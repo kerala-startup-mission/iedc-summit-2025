@@ -9,7 +9,7 @@ const Stats = () => {
     },
     {
       value: '450+',
-      label: 'IEDC Centres',
+      label: 'IEDCs',
     },
     {
       value: '1 Day',
