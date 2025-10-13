@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { gsap } from 'gsap';
-import logo from '/logo.svg';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import logo from '/iedc-summit-25-logo.png';
 
-const Navbar = ({ activeHref = '#home' }) => {
+gsap.registerPlugin(ScrollToPlugin);
+
+const Navbar = () => {
+  const [activeHref, setActiveHref] = useState('#home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const circleRefs = useRef([]);
   const tlRefs = useRef([]);
@@ -23,6 +27,70 @@ const Navbar = ({ activeHref = '#home' }) => {
   ], []);
 
   const ease = 'power2.easeOut';
+
+  // Smooth scroll handler
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const targetId = href.substring(1);
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      const navbarHeight = 80; // Offset for fixed navbar
+      const targetPosition = targetElement.offsetTop - navbarHeight;
+      
+      gsap.to(window, {
+        scrollTo: { y: targetPosition, autoKill: true },
+        duration: 1,
+        ease: 'power3.inOut'
+      });
+      
+      setActiveHref(href);
+      setIsMobileMenuOpen(false);
+    }
+  };
+
+  // Intersection Observer for active section tracking
+  useEffect(() => {
+    const sections = items.map(item => ({
+      id: item.href.substring(1),
+      href: item.href
+    }));
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const section = sections.find(s => s.id === entry.target.id);
+          if (section) {
+            setActiveHref(section.href);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach(section => {
+      const element = document.getElementById(section.id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      sections.forEach(section => {
+        const element = document.getElementById(section.id);
+        if (element) {
+          observer.unobserve(element);
+        }
+      });
+    };
+  }, [items]);
   const baseColor = '#ffffff';
   const pillColor = '#2563eb';
   const hoveredPillTextColor = '#000000';
@@ -108,7 +176,44 @@ const Navbar = ({ activeHref = '#home' }) => {
     return () => window.removeEventListener('resize', onResize);
   }, [items, ease]);
 
+  // Effect to keep active pill in hover state
+  useEffect(() => {
+    // Small delay to ensure timelines are set up
+    const timer = setTimeout(() => {
+      items.forEach((item, i) => {
+        const isActive = activeHref === item.href;
+        const tl = tlRefs.current[i];
+        if (!tl) return;
+
+        activeTweenRefs.current[i]?.kill();
+        
+        if (isActive) {
+          // Keep active item in "hovered" state
+          activeTweenRefs.current[i] = tl.tweenTo(tl.duration(), {
+            duration: 0.4,
+            ease,
+            overwrite: 'auto'
+          });
+        } else {
+          // Return to normal state
+          activeTweenRefs.current[i] = tl.tweenTo(0, {
+            duration: 0.4,
+            ease,
+            overwrite: 'auto'
+          });
+        }
+      });
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [activeHref, items, ease]);
+
   const handleEnter = i => {
+    const item = items[i];
+    const isActive = activeHref === item.href;
+    // Don't animate on hover if it's already active
+    if (isActive) return;
+
     const tl = tlRefs.current[i];
     if (!tl) return;
     activeTweenRefs.current[i]?.kill();
@@ -120,6 +225,11 @@ const Navbar = ({ activeHref = '#home' }) => {
   };
 
   const handleLeave = i => {
+    const item = items[i];
+    const isActive = activeHref === item.href;
+    // Don't animate on leave if it's active (keep it in hover state)
+    if (isActive) return;
+
     const tl = tlRefs.current[i];
     if (!tl) return;
     activeTweenRefs.current[i]?.kill();
@@ -239,8 +349,6 @@ const Navbar = ({ activeHref = '#home' }) => {
             style={{ gap: 'var(--pill-gap)' }}
           >
             {items.map((item, i) => {
-              const isActive = activeHref === item.href;
-
               const pillStyle = {
                 background: 'var(--pill-bg, #fff)',
                 color: 'var(--pill-text, var(--base, #000))',
@@ -253,6 +361,7 @@ const Navbar = ({ activeHref = '#home' }) => {
                   <a
                     role="menuitem"
                     href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     className="relative overflow-hidden inline-flex items-center justify-center h-full no-underline rounded-full box-border font-semibold text-[14px] leading-[0] uppercase tracking-[0.2px] whitespace-nowrap cursor-pointer px-0"
                     style={pillStyle}
                     aria-label={item.label}
@@ -288,13 +397,6 @@ const Navbar = ({ activeHref = '#home' }) => {
                         {item.label}
                       </span>
                     </span>
-                    {isActive && (
-                      <span
-                        className="absolute left-1/2 -bottom-[6px] -translate-x-1/2 w-3 h-3 rounded-full z-[4]"
-                        style={{ background: 'var(--base, #000)' }}
-                        aria-hidden="true"
-                      />
-                    )}
                   </a>
                 </li>
               );
@@ -338,12 +440,12 @@ const Navbar = ({ activeHref = '#home' }) => {
             <li key={item.href}>
               <a
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className="block py-3 px-4 text-[16px] font-medium rounded-[50px] transition-all duration-200"
                 style={{
                   background: 'var(--pill-bg, #fff)',
                   color: 'var(--pill-text, #fff)'
                 }}
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.label}
               </a>

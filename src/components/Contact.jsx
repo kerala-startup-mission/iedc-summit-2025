@@ -26,11 +26,14 @@ const Contact = () => {
             away!
           </p>
 
-          <button className="px-10 py-4 bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] text-white text-base font-bold font-inter hover:bg-blue-700 transition-colors">
+          <a 
+            href="mailto:iedcsummit@lbscek.ac.in"
+            className="px-10 py-4 bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] text-white text-base font-bold font-inter hover:bg-blue-700 transition-colors"
+          >
             Contact Us
-          </button>
+          </a>
 
-          {/* Social Icons */}
+          {/* Social Icons 
           <div className="flex justify-center gap-6">
             <div className="w-12 h-12 bg-white rounded-full border-2 border-gray-200 flex items-center justify-center hover:border-blue-600 transition-colors cursor-pointer">
               <FaFacebook className="text-blue-600 text-xl" />
@@ -44,7 +47,7 @@ const Contact = () => {
             <div className="w-12 h-12 bg-white rounded-full border-2 border-gray-200 flex items-center justify-center hover:border-blue-600 transition-colors cursor-pointer">
               <FaXTwitter className="text-blue-600 text-xl" />
             </div>
-          </div>
+          </div>*/}
         </div>
       </div>
     </section>

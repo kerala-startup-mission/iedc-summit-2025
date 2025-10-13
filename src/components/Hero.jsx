@@ -3,62 +3,112 @@ import TextType from './TextType';
 
 const Hero = () => {
   return (
-    <section
-      id="home"
-      className="min-h-screen px-6 md:px-12 lg:px-20 py-32 md:py-40 bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center overflow-hidden relative"
-    >
-      {/* Background Decorative Elements */}
-      <div className="w-[500px] h-[500px] absolute right-[-100px] top-[-150px] bg-gradient-radial from-blue-600/12 to-transparent rounded-full" />
-      <div className="w-96 h-96 absolute left-[-150px] bottom-[-70px] bg-gradient-radial from-indigo-600/10 to-transparent rounded-full" />
-      <div className="w-64 h-64 absolute right-[100px] top-[216px] rounded-full border-[3px] border-blue-600/20" />
-      <div className="w-36 h-36 absolute left-[192px] top-[144px] bg-blue-300/20 rounded-full" />
-      <div className="w-44 h-44 absolute right-[200px] bottom-[100px] rounded-full border-2 border-blue-400/20" />
+    <>
+      {/* Desktop Version */}
+      <section
+        id="home"
+        className="hidden md:flex w-full min-h-[720px] px-12 py-48 relative bg-gradient-to-br from-blue-50 to-indigo-50 justify-center items-center overflow-hidden"
+      >
+        {/* Background Decorative Elements - Desktop */}
+        <div className="w-[500px] h-[500px] left-[880px] top-[-150px] absolute bg-[radial-gradient(ellipse_70.71%_70.71%_at_50.00%_50.00%,_rgba(37,_99,_235,_0.12)_0%,_rgba(37,_99,_235,_0)_100%)] rounded-[250px]" />
+        <div className="w-96 h-96 left-[-150px] top-[420px] absolute bg-[radial-gradient(ellipse_70.71%_70.71%_at_50.00%_50.00%,_rgba(99,_102,_241,_0.10)_0%,_rgba(99,_102,_241,_0)_100%)] rounded-[200px]" />
+        <div className="w-64 h-64 left-[927.61px] top-[216px] absolute rounded-[125px] border-[3px] border-blue-600/20" />
+        <div className="w-36 h-36 left-[192px] top-[144px] absolute bg-blue-300/20 rounded-[75px]" />
+        <div className="w-44 h-44 left-[844px] top-[396px] absolute rounded-[90px] border-2 border-blue-400/20" />
 
-      {/* Content */}
-      <div className="max-w-[1400px] w-full mx-auto relative z-10 px-4 sm:px-6 md:px-8">
-        <div className="max-w-4xl">
-          {/* Badge */}
-          <div className="inline-flex items-center px-5 py-2.5 bg-white rounded-full shadow-[0px_4px_12px_0px_rgba(37,99,235,0.15)] mb-8">
-            <span className="text-blue-600 text-xs md:text-sm font-bold font-inter tracking-[0.1em] uppercase">
+        {/* Content - Desktop */}
+        <div className="w-[900px] h-80 max-w-[1400px] relative">
+          <div className="px-6 py-2 left-[48px] top-0 absolute bg-white rounded-[50px] shadow-[0px_4px_12px_0px_rgba(37,99,235,0.15)] inline-flex justify-start items-start">
+            <div className="justify-center text-blue-600 text-sm font-bold font-inter leading-snug tracking-wider">
               10TH ANNIVERSARY EDITION
-            </span>
+            </div>
           </div>
-
-          {/* Main Heading with TextType */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold font-inter text-gray-800 leading-[1.1] mb-8">
-            <TextType
-              text={["IEDC SUMMIT 2025",  "Innovation Unleashed"]}
-              typingSpeed={75}
-              pauseDuration={2000}
-              showCursor={true}
-              cursorCharacter="|"
-              className="text-blue-600"
-              cursorClassName="text-blue-600"
-            />
-          </h1>
-
-          {/* Subheading */}
-          <p className="text-xl sm:text-2xl md:text-3xl font-semibold font-inter text-gray-700 leading-relaxed mb-6">
-            Dare to Disrupt
-          </p>
-
-          {/* Details */}
-          <p className="text-base md:text-lg font-medium font-inter text-gray-600 leading-relaxed mb-12 max-w-2xl">
-            LBS College of Engineering, Kasaragod | November 2025
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-            <button className="px-8 py-4 bg-blue-600 rounded-xl shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] text-white text-base md:text-lg font-bold font-inter hover:bg-blue-700 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.40)] transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5">
+          
+          <div className="w-[850px] left-[48px] top-[60.75px] absolute inline-flex flex-col justify-start items-start">
+            <div className="justify-center text-gray-800 text-7xl font-bold font-inter leading-[79.20px] whitespace-nowrap">
+              <TextType
+                text={["IEDC SUMMIT 2025", "Innovation Unleashed"]}
+                typingSpeed={75}
+                pauseDuration={2000}
+                showCursor={true}
+                cursorCharacter="|"
+                className="text-blue-600"
+                cursorClassName="text-blue-600"
+              />
+            </div>
+          </div>
+          
+          <div className="w-[850px] max-w-[900px] left-[48px] top-[163.93px] absolute inline-flex flex-col justify-start items-start">
+            <div className="justify-center text-gray-800 text-2xl font-medium font-inter leading-10">
+              "Dare to Disrupt"
+            </div>
+          </div>
+          
+          <div className="w-[850px] left-[48px] top-[219.32px] absolute inline-flex flex-col justify-start items-start">
+            <div className="justify-center text-gray-500 text-base font-normal font-inter leading-7">
+              LBS College of Engineering, Kasaragod | 2025
+            </div>
+          </div>
+          
+          <div className="px-10 py-4 left-[48px] top-[287.46px] absolute bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] inline-flex justify-start items-start hover:bg-blue-700 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.40)] transition-all duration-300 cursor-pointer">
+            <div className="justify-center text-white text-base font-bold font-inter leading-relaxed">
               Register Now →
-            </button>
-            <button className="px-8 py-4 bg-white border-2 border-blue-600 rounded-xl shadow-[0px_4px_12px_0px_rgba(37,99,235,0.15)] text-blue-600 text-base md:text-lg font-bold font-inter hover:bg-blue-50 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.25)] transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5">
-              Learn More
-            </button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Mobile Version */}
+      <section
+        id="home-mobile"
+        className="md:hidden w-full min-h-[720px] px-5 pt-56 pb-44 relative bg-gradient-to-br from-blue-50 to-indigo-50 inline-flex justify-start items-center overflow-hidden"
+      >
+        {/* Background Decorative Elements - Mobile */}
+        <div className="w-72 h-72 left-[228px] top-[-100px] absolute bg-[radial-gradient(ellipse_70.71%_70.71%_at_50.00%_50.00%,_rgba(37,_99,_235,_0.15)_0%,_rgba(37,_99,_235,_0)_100%)] rounded-full" />
+        <div className="w-48 h-48 left-[-80px] top-[570px] absolute bg-[radial-gradient(ellipse_70.71%_70.71%_at_50.00%_50.00%,_rgba(99,_102,_241,_0.12)_0%,_rgba(99,_102,_241,_0)_100%)] rounded-[100px]" />
+
+        {/* Content - Mobile */}
+        <div className="w-full h-80 relative">
+          <div className="px-6 py-2 left-1/2 -translate-x-1/2 top-0 absolute bg-white rounded-[50px] shadow-[0px_4px_12px_0px_rgba(37,99,235,0.15)] inline-flex justify-center items-start whitespace-nowrap">
+            <div className="text-center justify-center text-blue-600 text-xs font-bold font-inter leading-none tracking-wider">
+              10TH ANNIVERSARY EDITION
+            </div>
+          </div>
+          
+          <div className="w-full left-0 top-[57.92px] absolute inline-flex flex-col justify-start items-center">
+            <div className="text-center justify-center text-gray-800 text-4xl font-bold font-inter leading-10">
+              <TextType
+                text={["IEDC SUMMIT 2025", "Innovation Unleashed"]}
+                typingSpeed={75}
+                pauseDuration={2000}
+                showCursor={true}
+                cursorCharacter="|"
+                className="text-blue-600"
+                cursorClassName="text-blue-600"
+              />
+            </div>
+          </div>
+          
+          <div className="w-full left-0 top-[117.92px] absolute inline-flex flex-col justify-start items-center">
+            <div className="text-center justify-center text-gray-800 text-base font-medium font-inter leading-7">
+              "Dare to Disrupt"
+            </div>
+          </div>
+          
+          <div className="w-full left-0 top-[186.15px] absolute inline-flex flex-col justify-start items-center">
+            <div className="text-center justify-center text-gray-500 text-sm font-normal font-inter leading-normal">
+              LBS College of Engineering, Kasaragod | 2025
+            </div>
+          </div>
+          
+          <div className="px-8 pt-3.5 pb-4 left-1/2 -translate-x-1/2 top-[267.63px] absolute bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] inline-flex justify-center items-start hover:bg-blue-700 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.40)] transition-all duration-300 cursor-pointer">
+            <div className="text-center justify-center text-white text-base font-bold font-inter leading-normal">
+              Register Now →
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 
