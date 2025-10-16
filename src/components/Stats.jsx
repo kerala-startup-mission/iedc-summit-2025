@@ -1,6 +1,6 @@
 import React from 'react';
 import TiltedCard from './TiltedCard';
-import { Users, Building2, Rocket, GraduationCap, Lightbulb, Briefcase, ListChecks } from 'lucide-react';
+import { Users, Building2, Rocket, GraduationCap, Lightbulb, Briefcase, ListChecks, Sparkles, Home, Warehouse } from 'lucide-react';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 
 const Stats = () => {
@@ -8,22 +8,23 @@ const Stats = () => {
   const topRowRef = useScrollAnimation({ y: 40, duration: 0.8, stagger: 0.15, delay: 0.2 });
   const middleRowRef = useScrollAnimation({ y: 40, duration: 0.8, stagger: 0.15, delay: 0.35 });
   const bottomRowRef = useScrollAnimation({ y: 40, duration: 0.8, stagger: 0.15, delay: 0.5 });
+  
   const topRowStats = [
     {
       icon: Users,
-      value: '10,000',
+      value: '10,000+',
       label: 'Student Innovators',
       color: 'bg-blue-400',
     },
     {
-      icon: GraduationCap,
-      value: '500+',
-      label: 'Colleges',
-      color: 'bg-pink-400',
+      icon: Sparkles,
+      value: '5,000+',
+      label: 'Ideas',
+      color: 'bg-purple-400',
     },
     {
       icon: Rocket,
-      value: '557+',
+      value: '550+',
       label: 'IEDCs',
       color: 'bg-green-400',
     },
@@ -37,25 +38,47 @@ const Stats = () => {
       color: 'bg-pink-500',
     },
     {
+      icon: GraduationCap,
+      value: '500+',
+      label: 'Colleges',
+      color: 'bg-pink-400',
+    },
+    {
+      icon: Briefcase,
+      value: '250+',
+      label: 'Registered Startups',
+      color: 'bg-yellow-300',
+    },
+  ];
+  
+  const thirdRowStats = [
+    {
       icon: Lightbulb,
       value: '200+',
       label: 'Speakers',
       color: 'bg-orange-400',
     },
     {
-      icon: Briefcase,
-      value: '150+',
-      label: 'Startups',
-      color: 'bg-yellow-300',
-    },
-  ];
-
-  const bottomRowStats = [
-    {
       icon: ListChecks,
       value: '100+',
       label: 'Sessions',
       color: 'bg-pink-400',
+    },
+    
+    {
+      icon: Home,
+      value: '25+',
+      label: 'Incubators',
+      color: 'bg-indigo-400',
+    },
+  ];
+
+  const fourthRowStats = [
+    {
+      icon: Warehouse,
+      value: '5+',
+      label: 'LEAP Coworks',
+      color: 'bg-teal-400',
     },
   ];
 
@@ -103,15 +126,13 @@ const Stats = () => {
             {middleRowStats.map((stat, index) => renderStatCard(stat, index))}
           </div>
 
-          <div ref={bottomRowRef} className="flex justify-center">
-            <div className="w-full max-w-[280px]">
-              {renderStatCard(bottomRowStats[0], 0)}
-            </div>
+          <div ref={bottomRowRef} className="grid grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {[...thirdRowStats, ...fourthRowStats].map((stat, index) => renderStatCard(stat, index))}
           </div>
         </div>
 
         <div className="md:hidden grid grid-cols-2 gap-4 max-w-md mx-auto">
-          {[...topRowStats, ...middleRowStats, ...bottomRowStats].map((stat, index) => renderStatCard(stat, index))}
+          {[...topRowStats, ...middleRowStats, ...thirdRowStats, ...fourthRowStats].map((stat, index) => renderStatCard(stat, index))}
         </div>
       </div>
     </section>
