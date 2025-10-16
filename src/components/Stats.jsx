@@ -98,26 +98,20 @@ const Stats = () => {
       color: 'bg-pink-500',
     },
     {
-      icon: Briefcase,
-      value: '250+',
-      label: 'Startups',
-      color: 'bg-yellow-300',
-    },
-    {
       icon: GraduationCap,
-      value: '150+',
+      value: '250+',
       label: 'Registered Startups',
       color: 'bg-pink-400',
     },
-  ];
-  
-  const thirdRowStats = [
     {
       icon: Lightbulb,
       value: '200+',
       label: 'Speakers',
       color: 'bg-orange-400',
     },
+  ];
+  
+  const thirdRowStats = [
     {
       icon: ListChecks,
       value: '100+',
@@ -131,9 +125,6 @@ const Stats = () => {
       label: 'Incubators',
       color: 'bg-indigo-400',
     },
-  ];
-
-  const fourthRowStats = [
     {
       icon: Warehouse,
       value: '5+',
@@ -141,6 +132,9 @@ const Stats = () => {
       color: 'bg-teal-400',
     },
   ];
+
+  // const fourthRowStats = [
+  // ];
 
   return (
     <section ref={sectionRef} className="px-4 sm:px-8 py-16 md:py-20 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-600">
@@ -154,14 +148,14 @@ const Stats = () => {
             {middleRowStats.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
           </div>
 
-          <div ref={bottomRowRef} className="grid grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {[...thirdRowStats, ...fourthRowStats].map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+          <div ref={bottomRowRef} className="grid grid-cols-3 gap-6 mb-6 max-w-4xl mx-auto">
+            {thirdRowStats.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
           </div>
         </div>
 
-        <div className="md:hidden grid grid-cols-2 gap-4 max-w-md mx-auto">
-          {[...topRowStats, ...middleRowStats, ...thirdRowStats, ...fourthRowStats].map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
-        </div>
+        {/* <div className="grid grid-cols-3 gap-6 mb-6 max-w-4xl mx-auto">
+          {fourthRowStats.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+        </div> */}
       </div>
     </section>
   );
