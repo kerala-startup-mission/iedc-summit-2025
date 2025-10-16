@@ -56,11 +56,11 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="px-10 py-4 left-[5%] top-[90%] absolute bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] inline-flex justify-start items-start hover:bg-blue-700 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.40)] transition-all duration-300 cursor-pointer">
+          <a href="#register" className="px-10 py-4 left-[5%] top-[90%] absolute bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] inline-flex justify-start items-start hover:bg-blue-700 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.40)] transition-all duration-300 cursor-pointer">
             <div className="justify-center text-white text-base font-bold font-inter leading-relaxed">
               Register Now →
             </div>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -112,11 +112,11 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="px-6 sm:px-8 pt-3.5 pb-4 left-1/2 -translate-x-1/2 top-[267.63px] absolute bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] inline-flex justify-center items-start hover:bg-blue-700 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.40)] transition-all duration-300 cursor-pointer whitespace-nowrap">
+          <a href="#register" className="px-6 sm:px-8 pt-3.5 pb-4 left-1/2 -translate-x-1/2 top-[267.63px] absolute bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] inline-flex justify-center items-start hover:bg-blue-700 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.40)] transition-all duration-300 cursor-pointer whitespace-nowrap">
             <div className="text-center justify-center text-white text-sm sm:text-base font-bold font-inter leading-normal">
               Register Now →
             </div>
-          </div>
+          </a>
         </div>
       </section>
     </>

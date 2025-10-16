@@ -139,6 +139,7 @@ const Stats = () => {
   return (
     <section ref={sectionRef} className="px-4 sm:px-8 py-16 md:py-20 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-600">
       <div className="max-w-[1200px] mx-auto">
+        {/* Desktop Layout - 3 columns */}
         <div className="hidden md:block">
           <div ref={topRowRef} className="grid grid-cols-3 gap-6 mb-6 max-w-4xl mx-auto">
             {topRowStats.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
@@ -153,9 +154,12 @@ const Stats = () => {
           </div>
         </div>
 
-        {/* <div className="grid grid-cols-3 gap-6 mb-6 max-w-4xl mx-auto">
-          {fourthRowStats.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
-        </div> */}
+        {/* Mobile Layout - 2 columns */}
+        <div className="md:hidden">
+          <div className="grid grid-cols-2 gap-4">
+            {[...topRowStats, ...middleRowStats, ...thirdRowStats].map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+          </div>
+        </div>
       </div>
     </section>
   );
