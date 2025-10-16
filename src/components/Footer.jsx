@@ -13,21 +13,21 @@ const Footer = () => {
     <footer className="bg-gray-900 py-12">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-8 md:px-12">
         {/* Main Footer Content */}
-        <div className="flex flex-col md:grid md:grid-cols-3 gap-8 mb-8">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8">
           {/* About Section */}
-          <div className="flex flex-col gap-3 text-left">
-            <h3 className="text-white text-lg font-bold font-inter">IEDC Summit 2025</h3>
-            <p className="text-gray-400 text-sm font-normal font-inter leading-relaxed">
+          <div className="flex flex-col gap-2 md:gap-3 text-left">
+            <h3 className="text-white text-base md:text-lg font-bold font-inter">IEDC Summit 2025</h3>
+            <p className="text-gray-400 text-xs md:text-sm font-normal font-inter leading-relaxed">
               Empowering Innovation • Fostering Entrepreneurship • Building the Future
             </p>
           </div>
 
           {/* Quick Links and Contact Info - Side by side on mobile */}
-          <div className="grid grid-cols-2 md:contents gap-8">
+          <div className="grid grid-cols-2 md:contents gap-6 md:gap-8">
             {/* Quick Links */}
-            <div className="flex flex-col gap-3 text-left md:text-center">
-              <h3 className="text-white text-lg font-bold font-inter">Quick Links</h3>
-              <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 md:gap-3 text-left md:text-center">
+              <h3 className="text-white text-base md:text-lg font-bold font-inter">Quick Links</h3>
+              <div className="flex flex-col gap-1.5 md:gap-2">
                 {quickLinks.map((link, index) => (
                   <a
                     key={index}
@@ -47,7 +47,7 @@ const Footer = () => {
                         });
                       }
                     }}
-                    className="text-gray-400 text-sm font-normal font-inter hover:text-blue-400 transition-colors"
+                    className="text-gray-400 text-xs md:text-sm font-normal font-inter hover:text-blue-400 transition-colors"
                   >
                     {link.name}
                   </a>
@@ -56,19 +56,19 @@ const Footer = () => {
             </div>
 
             {/* Contact Info */}
-            <div className="flex flex-col gap-3 text-left md:text-right">
-              <h3 className="text-white text-lg font-bold font-inter">Get In Touch</h3>
-              <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 md:gap-3 text-left md:text-right">
+              <h3 className="text-white text-base md:text-lg font-bold font-inter">Get In Touch</h3>
+              <div className="flex flex-col gap-1.5 md:gap-2">
                 <a
                   href="mailto:iedcsummit2025@lbscek.ac.in"
-                  className="text-gray-400 text-sm font-normal font-inter hover:text-blue-400 transition-colors"
+                  className="text-gray-400 text-xs md:text-sm font-normal font-inter hover:text-blue-400 transition-colors break-all"
                 >
                   iedcsummit@lbscek.ac.in
                 </a>
-                <p className="text-gray-400 text-sm font-normal font-inter">
+                <p className="text-gray-400 text-xs md:text-sm font-normal font-inter">
                   LBS College of Engineering
                 </p>
-                <p className="text-gray-400 text-sm font-normal font-inter">
+                <p className="text-gray-400 text-xs md:text-sm font-normal font-inter">
                   Kasaragod, Kerala
                 </p>
               </div>
@@ -77,11 +77,11 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-800 mb-6"></div>
+        <div className="border-t border-gray-800 mb-4 md:mb-6"></div>
 
         {/* Bottom Footer */}
         <div className="flex flex-col items-center gap-2">
-          <p className="text-gray-500 text-sm font-normal font-inter text-center">
+          <p className="text-gray-500 text-xs md:text-sm font-normal font-inter text-center px-4">
             © 2025 IEDC Summit - LBS College of Engineering, Kasaragod. All rights reserved.
           </p>
         </div>

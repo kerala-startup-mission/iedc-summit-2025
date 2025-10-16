@@ -7,7 +7,7 @@ const Hero = () => {
       {/* Desktop Version */}
       <section
         id="home"
-        className="hidden md:flex w-full min-h-[720px] px-12 py-48 relative bg-gradient-to-br from-blue-50 to-indigo-50 justify-center items-center overflow-hidden"
+        className="hidden md:flex w-full h-screen px-12 py-48 relative bg-gradient-to-br from-blue-50 to-indigo-50 justify-center items-center overflow-hidden"
       >
         {/* Background Decorative Elements - Desktop */}
         <div className="w-[500px] h-[500px] left-[880px] top-[-150px] absolute bg-[radial-gradient(ellipse_70.71%_70.71%_at_50.00%_50.00%,_rgba(37,_99,_235,_0.12)_0%,_rgba(37,_99,_235,_0)_100%)] rounded-[250px]" />
@@ -61,7 +61,7 @@ const Hero = () => {
       {/* Mobile Version */}
       <section
         id="home-mobile"
-        className="md:hidden w-full min-h-[720px] px-5 pt-56 pb-44 relative bg-gradient-to-br from-blue-50 to-indigo-50 inline-flex justify-start items-center overflow-hidden"
+        className="md:hidden w-full h-screen px-5 pt-56 pb-44 relative bg-gradient-to-br from-blue-50 to-indigo-50 inline-flex justify-start items-center overflow-hidden"
       >
         {/* Background Decorative Elements - Mobile */}
         <div className="w-72 h-72 left-[228px] top-[-100px] absolute bg-[radial-gradient(ellipse_70.71%_70.71%_at_50.00%_50.00%,_rgba(37,_99,_235,_0.15)_0%,_rgba(37,_99,_235,_0)_100%)] rounded-full" />
@@ -74,9 +74,9 @@ const Hero = () => {
               10TH ANNIVERSARY EDITION
             </div>
           </div>
-          
-          <div className="w-full left-0 top-[57.92px] absolute inline-flex flex-col justify-start items-center">
-            <div className="text-center justify-center text-gray-800 text-4xl font-bold font-inter leading-10">
+
+          <div className="w-full left-0 top-[57.92px] absolute inline-flex flex-col justify-start items-center px-2">
+            <div className="text-center justify-center text-gray-800 text-3xl sm:text-4xl font-bold font-inter leading-10 whitespace-nowrap">
               <TextType
                 text={["IEDC SUMMIT 2025", "Innovation Unleashed"]}
                 typingSpeed={75}
@@ -89,20 +89,20 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="w-full left-0 top-[117.92px] absolute inline-flex flex-col justify-start items-center">
-            <div className="text-center justify-center text-gray-800 text-base font-medium font-inter leading-7">
+          <div className="w-full left-0 top-[117.92px] absolute inline-flex flex-col justify-start items-center px-2">
+            <div className="text-center justify-center text-gray-800 text-base font-medium font-inter leading-7 whitespace-nowrap">
               "Dare to Disrupt"
             </div>
           </div>
           
-          <div className="w-full left-0 top-[186.15px] absolute inline-flex flex-col justify-start items-center">
-            <div className="text-center justify-center text-gray-500 text-sm font-normal font-inter leading-normal">
+          <div className="w-full left-0 top-[186.15px] absolute inline-flex flex-col justify-start items-center px-4">
+            <div className="text-center justify-center text-gray-500 text-xs sm:text-sm font-normal font-inter leading-normal whitespace-nowrap">
               LBS College of Engineering, Kasaragod | 2025
             </div>
           </div>
           
-          <div className="px-8 pt-3.5 pb-4 left-1/2 -translate-x-1/2 top-[267.63px] absolute bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] inline-flex justify-center items-start hover:bg-blue-700 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.40)] transition-all duration-300 cursor-pointer">
-            <div className="text-center justify-center text-white text-base font-bold font-inter leading-normal">
+          <div className="px-6 sm:px-8 pt-3.5 pb-4 left-1/2 -translate-x-1/2 top-[267.63px] absolute bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] inline-flex justify-center items-start hover:bg-blue-700 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.40)] transition-all duration-300 cursor-pointer whitespace-nowrap">
+            <div className="text-center justify-center text-white text-sm sm:text-base font-bold font-inter leading-normal">
               Register Now →
             </div>
           </div>

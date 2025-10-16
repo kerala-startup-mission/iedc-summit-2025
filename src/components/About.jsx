@@ -178,8 +178,7 @@ const About = () => {
             </div>
             <div className="self-stretch flex flex-col justify-start items-start">
               <div className="self-stretch justify-center text-gray-500 text-sm font-normal font-inter leading-snug text-justify">
-                A flagship initiative of Kerala Startup Mission with 450+ centres, IEDCs promote innovation and
-                entrepreneurship, offering mentorship, infrastructure, and funding to transform student ideas into viable ventures.
+                A flagship initiative of Kerala Startup Mission with 557+ IEDCs that promote innovation and entrepreneurship, offering mentorship, infrastructure, and funding to transform student ideas into viable ventures.
               </div>
             </div>
           </div>
