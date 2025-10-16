@@ -2,69 +2,90 @@ import React from 'react';
 import TiltedCard from './TiltedCard';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 
+// --- Icons are now imported from the react-icons library ---
+import { HiOutlineCube, HiOutlineSparkles, HiOutlineUsers, HiOutlineRocketLaunch } from 'react-icons/hi2';
+
 const Highlights = () => {
   const headerRef = useScrollAnimation({ y: 30, duration: 0.8, delay: 0.1 });
-  const cardsRef = useScrollAnimation({ y: 40, duration: 0.8, stagger: 0.15, delay: 0.3 });
+  const cardsRef = useScrollAnimation({ y: 40, duration: 0.8, stagger: 0.1, delay: 0.3 });
+  
+  // The 'highlights' array now directly references the imported icon components.
   const highlights = [
     {
-      emoji: '🎯',
+      Icon: HiOutlineCube, // Replaced custom SVG with React Icon
       title: 'Workshops',
-      description: 'Hands-on sessions led by industry experts',
+      description: 'Hands-on sessions on AI, Web3, and other cutting-edge technologies.',
+      iconBgColor: 'bg-gradient-to-br from-cyan-100 to-blue-100',
+      iconColor: 'text-blue-600',
     },
     {
-      emoji: '💡',
+      Icon: HiOutlineSparkles, // Replaced custom SVG with React Icon
       title: 'Keynotes',
-      description: 'Inspiring talks from successful entrepreneurs',
+      description: 'Inspiring talks from unicorn founders and visionary tech leaders.',
+      iconBgColor: 'bg-gradient-to-br from-amber-100 to-orange-100',
+      iconColor: 'text-orange-600',
     },
     {
-      emoji: '🤝',
+      Icon: HiOutlineUsers, // Replaced custom SVG with React Icon
       title: 'Networking',
-      description: 'Connect with innovators and mentors',
+      description: 'Connect with investors, mentors, and the brightest minds in the ecosystem.',
+      iconBgColor: 'bg-gradient-to-br from-green-100 to-emerald-100',
+      iconColor: 'text-emerald-600',
     },
     {
-      emoji: '🚀',
+      Icon: HiOutlineRocketLaunch, // Replaced custom SVG with React Icon
       title: 'Startup Hub',
-      description: 'Transform ideas into viable ventures',
+      description: 'Showcase your MVP and get feedback from seasoned entrepreneurs.',
+      iconBgColor: 'bg-gradient-to-br from-purple-100 to-indigo-100',
+      iconColor: 'text-indigo-600',
     },
   ];
 
   return (
-    <section className="px-5 md:px-12 py-12 md:py-20 bg-white">
-      <div className="max-w-[1400px] mx-auto">
+    <section className="px-5 md:px-12 py-16 md:py-24 bg-white relative overflow-hidden">
+      {/* Subtle background elements for visual depth */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E")`
+      }}></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/20 via-white to-blue-50/20 pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div ref={headerRef} className="flex flex-col items-center gap-3 mb-10 md:mb-14">
-          <span className="text-blue-600 text-xs font-bold font-inter uppercase tracking-wider md:tracking-widest">
+        <div ref={headerRef} className="flex flex-col items-center gap-4 mb-12 md:mb-16">
+          <span className="bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-1 rounded-full">
             What to Expect
           </span>
-          <h2 className="text-gray-800 text-3xl md:text-5xl font-bold font-inter text-center">
+          <h2 className="text-slate-900 text-4xl md:text-5xl font-bold font-inter text-center">
             Summit Highlights
           </h2>
-          <p className="text-gray-500 text-sm md:text-base font-normal font-inter text-center max-w-[700px] leading-6 md:leading-7 mt-1 px-4 md:px-0">
-            Experience Kerala's largest student entrepreneurship platform with world-class speakers,
-            workshops, and networking opportunities
+          <p className="text-slate-600 text-base md:text-lg font-normal text-center max-w-3xl leading-relaxed mt-2">
+            Experience Kerala's largest student entrepreneurship platform with world-class speakers, hands-on workshops, and unparalleled networking opportunities.
           </p>
         </div>
 
-        {/* Highlights Cards - Responsive Grid */}
-        <div ref={cardsRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 justify-items-center place-items-center">
+        {/* Highlights Cards Grid */}
+        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {highlights.map((item, index) => (
-            <div key={index} className="w-full max-w-xs md:max-w-none md:w-64">
+            <div key={index} className="w-full">
               <TiltedCard
                 captionText={item.title}
-                containerHeight="240px"
+                containerHeight="320px"
                 containerWidth="100%"
-                rotateAmplitude={8}
-                scaleOnHover={1.05}
-                showMobileWarning={false}
-                showTooltip={true}
+                rotateAmplitude={6}
+                scaleOnHover={1.03}
                 displayOverlayContent={true}
                 overlayContent={
-                  <div className="w-full bg-blue-50 rounded-xl border-2 border-blue-100 p-6 md:p-8 flex flex-col items-center h-full justify-center">
-                    <div className="text-4xl md:text-5xl mb-6 md:mb-8">{item.emoji}</div>
-                    <h3 className="text-gray-800 text-base md:text-lg font-bold font-inter text-center mb-3 md:mb-4">
+                  <div className="group w-full h-full bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-start transition-all duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-200/50">
+                    
+                    <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 transition-transform duration-300 ${item.iconBgColor} group-hover:scale-110`}>
+                      {/* The Icon component is now rendered directly from the 'item' object */}
+                      <item.Icon className={`w-8 h-8 transition-colors duration-300 ${item.iconColor}`} />
+                    </div>
+                    
+                    <h3 className="text-slate-900 text-xl font-bold font-inter mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-gray-500 text-xs md:text-sm font-normal font-inter text-center leading-snug">
+                    <p className="text-slate-600 text-base font-normal leading-relaxed">
                       {item.description}
                     </p>
                   </div>

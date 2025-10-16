@@ -168,10 +168,10 @@ const Footer = () => {
 
             <div className="text-gray-300">
               <p className="font-bold text-white mb-2">
-                Innovation and Entrepreneurship Development Centre<br />LBS College of Engineering
+                Innovation and Entrepreneurship Development Centre<br />
               </p>
               <p className="text-sm">L.B.S. College of Engineering,</p>
-              <p className="text-sm">Kasaragod, Kerala 671542</p>
+              <p className="text-sm">Povval, Muliyar P. O., Kasaragod, Kerala-671542</p>
             </div>
 
             <div className="text-gray-300">

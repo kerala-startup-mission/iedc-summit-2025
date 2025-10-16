@@ -52,7 +52,7 @@ const Hero = () => {
           
           <div className="w-[85%] left-[5%] top-[68%] absolute inline-flex flex-col justify-start items-start">
             <div className="justify-center text-gray-500 text-base font-normal font-inter leading-7">
-              LBS College of Engineering, Kasaragod | 2025
+              Asia's largest entrepreneurship summit @ LBS College of Engineering, Kasaragod
             </div>
           </div>
           
@@ -107,8 +107,8 @@ const Hero = () => {
           </div>
           
           <div className="w-full left-0 top-[186.15px] absolute inline-flex flex-col justify-start items-center px-4">
-            <div className="text-center justify-center text-gray-500 text-xs sm:text-sm font-normal font-inter leading-normal whitespace-nowrap">
-              LBS College of Engineering, Kasaragod | 2025
+            <div className="text-center justify-center text-gray-500 text-xs sm:text-sm font-normal font-inter leading-normal">
+              Asia's largest entrepreneurship summit @ LBS College of Engineering, Kasaragod
             </div>
           </div>
           
