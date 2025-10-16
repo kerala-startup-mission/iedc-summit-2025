@@ -11,14 +11,14 @@ const Stats = () => {
   const topRowStats = [
     {
       icon: Users,
-      value: '1000+',
-      label: 'Student Enterprises',
+      value: '10,000',
+      label: 'Student Innovators',
       color: 'bg-blue-400',
     },
     {
-      icon: Building2,
-      value: '600+',
-      label: 'Incubators',
+      icon: GraduationCap,
+      value: '500+',
+      label: 'Colleges',
       color: 'bg-pink-400',
     },
     {
@@ -31,15 +31,15 @@ const Stats = () => {
 
   const middleRowStats = [
     {
-      icon: GraduationCap,
-      value: '500+',
-      label: 'Colleges',
+      icon: Building2,
+      value: '600+',
+      label: 'Nodal Officers',
       color: 'bg-pink-500',
     },
     {
       icon: Lightbulb,
       value: '200+',
-      label: 'Colleges',
+      label: 'Speakers',
       color: 'bg-orange-400',
     },
     {
@@ -54,7 +54,7 @@ const Stats = () => {
     {
       icon: ListChecks,
       value: '100+',
-      label: 'Startups',
+      label: 'Sessions',
       color: 'bg-pink-400',
     },
   ];
@@ -94,15 +94,6 @@ const Stats = () => {
   return (
     <section className="px-4 sm:px-8 py-16 md:py-20 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-600">
       <div className="max-w-[1200px] mx-auto">
-        <div ref={headerRef} className="text-center mb-12">
-          <p className="text-blue-100 text-xs font-semibold tracking-widest uppercase mb-2">
-            BY THE NUMBERS
-          </p>
-          <h2 className="text-white text-3xl md:text-4xl font-bold font-inter">
-            IEDC Network Stats
-          </h2>
-        </div>
-
         <div className="hidden md:block">
           <div ref={topRowRef} className="grid grid-cols-3 gap-6 mb-6 max-w-4xl mx-auto">
             {topRowStats.map((stat, index) => renderStatCard(stat, index))}

@@ -53,7 +53,7 @@ const About = () => {
         The Innovation and Entrepreneurship Development Centres (IEDCs), a flagship initiative of Kerala Startup Mission (KSUM), promote innovation and entrepreneurship among students across the state. Operating in engineering, management, arts & science colleges, medical institutions, polytechnics, and universities, IEDCs provide opportunities to experiment, innovate, and turn ideas into viable products and services.
       </p>
       <p className="text-gray-500 text-base font-normal font-inter leading-7 text-justify">
-        With over 450 centres across Kerala, IEDCs act as mini incubators, offering mentorship, technology, infrastructure, early-stage funding, and global exposure. Programs like LEAP, Startup i3, and the Innovators' Premiere League (IPL) guide students from ideation to prototypes, while events like the IEDC Summit and Startup School further strengthen Kerala's entrepreneurial ecosystem.
+        With over 557 centres across Kerala, IEDCs act as mini incubators, offering mentorship, technology, infrastructure, early-stage funding, and global exposure. Programs like LEAP, Startup i3, and the Innovators' Premiere League (IPL) guide students from ideation to prototypes, while events like the IEDC Summit and Startup School further strengthen Kerala's entrepreneurial ecosystem.
       </p>
     </>
   );
@@ -86,7 +86,10 @@ const About = () => {
               A Decade of Innovation
             </div>
           </div>
-          <div className="w-full max-w-[700px] pt-1 flex flex-col justify-start items-center">
+          <div className="w-full max-w-[800px] pt-1 flex flex-col justify-start items-center gap-2">
+            <div className="text-center justify-center text-blue-600 text-lg md:text-xl font-semibold font-inter leading-relaxed">
+              Asia's largest summit for aspiring entrepreneurs
+            </div>
             <div className="text-center justify-center text-gray-500 text-sm md:text-base font-normal font-inter leading-normal md:leading-7">
               The IEDC Summit 2025 marks the 10th anniversary of Kerala's premier entrepreneurship
               event, celebrating innovation, collaboration, and technological excellence.

@@ -20,17 +20,17 @@ const Hero = () => {
         {/* Content - Desktop */}
         <div className="w-[900px] h-80 max-w-[1400px] relative">
           {/* Logo */}
-          <div className="left-[48px] top-[-180px] absolute">
-            <img src={logo} alt="IEDC Summit 2025 Logo" className="w-40 h-40 object-contain" />
+          <div className="right-[-15%] top-[-10%] absolute">
+            <img src={logo} alt="IEDC Summit 2025 Logo" className="w-60 h-60 object-contain" />
           </div>
 
-          <div className="px-6 py-2 left-[48px] top-0 absolute bg-white rounded-[50px] shadow-[0px_4px_12px_0px_rgba(37,99,235,0.15)] inline-flex justify-start items-start">
+          <div className="px-6 py-2 left-[5%] top-0 absolute bg-white rounded-[50px] shadow-[0px_4px_12px_0px_rgba(37,99,235,0.15)] inline-flex justify-start items-start">
             <div className="justify-center text-blue-600 text-sm font-bold font-inter leading-snug tracking-wider">
               10TH ANNIVERSARY EDITION
             </div>
           </div>
           
-          <div className="w-[850px] left-[48px] top-[60.75px] absolute inline-flex flex-col justify-start items-start">
+          <div className="w-[85%] left-[5%] top-[19%] absolute inline-flex flex-col justify-start items-start">
             <div className="justify-center text-gray-800 text-7xl font-bold font-inter leading-[79.20px] whitespace-nowrap">
               <TextType
                 text={["IEDC SUMMIT 2025", "Innovation Unleashed"]}
@@ -44,19 +44,19 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="w-[850px] max-w-[900px] left-[48px] top-[163.93px] absolute inline-flex flex-col justify-start items-start">
+          <div className="w-[85%] max-w-[900px] left-[5%] top-[51%] absolute inline-flex flex-col justify-start items-start">
             <div className="justify-center text-gray-800 text-2xl font-medium font-inter leading-10">
               "Dare to Disrupt"
             </div>
           </div>
           
-          <div className="w-[850px] left-[48px] top-[219.32px] absolute inline-flex flex-col justify-start items-start">
+          <div className="w-[85%] left-[5%] top-[68%] absolute inline-flex flex-col justify-start items-start">
             <div className="justify-center text-gray-500 text-base font-normal font-inter leading-7">
               LBS College of Engineering, Kasaragod | 2025
             </div>
           </div>
           
-          <div className="px-10 py-4 left-[48px] top-[287.46px] absolute bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] inline-flex justify-start items-start hover:bg-blue-700 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.40)] transition-all duration-300 cursor-pointer">
+          <div className="px-10 py-4 left-[5%] top-[90%] absolute bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] inline-flex justify-start items-start hover:bg-blue-700 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.40)] transition-all duration-300 cursor-pointer">
             <div className="justify-center text-white text-base font-bold font-inter leading-relaxed">
               Register Now →
             </div>
