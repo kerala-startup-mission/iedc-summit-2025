@@ -3,8 +3,10 @@ import TiltedCard from './TiltedCard';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 
 // --- Icons are now imported from the react-icons library ---
-import { HiOutlineCube, HiOutlineSparkles, HiOutlineUsers, HiOutlineRocketLaunch } from 'react-icons/hi2';
-
+import {  HiOutlineUsers, HiOutlineRocketLaunch } from 'react-icons/hi2';
+import { MdOutlineEngineering } from 'react-icons/md';
+import { FaHandHoldingMedical, FaBookOpen  } from 'react-icons/fa6';
+import { MdScience } from 'react-icons/md';
 const Highlights = () => {
   const headerRef = useScrollAnimation({ y: 30, duration: 0.8, delay: 0.1 });
   const cardsRef = useScrollAnimation({ y: 40, duration: 0.8, stagger: 0.1, delay: 0.3 });
@@ -12,30 +14,30 @@ const Highlights = () => {
   // The 'highlights' array now directly references the imported icon components.
   const highlights = [
     {
-      Icon: HiOutlineCube, // Replaced custom SVG with React Icon
-      title: 'Workshops',
-      description: 'Hands-on sessions on AI, Web3, and other cutting-edge technologies.',
+      Icon: MdOutlineEngineering, // Replaced custom SVG with React Icon
+      title: 'Engineering',
+      description: 'Where innovation meets impact through technology, design, and real-world problem-solving.',
       iconBgColor: 'bg-gradient-to-br from-cyan-100 to-blue-100',
       iconColor: 'text-blue-600',
     },
     {
-      Icon: HiOutlineSparkles, // Replaced custom SVG with React Icon
-      title: 'Keynotes',
-      description: 'Inspiring talks from unicorn founders and visionary tech leaders.',
+      Icon:  FaHandHoldingMedical, // Replaced custom SVG with React Icon
+      title: 'Medical',
+      description: ' Showcasing breakthroughs that blend compassion with cutting-edge healthcare innovation.',
       iconBgColor: 'bg-gradient-to-br from-amber-100 to-orange-100',
       iconColor: 'text-orange-600',
     },
     {
-      Icon: HiOutlineUsers, // Replaced custom SVG with React Icon
-      title: 'Networking',
-      description: 'Connect with investors, mentors, and the brightest minds in the ecosystem.',
+      Icon: MdScience, // Replaced custom SVG with React Icon
+      title: 'Arts & Science',
+      description: 'Celebrating creativity, research, and interdisciplinary thinking that shape tomorrow’s ideas.',
       iconBgColor: 'bg-gradient-to-br from-green-100 to-emerald-100',
       iconColor: 'text-emerald-600',
     },
     {
-      Icon: HiOutlineRocketLaunch, // Replaced custom SVG with React Icon
-      title: 'Startup Hub',
-      description: 'Showcase your MVP and get feedback from seasoned entrepreneurs.',
+      Icon: FaBookOpen, // Replaced custom SVG with React Icon
+      title: 'Management',
+      description: 'Empowering future leaders to drive change, innovation, and entrepreneurial growth',
       iconBgColor: 'bg-gradient-to-br from-purple-100 to-indigo-100',
       iconColor: 'text-indigo-600',
     },

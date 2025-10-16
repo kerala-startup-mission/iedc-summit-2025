@@ -34,10 +34,10 @@ export const aboutContent = {
     ),
   },
   ksum: {
-    title: "About KSUM",
+    title: "KSUM",
     logo: "/ksum-logo-black.png",
     shortDescription:
-      "The Kerala Startup Mission (KSUM) is the nodal agency of the government of Kerala for promoting entrepreneurship in the state. It is also the implementing body for the Kerala Technology Startup Policy.",
+      "The Kerala Startup Mission (KSUM) is the nodal agency of the government of Kerala for promoting entrepreneurship in the state. It is also the implementing body for the Kerala Technology Startup Policy that supports the state's startup ecosystem through the various schemes and support programs. KSUM was founded in 2006, with the goal to promote technology-based entrepreneurship activities and to create the infrastructure and ecosystem required to support high-end technology-based startup businesses.",
     fullDescription: (
       <div className="text-slate-600 leading-relaxed space-y-4">
         <p>
@@ -77,17 +77,17 @@ export const aboutContent = {
     ),
   },
   iedc: {
-    title: "About IEDC Kerala",
+    title: "IEDC Kerala",
     logo: "/iedc-logo-color.png",
     shortDescription:
-      "The Innovation and Entrepreneurship Development Centres (IEDCs), a flagship initiative of Kerala Startup Mission (KSUM), promote innovation and entrepreneurship among students across the state.",
+      "The Innovation and Entrepreneurship Development Centres (IEDCs), a flagship initiative of Kerala Startup Mission (KSUM), promote innovation and entrepreneurship among students across the state. Operating in the field of engineering, management, arts & science colleges, medical institutions, polytechnics, and universities, IEDCs provide opportunities to experiment, innovate, and turn ideas into viable products and services.",
     fullDescription: (
       <div className="text-slate-600 leading-relaxed space-y-4">
         <p className="mb-4">
           The Innovation and Entrepreneurship Development Centres (IEDCs), a
           flagship initiative of Kerala Startup Mission (KSUM), promote
           innovation and entrepreneurship among students across the state.
-          Operating in engineering, management, arts & science colleges, medical
+          Operating in the field of engineering, management, arts & science colleges, medical
           institutions, polytechnics, and universities, IEDCs provide
           opportunities to experiment, innovate, and turn ideas into viable
           products and services.
@@ -104,10 +104,10 @@ export const aboutContent = {
     ),
   },
   lbscek: {
-    title: "About LBSCEK",
+    title: "LBSCEK",
     logo: "/lbscek-logo-black.png",
     shortDescription:
-      "Established in 1993, Lal Bahadur Shastri College of Engineering (LBSCE), Kasaragod, functions under the L.B.S. Centre for Science and Technology, an autonomous institution owned by the Government of Kerala. A premier government institution driving innovation and inclusion.",
+      "Established in 1993, Lal Bahadur Shastri College of Engineering (LBSCE), Kasaragod, functions under the L.B.S. Centre for Science and Technology, Thiruvananthapuram, an autonomous institution owned by the Government of Kerala. The college offers AICTE-approved undergraduate (B.Tech.) programs in eight engineering disciplines, including two new programs introduced this year under the Department of Computer Science and Engineering — Artificial Intelligence and Data Science, and Computer Science and Business Systems, the latter offered in collaboration with Tata Consultancy Services (TCS). Additionally, the college offers one postgraduate (M.Tech.) program under the Department of Computer Science and Engineering.",
     fullDescription: (
       <div className="text-slate-600 leading-relaxed space-y-4">
         <p className="mb-4">
@@ -172,10 +172,10 @@ export const aboutContent = {
     ),
   },
   lbsiedc: {
-    title: "About IEDC LBSCEK",
+    title: "IEDC LBSCEK",
     logo: "/iedc-lbs-logo-color.png",
     shortDescription:
-      "The IEDC at LBS College of Engineering, Kasaragod, serves as a catalyst for innovation and entrepreneurship within the campus, providing students with mentorship, resources, and funding opportunities.",
+      "The Innovation and Entrepreneurship Development Centre (IEDC) at LBS College of Engineering, Kasaragod, functions under the aegis of Kerala Startup Mission (KSUM) with the vision to foster innovation, creativity, and entrepreneurial thinking among students. IEDC LBSCEK serves as a launchpad for young innovators by organizing workshops, hackathons, and mentorship programs that transform ideas into viable products and startups. The centre actively collaborates with industries, research institutions, and ecosystem enablers to cultivate a strong culture of innovation and empower students to become technology-driven entrepreneurs.",
     fullDescription: (
       <div className="text-slate-600 leading-relaxed space-y-4">
         {" "}

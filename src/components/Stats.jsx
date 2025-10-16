@@ -72,13 +72,13 @@ const Stats = () => {
   const topRowStats = [
     {
       icon: Users,
-      value: '10,000+',
+      value: '100000+',
       label: 'Innovators',
       color: 'bg-blue-400',
     },
     {
       icon: Sparkles,
-      value: '5,000+',
+      value: '5000+',
       label: 'Ideas',
       color: 'bg-purple-400',
     },

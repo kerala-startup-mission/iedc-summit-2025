@@ -55,7 +55,7 @@ const About = () => {
               <h3 className="text-slate-900 text-3xl font-bold">
                 {aboutContent.summit.title}
               </h3>
-              <p className="text-slate-600 text-lg leading-relaxed">
+              <p className="text-slate-600 text-lg text-justify leading-relaxed">
                 {aboutContent.summit.shortDescription}
               </p>
               <button
@@ -78,11 +78,11 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {cardData.map(card => (
               <div key={card.id} className="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300 flex flex-col gap-4 relative">
-                <img src={card.logo} alt={`${card.title} Logo`} className="absolute top-6 right-6 h-16 w-auto object-contain opacity-80" />
+                <img src={card.logo} alt={`${card.title} Logo`} className="absolute top-3 right-6 h-16 w-auto object-contain opacity-80" />
                 <div className="pr-20">
                   <h4 className="text-slate-900 text-2xl font-bold">{card.title}</h4>
                 </div>
-                <p className="text-slate-600 leading-relaxed flex-grow">
+                <p className="text-slate-600 leading-relaxed text-justify flex-grow">
                   {card.shortDescription}
                 </p>
                 <button
@@ -111,11 +111,11 @@ const About = () => {
           {/* Organization Cards */}
           {cardData.map(card => (
             <div key={card.id} className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col gap-3 relative">
-              <img src={card.logo} alt={`${card.title} Logo`} className="absolute top-5 right-5 h-14 w-auto object-contain opacity-80" />
+              <img src={card.logo} alt={`${card.title} Logo`} className="absolute top-2 right-5 h-14 w-auto object-contain opacity-80" />
               <div className="pr-16">
                 <h4 className="text-slate-900 text-xl font-bold">{card.title}</h4>
               </div>
-              <p className="text-slate-600 leading-relaxed">{card.shortDescription}</p>
+              <p className="text-slate-600 text-justify leading-relaxed">{card.shortDescription}</p>
               <button onClick={() => openModal(card.id)} className="text-blue-600 font-semibold self-start mt-1">Read More →</button>
             </div>
           ))}
