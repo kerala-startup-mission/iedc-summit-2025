@@ -95,7 +95,7 @@ const About = () => {
   const summitFullContent = (
     <>
       <p className="text-gray-500 text-base font-normal font-inter leading-7 text-justify mb-4">
-        The IEDC Summit 2025, organised by Kerala Startup Mission and hosted by L.B.S. College of Engineering, Kasaragod, marks the 10th anniversary edition of this flagship event, celebrating a decade of fostering innovation, entrepreneurship, and technological excellence. This one-day summit invites students, aspiring entrepreneurs, innovators, and faculty to participate in a vibrant festival of ideas, collaboration, and learning.
+        The IEDC Summit 2025, organised by Kerala Startup Mission and hosted by L.B.S. College of Engineering, Kasaragod, marks the 10th anniversary edition of this flagship event, celebrating a decade of fostering innovation, entrepreneurship, and technological excellence. This two-day summit invites students, aspiring entrepreneurs, innovators, and faculty to participate in a vibrant festival of ideas, collaboration, and learning.
       </p>
       <p className="text-gray-500 text-base font-normal font-inter leading-7 text-justify mb-4">
         As one of the region's most anticipated events, the summit provides a dynamic platform for interactive workshops, panel discussions, seminars, and keynote sessions led by industry experts and successful entrepreneurs. Participants will gain valuable insights into emerging trends, develop entrepreneurial skills, and explore opportunities to transform ideas into impactful ventures.

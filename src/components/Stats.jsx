@@ -73,7 +73,7 @@ const Stats = () => {
     {
       icon: Users,
       value: '10,000+',
-      label: 'Student Innovators',
+      label: 'Innovators',
       color: 'bg-blue-400',
     },
     {
@@ -98,16 +98,16 @@ const Stats = () => {
       color: 'bg-pink-500',
     },
     {
-      icon: GraduationCap,
-      value: '500+',
-      label: 'Colleges',
-      color: 'bg-pink-400',
-    },
-    {
       icon: Briefcase,
       value: '250+',
-      label: 'Registered Startups',
+      label: 'Startups',
       color: 'bg-yellow-300',
+    },
+    {
+      icon: GraduationCap,
+      value: '150+',
+      label: 'Registered Startups',
+      color: 'bg-pink-400',
     },
   ];
   
