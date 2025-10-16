@@ -1,8 +1,13 @@
 import React from 'react';
 import TiltedCard from './TiltedCard';
 import { Users, Building2, Rocket, GraduationCap, Lightbulb, Briefcase, ListChecks } from 'lucide-react';
+import useScrollAnimation from '../hooks/useScrollAnimation';
 
 const Stats = () => {
+  const headerRef = useScrollAnimation({ y: 30, duration: 0.8, delay: 0.1 });
+  const topRowRef = useScrollAnimation({ y: 40, duration: 0.8, stagger: 0.15, delay: 0.2 });
+  const middleRowRef = useScrollAnimation({ y: 40, duration: 0.8, stagger: 0.15, delay: 0.35 });
+  const bottomRowRef = useScrollAnimation({ y: 40, duration: 0.8, stagger: 0.15, delay: 0.5 });
   const topRowStats = [
     {
       icon: Users,
@@ -89,7 +94,7 @@ const Stats = () => {
   return (
     <section className="px-4 sm:px-8 py-16 md:py-20 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-600">
       <div className="max-w-[1200px] mx-auto">
-        <div className="text-center mb-12">
+        <div ref={headerRef} className="text-center mb-12">
           <p className="text-blue-100 text-xs font-semibold tracking-widest uppercase mb-2">
             BY THE NUMBERS
           </p>
@@ -99,22 +104,22 @@ const Stats = () => {
         </div>
 
         <div className="hidden md:block">
-          <div className="grid grid-cols-3 gap-6 mb-6 max-w-4xl mx-auto">
+          <div ref={topRowRef} className="grid grid-cols-3 gap-6 mb-6 max-w-4xl mx-auto">
             {topRowStats.map((stat, index) => renderStatCard(stat, index))}
           </div>
 
-          <div className="grid grid-cols-3 gap-6 mb-6 max-w-4xl mx-auto">
+          <div ref={middleRowRef} className="grid grid-cols-3 gap-6 mb-6 max-w-4xl mx-auto">
             {middleRowStats.map((stat, index) => renderStatCard(stat, index))}
           </div>
 
-          <div className="flex justify-center">
+          <div ref={bottomRowRef} className="flex justify-center">
             <div className="w-full max-w-[280px]">
               {renderStatCard(bottomRowStats[0], 0)}
             </div>
           </div>
         </div>
 
-        <div className="md:hidden flex flex-col gap-4 max-w-sm mx-auto">
+        <div className="md:hidden grid grid-cols-2 gap-4 max-w-md mx-auto">
           {[...topRowStats, ...middleRowStats, ...bottomRowStats].map((stat, index) => renderStatCard(stat, index))}
         </div>
       </div>

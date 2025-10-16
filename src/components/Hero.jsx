@@ -1,5 +1,6 @@
 import React from 'react';
 import TextType from './TextType';
+import logo from '/iedc-summit-25-logo.png';
 
 const Hero = () => {
   return (
@@ -18,6 +19,11 @@ const Hero = () => {
 
         {/* Content - Desktop */}
         <div className="w-[900px] h-80 max-w-[1400px] relative">
+          {/* Logo */}
+          <div className="left-[48px] top-[-180px] absolute">
+            <img src={logo} alt="IEDC Summit 2025 Logo" className="w-40 h-40 object-contain" />
+          </div>
+
           <div className="px-6 py-2 left-[48px] top-0 absolute bg-white rounded-[50px] shadow-[0px_4px_12px_0px_rgba(37,99,235,0.15)] inline-flex justify-start items-start">
             <div className="justify-center text-blue-600 text-sm font-bold font-inter leading-snug tracking-wider">
               10TH ANNIVERSARY EDITION
@@ -69,6 +75,11 @@ const Hero = () => {
 
         {/* Content - Mobile */}
         <div className="w-full h-80 relative">
+          {/* Logo */}
+          <div className="left-1/2 -translate-x-1/2 top-[-170px] absolute">
+            <img src={logo} alt="IEDC Summit 2025 Logo" className="w-30 h-30 object-contain" />
+          </div>
+
           <div className="px-6 py-2 left-1/2 -translate-x-1/2 top-0 absolute bg-white rounded-[50px] shadow-[0px_4px_12px_0px_rgba(37,99,235,0.15)] inline-flex justify-center items-start whitespace-nowrap">
             <div className="text-center justify-center text-blue-600 text-xs font-bold font-inter leading-none tracking-wider">
               10TH ANNIVERSARY EDITION

@@ -1,13 +1,16 @@
 import React from 'react';
 import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
+import useScrollAnimation from '../hooks/useScrollAnimation';
 
 const Contact = () => {
+  const headerRef = useScrollAnimation({ y: 30, duration: 0.8, delay: 0.1 });
+  const contentRef = useScrollAnimation({ y: 40, duration: 0.8, delay: 0.3 });
   return (
     <section id="contact" className="px-12 py-20 bg-indigo-50">
       <div className="max-w-[1400px] mx-auto">
         {/* Section Header */}
-        <div className="flex flex-col items-center gap-3 mb-14">
+        <div ref={headerRef} className="flex flex-col items-center gap-3 mb-14">
           <span className="text-blue-600 text-xs font-bold font-inter uppercase tracking-widest">
             Get In Touch
           </span>
@@ -17,7 +20,7 @@ const Contact = () => {
         </div>
 
         {/* Content */}
-        <div className="flex flex-col items-center gap-10 max-w-[650px] mx-auto">
+        <div ref={contentRef} className="flex flex-col items-center gap-10 max-w-[650px] mx-auto">
           <p className="text-gray-500 text-base font-normal font-inter text-center leading-loose">
             Your questions and ideas fuel our mission. Whether you have a query or a spark of
             <br />

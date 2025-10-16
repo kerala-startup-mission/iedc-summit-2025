@@ -22,6 +22,7 @@ const Navbar = () => {
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
     { label: 'Highlights', href: '#highlights' },
+    { label: 'Gallery', href: '#gallery' },
     { label: 'Contact', href: '#contact' },
     { label: 'Register', href: '#register' }
   ], []);
@@ -32,16 +33,18 @@ const Navbar = () => {
   const handleNavClick = (e, href) => {
     e.preventDefault();
     const targetId = href.substring(1);
-    const targetElement = document.getElementById(targetId);
+    
+    // Special case for register - scroll to contact section
+    const actualTargetId = targetId === 'register' ? 'contact' : targetId;
+    const targetElement = document.getElementById(actualTargetId);
     
     if (targetElement) {
       const navbarHeight = 80; // Offset for fixed navbar
       const targetPosition = targetElement.offsetTop - navbarHeight;
       
-      gsap.to(window, {
-        scrollTo: { y: targetPosition, autoKill: true },
-        duration: 1,
-        ease: 'power3.inOut'
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
       });
       
       setActiveHref(href);
@@ -51,10 +54,19 @@ const Navbar = () => {
 
   // Intersection Observer for active section tracking
   useEffect(() => {
-    const sections = items.map(item => ({
-      id: item.href.substring(1),
-      href: item.href
-    }));
+    const sections = items.map(item => {
+      const targetId = item.href.substring(1);
+      // Map register to contact since register section doesn't exist
+      const actualId = targetId === 'register' ? 'contact' : targetId;
+      return {
+        id: actualId,
+        href: item.href,
+        originalId: targetId
+      };
+    }).filter((section, index, self) => 
+      // Remove duplicate contact entries
+      index === self.findIndex(s => s.id === section.id)
+    );
 
     const observerOptions = {
       root: null,

@@ -1,7 +1,10 @@
 import React from 'react';
 import TiltedCard from './TiltedCard';
+import useScrollAnimation from '../hooks/useScrollAnimation';
 
 const Highlights = () => {
+  const headerRef = useScrollAnimation({ y: 30, duration: 0.8, delay: 0.1 });
+  const cardsRef = useScrollAnimation({ y: 40, duration: 0.8, stagger: 0.15, delay: 0.3 });
   const highlights = [
     {
       emoji: '🎯',
@@ -26,10 +29,10 @@ const Highlights = () => {
   ];
 
   return (
-    <section id="highlights" className="px-5 md:px-12 py-12 md:py-20 bg-white">
+    <section className="px-5 md:px-12 py-12 md:py-20 bg-white">
       <div className="max-w-[1400px] mx-auto">
         {/* Section Header */}
-        <div className="flex flex-col items-center gap-3 mb-10 md:mb-14">
+        <div ref={headerRef} className="flex flex-col items-center gap-3 mb-10 md:mb-14">
           <span className="text-blue-600 text-xs font-bold font-inter uppercase tracking-wider md:tracking-widest">
             What to Expect
           </span>
@@ -43,7 +46,7 @@ const Highlights = () => {
         </div>
 
         {/* Highlights Cards - Responsive Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 md:gap-8 justify-items-center place-items-center">
+        <div ref={cardsRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 justify-items-center place-items-center">
           {highlights.map((item, index) => (
             <div key={index} className="w-full max-w-xs md:max-w-none md:w-64">
               <TiltedCard
