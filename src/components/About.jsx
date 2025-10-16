@@ -162,8 +162,9 @@ const About = () => {
 
           <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
             {/* KSUM Card */}
-            <div className="w-full max-w-[576px] self-stretch px-8 py-8 bg-white rounded-xl border-2 border-blue-100 inline-flex flex-col justify-start items-start gap-4">
-              <div className="self-stretch flex flex-col justify-start items-start">
+            <div className="w-full max-w-[576px] self-stretch px-8 py-8 bg-white rounded-xl border-2 border-blue-100 inline-flex flex-col justify-start items-start gap-4 relative">
+              <img src="/ksum-logo-black.png" alt="KSUM Logo" className="absolute top-6 right-6 h-16 w-auto object-contain" />
+              <div className="self-stretch flex flex-col justify-start items-start pr-16">
                 <div className="self-stretch justify-center text-gray-800 text-xl font-bold font-inter leading-loose">
                   About KSUM
                 </div>
@@ -182,8 +183,9 @@ const About = () => {
             </div>
 
             {/* IEDC Kerala Card */}
-            <div className="w-full max-w-[576px] self-stretch px-8 py-8 bg-white rounded-xl border-2 border-blue-100 inline-flex flex-col justify-start items-start gap-4">
-              <div className="self-stretch flex flex-col justify-start items-start">
+            <div className="w-full max-w-[576px] self-stretch px-8 py-8 bg-white rounded-xl border-2 border-blue-100 inline-flex flex-col justify-start items-start gap-4 relative">
+              <img src="/iedc-logo-color.png" alt="IEDC Logo" className="absolute top-6 right-6 h-16 w-auto object-contain" />
+              <div className="self-stretch flex flex-col justify-start items-start pr-16">
                 <div className="self-stretch justify-center text-gray-800 text-xl font-bold font-inter leading-loose">
                   About IEDC Kerala
                 </div>
@@ -202,8 +204,9 @@ const About = () => {
             </div>
 
             {/* LBSCEK Card */}
-            <div className="w-full max-w-[576px] self-stretch px-8 py-8 bg-white rounded-xl border-2 border-blue-100 inline-flex flex-col justify-start items-start gap-4">
-              <div className="self-stretch flex flex-col justify-start items-start">
+            <div className="w-full max-w-[576px] self-stretch px-8 py-8 bg-white rounded-xl border-2 border-blue-100 inline-flex flex-col justify-start items-start gap-4 relative">
+              <img src="/lbscek-logo-black.png" alt="LBSCEK Logo" className="absolute top-6 right-6 h-16 w-auto object-contain" />
+              <div className="self-stretch flex flex-col justify-start items-start pr-16">
                 <div className="self-stretch justify-center text-gray-800 text-xl font-bold font-inter leading-loose">
                   About LBSCEK
                 </div>
@@ -222,8 +225,9 @@ const About = () => {
             </div>
 
             {/* IEDC LBSCEK Card */}
-            <div className="w-full max-w-[576px] self-stretch px-8 py-8 bg-white rounded-xl border-2 border-blue-100 inline-flex flex-col justify-start items-start gap-4">
-              <div className="self-stretch flex flex-col justify-start items-start">
+            <div className="w-full max-w-[576px] self-stretch px-8 py-8 bg-white rounded-xl border-2 border-blue-100 inline-flex flex-col justify-start items-start gap-4 relative">
+              <img src="/iedc-lbs-logo-color.png" alt="IEDC LBSCEK Logo" className="absolute top-6 right-6 h-16 w-auto object-contain" />
+              <div className="self-stretch flex flex-col justify-start items-start pr-16">
                 <div className="self-stretch justify-center text-gray-800 text-xl font-bold font-inter leading-loose">
                   About IEDC LBSCEK
                 </div>
@@ -274,8 +278,9 @@ const About = () => {
         {/* Mobile Cards */}
         <div className="md:hidden self-stretch flex flex-col justify-start items-start gap-6 mt-8">
           {/* KSUM Card Mobile */}
-          <div className="self-stretch p-6 bg-white rounded-xl border-2 border-blue-100 flex flex-col justify-start items-start gap-3">
-            <div className="self-stretch flex flex-col justify-start items-start">
+          <div className="self-stretch p-6 bg-white rounded-xl border-2 border-blue-100 flex flex-col justify-start items-start gap-3 relative">
+            <img src="/ksum-logo-black.png" alt="KSUM Logo" className="absolute top-4 right-4 h-14 w-auto object-contain" />
+            <div className="self-stretch flex flex-col justify-start items-start pr-14">
               <div className="self-stretch justify-center text-gray-800 text-xl font-bold font-inter leading-7">
                 About KSUM
               </div>
@@ -294,8 +299,9 @@ const About = () => {
           </div>
 
           {/* IEDC Kerala Card Mobile */}
-          <div className="self-stretch p-6 bg-white rounded-xl border-2 border-blue-100 flex flex-col justify-start items-start gap-3">
-            <div className="self-stretch flex flex-col justify-start items-start">
+          <div className="self-stretch p-6 bg-white rounded-xl border-2 border-blue-100 flex flex-col justify-start items-start gap-3 relative">
+            <img src="/iedc-logo-color.png" alt="IEDC Logo" className="absolute top-4 right-4 h-14 w-auto object-contain" />
+            <div className="self-stretch flex flex-col justify-start items-start pr-14">
               <div className="self-stretch justify-center text-gray-800 text-xl font-bold font-inter leading-7">
                 About IEDC Kerala
               </div>
@@ -314,8 +320,9 @@ const About = () => {
           </div>
 
           {/* LBSCEK Card Mobile */}
-          <div className="self-stretch p-6 bg-white rounded-xl border-2 border-blue-100 flex flex-col justify-start items-start gap-3">
-            <div className="self-stretch flex flex-col justify-start items-start">
+          <div className="self-stretch p-6 bg-white rounded-xl border-2 border-blue-100 flex flex-col justify-start items-start gap-3 relative">
+            <img src="/lbscek-logo-black.png" alt="LBSCEK Logo" className="absolute top-4 right-4 h-14 w-auto object-contain" />
+            <div className="self-stretch flex flex-col justify-start items-start pr-14">
               <div className="self-stretch justify-center text-gray-800 text-xl font-bold font-inter leading-7">
                 About LBSCEK
               </div>
@@ -334,8 +341,9 @@ const About = () => {
           </div>
 
           {/* IEDC LBSCEK Card Mobile */}
-          <div className="self-stretch p-6 bg-white rounded-xl border-2 border-blue-100 flex flex-col justify-start items-start gap-3">
-            <div className="self-stretch flex flex-col justify-start items-start">
+          <div className="self-stretch p-6 bg-white rounded-xl border-2 border-blue-100 flex flex-col justify-start items-start gap-3 relative">
+            <img src="/iedc-lbs-logo-color.png" alt="IEDC LBSCEK Logo" className="absolute top-4 right-4 h-14 w-auto object-contain" />
+            <div className="self-stretch flex flex-col justify-start items-start pr-14">
               <div className="self-stretch justify-center text-gray-800 text-xl font-bold font-inter leading-7">
                 About IEDC LBSCEK
               </div>
