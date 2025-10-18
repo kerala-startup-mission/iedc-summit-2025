@@ -69,68 +69,26 @@ const Stats = () => {
     };
   }, []);
   
-  const topRowStats = [
-    {
-      icon: Users,
-      value: '100000+',
-      label: 'Innovators',
-      color: 'bg-blue-400',
-    },
-    {
-      icon: Sparkles,
-      value: '5000+',
-      label: 'Ideas',
-      color: 'bg-purple-400',
-    },
-    {
-      icon: Rocket,
-      value: '550+',
-      label: 'IEDCs',
-      color: 'bg-green-400',
-    },
+  // Grouped stats into 3 steps as requested
+  const stepOne = [
+    { icon: Users, value: '100000+', label: 'Innovators', color: 'bg-blue-400' },
+    { icon: Users, value: '20000+', label: 'Aspiring change makers', color: 'bg-cyan-400' },
+    { icon: Sparkles, value: '5000+', label: 'Leads', color: 'bg-purple-400' },
+    { icon: Building2, value: '1000+', label: 'Nodal Officers', color: 'bg-rose-400' },
   ];
 
-  const middleRowStats = [
-    {
-      icon: Building2,
-      value: '600+',
-      label: 'Nodal Officers',
-      color: 'bg-pink-500',
-    },
-    {
-      icon: GraduationCap,
-      value: '250+',
-      label: 'Registered Startups',
-      color: 'bg-pink-400',
-    },
-    {
-      icon: Lightbulb,
-      value: '200+',
-      label: 'Speakers',
-      color: 'bg-orange-400',
-    },
+  const stepTwo = [
+    { icon: Briefcase, value: '150+', label: 'NEST members', color: 'bg-pink-400' },
+    { icon: ListChecks, value: '70+', label: 'Cluster coordinators', color: 'bg-fuchsia-400' },
+    { icon: ListChecks, value: '14', label: 'Clusters', color: 'bg-violet-400' },
+    { icon: Rocket, value: '557', label: 'IEDCs', color: 'bg-green-400' },
   ];
-  
-  const thirdRowStats = [
-    {
-      icon: ListChecks,
-      value: '100+',
-      label: 'Sessions',
-      color: 'bg-pink-400',
-    },
-    
-    {
-      icon: Home,
-      value: '25+',
-      label: 'Incubators',
-      color: 'bg-indigo-400',
-    },
-    {
-      icon: Warehouse,
-      value: '5+',
-      label: 'LEAP Coworks',
-      color: 'bg-teal-400',
-    },
+
+  const stepThree = [
+    { icon: Sparkles, value: '5000+', label: 'Ideas', color: 'bg-purple-400' },
+    { icon: Home, value: '350+', label: 'Pre Incubatees', color: 'bg-indigo-400' },
+    { icon: GraduationCap, value: '250+', label: 'Startups', color: 'bg-amber-400' },
+    { icon: Warehouse, value: '25', label: 'TBIs / Coworks', color: 'bg-teal-400' },
   ];
 
   // const fourthRowStats = [
@@ -139,25 +97,45 @@ const Stats = () => {
   return (
     <section ref={sectionRef} className="px-4 sm:px-8 py-16 md:py-20 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-600">
       <div className="max-w-[1200px] mx-auto">
-        {/* Desktop Layout - 3 columns */}
-        <div className="hidden md:block">
-          <div ref={topRowRef} className="grid grid-cols-3 gap-6 mb-6 max-w-4xl mx-auto">
-            {topRowStats.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+        {/* Desktop Layout - 3 steps */}
+        <div className="hidden md:block space-y-12">
+          <div ref={topRowRef} className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-4 gap-6">
+              {stepOne.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+            </div>
           </div>
 
-          <div ref={middleRowRef} className="grid grid-cols-3 gap-6 mb-6 max-w-4xl mx-auto">
-            {middleRowStats.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+          <div ref={middleRowRef} className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-4 gap-6">
+              {stepTwo.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+            </div>
           </div>
 
-          <div ref={bottomRowRef} className="grid grid-cols-3 gap-6 mb-6 max-w-4xl mx-auto">
-            {thirdRowStats.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+          <div ref={bottomRowRef} className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-4 gap-6">
+              {stepThree.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+            </div>
           </div>
         </div>
 
-        {/* Mobile Layout - 2 columns */}
-        <div className="md:hidden">
-          <div className="grid grid-cols-2 gap-4">
-            {[...topRowStats, ...middleRowStats, ...thirdRowStats].map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+        {/* Mobile Layout - stacked steps with 2 columns */}
+        <div className="md:hidden space-y-8">
+          <div>
+            <div className="grid grid-cols-2 gap-4">
+              {stepOne.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+            </div>
+          </div>
+
+          <div>
+            <div className="grid grid-cols-2 gap-4">
+              {stepTwo.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+            </div>
+          </div>
+
+          <div>
+            <div className="grid grid-cols-2 gap-4">
+              {stepThree.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+            </div>
           </div>
         </div>
       </div>
