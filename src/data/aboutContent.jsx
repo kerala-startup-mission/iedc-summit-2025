@@ -107,7 +107,7 @@ export const aboutContent = {
     title: "LBSCEK",
     logo: "/lbscek-logo-black.png",
     shortDescription:
-      "Established in 1993, Lal Bahadur Shastri College of Engineering (LBSCE), Kasaragod, functions under the L.B.S. Centre for Science and Technology, Thiruvananthapuram, an autonomous institution owned by the Government of Kerala. The college offers AICTE-approved undergraduate (B.Tech.) programs in eight engineering disciplines, including two new programs introduced this year under the Department of Computer Science and Engineering — Artificial Intelligence and Data Science, and Computer Science and Business Systems, the latter offered in collaboration with Tata Consultancy Services (TCS). Additionally, the college offers one postgraduate (M.Tech.) program under the Department of Computer Science and Engineering.",
+      "Established in 1993, Lal Bahadur Shastri College of Engineering (LBSCE), Kasaragod, functions under the L.B.S. Centre for Science and Technology, Thiruvananthapuram, an autonomous institution owned by the Government of Kerala. Located in the scenic Muliyar Panchayath of Kasaragod District, the 52-acre campus is situated about 12 km from Kasaragod town, 14 km from the railway station, and 75 km from Mangaluru Airport, ensuring easy accessibility.",
     fullDescription: (
       <div className="text-slate-600 leading-relaxed space-y-4">
         <p className="mb-4">
@@ -175,7 +175,7 @@ export const aboutContent = {
     title: "IEDC LBSCEK",
     logo: "/iedc-lbs-logo-color.png",
     shortDescription:
-      "The Innovation and Entrepreneurship Development Centre (IEDC) at LBS College of Engineering, Kasaragod, functions under the aegis of Kerala Startup Mission (KSUM) with the vision to foster innovation, creativity, and entrepreneurial thinking among students. IEDC LBSCEK serves as a launchpad for young innovators by organizing workshops, hackathons, and mentorship programs that transform ideas into viable products and startups. The centre actively collaborates with industries, research institutions, and ecosystem enablers to cultivate a strong culture of innovation and empower students to become technology-driven entrepreneurs.",
+      "The Innovation and Entrepreneurship Development Centre (IEDC) at LBS College of Engineering, Kasaragod, functions under the aegis of Kerala Startup Mission (KSUM) with the vision to foster innovation, creativity, and entrepreneurial thinking among students. Guided by dedicated mentors and an active founder community, the cell has evolved into a thriving ecosystem that inspires students to ideate, innovate, and lead the change toward a sustainable and technology-driven future.",
     fullDescription: (
       <div className="text-slate-600 leading-relaxed space-y-4">
         {" "}
