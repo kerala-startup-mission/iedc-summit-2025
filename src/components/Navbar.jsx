@@ -24,19 +24,22 @@ const Navbar = () => {
     { label: 'Highlights', href: '#highlights' },
     { label: 'Gallery', href: '#gallery' },
     // { label: 'Contact', href: '#contact' },
-    { label: 'Register', href: '#register' }
+    { label: 'Register', href: 'https://tickets.startupmission.in/iedc-summit-2025', external: true }
   ], []);
 
   const ease = 'power2.easeOut';
 
   // Smooth scroll handler
-  const handleNavClick = (e, href) => {
+  const handleNavClick = (e, href, external = false) => {
+    if (external) {
+      // For external links, navigate in same tab
+      window.location.href = href;
+      return;
+    }
+    
     e.preventDefault();
     const targetId = href.substring(1);
-    
-    // Special case for register - scroll to contact section
-    const actualTargetId = targetId === 'register' ? 'contact' : targetId;
-    const targetElement = document.getElementById(actualTargetId);
+    const targetElement = document.getElementById(targetId);
     
     if (targetElement) {
       const navbarHeight = 80; // Offset for fixed navbar
@@ -373,7 +376,7 @@ const Navbar = () => {
                   <a
                     role="menuitem"
                     href={item.href}
-                    onClick={(e) => handleNavClick(e, item.href)}
+                    onClick={(e) => handleNavClick(e, item.href, item.external)}
                     className="relative overflow-hidden inline-flex items-center justify-center h-full no-underline rounded-full box-border font-semibold text-[14px] leading-[0] uppercase tracking-[0.2px] whitespace-nowrap cursor-pointer px-0"
                     style={pillStyle}
                     aria-label={item.label}
@@ -452,7 +455,7 @@ const Navbar = () => {
             <li key={item.href}>
               <a
                 href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
+                onClick={(e) => handleNavClick(e, item.href, item.external)}
                 className="block py-3 px-4 text-[16px] font-medium rounded-[50px] transition-all duration-200"
                 style={{
                   background: 'var(--pill-bg, #fff)',

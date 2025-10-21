@@ -7,17 +7,10 @@ import Stats from './components/Stats';
 import Gallery from './components/Gallery';
 import Directions from './components/Directions';
 import Footer from './components/Footer';
-import Splash from './components/Splash';
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
-
   return (
     <div className="App">
-      {showSplash ? (
-        <Splash onDismiss={() => setShowSplash(false)} />
-      ) : (
-        <>
           <Navbar />
           <Hero />
           <About />
@@ -28,8 +21,6 @@ function App() {
           <Gallery />
           <Directions />
           <Footer />
-        </>
-      )}
     </div>
   );
 }
