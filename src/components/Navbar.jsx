@@ -1,91 +1,149 @@
-﻿import { useState } from 'react';
+﻿import { useState, useEffect } from 'react';
 import logo from '/iedc-summit-25-logo.png';
-import './Navbar.css';
+import ellipse1 from '/Ellipse1.svg';
+
+const navItems = [
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Highlights', href: '#highlights' },
+  { label: 'Gallery', href: '#gallery' },
+];
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('Home');
 
-  const navItems = [
-    { label: 'Home', href: '#home' },
-    { label: 'About', href: '#about' },
-    { label: 'Highlights', href: '#highlights' },
-    { label: 'Gallery', href: '#gallery' },
-    { label: 'Contact', href: '#contact' },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+
+      // Detect active section based on scroll position
+      const sections = navItems.map(item => ({
+        id: item.href.substring(1),
+        label: item.label
+      }));
+
+      for (let section of sections) {
+        const element = document.getElementById(section.id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 150 && rect.bottom >= 0) {
+            setActiveSection(section.label);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-12 z-[1000] w-full left-0">
-      <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-blue-600 rounded-[20px] w-[95%] max-w-full h-[70px] items-center justify-between px-12 animate-expandWidth" style={{ animationDelay: '1.5s' }}>
-        {/* Logo */}
-        <a href="#home" className="flex items-center animate-fadeIn" style={{ animationDelay: '1.7s' }}>
+    <>
+      {/* Desktop Navigation */}
+      <nav className="hidden md:flex fixed top-0 left-0 right-0 w-full h-24 items-center justify-center z-[1000]">
+        {/* Logo and Navigation Links Container */}
+        <div className={`flex items-center gap-8 transition-all duration-300 ${isScrolled ? 'bg-white rounded-lg px-6 py-3' : 'bg-transparent'}`}>
+          {/* Logo */}
           <img 
             src={logo} 
             alt="IEDC Logo" 
-            className="w-20 h-16 object-contain hover:opacity-80 transition-opacity"
+            className="w-16 h-16 object-contain"
           />
-        </a>
 
-        {/* Desktop Menu Items */}
-        <div className="flex items-center gap-12">
-          {navItems.map((item, index) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-white text-[18px] font-medium leading-[28px] hover:opacity-80 transition-opacity cursor-pointer animate-fadeIn"
-              style={{ animationDelay: `${1.7 + index * 0.1}s` }}
+          {/* Navigation Links */}
+          <div className="inline-flex justify-start items-center gap-8">
+            {navItems.map((item) => (
+              <div key={item.href} className="relative">
+                <a 
+                  href={item.href}
+                  onClick={() => setActiveSection(item.label)}
+                  className="pb-px inline-flex flex-col justify-start items-start group"
+                >
+                  <div className={`justify-center text-blue-600 text-lg font-bold font-Gilroy leading-7 hover:opacity-100 transition-opacity ${activeSection === item.label ? 'opacity-100' : 'opacity-50'}`}>
+                    {item.label}
+                  </div>
+                </a>
+                {/* Active Indicator */}
+                {activeSection === item.label && (
+                  <img 
+                    src={ellipse1} 
+                    alt="Active indicator" 
+                    className="w-8 h-8 absolute top-0 right-2"
+                  />
+                )}
+              </div>
+            ))}
+
+            {/* Register Button */}
+            <a 
+              href="https://tickets.startupmission.in/iedc-summit-2025"
+              className="w-40 h-10 relative bg-blue-600 rounded-xl hover:bg-blue-700 transition-all duration-300 flex items-center justify-center"
             >
-              {item.label}
+              <div className="text-white text-lg font-semibold font-clash-display leading-6">REGISTER NOW</div>
             </a>
-          ))}
-
-          {/* Register Button */}
-          <a 
-            href="https://tickets.startupmission.in/iedc-summit-2025"
-            className="bg-white rounded-[14px] px-6 py-2 text-blue-600 text-[18px] font-semibold leading-[24px] hover:bg-gray-100 transition-all duration-300 cursor-pointer animate-fadeIn"
-            style={{ animationDelay: '2s' }}
-          >
-            REGISTER NOW
-          </a>
+          </div>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
-      <div className="md:hidden flex items-center justify-between px-4 py-3 bg-blue-600 rounded-[16px] mx-4 animate-expandWidth" style={{ animationDelay: '1.5s' }}>
-        <a href="#home" className="animate-fadeIn" style={{ animationDelay: '1.7s' }}>
-          <img src={logo} alt="IEDC Logo" className="w-14 h-12 object-contain" />
-        </a>
-        
-        <button 
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="text-white text-2xl animate-fadeIn"
-          style={{ animationDelay: '1.7s' }}
-        >
-          ☰
-        </button>
-      </div>
+      {/* Mobile Navigation */}
+      <div className="md:hidden fixed top-0 left-0 right-0 w-full z-[1000] p-4">
+        <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'bg-white rounded-lg px-4 py-2' : 'bg-transparent'}`}>
+          <img 
+            src={logo} 
+            alt="IEDC Logo" 
+            className="w-16 h-16 object-contain"
+          />
+          
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-blue-600 text-2xl font-bold"
+          >
+            ☰
+          </button>
+        </div>
 
-      {/* Mobile Menu Items */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-blue-600 mt-2 mx-4 rounded-[16px] py-4 px-4 space-y-2 animate-slideDown">
-          {navItems.map((item) => (
+        {/* Mobile Menu Items */}
+        {isMobileMenuOpen && (
+          <div className={`mt-4 space-y-2 transition-all duration-300 ${isScrolled ? 'bg-white rounded-lg px-4 py-3' : 'bg-transparent'}`}>
+            {navItems.map((item) => (
+              <div key={item.href} className="relative">
+                <a
+                  href={item.href}
+                  onClick={() => {
+                    setActiveSection(item.label);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`block text-blue-600 text-lg font-bold py-2 hover:opacity-100 transition-opacity ${activeSection === item.label ? 'opacity-100' : 'opacity-50'}`}
+                >
+                  {item.label}
+                </a>
+                {/* Active Indicator */}
+                {activeSection === item.label && (
+                  <img 
+                    src={ellipse1} 
+                    alt="Active indicator" 
+                    className="w-5 h-5 absolute right-0 top-1/2 transform -translate-y-1/2"
+                  />
+                )}
+              </div>
+            ))}
             <a
-              key={item.href}
-              href={item.href}
-              className="block text-white text-lg font-medium py-2 hover:opacity-80 transition-opacity"
-              onClick={() => setIsMobileMenuOpen(false)}
+              href="https://tickets.startupmission.in/iedc-summit-2025"
+              className="block w-full bg-blue-600 text-white text-lg font-bold py-2 text-center rounded-lg hover:bg-blue-700 transition-all duration-300 mt-4"
             >
-              {item.label}
+              REGISTER NOW
             </a>
-          ))}
-          <a
-            href="https://tickets.startupmission.in/iedc-summit-2025"
-            className="block w-full bg-white rounded-[14px] px-4 py-2 text-blue-600 text-lg font-semibold text-center hover:bg-gray-100 transition-all duration-300 mt-4"
-          >
-            REGISTER NOW
-          </a>
-        </div>
-      )}
-    </nav>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

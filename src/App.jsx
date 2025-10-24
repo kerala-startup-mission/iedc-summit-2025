@@ -8,6 +8,11 @@ import Gallery from './components/Gallery';
 import Directions from './components/Directions';
 import Footer from './components/Footer';
 
+import "./fonts/ClashDisplay-Variable.ttf";
+import "./fonts/Gilroy-Light.otf";
+import "./fonts/Gilroy-ExtraBold.otf";
+import "./fonts/Gilroy-Medium.ttf";
+
 function App() {
   return (
     <div className="App">

@@ -1,5 +1,70 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "ClashDisplay";
+  src: url("./fonts/ClashDisplay-Variable.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("./fonts/Gilroy-Light.otf") format("opentype");
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("./fonts/Gilroy-ExtraBold.otf") format("opentype");
+  font-weight: 800;
+  font-display: swap;
+}
+
+@layer utilities {
+  @font-face {
+    font-family: "ClashDisplay";
+    src: url("./fonts/ClashDisplay-Variable.ttf") format("truetype");
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Gilroy";
+    src: url("./fonts/Gilroy-Light.otf") format("opentype");
+    font-weight: 300;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Gilroy";
+    src: url("./fonts/Gilroy-ExtraBold.otf") format("opentype");
+    font-weight: 800;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Gilroy";
+    src: url("./fonts/Gilroy-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-display: swap;
+  }
+
+  .font-clash-display {
+    font-family: "ClashDisplay", sans-serif;
+  }
+
+  .font-gilroy-light {
+    font-family: "Gilroy", sans-serif;
+    font-weight: 300;
+  }
+
+  .font-gilroy-bold {
+    font-family: "Gilroy", sans-serif;
+    font-weight: 800;
+  }
+  .font-gilroy-medium {
+    font-family: "Gilroy", sans-serif;
+    font-weight: 500;
+  }
+}
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
