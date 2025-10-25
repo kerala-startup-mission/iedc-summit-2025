@@ -33,7 +33,7 @@ const Highlights = () => {
 
   const HighlightCard = ({ item, position }) => {
     return (
-      <div className={`${item.bgColor} p-8 w-full aspect-square flex flex-col justify-start items-start relative overflow-hidden`}>
+      <div className={`${item.bgColor} p-4 md:p-6 lg:p-8 w-full aspect-square flex flex-col justify-start items-start relative overflow-hidden`}>
         {/* Background SVG */}
         {position === 'engineering' && (
           <img 
@@ -66,10 +66,10 @@ const Highlights = () => {
         
         {/* Content */}
         <div className="relative z-10">
-          <h3 className="text-2xl font-semibold font-clash-display text-white mb-4 text-left">
+          <h3 className="text-lg md:text-xl lg:text-2xl font-semibold font-clash-display text-white mb-2 md:mb-3 lg:mb-4 text-left">
             {item.title}
           </h3>
-          <p className="text-sm text-white font-clash-display leading-relaxed text-left">
+          <p className="text-xs md:text-sm text-white font-clash-display leading-relaxed text-left">
             {item.description}
           </p>
         </div>
@@ -82,19 +82,19 @@ const Highlights = () => {
       sectionVisible ? 'fade-in-up-visible' : 'fade-in-up-hidden'
     }`} ref={sectionRef}>
       {/* Header Section */}
-      <div className="px-12 pt-12 pb-16 flex items-start justify-between gap-12">
+      <div className="px-4 md:px-8 lg:px-12 pt-8 md:pt-12 pb-8 md:pb-16 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 md:gap-8 lg:gap-12">
         {/* Left Content */}
-        <div className="flex-1">
-          <h2 className="text-8xl font-light font-clash-display text-blue-500 mb-8">
-          Summit Highlights
-        </h2>
-          <p className="text-2xl text-black font-normal font-gilroy-light max-w-md leading-relaxed">
-          Experience Kerala's largest student entrepreneurship platform with world-class speakers, hands-on workshops, and unparalleled networking opportunities.
-        </p>
+        <div className="flex-1 w-full lg:w-auto">
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-light font-clash-display text-blue-500 mb-4 md:mb-6 lg:mb-8 leading-tight">
+            Summit <br className="hidden md:block" />Highlights
+          </h2>
+          <p className="text-base md:text-lg lg:text-2xl text-black font-normal font-gilroy-light max-w-md leading-relaxed">
+            Experience Kerala's largest student entrepreneurship platform with world-class speakers, hands-on workshops, and unparalleled networking opportunities.
+          </p>
         </div>
 
         {/* Right Cards Grid */}
-        <div className="grid grid-cols-2 gap-4 w-150">
+        <div className="grid grid-cols-2 gap-2 md:gap-3 lg:gap-4 w-full lg:w-150 lg:flex-shrink-0" style={{ gridAutoColumns: 'minmax(0, 1fr)' }}>
           <HighlightCard item={highlights[0]} position="engineering" />
           <HighlightCard item={highlights[1]} position="medical" />
           <HighlightCard item={highlights[2]} position="arts" />
