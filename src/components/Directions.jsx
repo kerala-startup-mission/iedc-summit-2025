@@ -42,7 +42,7 @@ const Directions = () => {
           
           <div className="text-center mt-6">
             <a 
-              href="https://maps.app.goo.gl/YourGoogleMapsLink" 
+              href="https://maps.app.goo.gl/Z4sA5aUp6dBwmvZ4A" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-normal font-clash-display rounded-lg transition-colors duration-300"

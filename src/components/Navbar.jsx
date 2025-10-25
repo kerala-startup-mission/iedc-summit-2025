@@ -101,8 +101,8 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Navigation */}
-      <div className="md:hidden fixed top-0 left-0 right-0 w-full z-1000 p-4">
-        <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'bg-white rounded-lg px-4 py-2' : 'bg-transparent'}`}>
+      <div className="md:hidden fixed top-0 left-0 right-0 w-full z-1000 p-4 bg-white">
+        <div className="flex items-center justify-between">
           <img 
             src={logo} 
             alt="IEDC Logo" 
@@ -119,7 +119,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Items */}
         {isMobileMenuOpen && (
-          <div className={`mt-4 space-y-2 transition-all duration-300 ${isScrolled ? 'bg-white rounded-lg px-4 py-3' : 'bg-transparent'}`}>
+          <div className="mt-4 space-y-2 bg-white rounded-lg px-4 py-3">
             {navItems.map((item) => (
               <div key={item.href} className="relative">
                 <button
