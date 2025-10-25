@@ -6,7 +6,7 @@ const Directions = () => {
   const mapRef = useScrollAnimation({ delay: 0.3 });
 
   return (
-    <section id="directions" className="w-full py-16 md:py-24 bg-white">
+    <section id="directions" className="w-full py-8 md:py-16 bg-white">
       <div className="container mx-auto px-4 sm:px-6 md:px-16 lg:px-20">
         <div ref={headerRef} className="text-center mb-12">
           <div className="inline-flex justify-center items-center mb-4">
@@ -16,10 +16,7 @@ const Directions = () => {
               className="w-16 h-16 md:w-20 md:h-20 object-contain"
             />
           </div>
-          <h6 className="text-blue-600 text-xs md:text-sm font-bold font-inter uppercase tracking-wider mb-3">
-            Directions
-          </h6>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-4">
+          <h2 className="text-3xl md:text-5xl font-normal font-clash-display text-gray-800 mb-4">
             Get Directions to the <span className="text-blue-500">Event</span>
           </h2>
           <div className="w-24 h-1 bg-blue-500 mx-auto"></div>
@@ -44,7 +41,7 @@ const Directions = () => {
               href="https://maps.app.goo.gl/YourGoogleMapsLink" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-300"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-normal font-clash-display rounded-lg transition-colors duration-300"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
@@ -54,6 +51,12 @@ const Directions = () => {
           </div>
         </div>
       </div>
+      {/* Colored Blocks at Bottom */}
+      <img 
+        src="/hero-blocks.png" 
+        alt="Decorative blocks" 
+        className="w-full h-20 sm:h-24 mt-5 -mb-16 object-cover"
+      />
     </section>
   );
 };

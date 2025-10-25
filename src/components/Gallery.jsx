@@ -1,6 +1,8 @@
-import React from 'react';
-import useScrollAnimation from '../hooks/useScrollAnimation';
-
+import React, { useState } from 'react';
+import LogoLoop from './LogoLoop';
+import { MdNavigateNext,  MdKeyboardArrowLeft } from 'react-icons/md';
+import ellipse2 from '/Ellipse2.svg';
+import ellipse3 from '/Ellipse3.svg';
 const summits = [
   { year: '2024', title: 'IEDC Summit 2024', location: 'NIT Calicut', videoId: 'ZeQyHm8sfC4' },
   { year: '2023', title: 'IEDC Summit 2023', location: 'College of Engineering, Trivandrum', videoId: '6Byl5JR-IpQ' },
@@ -14,63 +16,125 @@ const summits = [
 ];
 
 const Gallery = () => {
-  const headerRef = useScrollAnimation({ y: 30, duration: 0.8, delay: 0.1 });
-  const videosRef = useScrollAnimation({ y: 40, duration: 0.8, stagger: 0.1, delay: 0.3 });
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + summits.length) % summits.length);
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % summits.length);
+  };
+
+  const currentSummit = summits[currentIndex];
 
   return (
-    <section id="gallery" className="w-full px-5 md:px-16 lg:px-20 py-16 md:py-24 bg-slate-50">
-      <div className="max-w-7xl mx-auto">
+    <section id="gallery" className="w-full px-5 md:px-16 lg:px-20 py-16 md:py-24 bg-white relative overflow-hidden">
+      {/* Decorative Circles - Top Left */}
+      <img src={ellipse2} alt="Ellipse 2" className="absolute w-[600px] h-[600px] -left-30 -top-20 opacity-75 pointer-events-none" />
+      <img src={ellipse3} alt="Ellipse 3" className="absolute w-[450px] h-[450px] -left-10 top-0 pointer-events-none" />
+      <img src={ellipse3} alt="Ellipse 3" className="absolute w-[463.57px] h-[463.57px] -left-12 -top-24 opacity-50 pointer-events-none transform -translate-x-1/2 -translate-y-1/2" />
+
+      <div className="max-w-7xl mx-auto relative z-20">
         {/* Section Header */}
-        <div ref={headerRef} className="w-full flex flex-col items-center gap-4 mb-12 md:mb-20 text-center">
-          <div className="bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-1 rounded-full">
-            Our Journey
-          </div>
-          <h2 className="text-slate-900 text-4xl md:text-5xl font-bold font-inter leading-tight">
+        <div className="w-full flex flex-col items-start gap-4 text-left relative z-20">
+          <h2 className="text-blue-500 text-6xl md:text-7xl font-light font-clash-display leading-tight">
             Previous Summits
           </h2>
-          <p className="text-slate-500 text-base md:text-lg max-w-3xl mx-auto leading-relaxed mt-2">
-            Relive the inspiring moments, groundbreaking ideas, and vibrant energy from our past IEDC Summits.
-          </p>
         </div>
 
-        {/* Video Grid */}
-        <div ref={videosRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {summits.map((summit, index) => (
-            <div
-              key={`${summit.year}-${index}`}
-              className="bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300 flex flex-col"
-            >
-              {/* Video Embed */}
-              <div className="relative w-full pt-[56.25%] bg-slate-100 rounded-t-2xl overflow-hidden">
-                <iframe
-                  className="absolute inset-0 w-full h-full"
-                  src={`https://www.youtube.com/embed/${summit.videoId}`}
-                  title={summit.title}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  loading="lazy"
-                ></iframe>
-              </div>
+        {/* Large Video Display */}
+        <div className="w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden mb-12 shadow-lg">
+          <iframe
+            className="w-full h-full"
+            src={`https://www.youtube.com/embed/${currentSummit.videoId}`}
+            title={currentSummit.title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            loading="lazy"
+          ></iframe>
+        </div>
 
-              {/* Summit Info */}
-              <div className="p-5 flex flex-col flex-grow">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-full">
-                    {summit.year}
-                  </span>
-                </div>
-                <h3 className="text-slate-900 text-lg font-bold leading-snug flex-grow">
-                  {summit.title}
-                </h3>
-                <p className="text-slate-500 text-sm mt-2">
-                  {summit.location}
-                </p>
-              </div>
+        {/* Carousel Controller - Below Video */}
+        <div className="w-full lg:w-[860px] relative bottom-20 h-44 bg-white rounded-2xl border-3 border-blue-600 overflow-hidden flex items-center px-8 mx-auto mb-10">
+          {/* Left Arrow */}
+          <button 
+            onClick={goToPrevious}
+            className="w-11 h-32 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 flex-shrink-0"
+          >
+            <MdKeyboardArrowLeft className="w-10 h-20 text-white" />
+          </button>
+          
+
+          <div className="flex items-center justify-start h-full gap-2.5 px-5 flex-grow">
+            {/* Video Thumbnail */}
+            <div className="w-60 h-32 rounded-lg overflow-hidden flex-shrink-0 bg-slate-900 flex items-center justify-center">
+              <img 
+                src={`https://img.youtube.com/vi/${currentSummit.videoId}/0.jpg`}
+                alt="Video thumbnail"
+                className="w-full h-full object-cover"
+              />
             </div>
-          ))}
-        </div>
+
+            {/* Summit Info */}
+            <div className="flex-grow flex flex-col justify-center">
+              <h3 className="text-slate-900 text-lg font-bold font-gilroy-bold leading-snug">
+                {currentSummit.title}
+              </h3>
+              <p className="text-slate-600 font-clash-display text-sm mt-1">
+                {currentSummit.location}
+              </p>
+            </div>
+
+            {/* Year Badge */}
+            <div className="w-36 h-32 flex items-center justify-center bg-zinc-100 rounded-lg flex-shrink-0">
+              <span className="text-slate-900 text-3xl font-light font-gilroy-light">
+                {currentSummit.year}
+              </span>
+            </div>
+
+            {/* Spacers */}
+            <div className="w-20 h-32 bg-zinc-300 rounded-lg flex-shrink-0" />
+          </div>
+
+          {/* Right Arrow */}
+          <button 
+            onClick={goToNext}
+            className="w-11 h-32 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 flex-shrink-0"
+          >
+            <MdNavigateNext className="w-10 h-20 text-white" />
+          </button>
+        </div>  
       </div>
+        {/* Colored Blocks at Bottom - Using PNG */}
+              <img 
+                src="/hero-blocks.png" 
+                alt="Decorative blocks" 
+                className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
+              />
+              {/* Scrolling Text Loop */}
+              <div className="w-full absolute bottom-12 left-0 -skew-y-2">
+                <LogoLoop
+                  logos={[
+                    { text: 'IEDC SUMMIT 2025' },
+                    { text: 'IEDC SUMMIT 2025' },
+                    { text: 'IEDC SUMMIT 2025' },
+                    { text: 'IEDC SUMMIT 2025' },
+                    { text: 'IEDC SUMMIT 2025' },
+                    { text: 'IEDC SUMMIT 2025' },
+                    { text: 'IEDC SUMMIT 2025' },
+                    { text: 'IEDC SUMMIT 2025' },
+                  ]}
+                  speed={80}
+                  direction="right"
+                  logoHeight={20}
+                  gap={40}
+                  pauseOnHover={true}
+                  className=" font-gilroy-bold bg-blue-600 py-5 text-white"
+                  ariaLabel="IEDC Summit 2025"
+                />
+              </div>
     </section>
   );
 };

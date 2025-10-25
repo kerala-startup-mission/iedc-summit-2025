@@ -5,8 +5,8 @@ import ellipse1 from '/Ellipse1.svg';
 const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
-  { label: 'Highlights', href: '#highlights' },
   { label: 'Gallery', href: '#gallery' },
+  { label: 'Highlights', href: '#highlights' },
 ];
 
 const Navbar = () => {
