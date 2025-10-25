@@ -24,30 +24,30 @@ const Hero = () => {
       {/* Mobile Layout - Hidden on md and up */}
       <div className="md:hidden w-full min-h-screen relative bg-white">
         {/* Decorative Circles for Mobile */}
-        <div className="w-64 h-64 absolute left-[-29px] top-[500px] opacity-50 rounded-full border-[0.50px] border-blue-600" />
-        <img src="/Ellipse3.svg" alt="Decorative" className="w-72 h-72 absolute left-[80px] top-[350px] opacity-50" />
+        <div className="w-64 h-64 absolute left-[-29px] top-[500px] opacity-50 rounded-full border-[0.50px] border-blue-600 animate-fade-in-up" style={{animationDelay: '0.6s'}} />
+        <img src="/Ellipse3.svg" alt="Decorative" className="w-72 h-72 absolute left-[80px] top-[350px] opacity-50 animate-fade-in-up" style={{animationDelay: '0.7s'}} />
         
         {/* Main Content */}
         <div className="px-5 pt-24 pb-20 relative z-10">
-          <h1 className="text-blue-500 text-[42px] font-bold font-clash-display leading-11 mb-3">
+          <h1 className="text-blue-500 text-[42px] font-bold font-clash-display leading-11 mb-3 animate-fade-in-down">
             IEDC SUMMIT<br />2025
           </h1>
           {/* Location */}
-          <div className="text-blue-400 text-xl font-semibold font-clash-display mb-2">Kasaragod</div>
+          <div className="text-blue-400 text-xl font-semibold font-clash-display mb-2 animate-fade-in-up" style={{animationDelay: '0.1s'}}>Kasaragod</div>
 
           {/* Date */}
-          <div className="flex items-center gap-2 relative mb-4">
+          <div className="flex items-center gap-2 relative mb-4 animate-fade-in-up" style={{animationDelay: '0.2s'}}>
             <div className="text-blue-500 text-lg font-bold font-gilroy-bold relative z-10">22 Dec 2025</div>
             <div className="w-6 h-6 rounded-full border-[0.32px] border-blue-600 absolute left-[105px]" />
           </div>
 
           {/* Register Button */}
-          <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-[200px] h-11 bg-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-700 transition-colors mb-3 relative z-20">
+          <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-[200px] h-11 bg-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-700 transition-colors mb-3 relative z-20 animate-scale-in" style={{animationDelay: '0.3s'}}>
             <div className="text-neutral-100 text-lg font-semibold font-clash-display tracking-tight">REGISTER NOW</div>
           </a>
 
           {/* Pricing */}
-          <div className="flex items-baseline gap-2 mb-2">
+          <div className="flex items-baseline gap-2 mb-2 animate-fade-in-up" style={{animationDelay: '0.4s'}}>
             <div className="relative">
               <div className="text-blue-400 text-2xl font-gilroy-bold opacity-75">999</div>
               <div className="w-12 h-0.5 border-t-[3px] border-red-600 absolute top-1/2 left-0 -skew-x-12" />
@@ -56,14 +56,14 @@ const Hero = () => {
           </div>
 
           {/* Early Bird */}
-          <div className="text-blue-400 text-sm font-normal font-gilroy-bold">*early bird discounts available*</div>
+          <div className="text-blue-400 text-sm font-normal font-gilroy-bold animate-fade-in-up" style={{animationDelay: '0.5s'}}>*early bird discounts available*</div>
         </div>
 
         {/* Spacer for better separation */}
         <div className="h-32"></div>
 
         {/* Hero Background Image - Mobile - On Top of Blocks */}
-        <div className="absolute bottom-0 right-0 w-[65%] max-w-[260px] z-10">
+        <div className="absolute bottom-0 right-0 w-[65%] max-w-[260px] z-10 animate-slide-in-right" style={{animationDelay: '0.8s'}}>
           <img
             src="/hero-img.png" 
             alt="Decorative image"
@@ -75,7 +75,7 @@ const Hero = () => {
         <img 
           src="/hero-blocks.png" 
           alt="Decorative blocks" 
-          className="w-full h-14 object-cover absolute bottom-0 left-0 z-5"
+          className="w-full h-14 object-cover absolute bottom-0 left-0 z-5 animate-fade-in-up" style={{animationDelay: '0.9s'}}
         />
 
         {/* Countdown Badge - Mobile */}
@@ -120,13 +120,13 @@ const Hero = () => {
       {/* Desktop Layout - Hidden on mobile */}
       <div className="hidden md:block w-full min-h-screen lg:h-[110vh] relative">
         {/* Decorative Circles - Using SVG */}
-        <img src="/Ellipse2.svg" alt="Decorative circle 1" className="w-1/2 absolute left-1/2 top-10 opacity-50" />
-        <img src="/Ellipse3.svg" alt="Decorative circle 2" className="w-2/5 absolute right-10 top-20 lg:top-30" />
-        <img src="/Ellipse3.svg" alt="Decorative circle 3" className="w-2/5 absolute -right-80 top-20 lg:top-30 opacity-25" />
-        <img src="/Ellipse3.svg" alt="Decorative circle 4" className="w-1/3 absolute left-130 bottom-20 lg:bottom-30 opacity-25" />
+        <img src="/Ellipse2.svg" alt="Decorative circle 1" className="w-1/2 absolute left-1/2 top-10 opacity-50 animate-fade-in-up" style={{animationDelay: '0.1s'}} />
+        <img src="/Ellipse3.svg" alt="Decorative circle 2" className="w-2/5 absolute right-10 top-20 lg:top-30 animate-fade-in-up" style={{animationDelay: '0.2s'}} />
+        <img src="/Ellipse3.svg" alt="Decorative circle 3" className="w-2/5 absolute -right-80 top-20 lg:top-30 opacity-25 animate-fade-in-up" style={{animationDelay: '0.3s'}} />
+        <img src="/Ellipse3.svg" alt="Decorative circle 4" className="w-1/3 absolute left-130 bottom-20 lg:bottom-30 opacity-25 animate-fade-in-up" style={{animationDelay: '0.4s'}} />
 
         {/* Main Content Container */}
-        <div className="w-1/2 absolute top-10 lg:top-40 left-[10%] flex flex-col gap-3 pb-40">
+        <div className="w-1/2 absolute top-10 lg:top-40 left-[10%] flex flex-col gap-3 pb-40 animate-fade-in-down" style={{animationDelay: '0.5s'}}>
           {/* Title with Logo */}
           <div className="relative">
             <div className="text-blue-500 text-5xl lg:text-6xl xl:text-7xl font-semibold drop-shadow-[0px_2px_19px_rgba(37,99,235,0.10)] font-clash-display">
@@ -134,7 +134,7 @@ const Hero = () => {
             </div>
 
             {/* Logo - Top Right of Title */}
-            <img className="w-16 lg:w-30 h-auto absolute -top-12 lg:-top-9 left-40 lg:left-50" src="/iedc-summit-25-logo.png" alt="IEDC Badge" />
+            <img className="w-16 lg:w-30 h-auto absolute -top-12 lg:-top-9 left-40 lg:left-50 animate-scale-in" style={{animationDelay: '0.6s'}} src="/iedc-summit-25-logo.png" alt="IEDC Badge" />
 
             {/* Location */}
             <div className="text-blue-400 text-xl lg:text-3xl font-semibold font-gilroy-medium">Kasaragod</div>
@@ -167,14 +167,14 @@ const Hero = () => {
         <img 
           src="/hero-blocks.png" 
           alt="Decorative blocks" 
-          className="w-full h-16 lg:h-24 absolute bottom-20 left-0 object-cover"
+          className="w-full h-16 lg:h-24 absolute bottom-20 left-0 object-cover animate-fade-in-up" style={{animationDelay: '0.7s'}}
         />
 
         {/* Hero Background Image - Aligned Left and Scaled */}
         <img
           src="/hero-img.png" 
           alt="Decorative blocks"
-          className="h-48 lg:h-64 xl:h-200 absolute bottom-16 lg:bottom-24 right-4 lg:right-10 object-contain"
+          className="h-48 lg:h-64 xl:h-200 absolute bottom-16 lg:bottom-24 right-4 lg:right-10 object-contain animate-slide-in-right" style={{animationDelay: '0.8s'}}
         />
 
         {/* Countdown Badge - Near Hero Image */}
