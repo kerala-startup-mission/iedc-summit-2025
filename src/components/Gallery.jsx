@@ -76,9 +76,9 @@ const Gallery = () => {
           {/* Left Arrow */}
           <button 
             onClick={goToPrevious}
-            className="w-5 md:w-7 h-12 md:h-20 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
+            className="w-10 md:w-10 h-12 md:h-20 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
           >
-            <MdKeyboardArrowLeft className="w-4 md:w-6 h-8 md:h-12 text-white" />
+            <MdKeyboardArrowLeft className="w-5 md:w-7 h-8 md:h-14 text-white" />
           </button>
           
 
@@ -113,9 +113,9 @@ const Gallery = () => {
           {/* Right Arrow */}
           <button 
             onClick={goToNext}
-            className="w-5 md:w-7 h-12 md:h-20 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
+            className="w-10 md:w-10 h-12 md:h-20 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
           >
-            <MdNavigateNext className="w-4 md:w-6 h-8 md:h-12 text-white" />
+            <MdNavigateNext className="w-5 md:w-7 h-8 md:h-14 text-white" />
           </button>
         </div>  
       </div>
