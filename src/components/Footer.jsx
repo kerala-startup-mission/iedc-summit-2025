@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="grid grid-cols-2 gap-8">
             <div className="flex items-center justify-center">
               <img 
-                src="/ksum-logo.png" 
+                src="/ksum-logo.svg" 
                 alt="Kerala Startup Mission" 
                 className="h-28 object-contain opacity-80 hover:opacity-100 transition-opacity"
               />
@@ -27,15 +27,15 @@ const Footer = () => {
           <div className="grid grid-cols-2 gap-8">
             <div className="flex items-center justify-center">
               <img 
-                src="/iedc-lbs-logo.png" 
-                alt="IEDC LBSCEK" 
+                src="/lbscek-logo.png" 
+                alt="LBS College of Engineering" 
                 className="h-24 object-contain opacity-80 hover:opacity-100 transition-opacity"
               />
             </div>
             <div className="flex items-center justify-center">
               <img 
-                src="/lbscek-logo.png" 
-                alt="LBS College of Engineering" 
+                src="/cuk-logo.svg" 
+                alt="Central University of Kerala" 
                 className="h-24 object-contain opacity-80 hover:opacity-100 transition-opacity"
               />
             </div>
@@ -53,7 +53,7 @@ const Footer = () => {
             <div className="grid grid-cols-2 gap-4 md:hidden mb-6">
               <div className="flex items-center justify-center bg-white/5 rounded-lg p-4">
                 <img 
-                  src="/ksum-logo.png" 
+                  src="/ksum-logo.svg" 
                   alt="Kerala Startup Mission" 
                   className="h-16 object-contain"
                 />
@@ -152,15 +152,15 @@ const Footer = () => {
             <div className="grid grid-cols-2 gap-4 md:hidden mb-6">
               <div className="flex items-center justify-center bg-white/5 rounded-lg p-4">
                 <img 
-                  src="/iedc-lbs-logo.png" 
-                  alt="IEDC LBSCEK" 
+                  src="/lbscek-logo.png" 
+                  alt="LBS College of Engineering" 
                   className="h-16 object-contain"
                 />
               </div>
               <div className="flex items-center justify-center bg-white/5 rounded-lg p-4">
                 <img 
-                  src="/lbscek-logo.png" 
-                  alt="LBS College of Engineering" 
+                  src="/cuk-logo.svg" 
+                  alt="Central University of Kerala" 
                   className="h-16 object-contain"
                 />
               </div>

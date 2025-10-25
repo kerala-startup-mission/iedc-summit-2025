@@ -5,15 +5,15 @@ import ellipse2 from '/Ellipse2.svg';
 import ellipse3 from '/Ellipse3.svg';
 import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 const summits = [
-  { year: '2024', title: 'IEDC Summit 2024', location: 'NIT Calicut', videoId: 'ZeQyHm8sfC4' },
-  { year: '2023', title: 'IEDC Summit 2023', location: 'College of Engineering, Trivandrum', videoId: '6Byl5JR-IpQ' },
-  { year: '2023', title: 'IEDC Summit 2023', location: 'Rajagiri School of Engineering & Technology', videoId: 'w1Fr8mSf__8' },
-  { year: '2022', title: 'IEDC Summit 2022', location: "St. Joseph's College of Engineering & Technology", videoId: 'fPmUPSigxrg' },
-  { year: '2021', title: 'IEDC Summit 2021', location: 'Adi Shankara Institute of Engineering and Technology, Cochin', videoId: 'zxxGtCYnhD4' },
-  { year: '2019', title: 'IEDC Summit 2019', location: 'Sahrdaya College of Engineering and Technology, Thrissur', videoId: 'UqKGvZuhsCU' },
-  { year: '2018', title: 'IEDC Summit 2018', location: 'Amal Jyothi Engineering College, Kanjirapally', videoId: 'jzyTX9SRTpk' },
-  { year: '2017', title: 'IEDC Summit 2017', location: 'ADLUX International Convention Centre, Kochi', videoId: 'XrPAxDk_dM4' },
-  { year: '2016', title: 'IEDC Summit 2016', location: 'Girideepam Convention Center, Trivandrum', videoId: 'k1wGLf7s5tA' }
+  { year: '2024', title: 'IEDC Summit 2024', location: 'NIT Calicut', videoId: 'ZeQyHm8sfC4', type: 'youtube' },
+  { year: '2023', title: 'IEDC Summit 2023', location: 'College of Engineering, Trivandrum', videoId: 'C2-KdDvvUK3', type: 'instagram' },
+  { year: '2023', title: 'IEDC Summit 2023', location: 'Rajagiri School of Engineering & Technology', videoId: 'w1Fr8mSf__8', type: 'youtube' },
+  { year: '2022', title: 'IEDC Summit 2022', location: "St. Joseph's College of Engineering & Technology", videoId: 'fPmUPSigxrg', type: 'youtube' },
+  { year: '2021', title: 'IEDC Summit 2021', location: 'Adi Shankara Institute of Engineering and Technology, Cochin', videoId: 'zxxGtCYnhD4', type: 'youtube' },
+  { year: '2019', title: 'IEDC Summit 2019', location: 'Sahrdaya College of Engineering and Technology, Thrissur', videoId: 'UqKGvZuhsCU', type: 'youtube' },
+  { year: '2018', title: 'IEDC Summit 2018', location: 'Amal Jyothi Engineering College, Kanjirapally', videoId: 'jzyTX9SRTpk', type: 'youtube' },
+  { year: '2017', title: 'IEDC Summit 2017', location: 'ADLUX International Convention Centre, Kochi', videoId: 'XrPAxDk_dM4', type: 'youtube' },
+  { year: '2016', title: 'IEDC Summit 2016', location: 'Girideepam Convention Center, Trivandrum', videoId: 'k1wGLf7s5tA', type: 'youtube' }
 ];
 
 const Gallery = () => {
@@ -49,15 +49,26 @@ const Gallery = () => {
 
         {/* Large Video Display */}
         <div className="w-full h-[250px] sm:h-[350px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden mb-12 shadow-lg">
-          <iframe
-            className="w-full h-full"
-            src={`https://www.youtube.com/embed/${currentSummit.videoId}`}
-            title={currentSummit.title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            loading="lazy"
-          ></iframe>
+          {currentSummit.type === 'instagram' ? (
+            <iframe
+              className="w-full h-full"
+              src={`https://www.instagram.com/reel/${currentSummit.videoId}/embed/`}
+              title={currentSummit.title}
+              frameBorder="0"
+              allowFullScreen
+              loading="lazy"
+            ></iframe>
+          ) : (
+            <iframe
+              className="w-full h-full"
+              src={`https://www.youtube.com/embed/${currentSummit.videoId}`}
+              title={currentSummit.title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              loading="lazy"
+            ></iframe>
+          )}
         </div>
 
         {/* Carousel Controller - Below Video */}

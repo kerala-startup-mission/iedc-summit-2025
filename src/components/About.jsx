@@ -42,7 +42,7 @@ const About = () => {
                   </div>
                   <p className="text-black text-sm md:text-2xl font-light font-gilroy-light leading-5 md:leading-7">
                     The IEDC Summit 2025, organised by Kerala Startup Mission
-                    and hosted by L.B.S. College of Engineering, Kasaragod,
+                    and jointly hosted by L.B.S. College of Engineering, Kasaragod and Central University of Kerala,
                     marks the 10th anniversary edition of this flagship event,
                     celebrating a decade of fostering innovation,
                     entrepreneurship, and technological excellence. This two-day
