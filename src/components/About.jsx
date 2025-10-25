@@ -3,13 +3,19 @@ import gridImage from "../assets/grid.svg";
 import elipseImage from "../assets/Ellipse3.svg";
 import elipse4 from "../assets/Ellipse 4.svg";
 import LogoLoop from "./LogoLoop";
+import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 
 const About = () => {
+  const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
+
   return (
     <>
     <section
       id="about"
-      className="w-full px-5 md:px-16 lg:px-20 py-16 md:py-24 bg-white relative overflow-hidden"
+      ref={sectionRef}
+      className={`w-full px-5 md:px-16 lg:px-20 py-16 md:py-24 bg-white relative overflow-hidden ${
+        sectionVisible ? 'fade-in-up-visible' : 'fade-in-up-hidden'
+      }`}
     >
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}

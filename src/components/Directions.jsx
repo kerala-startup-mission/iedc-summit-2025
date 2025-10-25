@@ -1,12 +1,16 @@
 import React from 'react';
 import useScrollAnimation from '../hooks/useScrollAnimation';
+import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 
 const Directions = () => {
   const headerRef = useScrollAnimation();
   const mapRef = useScrollAnimation({ delay: 0.3 });
+  const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
 
   return (
-    <section id="directions" className="w-full py-8 md:py-16 bg-white">
+    <section id="directions" ref={sectionRef} className={`w-full py-8 md:py-16 bg-white ${
+      sectionVisible ? 'fade-in-up-visible' : 'fade-in-up-hidden'
+    }`}>
       <div className="container mx-auto px-4 sm:px-6 md:px-16 lg:px-20">
         <div ref={headerRef} className="text-center mb-12">
           <div className="inline-flex justify-center items-center mb-4">

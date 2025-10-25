@@ -154,3 +154,16 @@ body::-webkit-scrollbar-thumb:hover {
 .animate-fade-in {
   animation: fadeIn 1.2s ease-out 0.4s both;
 }
+
+/* Scroll-based fade in/out animations */
+.fade-in-up-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}

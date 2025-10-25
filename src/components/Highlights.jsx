@@ -1,7 +1,9 @@
 import React from 'react';
 import LogoLoop from './LogoLoop';
+import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 
 const Highlights = () => {
+  const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
   const highlights = [
     {
       title: 'Engineering',
@@ -76,7 +78,9 @@ const Highlights = () => {
   };
 
   return (
-    <section id="highlights" className="w-full bg-white overflow-hidden relative">
+    <section id="highlights" className={`w-full bg-white overflow-hidden relative ${
+      sectionVisible ? 'fade-in-up-visible' : 'fade-in-up-hidden'
+    }`} ref={sectionRef}>
       {/* Header Section */}
       <div className="px-12 pt-12 pb-16 flex items-start justify-between gap-12">
         {/* Left Content */}

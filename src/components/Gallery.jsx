@@ -3,6 +3,7 @@ import LogoLoop from './LogoLoop';
 import { MdNavigateNext,  MdKeyboardArrowLeft } from 'react-icons/md';
 import ellipse2 from '/Ellipse2.svg';
 import ellipse3 from '/Ellipse3.svg';
+import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 const summits = [
   { year: '2024', title: 'IEDC Summit 2024', location: 'NIT Calicut', videoId: 'ZeQyHm8sfC4' },
   { year: '2023', title: 'IEDC Summit 2023', location: 'College of Engineering, Trivandrum', videoId: '6Byl5JR-IpQ' },
@@ -17,6 +18,7 @@ const summits = [
 
 const Gallery = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + summits.length) % summits.length);
@@ -29,7 +31,9 @@ const Gallery = () => {
   const currentSummit = summits[currentIndex];
 
   return (
-    <section id="gallery" className="w-full px-5 md:px-16 lg:px-20 py-16 md:py-24 bg-white relative overflow-hidden">
+    <section id="gallery" ref={sectionRef} className={`w-full px-5 md:px-16 lg:px-20 py-16 md:py-24 bg-white relative overflow-hidden ${
+      sectionVisible ? 'fade-in-up-visible' : 'fade-in-up-hidden'
+    }`}>
       {/* Decorative Circles - Top Left */}
       <img src={ellipse2} alt="Ellipse 2" className="absolute w-[600px] h-[600px] -left-30 -top-20 opacity-75 pointer-events-none" />
       <img src={ellipse3} alt="Ellipse 3" className="absolute w-[450px] h-[450px] -left-10 top-0 pointer-events-none" />
