@@ -32,17 +32,26 @@ const Navbar = () => {
         const element = document.getElementById(section.id);
         if (element) {
           const rect = element.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 0) {
+          // Check if section is in viewport (top of section is above middle of screen)
+          if (rect.top < window.innerHeight * 0.5 && rect.bottom > 0) {
             setActiveSection(section.label);
-            break;
           }
         }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Call once on mount to set initial state
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleNavClick = (label, href) => {
+    setActiveSection(label);
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
@@ -61,15 +70,14 @@ const Navbar = () => {
           <div className="inline-flex justify-start items-center gap-8">
             {navItems.map((item) => (
               <div key={item.href} className="relative">
-                <a 
-                  href={item.href}
-                  onClick={() => setActiveSection(item.label)}
-                  className="pb-px inline-flex flex-col justify-start items-start group"
+                <button 
+                  onClick={() => handleNavClick(item.label, item.href)}
+                  className="pb-px inline-flex flex-col justify-start items-start group cursor-pointer bg-none border-none"
                 >
                   <div className={`justify-center text-blue-600 text-lg font-bold font-Gilroy leading-7 hover:opacity-100 transition-opacity ${activeSection === item.label ? 'opacity-100' : 'opacity-50'}`}>
                     {item.label}
                   </div>
-                </a>
+                </button>
                 {/* Active Indicator */}
                 {activeSection === item.label && (
                   <img 
@@ -114,16 +122,15 @@ const Navbar = () => {
           <div className={`mt-4 space-y-2 transition-all duration-300 ${isScrolled ? 'bg-white rounded-lg px-4 py-3' : 'bg-transparent'}`}>
             {navItems.map((item) => (
               <div key={item.href} className="relative">
-                <a
-                  href={item.href}
+                <button
                   onClick={() => {
-                    setActiveSection(item.label);
+                    handleNavClick(item.label, item.href);
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`block text-blue-600 text-lg font-bold py-2 hover:opacity-100 transition-opacity ${activeSection === item.label ? 'opacity-100' : 'opacity-50'}`}
+                  className={`block w-full text-left text-blue-600 text-lg font-bold py-2 hover:opacity-100 transition-opacity cursor-pointer bg-none border-none ${activeSection === item.label ? 'opacity-100' : 'opacity-50'}`}
                 >
                   {item.label}
-                </a>
+                </button>
                 {/* Active Indicator */}
                 {activeSection === item.label && (
                   <img 
