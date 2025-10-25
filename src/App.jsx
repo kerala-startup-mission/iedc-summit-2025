@@ -19,11 +19,11 @@ function App() {
           <Navbar />
           <Hero />
           <About />
+          <Gallery />
           <div id="highlights">
             <Highlights />
             <Stats />
           </div>
-          <Gallery />
           <Directions />
           <Footer />
     </div>

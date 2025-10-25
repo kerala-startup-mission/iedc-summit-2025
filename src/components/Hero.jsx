@@ -48,12 +48,6 @@ const Hero = () => {
       </div>
         </div>
 
-
-
-
-
-
-
       {/* Colored Blocks at Bottom - Using PNG */}
       <img 
         src="/hero-blocks.png" 
