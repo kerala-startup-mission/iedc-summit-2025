@@ -11,59 +11,78 @@ const Hero = () => {
       const today = new Date().getTime();
       const timeLeft = eventDate - today;
       const days = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
-      setDaysLeft(Math.max(days, 0));
+      setDaysLeft(Math.max(days, 0)); // Ensure it doesn't go negative
     };
 
     calculateDaysLeft();
-    const timer = setInterval(calculateDaysLeft, 1000 * 60 * 60); // Update every hour
+    // Update once per hour. No need to update every second for a day counter.
+    const timer = setInterval(calculateDaysLeft, 1000 * 60 * 60); 
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div id="home" className="w-full h-[110vh] md:h-[110vh] relative bg-white overflow-hidden">
-      {/* Mobile Layout - Hidden on md and up */}
-      <div className="md:hidden w-full min-h-screen relative bg-white">
-        {/* Decorative Circles for Mobile */}
-        <div className="w-64 h-64 absolute left-[-29px] top-[500px] opacity-50 rounded-full border-[0.50px] border-blue-600 animate-fade-in-up" style={{animationDelay: '0.6s'}} />
-        <img src="/Ellipse3.svg" alt="Decorative" className="w-72 h-72 absolute left-[80px] top-[350px] opacity-50 animate-fade-in-up" style={{animationDelay: '0.7s'}} />
+    // Main container:
+    // - min-h-screen ensures it's at least the viewport height.
+    // - relative allows absolute positioning of children.
+    // - overflow-hidden clips decorative circles.
+    // - pb-XX creates a "safe area" at the bottom for the absolute-positioned blocks/image,
+    //   preventing the in-flow content from overlapping them.
+    <div 
+      id="home" 
+      className="w-full min-h-screen md:h-[110vh] relative bg-white overflow-hidden pb-28 sm:pb-32 md:pb-36 lg:pb-40"
+    >
+      {/* Decorative Circles (Absolute, z-0, behind content) */}
+      {/* Mobile Circles - Hidden on md and up */}
+      <div className="md:hidden w-64 h-64 absolute left-[-29px] top-[500px] opacity-50 rounded-full border-[0.50px] border-blue-600 animate-fade-in-up" style={{animationDelay: '0.6s'}} />
+      <img src="/Ellipse3.svg" alt="" className="md:hidden w-72 h-72 absolute left-[80px] top-[350px] opacity-50 animate-fade-in-up" style={{animationDelay: '0.7s'}} />
+      
+      {/* Desktop Circles - Hidden on mobile */}
+      <img src="/Ellipse2.svg" alt="" className="hidden md:block w-1/2 absolute left-1/2 top-10 opacity-50 animate-fade-in-up" style={{animationDelay: '0.1s'}} />
+      <img src="/Ellipse3.svg" alt="" className="hidden md:block w-2/5 absolute right-10 top-20 lg:top-30 animate-fade-in-up" style={{animationDelay: '0.2s'}} />
+      <img src="/Ellipse3.svg" alt="" className="hidden md:block w-2/5 absolute -right-80 top-20 lg:top-30 opacity-25 animate-fade-in-up" style={{animationDelay: '0.3s'}} />
+      <img src="/Ellipse3.svg" alt="" className="hidden md:block w-1/3 absolute left-130 bottom-20 lg:bottom-30 opacity-25 animate-fade-in-up" style={{animationDelay: '0.4s'}} />
+
+      {/* Main Content Wrapper (In-flow)
+          - Mobile layout structure maintained
+      */}
+      <div className="relative z-10">
+        {/* Mobile Layout - Hidden on md and up */}
+        <div className="md:hidden w-full min-h-screen relative bg-white flex flex-col">
         
         {/* Main Content */}
-        <div className="px-5 pt-24 pb-20 relative z-10">
-          <h1 className="text-blue-500 text-[42px] font-bold font-clash-display leading-11 mb-3 animate-fade-in-down">
+        <div className="px-5 pt-12 sm:pt-16 pb-8 sm:pb-12 relative z-10 flex-1 flex flex-col justify-start">
+          <h1 className="text-blue-500 text-[32px] sm:text-[36px] md:text-[42px] font-bold font-clash-display leading-tight mb-1 sm:mb-2 animate-fade-in-down">
             IEDC SUMMIT<br />2025
           </h1>
           {/* Location */}
-          <div className="text-blue-400 text-xl font-semibold font-clash-display mb-2 animate-fade-in-up" style={{animationDelay: '0.1s'}}>Kasaragod</div>
+          <div className="text-blue-400 text-base sm:text-lg md:text-xl font-semibold font-clash-display mb-1 animate-fade-in-up" style={{animationDelay: '0.1s'}}>Kasaragod</div>
 
           {/* Date */}
-          <div className="flex items-center gap-2 relative mb-4 animate-fade-in-up" style={{animationDelay: '0.2s'}}>
-            <div className="text-blue-500 text-lg font-bold font-gilroy-bold relative z-10">22 Dec 2025</div>
-            <div className="w-6 h-6 rounded-full border-[0.32px] border-blue-600 absolute left-[105px]" />
+          <div className="flex items-center gap-2 relative mb-1 sm:mb-2 animate-fade-in-up" style={{animationDelay: '0.2s'}}>
+            <div className="text-blue-500 text-xs sm:text-sm md:text-lg font-bold font-gilroy-bold relative z-10">22 Dec 2025</div>
+            <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-[0.32px] border-blue-600 absolute left-[85px] sm:left-[95px] md:left-[105px]" />
           </div>
 
           {/* Register Button */}
-          <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-[200px] h-11 bg-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-700 transition-colors mb-3 relative z-20 animate-scale-in" style={{animationDelay: '0.3s'}}>
-            <div className="text-neutral-100 text-lg font-semibold font-clash-display tracking-tight">REGISTER NOW</div>
+          <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-40 sm:w-[180px] md:w-[200px] h-9 sm:h-10 md:h-11 bg-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-700 transition-colors mb-1 sm:mb-2 relative z-20 animate-scale-in" style={{animationDelay: '0.3s'}}>
+            <div className="text-neutral-100 text-xs sm:text-sm md:text-lg font-semibold font-clash-display tracking-tight">REGISTER NOW</div>
           </a>
 
           {/* Pricing */}
-          <div className="flex items-baseline gap-2 mb-2 animate-fade-in-up" style={{animationDelay: '0.4s'}}>
+          <div className="flex items-baseline gap-2 mb-1 animate-fade-in-up" style={{animationDelay: '0.4s'}}>
             <div className="relative inline-block">
-              <div className="text-blue-400 text-2xl font-gilroy-bold opacity-75">₹999</div>
-              <div className="w-16 h-0.5 border-t-[3px] border-red-600 absolute top-1/2 left-0 -translate-y-1/2 -skew-y-10" />
+              <div className="text-blue-400 text-lg sm:text-xl md:text-2xl font-gilroy-bold opacity-75">₹999</div>
+              <div className="w-12 sm:w-14 md:w-16 h-0.5 border-t-[3px] border-red-600 absolute top-1/2 left-0 -translate-y-1/2 -skew-y-10" />
             </div>
-            <div className="text-blue-600 text-3xl font-gilroy-bold">₹749/-</div>
+            <div className="text-blue-600 text-xl sm:text-2xl md:text-3xl font-gilroy-bold">₹749/-</div>
           </div>
 
           {/* Early Bird */}
-          <div className="text-blue-400 text-sm font-normal font-gilroy-bold animate-fade-in-up" style={{animationDelay: '0.5s'}}>*Be quick, connect more*</div>
+          <div className="text-blue-400 text-xs font-normal font-gilroy-bold animate-fade-in-up" style={{animationDelay: '0.5s'}}>*Be quick, connect more*</div>
         </div>
 
-        {/* Spacer for better separation */}
-        <div className="h-32"></div>
-
         {/* Hero Background Image - Mobile - On Top of Blocks */}
-        <div className="absolute bottom-0 right-0 w-[65%] max-w-[260px] z-10 animate-slide-in-right" style={{animationDelay: '0.8s'}}>
+        <div className="absolute bottom-0 right-0 w-[55%] sm:w-[60%] md:w-[65%] max-w-52 sm:max-w-60 z-10 animate-slide-in-right" style={{animationDelay: '0.8s'}}>
           <img
             src="/hero-img.png" 
             alt="Decorative image"
@@ -75,27 +94,30 @@ const Hero = () => {
         <img 
           src="/hero-blocks.png" 
           alt="Decorative blocks" 
-          className="w-full h-14 object-cover absolute bottom-0 left-0 z-5 animate-fade-in-up" style={{animationDelay: '0.9s'}}
+          className="w-full h-10 sm:h-12 md:h-14 object-cover absolute bottom-0 left-0 z-5 animate-fade-in-up" style={{animationDelay: '0.9s'}}
         />
 
         {/* Countdown Badge - Mobile */}
-        <div className="absolute bottom-30 left-8">
+        <div className="absolute bottom-20 sm:bottom-24 md:bottom-28 left-4 sm:left-6 md:left-8">
           <div className="flex items-center gap-0">
             {/* Days - First digit */}
-            <span className="text-blue-600 text-8xl font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
+            <span className="text-blue-600 text-5xl sm:text-6xl md:text-8xl font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
             {/* Days - Second digit */}
-            <span className="text-blue-600 text-8xl font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
+            <span className="text-blue-600 text-5xl sm:text-6xl md:text-8xl font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
             {/* Label */}
             <div className="flex flex-col items-start justify-center ml-0 gap-0">
-              <span className="text-blue-600 text-4xl font-bold font-dimensions-semi-bold leading-none">DAYS</span>
-              <span className="text-blue-600 text-4xl font-dimensions-semi-bold leading-none -mt-2">TO Go</span>
+              <span className="text-blue-600 text-lg sm:text-2xl md:text-4xl font-bold font-dimensions-semi-bold leading-none">DAYS</span>
+              <span className="text-blue-600 text-lg sm:text-2xl md:text-4xl font-dimensions-semi-bold leading-none -mt-0.5 sm:-mt-1 md:-mt-2">TO Go</span>
             </div>
           </div>
         </div>
       </div>
 
+      {/* --- Bottom Elements (Absolutely Positioned) --- */}
+      {/* These all live in the "safe zone" created by the parent's pb-XX padding */}
+
       {/* Scrolling Text Loop - At Blocks Level */}
-      <div className="w-full -skew-y-2 absolute bottom-10 left-0 z-10 md:absolute md:bottom-12 md:left-0">
+      <div className="w-full -skew-y-2 absolute bottom-10 left-0 z-10 md:bottom-12 md:left-0">
         <LogoLoop
           logos={[
             { text: 'IEDC SUMMIT 2025' },
@@ -117,16 +139,11 @@ const Hero = () => {
         />
       </div>
 
-      {/* Desktop Layout - Hidden on mobile */}
-      <div className="hidden md:block w-full min-h-screen lg:h-[110vh] relative">
-        {/* Decorative Circles - Using SVG */}
-        <img src="/Ellipse2.svg" alt="Decorative circle 1" className="w-1/2 absolute left-1/2 top-10 opacity-50 animate-fade-in-up" style={{animationDelay: '0.1s'}} />
-        <img src="/Ellipse3.svg" alt="Decorative circle 2" className="w-2/5 absolute right-10 top-20 lg:top-30 animate-fade-in-up" style={{animationDelay: '0.2s'}} />
-        <img src="/Ellipse3.svg" alt="Decorative circle 3" className="w-2/5 absolute -right-80 top-20 lg:top-30 opacity-25 animate-fade-in-up" style={{animationDelay: '0.3s'}} />
-        <img src="/Ellipse3.svg" alt="Decorative circle 4" className="w-1/3 absolute left-130 bottom-20 lg:bottom-30 opacity-25 animate-fade-in-up" style={{animationDelay: '0.4s'}} />
+        {/* Desktop Layout - Hidden on mobile */}
+        <div className="hidden md:block w-full min-h-screen lg:h-[110vh] relative">
 
-        {/* Main Content Container */}
-        <div className="w-1/2 absolute top-10 lg:top-40 left-[10%] flex flex-col gap-3 pb-40 animate-fade-in-down" style={{animationDelay: '0.5s'}}>
+          {/* Main Content Container */}
+          <div className="w-1/2 absolute top-10 lg:top-40 left-[10%] flex flex-col gap-3 pb-40 animate-fade-in-down" style={{animationDelay: '0.5s'}}>
           {/* Title with Logo */}
           <div className="relative">
             <div className="text-blue-500 text-5xl lg:text-6xl xl:text-7xl font-semibold drop-shadow-[0px_2px_19px_rgba(37,99,235,0.10)] font-clash-display">
@@ -163,31 +180,32 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Colored Blocks at Bottom - Using PNG */}
-        <img 
-          src="/hero-blocks.png" 
-          alt="Decorative blocks" 
-          className="w-full h-16 lg:h-24 absolute bottom-20 left-0 object-cover animate-fade-in-up" style={{animationDelay: '0.7s'}}
-        />
+          {/* Colored Blocks at Bottom - Using PNG */}
+          <img 
+            src="/hero-blocks.png" 
+            alt="Decorative blocks" 
+            className="w-full h-16 lg:h-24 absolute bottom-20 left-0 object-cover animate-fade-in-up" style={{animationDelay: '0.7s'}}
+          />
 
-        {/* Hero Background Image - Aligned Left and Scaled */}
-        <img
-          src="/hero-img.png" 
-          alt="Decorative blocks"
-          className="h-48 lg:h-64 xl:h-200 absolute bottom-16 lg:bottom-24 right-4 lg:right-10 object-contain animate-slide-in-right" style={{animationDelay: '0.8s'}}
-        />
+          {/* Hero Background Image - Aligned Left and Scaled */}
+          <img
+            src="/hero-img.png" 
+            alt="Decorative blocks"
+            className="h-48 lg:h-64 xl:h-200 absolute bottom-16 lg:bottom-24 right-4 lg:right-10 object-contain animate-slide-in-right" style={{animationDelay: '0.8s'}}
+          />
 
-        {/* Countdown Badge - Near Hero Image */}
-        <div className="absolute bottom-60 md:bottom-60 lg:bottom-60 right-150 lg:right-150">
-          <div className="flex items-center gap-0 lg:gap-1">
-            {/* Days - First digit */}
-            <span className="text-blue-600 text-6xl md:text-9xl lg:text-[200px] font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
-            {/* Days - Second digit */}
-            <span className="text-blue-600 text-6xl md:text-9xl lg:text-[200px] font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
-            {/* Label */}
-            <div className="flex flex-col items-start justify-center ml-0 lg:ml-0 gap-0">
-              <span className="text-blue-600 text-sm md:text-xl lg:text-7xl font-bold font-dimensions-semi-bold leading-none">DAYS</span>
-              <span className="text-blue-600 text-xs md:text-lg lg:text-7xl font-dimensions-semi-bold leading-none -mt-3">TO Go</span>
+          {/* Countdown Badge - Near Hero Image */}
+          <div className="absolute bottom-60 md:bottom-60 lg:bottom-60 right-150 lg:right-150">
+            <div className="flex items-center gap-0 lg:gap-1">
+              {/* Days - First digit */}
+              <span className="text-blue-600 text-6xl md:text-9xl lg:text-[200px] font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
+              {/* Days - Second digit */}
+              <span className="text-blue-600 text-6xl md:text-9xl lg:text-[200px] font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
+              {/* Label */}
+              <div className="flex flex-col items-start justify-center ml-0 lg:ml-0 gap-0">
+                <span className="text-blue-600 text-sm md:text-xl lg:text-7xl font-bold font-dimensions-semi-bold leading-none">DAYS</span>
+                <span className="text-blue-600 text-xs md:text-lg lg:text-7xl font-dimensions-semi-bold leading-none -mt-3">TO Go</span>
+              </div>
             </div>
           </div>
         </div>
