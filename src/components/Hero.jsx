@@ -61,7 +61,7 @@ const Hero = () => {
         <img src="/Ellipse3.svg" alt="Decorative circle 4" className="w-1/3 absolute left-130 bottom-20 lg:bottom-30 opacity-25" />
 
         {/* Main Content Container */}
-        <div className="w-1/2 absolute top-1/4 left-[10%] flex flex-col gap-4">
+        <div className="w-1/2 absolute top-10 lg:top-30 left-[10%] flex flex-col gap-3 pb-40">
           {/* Title with Logo */}
           <div className="relative">
             <div className="text-blue-500 text-5xl lg:text-6xl xl:text-7xl font-semibold drop-shadow-[0px_2px_19px_rgba(37,99,235,0.10)] font-clash-display leading-tight">
@@ -69,7 +69,7 @@ const Hero = () => {
             </div>
 
             {/* Logo - Top Right of Title */}
-            <img className="w-16 lg:w-20 h-auto absolute -top-12 lg:-top-16 left-40 lg:left-56" src="/iedc-summit-25-logo.png" alt="IEDC Badge" />
+            <img className="w-16 lg:w-30 h-auto absolute -top-12 lg:-top-3 left-40 lg:left-50" src="/iedc-summit-25-logo.png" alt="IEDC Badge" />
 
             {/* Location */}
             <div className="text-blue-400 text-xl lg:text-3xl font-semibold font-gilroy-medium mt-4">Kasaragod</div>
