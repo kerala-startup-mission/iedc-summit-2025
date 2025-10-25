@@ -48,7 +48,7 @@ const Gallery = () => {
         </div>
 
         {/* Large Video Display */}
-        <div className="w-full h-[250px] sm:h-[350px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden mb-12 shadow-lg">
+        <div className="w-full h-[200px] sm:h-[280px] md:h-[400px] lg:h-[500px] rounded-2xl overflow-hidden mb-12 shadow-lg">
           {currentSummit.type === 'instagram' ? (
             <iframe
               className="w-full h-full"
@@ -72,19 +72,19 @@ const Gallery = () => {
         </div>
 
         {/* Carousel Controller - Below Video */}
-        <div className="w-full lg:w-[860px] relative bottom-20 h-32 md:h-44 bg-white rounded-2xl border-3 border-blue-600 overflow-hidden flex items-center px-4 md:px-8 mx-auto mb-10">
+        <div className="w-full lg:w-[860px] relative bottom-16 h-24 md:h-36 bg-white rounded-2xl border-3 border-blue-600 overflow-hidden flex items-center px-4 md:px-8 mx-auto mb-10">
           {/* Left Arrow */}
           <button 
             onClick={goToPrevious}
-            className="w-9 md:w-11 h-24 md:h-32 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
+            className="w-8 md:w-10 h-20 md:h-28 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
           >
-            <MdKeyboardArrowLeft className="w-8 md:w-10 h-16 md:h-20 text-white" />
+            <MdKeyboardArrowLeft className="w-6 md:w-8 h-12 md:h-16 text-white" />
           </button>
           
 
           <div className="flex items-center justify-start h-full gap-2 md:gap-2.5 px-3 md:px-5 grow">
             {/* Video Thumbnail - Hidden on Mobile */}
-            <div className="hidden md:flex w-60 h-32 rounded-lg overflow-hidden shrink-0 bg-slate-900 items-center justify-center">
+            <div className="hidden md:flex w-48 h-28 rounded-lg overflow-hidden shrink-0 bg-slate-900 items-center justify-center">
               <img 
                 src={`https://img.youtube.com/vi/${currentSummit.videoId}/0.jpg`}
                 alt="Video thumbnail"
@@ -94,31 +94,31 @@ const Gallery = () => {
 
             {/* Summit Info */}
             <div className="grow flex flex-col justify-center">
-              <h3 className="text-slate-900 text-sm md:text-lg font-bold font-gilroy-bold leading-snug">
+              <h3 className="text-slate-900 text-xs md:text-base font-bold font-gilroy-bold leading-snug">
                 {currentSummit.title}
               </h3>
-              <p className="text-slate-600 font-clash-display text-xs md:text-sm mt-1">
+              <p className="text-slate-600 font-clash-display text-xs md:text-sm mt-0.5">
                 {currentSummit.location}
               </p>
             </div>
 
             {/* Year Badge - Hidden on Mobile */}
-            <div className="hidden md:flex w-36 h-32 items-center justify-center bg-zinc-100 rounded-lg shrink-0">
-              <span className="text-slate-900 text-3xl font-light font-gilroy-light">
+            <div className="hidden md:flex w-28 h-28 items-center justify-center bg-zinc-100 rounded-lg shrink-0">
+              <span className="text-slate-900 text-2xl font-light font-gilroy-light">
                 {currentSummit.year}
               </span>
             </div>
 
             {/* Spacers - Hidden on Mobile */}
-            <div className="hidden md:block w-20 h-32 bg-zinc-300 rounded-lg shrink-0" />
+            <div className="hidden md:block w-16 h-28 bg-zinc-300 rounded-lg shrink-0" />
           </div>
 
           {/* Right Arrow */}
           <button 
             onClick={goToNext}
-            className="w-9 md:w-11 h-24 md:h-32 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
+            className="w-8 md:w-10 h-20 md:h-28 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
           >
-            <MdNavigateNext className="w-8 md:w-10 h-16 md:h-20 text-white" />
+            <MdNavigateNext className="w-6 md:w-8 h-12 md:h-16 text-white" />
           </button>
         </div>  
       </div>
