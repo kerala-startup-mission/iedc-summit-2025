@@ -1,101 +1,131 @@
 import React from 'react';
-import TiltedCard from './TiltedCard';
-import useScrollAnimation from '../hooks/useScrollAnimation';
+import LogoLoop from './LogoLoop';
 
-// --- Icons are now imported from the react-icons library ---
-import {  HiOutlineUsers, HiOutlineRocketLaunch } from 'react-icons/hi2';
-import { MdOutlineEngineering } from 'react-icons/md';
-import { FaHandHoldingMedical, FaBookOpen  } from 'react-icons/fa6';
-import { MdScience } from 'react-icons/md';
 const Highlights = () => {
-  const headerRef = useScrollAnimation({ y: 30, duration: 0.8, delay: 0.1 });
-  const cardsRef = useScrollAnimation({ y: 40, duration: 0.8, stagger: 0.1, delay: 0.3 });
-  
-  // The 'highlights' array now directly references the imported icon components.
   const highlights = [
     {
-      Icon: MdOutlineEngineering, // Replaced custom SVG with React Icon
       title: 'Engineering',
       description: 'Where innovation meets impact through technology, design, and real-world problem-solving.',
-      iconBgColor: 'bg-gradient-to-br from-cyan-100 to-blue-100',
-      iconColor: 'text-blue-600',
+      bgColor: 'bg-[#4D84F7]',
+      svg: '/engineering-bg.svg',
     },
     {
-      Icon:  FaHandHoldingMedical, // Replaced custom SVG with React Icon
       title: 'Medical',
-      description: ' Showcasing breakthroughs that blend compassion with cutting-edge healthcare innovation.',
-      iconBgColor: 'bg-gradient-to-br from-amber-100 to-orange-100',
-      iconColor: 'text-orange-600',
+      description: 'Showcasing breakthroughs that blend compassion with cutting-edge healthcare innovation.',
+      bgColor: 'bg-[#E371E3]',
+      svg: '/medical-bg.svg',
     },
     {
-      Icon: MdScience, // Replaced custom SVG with React Icon
       title: 'Arts & Science',
-      description: 'Celebrating creativity, research, and interdisciplinary thinking that shape tomorrow’s ideas.',
-      iconBgColor: 'bg-gradient-to-br from-green-100 to-emerald-100',
-      iconColor: 'text-emerald-600',
+      description: 'Celebrating creativity, research, and interdisciplinary thinking that shape tomorrow\'s ideas.',
+      bgColor: 'bg-[#4D84F7]',
+      svg: '/arts-science-bg.svg',
     },
     {
-      Icon: FaBookOpen, // Replaced custom SVG with React Icon
       title: 'Management',
-      description: 'Empowering future leaders to drive change, innovation, and entrepreneurial growth',
-      iconBgColor: 'bg-gradient-to-br from-purple-100 to-indigo-100',
-      iconColor: 'text-indigo-600',
+      description: 'Empowering future leaders to drive change, innovation, and entrepreneurial growth.',
+      bgColor: 'bg-[#3E80BF]',
+      svg: '/management-bg.svg',
     },
   ];
 
-  return (
-    <section className="px-5 md:px-12 py-16 md:py-24 bg-white relative overflow-hidden">
-      {/* Subtle background elements for visual depth */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E")`
-      }}></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/20 via-white to-blue-50/20 pointer-events-none"></div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
-        <div ref={headerRef} className="flex flex-col items-center gap-4 mb-12 md:mb-16">
-          <span className="bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-1 rounded-full">
-            What to Expect
-          </span>
-          <h2 className="text-slate-900 text-4xl md:text-5xl font-bold font-inter text-center">
-            Summit Highlights
-          </h2>
-          <p className="text-slate-600 text-base md:text-lg font-normal text-center max-w-3xl leading-relaxed mt-2">
-            Experience Kerala's largest student entrepreneurship platform with world-class speakers, hands-on workshops, and unparalleled networking opportunities.
+  const HighlightCard = ({ item, position }) => {
+    return (
+      <div className={`${item.bgColor} p-8 w-full aspect-square flex flex-col justify-start items-start relative overflow-hidden`}>
+        {/* Background SVG */}
+        {position === 'engineering' && (
+          <img 
+            src={item.svg} 
+            alt="" 
+            className="absolute bottom-0 left-0 w-full h-auto"
+          />
+        )}
+        {position === 'arts' && (
+          <img 
+            src={item.svg} 
+            alt="" 
+            className="absolute top-0 right-0 w-auto h-full"
+          />
+        )}
+        {position === 'medical' && (
+          <img 
+            src={item.svg} 
+            alt="" 
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
+        {position === 'management' && (
+          <img 
+            src={item.svg} 
+            alt="" 
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
+        
+        {/* Content */}
+        <div className="relative z-10">
+          <h3 className="text-2xl font-semibold font-clash-display text-white mb-4 text-left">
+            {item.title}
+          </h3>
+          <p className="text-sm text-white font-clash-display leading-relaxed text-left">
+            {item.description}
           </p>
         </div>
+      </div>
+    );
+  };
 
-        {/* Highlights Cards Grid */}
-        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {highlights.map((item, index) => (
-            <div key={index} className="w-full">
-              <TiltedCard
-                captionText={item.title}
-                containerHeight="320px"
-                containerWidth="100%"
-                rotateAmplitude={6}
-                scaleOnHover={1.03}
-                displayOverlayContent={true}
-                overlayContent={
-                  <div className="group w-full h-full bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-start transition-all duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-200/50">
-                    
-                    <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 transition-transform duration-300 ${item.iconBgColor} group-hover:scale-110`}>
-                      {/* The Icon component is now rendered directly from the 'item' object */}
-                      <item.Icon className={`w-8 h-8 transition-colors duration-300 ${item.iconColor}`} />
-                    </div>
-                    
-                    <h3 className="text-slate-900 text-xl font-bold font-inter mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-slate-600 text-base font-normal leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                }
-              />
-            </div>
-          ))}
+  return (
+    <section className="w-full bg-white overflow-hidden relative">
+      {/* Header Section */}
+      <div className="px-12 pt-12 pb-16 flex items-start justify-between gap-12">
+        {/* Left Content */}
+        <div className="flex-1">
+          <h2 className="text-8xl font-light font-clash-display text-blue-500 mb-8">
+          Summit Highlights
+        </h2>
+          <p className="text-2xl text-black font-normal font-gilroy-light max-w-md leading-relaxed">
+          Experience Kerala's largest student entrepreneurship platform with world-class speakers, hands-on workshops, and unparalleled networking opportunities.
+        </p>
         </div>
+
+        {/* Right Cards Grid */}
+        <div className="grid grid-cols-2 gap-4 w-150">
+          <HighlightCard item={highlights[0]} position="engineering" />
+          <HighlightCard item={highlights[1]} position="medical" />
+          <HighlightCard item={highlights[2]} position="arts" />
+          <HighlightCard item={highlights[3]} position="management" />
+        </div>
+      </div>
+
+      {/* Colored Blocks at Bottom */}
+      <img 
+        src="/hero-blocks.png" 
+        alt="Decorative blocks" 
+        className="w-full h-20 sm:h-24 object-cover"
+      />
+
+      {/* Scrolling Text Loop */}
+      <div className="w-full -mt-7 mb-10 skew-y-2">
+        <LogoLoop
+          logos={[
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+          ]}
+          speed={80}
+          direction="left"
+          logoHeight={20}
+          gap={40}
+          pauseOnHover={true}
+          className="font-gilroy-bold bg-blue-600 py-5  text-white"
+          ariaLabel="IEDC Summit 2025"
+        />
       </div>
     </section>
   );

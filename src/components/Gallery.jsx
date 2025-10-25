@@ -127,7 +127,7 @@ const Gallery = () => {
                     { text: 'IEDC SUMMIT 2025' },
                   ]}
                   speed={80}
-                  direction="left"
+                  direction="right"
                   logoHeight={20}
                   gap={40}
                   pauseOnHover={true}
