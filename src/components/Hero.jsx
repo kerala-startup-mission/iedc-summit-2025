@@ -126,40 +126,47 @@ const Hero = () => {
         <img src="/Ellipse3.svg" alt="Decorative circle 4" className="w-1/3 absolute left-130 bottom-20 lg:bottom-30 opacity-25 animate-fade-in-up" style={{animationDelay: '0.4s'}} />
 
         {/* Main Content Container */}
-        <div className="w-1/2 absolute top-10 lg:top-40 left-[10%] flex flex-col gap-3 pb-40 animate-fade-in-down" style={{animationDelay: '0.5s'}}>
+        <div className="w-1/2 absolute top-[6vh] lg:top-[13vh] xl:top-[25vh] left-[10%] flex flex-col gap-3 pb-40 animate-fade-in-down" style={{animationDelay: '0.5s'}}>
           {/* Title with Logo */}
           <div className="relative">
-            <div className="text-blue-500 text-5xl lg:text-6xl xl:text-7xl font-semibold drop-shadow-[0px_2px_19px_rgba(37,99,235,0.10)] font-clash-display">
+            <div className="text-blue-500 text-[5vh] lg:text-[6vh] xl:text-[8vh] font-semibold drop-shadow-[0px_2px_19px_rgba(37,99,235,0.10)] font-clash-display leading-15">
               IEDC <br/>SUMMIT 2025<br/>
             </div>
 
             {/* Logo - Top Right of Title */}
-            <img className="w-16 lg:w-30 h-auto absolute -top-12 lg:-top-9 left-40 lg:left-50 animate-scale-in" style={{animationDelay: '0.6s'}} src="/iedc-summit-25-logo.png" alt="IEDC Badge" />
+            <img className="w-[2vh] lg:w-[15vh] h-auto absolute -top-[3vh] lg:-top-[8vh] left-[8vh] lg:left-[20vh] animate-scale-in" style={{animationDelay: '0.6s'}} src="/iedc-summit-25-logo.png" alt="IEDC Badge" />
 
             {/* Location */}
-            <div className="text-blue-400 text-xl lg:text-3xl font-semibold font-gilroy-medium">Kasaragod</div>
+            <div className="text-blue-400 text-[2vh] lg:text-[3vh] font-semibold font-gilroy-medium">Kasaragod</div>
 
             {/* Date */}
-            <div className="flex items-center relative my-3 lg:my-5">
-              <img src="/Ellipse1.svg" alt="Decorative circle 1" className="w-10 lg:w-13 h-10 lg:h-13 absolute -top-1 lg:-top-2 left-16 lg:left-18" />
-              <div className="text-blue-500 text-2xl lg:text-4xl font-black leading-8 lg:leading-9 font-gilroy-bold relative z-10">22 Dec 2025</div>
+            <div className="flex items-center relative my-[0.5vh] lg:my-[1vh]">
+              <img src="/Ellipse1.svg" alt="Decorative circle 1" className="w-[1.5vh] lg:w-[2vh] h-[1.5vh] lg:h-[2vh] absolute -top-[0.2vh] lg:-top-[0.5vh] left-[3vh] lg:left-[4vh]" />
+              <div className="text-blue-500 text-[2.5vh] lg:text-[4vh] font-black leading-[2vh] lg:leading-[3vh] font-gilroy-bold relative z-10">22 Dec 2025</div>
             </div>
 
             {/* Register Button */}
-            <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-1/2 h-16 lg:h-20 bg-blue-600 rounded-[29px] flex items-center justify-center mt-6 lg:mt-10 hover:bg-blue-700 transition-colors duration-300">
-              <div className="text-white text-2xl lg:text-4xl font-normal font-clash-display">REGISTER NOW</div>
+            <a 
+              href="https://tickets.startupmission.in/iedc-summit-2025" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="px-8 lg:px-12 py-3 lg:py-4 bg-blue-600 rounded-[29px] flex items-center justify-center mt-[2vh] lg:mt-[3vh] hover:bg-blue-700 transition-colors duration-300 inline-block"
+            >
+              <div className="text-white text-[2.5vh] lg:text-[3.5vh] font-normal font-clash-display">
+                REGISTER NOW
+              </div>
             </a>
 
             {/* Amount */}
-            <div className="flex items-baseline gap-2 mt-5 lg:mt-8">
-              <div className="text-blue-400 text-2xl lg:text-4xl font-black font-gilroy-bold opacity-75 relative inline-block">
-                <div className="w-12 lg:w-22 h-0.5 lg:h-1 border-t-4 border-red-600 absolute top-1/2 left-0 -translate-y-1/2 -skew-9" />
-                ₹999
-              </div>
-              <div className="text-blue-600 text-3xl lg:text-5xl font-black font-gilroy-bold">₹749/-</div>
+            <div className="flex items-baseline gap-2 mt-[2vh] lg:mt-[3vh]">
+              <div className="text-blue-400 text-[2.5vh] lg:text-[4vh] font-black font-gilroy-bold opacity-75 relative inline-block">
+              <div className="w-full lg:w-full h-[0.5vh] lg:h-[0.7vh] border-t-4 border-red-600 absolute top-1/2 left-0 -translate-y-1/2 -skew-6" />
+              ₹999
+            </div>
+              <div className="text-blue-600 text-[3vh] lg:text-[5vh] font-black font-gilroy-bold">₹749/-</div>
             </div>
             {/* Paragraph */}
-            <div className="text-blue-400 text-base lg:text-xl font-black font-gilroy-bold mt-2">*Be quick, connect more*</div>
+            <div className="text-blue-400 text-[1.2vh] lg:text-[1.8vh] font-black font-gilroy-bold mt-[1vh]">*Be quick, connect more*</div>
           </div>
         </div>
 
@@ -171,23 +178,22 @@ const Hero = () => {
         />
 
         {/* Hero Background Image - Aligned Left and Scaled */}
-        <img
-          src="/hero-img.png" 
-          alt="Decorative blocks"
-          className="h-48 lg:h-64 xl:h-200 absolute bottom-16 lg:bottom-24 right-4 lg:right-10 object-contain animate-slide-in-right" style={{animationDelay: '0.8s'}}
-        />
+       <img
+            src="/hero-img.png" 
+            alt="Decorative blocks"
+            className="h-[50vh] lg:h-[62vh] xl:h-[80vh] absolute bottom-[7%] right-[1%] object-contain animate-slide-in-right" style={{animationDelay: '0.8s'}}/>
 
         {/* Countdown Badge - Near Hero Image */}
-        <div className="absolute bottom-60 md:bottom-60 lg:bottom-60 right-150 lg:right-150">
+        <div className="absolute bottom-[10vh] md:bottom-[10vh] lg:bottom-[23vh] right-[5%] lg:right-[40%]">
           <div className="flex items-center gap-0 lg:gap-1">
             {/* Days - First digit */}
-            <span className="text-blue-600 text-6xl md:text-9xl lg:text-[200px] font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
+            <span className="text-blue-600 text-[8vh] md:text-[12vh] lg:text-[20vh] font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
             {/* Days - Second digit */}
-            <span className="text-blue-600 text-6xl md:text-9xl lg:text-[200px] font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
+            <span className="text-blue-600 text-[8vh] md:text-[12vh] lg:text-[20vh] font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
             {/* Label */}
             <div className="flex flex-col items-start justify-center ml-0 lg:ml-0 gap-0">
-              <span className="text-blue-600 text-sm md:text-xl lg:text-7xl font-bold font-dimensions-semi-bold leading-none">DAYS</span>
-              <span className="text-blue-600 text-xs md:text-lg lg:text-7xl font-dimensions-semi-bold leading-none -mt-3">TO Go</span>
+              <span className="text-blue-600 text-[1.5vh] md:text-[2vh] lg:text-[7vh] font-bold font-dimensions-semi-bold leading-none">DAYS</span>
+              <span className="text-blue-600 text-[1.2vh] md:text-[1.8vh] lg:text-[7vh] font-dimensions-semi-bold leading-none -mt-[0.5vh]">TO Go</span>
             </div>
           </div>
         </div>
