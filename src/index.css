@@ -20,6 +20,13 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Gilroy";
+  src: url("./fonts/Gilroy-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
 @layer utilities {
   @font-face {
     font-family: "ClashDisplay";
@@ -46,7 +53,13 @@
     font-weight: 500;
     font-display: swap;
   }
-
+  @font-face {
+    font-family: "Dimensions";
+    src: url("./fonts/dimensions-600.otf") format("truetype");
+    font-weight: 600;
+    font-display: swap;
+  }
+  
   .font-clash-display {
     font-family: "ClashDisplay", sans-serif;
   }
@@ -59,6 +72,10 @@
   .font-gilroy-bold {
     font-family: "Gilroy", sans-serif;
     font-weight: 800;
+  }
+  .font-dimensions-semi-bold {
+    font-family: "Dimensions", sans-serif;
+    font-weight: 600;
   }
   .font-gilroy-medium {
     font-family: "Gilroy", sans-serif;
