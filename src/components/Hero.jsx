@@ -150,7 +150,7 @@ const Hero = () => {
               href="https://tickets.startupmission.in/iedc-summit-2025" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="px-8 lg:px-12 py-3 lg:py-4 bg-blue-600 rounded-[29px] flex items-center justify-center mt-[2vh] lg:mt-[3vh] hover:bg-blue-700 transition-colors duration-300 inline-block"
+              className="px-8 lg:px-12 py-3 lg:py-4 bg-blue-600 rounded-[29px] flex items-center justify-center mt-[2vh] lg:mt-[3vh] hover:bg-blue-700 transition-colors duration-300 "
             >
               <div className="text-white text-[2.5vh] lg:text-[3.5vh] font-normal font-clash-display">
                 REGISTER NOW
@@ -166,7 +166,7 @@ const Hero = () => {
               <div className="text-blue-600 text-[3vh] lg:text-[5vh] font-black font-gilroy-bold">₹749/-</div>
             </div>
             {/* Paragraph */}
-            <div className="text-blue-400 text-[1.2vh] lg:text-[1.8vh] font-black font-gilroy-bold mt-[1vh]">*Be quick, connect more*</div>
+            <div className="text-blue-400 text-[1.2vh] lg:text-xl font-black font-gilroy-bold leading-3">*Be quick, connect more*</div>
           </div>
         </div>
 
@@ -181,7 +181,7 @@ const Hero = () => {
        <img
             src="/hero-img.png" 
             alt="Decorative blocks"
-            className="h-[50vh] lg:h-[62vh] xl:h-[80vh] absolute bottom-[7%] right-[1%] object-contain animate-slide-in-right" style={{animationDelay: '0.8s'}}/>
+            className="h-[50vh] lg:h-[70vh] xl:h-[90vh] absolute bottom-[8%] right-[1%] object-contain animate-slide-in-right" style={{animationDelay: '0.8s'}}/>
 
         {/* Countdown Badge - Near Hero Image */}
         <div className="absolute bottom-[10vh] md:bottom-[10vh] lg:bottom-[23vh] right-[5%] lg:right-[40%]">
