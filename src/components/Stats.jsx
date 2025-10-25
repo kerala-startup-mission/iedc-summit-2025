@@ -95,7 +95,7 @@ const Stats = () => {
   // ];
 
   return (
-    <section ref={sectionRef} className="px-4 sm:px-8 py-16 md:py-20 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-600">
+    <section ref={sectionRef} className="px-4 sm:px-8 py-16 md:py-20 bg-linear-to-br from-blue-600 via-blue-500 to-blue-600">
       <div className="max-w-[1200px] mx-auto">
         {/* Desktop Layout - 3 steps */}
         <div className="hidden md:block space-y-12">

@@ -1,34 +1,86 @@
 @import "tailwindcss";
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+@font-face {
+  font-family: "ClashDisplay";
+  src: url("./fonts/ClashDisplay-Variable.ttf") format("truetype");
+  font-display: swap;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
+@font-face {
+  font-family: "Gilroy";
+  src: url("./fonts/Gilroy-Light.otf") format("opentype");
+  font-weight: 300;
+  font-display: swap;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #3b82f6;
-  border-radius: 4px;
-  transition: background 0.3s ease;
+@font-face {
+  font-family: "Gilroy";
+  src: url("./fonts/Gilroy-ExtraBold.otf") format("opentype");
+  font-weight: 800;
+  font-display: swap;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
+@font-face {
+  font-family: "Gilroy";
+  src: url("./fonts/Gilroy-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
 }
 
-/* Hide scrollbar arrows */
-::-webkit-scrollbar-button {
-  display: none;
-}
+@layer utilities {
+  @font-face {
+    font-family: "ClashDisplay";
+    src: url("./fonts/ClashDisplay-Variable.ttf") format("truetype");
+    font-display: swap;
+  }
 
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #3b82f6 transparent;
+  @font-face {
+    font-family: "Gilroy";
+    src: url("./fonts/Gilroy-Light.otf") format("opentype");
+    font-weight: 300;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Gilroy";
+    src: url("./fonts/Gilroy-ExtraBold.otf") format("opentype");
+    font-weight: 800;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Gilroy";
+    src: url("./fonts/Gilroy-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Dimensions";
+    src: url("./fonts/dimensions-600.otf") format("truetype");
+    font-weight: 600;
+    font-display: swap;
+  }
+  
+  .font-clash-display {
+    font-family: "ClashDisplay", sans-serif;
+  }
+
+  .font-gilroy-light {
+    font-family: "Gilroy", sans-serif;
+    font-weight: 300;
+  }
+
+  .font-gilroy-bold {
+    font-family: "Gilroy", sans-serif;
+    font-weight: 800;
+  }
+  .font-dimensions-semi-bold {
+    font-family: "Dimensions", sans-serif;
+    font-weight: 600;
+  }
+  .font-gilroy-medium {
+    font-family: "Gilroy", sans-serif;
+    font-weight: 500;
+  }
 }
 
 /* Smooth scrolling */
@@ -36,11 +88,51 @@ html {
   scroll-behavior: smooth;
 }
 
+* {
+  scroll-behavior: smooth;
+}
+
+/* Blue scrollbar - only slider visible */
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 6px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #2563eb;
+  background-clip: content-box;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 transparent;
+}
+
+.blend {
+  mix-blend-mode: lighten;
+}
+
+#spotlight {
+  transition: background 0.1s ease;
+  mix-blend-mode: screen;
+}
+
 /* Splash Page Animations */
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-30px);
   }
   to {
     opacity: 1;
@@ -51,7 +143,7 @@ html {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -59,23 +151,94 @@ html {
   }
 }
 
-@keyframes fadeIn {
+@keyframes slideInRight {
   from {
     opacity: 0;
+    transform: translateX(50px);
   }
   to {
     opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
   }
 }
 
 .animate-fade-in-down {
-  animation: fadeInDown 1s ease-out;
+  animation: fadeInDown 0.8s ease-out;
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 1s ease-out 0.2s both;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
-.animate-fade-in {
-  animation: fadeIn 1.2s ease-out 0.4s both;
+.animate-slide-in-right {
+  animation: slideInRight 0.8s ease-out 0.3s both;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s ease-out 0.3s both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.8s ease-out 0.4s both;
+}
+
+.animate-bounce-slow {
+  animation: bounce 3s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Scroll-based fade in/out animations */
+.fade-in-up-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }

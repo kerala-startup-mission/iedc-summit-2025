@@ -1,125 +1,204 @@
-import React from 'react';
-import TextType from './TextType';
-import logo from '/iedc-summit-25-logo.png';
+﻿import React from 'react';
+import LogoLoop from './LogoLoop';
+import { useState, useEffect } from 'react';
 
 const Hero = () => {
+  const [DaysLeft, setDaysLeft] = useState(0);
+
+  useEffect(() => {
+    const calculateDaysLeft = () => {
+      const eventDate = new Date('2025-12-22').getTime();
+      const today = new Date().getTime();
+      const timeLeft = eventDate - today;
+      const days = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
+      setDaysLeft(Math.max(days, 0));
+    };
+
+    calculateDaysLeft();
+    const timer = setInterval(calculateDaysLeft, 1000 * 60 * 60); // Update every hour
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <>
-      {/* Desktop Version */}
-      <section
-        id="home"
-        className="hidden md:flex w-full h-screen px-12 py-48 relative bg-gradient-to-br from-blue-50 to-indigo-50 justify-center items-center overflow-hidden"
-      >
-        {/* Background Decorative Elements - Desktop */}
-        <div className="w-[500px] h-[500px] left-[880px] top-[-150px] absolute bg-[radial-gradient(ellipse_70.71%_70.71%_at_50.00%_50.00%,_rgba(37,_99,_235,_0.12)_0%,_rgba(37,_99,_235,_0)_100%)] rounded-[250px]" />
-        <div className="w-96 h-96 left-[-150px] top-[420px] absolute bg-[radial-gradient(ellipse_70.71%_70.71%_at_50.00%_50.00%,_rgba(99,_102,_241,_0.10)_0%,_rgba(99,_102,_241,_0)_100%)] rounded-[200px]" />
-        <div className="w-64 h-64 left-[927.61px] top-[216px] absolute rounded-[125px] border-[3px] border-blue-600/20" />
-        <div className="w-36 h-36 left-[192px] top-[144px] absolute bg-blue-300/20 rounded-[75px]" />
-        <div className="w-44 h-44 left-[844px] top-[396px] absolute rounded-[90px] border-2 border-blue-400/20" />
+    <div id="home" className="w-full h-[110vh] md:h-[110vh] relative bg-white overflow-hidden">
+      {/* Mobile Layout - Hidden on md and up */}
+      <div className="md:hidden w-full min-h-screen relative bg-white">
+        {/* Decorative Circles for Mobile */}
+        <div className="w-64 h-64 absolute left-[-29px] top-[500px] opacity-50 rounded-full border-[0.50px] border-blue-600 animate-fade-in-up" style={{animationDelay: '0.6s'}} />
+        <img src="/Ellipse3.svg" alt="Decorative" className="w-72 h-72 absolute left-[80px] top-[350px] opacity-50 animate-fade-in-up" style={{animationDelay: '0.7s'}} />
+        
+        {/* Main Content */}
+        <div className="px-5 pt-24 pb-20 relative z-10">
+          <h1 className="text-blue-500 text-[42px] font-bold font-clash-display leading-11 mb-3 animate-fade-in-down">
+            IEDC SUMMIT<br />2025
+          </h1>
+          {/* Location */}
+          <div className="text-blue-400 text-xl font-semibold font-clash-display mb-2 animate-fade-in-up" style={{animationDelay: '0.1s'}}>Kasaragod</div>
 
-        {/* Content - Desktop */}
-        <div className="w-[900px] h-80 max-w-[1400px] relative">
-          {/* Logo */}
-          <div className="right-[-15%] top-[-10%] absolute">
-            <img src={logo} alt="IEDC Summit 2025 Logo" className="w-60 h-60 object-contain" />
+          {/* Date */}
+          <div className="flex items-center gap-2 relative mb-4 animate-fade-in-up" style={{animationDelay: '0.2s'}}>
+            <div className="text-blue-500 text-lg font-bold font-gilroy-bold relative z-10">22 Dec 2025</div>
+            <div className="w-6 h-6 rounded-full border-[0.32px] border-blue-600 absolute left-[105px]" />
           </div>
 
-          <div className="px-6 py-2 left-[5%] top-0 absolute bg-white rounded-[50px] shadow-[0px_4px_12px_0px_rgba(37,99,235,0.15)] inline-flex justify-start items-start">
-            <div className="justify-center text-blue-600 text-sm font-bold font-inter leading-snug tracking-wider">
-              10TH ANNIVERSARY EDITION
-            </div>
-          </div>
-          
-          <div className="w-[85%] left-[5%] top-[19%] absolute inline-flex flex-col justify-start items-start">
-            <div className="justify-center text-gray-800 text-7xl font-bold font-inter leading-[79.20px] whitespace-nowrap">
-              <TextType
-                text={["IEDC SUMMIT 2025", "Innovation Unleashed"]}
-                typingSpeed={75}
-                pauseDuration={2000}
-                showCursor={true}
-                cursorCharacter="|"
-                className="text-blue-600"
-                cursorClassName="text-blue-600"
-              />
-            </div>
-          </div>
-          
-          <div className="w-[85%] max-w-[900px] left-[5%] top-[51%] absolute inline-flex flex-col justify-start items-start">
-            <div className="justify-center text-gray-800 text-2xl font-medium font-inter leading-10">
-              "Dare to Disrupt"
-            </div>
-          </div>
-          
-          <div className="w-[85%] left-[5%] top-[68%] absolute inline-flex flex-col justify-start items-start">
-            <div className="justify-center text-gray-500 text-base font-normal font-inter leading-7">
-              Asia's largest summit for aspiring entrepreneurs, organised by KSUM @ LBSCE Kasaragod
-            </div>
-          </div>
-          
-          <a href="https://tickets.startupmission.in/iedc-summit-2025" className="px-10 py-4 left-[5%] top-[90%] absolute bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] inline-flex justify-start items-start hover:bg-blue-700 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.40)] transition-all duration-300 cursor-pointer">
-            <div className="justify-center text-white text-base font-bold font-inter leading-relaxed">
-              Register Now →
-            </div>
+          {/* Register Button */}
+          <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-[200px] h-11 bg-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-700 transition-colors mb-3 relative z-20 animate-scale-in" style={{animationDelay: '0.3s'}}>
+            <div className="text-neutral-100 text-lg font-semibold font-clash-display tracking-tight">REGISTER NOW</div>
           </a>
+
+          {/* Pricing */}
+          <div className="flex items-baseline gap-2 mb-2 animate-fade-in-up" style={{animationDelay: '0.4s'}}>
+            <div className="relative inline-block">
+              <div className="text-blue-400 text-2xl font-gilroy-bold opacity-75">₹999</div>
+              <div className="w-16 h-0.5 border-t-[3px] border-red-600 absolute top-1/2 left-0 -translate-y-1/2 -skew-y-10" />
+            </div>
+            <div className="text-blue-600 text-3xl font-gilroy-bold">₹749/-</div>
+          </div>
+
+          {/* Early Bird */}
+          <div className="text-blue-400 text-sm font-normal font-gilroy-bold animate-fade-in-up" style={{animationDelay: '0.5s'}}>*Be quick, connect more*</div>
         </div>
-      </section>
 
-      {/* Mobile Version */}
-      <section
-        id="home-mobile"
-        className="md:hidden w-full h-screen px-5 pt-56 pb-44 relative bg-gradient-to-br from-blue-50 to-indigo-50 inline-flex justify-start items-center overflow-hidden"
-      >
-        {/* Background Decorative Elements - Mobile */}
-        <div className="w-72 h-72 left-[228px] top-[-100px] absolute bg-[radial-gradient(ellipse_70.71%_70.71%_at_50.00%_50.00%,_rgba(37,_99,_235,_0.15)_0%,_rgba(37,_99,_235,_0)_100%)] rounded-full" />
-        <div className="w-48 h-48 left-[-80px] top-[570px] absolute bg-[radial-gradient(ellipse_70.71%_70.71%_at_50.00%_50.00%,_rgba(99,_102,_241,_0.12)_0%,_rgba(99,_102,_241,_0)_100%)] rounded-[100px]" />
+        {/* Spacer for better separation */}
+        <div className="h-32"></div>
 
-        {/* Content - Mobile */}
-        <div className="w-full h-80 relative">
-          {/* Logo */}
-          <div className="left-1/2 -translate-x-1/2 top-[-170px] absolute">
-            <img src={logo} alt="IEDC Summit 2025 Logo" className="w-30 h-30 object-contain" />
-          </div>
-
-          <div className="px-6 py-2 left-1/2 -translate-x-1/2 top-0 absolute bg-white rounded-[50px] shadow-[0px_4px_12px_0px_rgba(37,99,235,0.15)] inline-flex justify-center items-start whitespace-nowrap">
-            <div className="text-center justify-center text-blue-600 text-xs font-bold font-inter leading-none tracking-wider">
-              10TH ANNIVERSARY EDITION
-            </div>
-          </div>
-
-          <div className="w-full left-0 top-[57.92px] absolute inline-flex flex-col justify-start items-center px-2">
-            <div className="text-center justify-center text-gray-800 text-3xl sm:text-4xl font-bold font-inter leading-10 whitespace-nowrap">
-              <TextType
-                text={["IEDC SUMMIT 2025", "Innovation Unleashed"]}
-                typingSpeed={75}
-                pauseDuration={2000}
-                showCursor={true}
-                cursorCharacter="|"
-                className="text-blue-600"
-                cursorClassName="text-blue-600"
-              />
-            </div>
-          </div>
-          
-          <div className="w-full left-0 top-[117.92px] absolute inline-flex flex-col justify-start items-center px-2">
-            <div className="text-center justify-center text-gray-800 text-base font-medium font-inter leading-7 whitespace-nowrap">
-              "Dare to Disrupt"
-            </div>
-          </div>
-          
-          <div className="w-full left-0 top-[186.15px] absolute inline-flex flex-col justify-start items-center px-4">
-            <div className="text-center justify-center text-gray-500 text-xs sm:text-sm font-normal font-inter leading-normal">
-              Asia's largest summit for aspiring entrepreneurs, organised by KSUM @ LBSCE Kasaragod
-            </div>
-          </div>
-          
-          <a href="https://tickets.startupmission.in/iedc-summit-2025" className="px-6 sm:px-8 pt-3.5 pb-4 left-1/2 -translate-x-1/2 top-[267.63px] absolute bg-blue-600 rounded-lg shadow-[0px_4px_15px_0px_rgba(37,99,235,0.30)] inline-flex justify-center items-start hover:bg-blue-700 hover:shadow-[0px_6px_20px_0px_rgba(37,99,235,0.40)] transition-all duration-300 cursor-pointer whitespace-nowrap">
-            <div className="text-center justify-center text-white text-sm sm:text-base font-bold font-inter leading-normal">
-              Register Now →
-            </div>
-          </a>
+        {/* Hero Background Image - Mobile - On Top of Blocks */}
+        <div className="absolute bottom-0 right-0 w-[65%] max-w-[260px] z-10 animate-slide-in-right" style={{animationDelay: '0.8s'}}>
+          <img
+            src="/hero-img.png" 
+            alt="Decorative image"
+            className="w-full h-auto object-contain"
+          />
         </div>
-      </section>
-    </>
+
+        {/* Colored Blocks at Bottom */}
+        <img 
+          src="/hero-blocks.png" 
+          alt="Decorative blocks" 
+          className="w-full h-14 object-cover absolute bottom-0 left-0 z-5 animate-fade-in-up" style={{animationDelay: '0.9s'}}
+        />
+
+        {/* Countdown Badge - Mobile */}
+        <div className="absolute bottom-30 left-8">
+          <div className="flex items-center gap-0">
+            {/* Days - First digit */}
+            <span className="text-blue-600 text-8xl font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
+            {/* Days - Second digit */}
+            <span className="text-blue-600 text-8xl font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
+            {/* Label */}
+            <div className="flex flex-col items-start justify-center ml-0 gap-0">
+              <span className="text-blue-600 text-4xl font-bold font-dimensions-semi-bold leading-none">DAYS</span>
+              <span className="text-blue-600 text-4xl font-dimensions-semi-bold leading-none -mt-2">TO Go</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Scrolling Text Loop - At Blocks Level */}
+      <div className="w-full -skew-y-2 absolute bottom-10 left-0 z-10 md:absolute md:bottom-12 md:left-0">
+        <LogoLoop
+          logos={[
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+          ]}
+          speed={80}
+          direction="right"
+          logoHeight={20}
+          gap={40}
+          pauseOnHover={true}
+          className="font-gilroy-bold bg-blue-600 py-5 text-white"
+          ariaLabel="IEDC Summit 2025"
+        />
+      </div>
+
+      {/* Desktop Layout - Hidden on mobile */}
+      <div className="hidden md:block w-full min-h-screen lg:h-[110vh] relative">
+        {/* Decorative Circles - Using SVG */}
+        <img src="/Ellipse2.svg" alt="Decorative circle 1" className="w-1/2 absolute left-1/2 top-10 opacity-50 animate-fade-in-up" style={{animationDelay: '0.1s'}} />
+        <img src="/Ellipse3.svg" alt="Decorative circle 2" className="w-2/5 absolute right-10 top-20 lg:top-30 animate-fade-in-up" style={{animationDelay: '0.2s'}} />
+        <img src="/Ellipse3.svg" alt="Decorative circle 3" className="w-2/5 absolute -right-80 top-20 lg:top-30 opacity-25 animate-fade-in-up" style={{animationDelay: '0.3s'}} />
+        <img src="/Ellipse3.svg" alt="Decorative circle 4" className="w-1/3 absolute left-130 bottom-20 lg:bottom-30 opacity-25 animate-fade-in-up" style={{animationDelay: '0.4s'}} />
+
+        {/* Main Content Container */}
+        <div className="w-1/2 absolute top-[6vh] lg:top-[13vh] xl:top-[25vh] left-[10%] flex flex-col gap-3 pb-40 animate-fade-in-down" style={{animationDelay: '0.5s'}}>
+          {/* Title with Logo */}
+          <div className="relative">
+            <div className="text-blue-500 text-[5vh] lg:text-[6vh] xl:text-[8vh] font-semibold drop-shadow-[0px_2px_19px_rgba(37,99,235,0.10)] font-clash-display leading-15">
+              IEDC <br/>SUMMIT 2025<br/>
+            </div>
+
+            {/* Logo - Top Right of Title */}
+            <img className="w-[2vh] lg:w-[15vh] h-auto absolute -top-[3vh] lg:-top-[8vh] left-[8vh] lg:left-[20vh] animate-scale-in" style={{animationDelay: '0.6s'}} src="/iedc-summit-25-logo.png" alt="IEDC Badge" />
+
+            {/* Location */}
+            <div className="text-blue-400 text-[2vh] lg:text-[3vh] font-semibold font-gilroy-medium">Kasaragod</div>
+
+            {/* Date */}
+            <div className="flex items-center relative my-[0.5vh] lg:my-[1vh]">
+              <img src="/Ellipse1.svg" alt="Decorative circle 1" className="w-[1.5vh] lg:w-[2vh] h-[1.5vh] lg:h-[2vh] absolute -top-[0.2vh] lg:-top-[0.5vh] left-[3vh] lg:left-[4vh]" />
+              <div className="text-blue-500 text-[2.5vh] lg:text-[4vh] font-black leading-[2vh] lg:leading-[3vh] font-gilroy-bold relative z-10">22 Dec 2025</div>
+            </div>
+
+            {/* Register Button */}
+            <a 
+              href="https://tickets.startupmission.in/iedc-summit-2025" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="px-8 lg:px-12 py-3 lg:py-4 bg-blue-600 rounded-[29px] flex items-center justify-center mt-[2vh] lg:mt-[3vh] hover:bg-blue-700 transition-colors duration-300 inline-block"
+            >
+              <div className="text-white text-[2.5vh] lg:text-[3.5vh] font-normal font-clash-display">
+                REGISTER NOW
+              </div>
+            </a>
+
+            {/* Amount */}
+            <div className="flex items-baseline gap-2 mt-[2vh] lg:mt-[3vh]">
+              <div className="text-blue-400 text-[2.5vh] lg:text-[4vh] font-black font-gilroy-bold opacity-75 relative inline-block">
+              <div className="w-full lg:w-full h-[0.5vh] lg:h-[0.7vh] border-t-4 border-red-600 absolute top-1/2 left-0 -translate-y-1/2 -skew-6" />
+              ₹999
+            </div>
+              <div className="text-blue-600 text-[3vh] lg:text-[5vh] font-black font-gilroy-bold">₹749/-</div>
+            </div>
+            {/* Paragraph */}
+            <div className="text-blue-400 text-[1.2vh] lg:text-xl font-black font-gilroy-bold leading-3">*Be quick, connect more*</div>
+          </div>
+        </div>
+
+        {/* Colored Blocks at Bottom - Using PNG */}
+        <img 
+          src="/hero-blocks.png" 
+          alt="Decorative blocks" 
+          className="w-full h-16 lg:h-24 absolute bottom-20 left-0 object-cover animate-fade-in-up" style={{animationDelay: '0.7s'}}
+        />
+
+        {/* Hero Background Image - Aligned Left and Scaled */}
+       <img
+            src="/hero-img.png" 
+            alt="Decorative blocks"
+            className="h-[50vh] lg:h-[70vh] xl:h-[90vh] absolute bottom-[8%] right-[1%] object-contain animate-slide-in-right" style={{animationDelay: '0.8s'}}/>
+
+        {/* Countdown Badge - Near Hero Image */}
+        <div className="absolute bottom-[10vh] md:bottom-[10vh] lg:bottom-[23vh] right-[5%] lg:right-[40%] animate-fade-in-up" style={{animationDelay: '0.9s'}}>
+          <div className="flex items-center gap-0 lg:gap-1">
+            {/* Days - First digit */}
+            <span className="text-blue-600 text-[8vh] md:text-[12vh] lg:text-[20vh] font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
+            {/* Days - Second digit */}
+            <span className="text-blue-600 text-[8vh] md:text-[12vh] lg:text-[20vh] font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
+            {/* Label */}
+            <div className="flex flex-col items-start justify-center ml-0 lg:ml-0 gap-0">
+              <span className="text-blue-600 text-[1.5vh] md:text-[2vh] lg:text-[7vh] font-bold font-dimensions-semi-bold leading-none">DAYS</span>
+              <span className="text-blue-600 text-[1.2vh] md:text-[1.8vh] lg:text-[7vh] font-dimensions-semi-bold leading-none -mt-[0.5vh]">TO Go</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

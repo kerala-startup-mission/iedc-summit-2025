@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="grid grid-cols-2 gap-8">
             <div className="flex items-center justify-center">
               <img 
-                src="/ksum-logo.png" 
+                src="/ksum-logo.svg" 
                 alt="Kerala Startup Mission" 
                 className="h-28 object-contain opacity-80 hover:opacity-100 transition-opacity"
               />
@@ -27,15 +27,15 @@ const Footer = () => {
           <div className="grid grid-cols-2 gap-8">
             <div className="flex items-center justify-center">
               <img 
-                src="/iedc-lbs-logo.png" 
-                alt="IEDC LBSCEK" 
+                src="/lbscek-logo.png" 
+                alt="LBS College of Engineering" 
                 className="h-24 object-contain opacity-80 hover:opacity-100 transition-opacity"
               />
             </div>
             <div className="flex items-center justify-center">
               <img 
-                src="/lbscek-logo.png" 
-                alt="LBS College of Engineering" 
+                src="/cuk-logo.svg" 
+                alt="Central University of Kerala" 
                 className="h-24 object-contain opacity-80 hover:opacity-100 transition-opacity"
               />
             </div>
@@ -45,7 +45,7 @@ const Footer = () => {
         <hr className="hidden md:block border-gray-800 mb-8" />
 
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           
           {/* Left Column - Kerala Startup Mission */}
           <div className="space-y-6">
@@ -53,7 +53,7 @@ const Footer = () => {
             <div className="grid grid-cols-2 gap-4 md:hidden mb-6">
               <div className="flex items-center justify-center bg-white/5 rounded-lg p-4">
                 <img 
-                  src="/ksum-logo.png" 
+                  src="/ksum-logo.svg" 
                   alt="Kerala Startup Mission" 
                   className="h-16 object-contain"
                 />
@@ -68,32 +68,40 @@ const Footer = () => {
             </div>
 
             <div className="text-gray-300">
-              <p className="font-bold text-white mb-2">Kerala Startup Mission | Government of Kerala</p>
-              <p className="text-sm">G3B, Thejaswini, Technopark Campus</p>
-              <p className="text-sm">Kariyavattom, Trivandrum, Kerala 695581</p>
+              <p className="font-bold text-white mb-2 font-clash-display">Kerala Startup Mission | Government of Kerala</p>
+              <p className="text-sm font-gilroy-light">G3B, Thejaswini, Technopark Campus</p>
+              <p className="text-sm font-gilroy-light">Kariyavattom, Trivandrum, Kerala-695581</p>
+              <a 
+                href="https://www.startupmission.in" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light mt-2 inline-block"
+              >
+                www.startupmission.in
+              </a>
             </div>
 
             <div className="text-gray-300">
-              <p className="font-bold text-white mb-2">For Queries</p>
+              <p className="font-bold text-white mb-2 font-clash-display">For Queries</p>
               <a 
                 href="mailto:iedckerala@startupmission.in" 
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light"
               >
                 iedckerala@startupmission.in
               </a>
             </div>
 
             <div className="text-gray-300">
-              <p className="font-bold text-white mb-2">Adarsh V</p>
+              <p className="font-bold text-white mb-2 font-clash-display">Adarsh V</p>
               <a 
                 href="mailto:iedckerala@startupmission.in" 
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors block"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors block font-gilroy-light"
               >
                 iedckerala@startupmission.in
               </a>
               <a 
                 href="tel:+918921148007" 
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light"
               >
                 +91 89211 48007
               </a>
@@ -152,47 +160,55 @@ const Footer = () => {
             <div className="grid grid-cols-2 gap-4 md:hidden mb-6">
               <div className="flex items-center justify-center bg-white/5 rounded-lg p-4">
                 <img 
-                  src="/iedc-lbs-logo.png" 
-                  alt="IEDC LBSCEK" 
-                  className="h-16 object-contain"
-                />
-              </div>
-              <div className="flex items-center justify-center bg-white/5 rounded-lg p-4">
-                <img 
                   src="/lbscek-logo.png" 
                   alt="LBS College of Engineering" 
                   className="h-16 object-contain"
                 />
               </div>
+              <div className="flex items-center justify-center bg-white/5 rounded-lg p-4">
+                <img 
+                  src="/cuk-logo.svg" 
+                  alt="Central University of Kerala" 
+                  className="h-16 object-contain"
+                />
+              </div>
             </div>
 
             <div className="text-gray-300">
-              <p className="font-bold text-white mb-2">
-                Innovation and Entrepreneurship Development Centre<br />
+              <p className="font-bold text-white mb-2 font-clash-display">
+                IEDC LBSCEK
               </p>
-              <p className="text-sm">L.B.S. College of Engineering,</p>
-              <p className="text-sm">Povval, Muliyar P. O., Kasaragod, Kerala-671542</p>
+              <p className="text-sm font-gilroy-light">L.B.S. College of Engineering,</p>
+              <p className="text-sm font-gilroy-light">Povval, Muliyar P. O., Kasaragod, Kerala-671542</p>
+              <a 
+                href="https://www.lbscek.ac.in" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light mt-2 inline-block"
+              >
+                www.lbscek.ac.in
+              </a>
             </div>
 
             <div className="text-gray-300">
-              <p className="font-bold text-white mb-2">For Queries</p>
+              <p className="font-bold text-white mb-2 font-clash-display">For Queries</p>
               <a 
                 href="mailto:iedcsummit@lbscek.ac.in" 
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light"
               >
                 iedcsummit@lbscek.ac.in
               </a>
             </div>
 
             <div className="text-gray-300">
-              <p className="font-bold text-white mb-2">IEDC LBSCEK</p>
+              <p className="font-bold text-white mb-2 font-clash-display">IEDC LBSCEK</p>
               <a 
                 href="mailto:iedc@lbscek.ac.in" 
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors block"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors block font-gilroy-light"
               >
                 iedc@lbscek.ac.in
               </a>
-              <div className="text-sm">
+              <div className="text-sm font-gilroy-light">
                 <a 
                   href="tel:+919946760222" 
                   className="text-blue-400 hover:text-blue-300 transition-colors"
@@ -248,11 +264,104 @@ const Footer = () => {
               </ul>
             </div>
           </div>
+
+          {/* Right Column - IEDC CUK */}
+          <div className="space-y-6">
+            <div className="text-gray-300">
+              <p className="font-bold text-white mb-2 font-clash-display">
+                IEDC CUK
+              </p>
+              <p className="text-sm font-gilroy-light">Central University of Kerala, Tejaswini Hills, Periye (PO),</p>
+              <p className="text-sm font-gilroy-light">Kasaragod, Kerala - 671316</p>
+              <a 
+                href="https://www.cukerala.ac.in" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light mt-2 inline-block"
+              >
+                www.cukerala.ac.in
+              </a>
+            </div>
+
+            <div className="text-gray-300">
+              <p className="font-bold text-white mb-2 font-clash-display">For Queries</p>
+              <a 
+                href="mailto:iedcsummit@lbscek.ac.in" 
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light"
+              >
+                iedc@cukerala.ac.in
+              </a>
+            </div>
+
+            <div className="text-gray-300">
+              <p className="font-bold text-white mb-2 font-clash-display">IEDC CUK</p>
+              <a 
+                href="mailto:iedc@cukerala.ac.in" 
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors block font-gilroy-light"
+              >
+                iedc@cukerala.ac.in
+              </a>
+              <div className="text-sm font-gilroy-light">
+                <a 
+                  href="tel:+919497295949" 
+                  className="text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  +91 94972 95949
+                </a>
+              </div>
+            </div>
+
+            {/* Social Media - IEDC CUK */}
+            <div>
+              <ul className="flex gap-4">
+                <li>
+                  <a 
+                    href="https://www.facebook.com/mrocukerala/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-white/10 hover:bg-blue-500 rounded-full flex items-center justify-center transition-colors"
+                  >
+                    <FaFacebookF className="text-white" />
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://x.com/cukeralatweet" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-white/10 hover:bg-blue-400 rounded-full flex items-center justify-center transition-colors"
+                  >
+                    <FaTwitter className="text-white" />
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://www.instagram.com/cukerala_official/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-white/10 hover:bg-pink-500 rounded-full flex items-center justify-center transition-colors"
+                  >
+                    <FaInstagram className="text-white" />
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://www.linkedin.com/company/central-university-of-kerala-official/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-white/10 hover:bg-blue-600 rounded-full flex items-center justify-center transition-colors"
+                  >
+                    <FaLinkedin className="text-white" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-6 border-t border-gray-800">
-          <p className="text-center text-gray-500 text-sm">
+          <p className="text-center text-gray-500 text-sm font-gilroy-light">
             © 2025 Kerala Startup Mission. All Rights Reserved.
           </p>
         </div>
