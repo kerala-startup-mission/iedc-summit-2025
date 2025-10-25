@@ -150,7 +150,7 @@ const Hero = () => {
               href="https://tickets.startupmission.in/iedc-summit-2025" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="px-8 lg:px-12 py-3 lg:py-4 bg-blue-600 rounded-[29px] flex items-center justify-center mt-[2vh] lg:mt-[3vh] hover:bg-blue-700 transition-colors duration-300 "
+              className="px-8 lg:px-12 py-3 lg:py-4 bg-blue-600 rounded-[29px] flex items-center justify-center mt-[2vh] lg:mt-[3vh] hover:bg-blue-700 transition-colors duration-300 inline-block"
             >
               <div className="text-white text-[2.5vh] lg:text-[3.5vh] font-normal font-clash-display">
                 REGISTER NOW
