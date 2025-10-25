@@ -184,7 +184,7 @@ const Hero = () => {
             className="h-[50vh] lg:h-[70vh] xl:h-[90vh] absolute bottom-[8%] right-[1%] object-contain animate-slide-in-right" style={{animationDelay: '0.8s'}}/>
 
         {/* Countdown Badge - Near Hero Image */}
-        <div className="absolute bottom-[10vh] md:bottom-[10vh] lg:bottom-[23vh] right-[5%] lg:right-[40%]">
+        <div className="absolute bottom-[10vh] md:bottom-[10vh] lg:bottom-[23vh] right-[5%] lg:right-[40%] animate-fade-in-up" style={{animationDelay: '0.9s'}}>
           <div className="flex items-center gap-0 lg:gap-1">
             {/* Days - First digit */}
             <span className="text-blue-600 text-[8vh] md:text-[12vh] lg:text-[20vh] font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>

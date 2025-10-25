@@ -6,6 +6,7 @@ import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 
 const About = () => {
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
+  const { ref: bottomRef, isVisible: bottomVisible } = useScrollFadeInUp();
 
   return (
     <>
@@ -74,35 +75,42 @@ const About = () => {
           </div>
         </div>
       </section>
-      {/* Colored Blocks at Bottom */}
-      <img
-        src="/hero-blocks.png"
-        alt="Decorative blocks"
-        className="w-full h-20 sm:h-24 object-cover"
-      />
-
-      {/* Scrolling Text Loop */}
-      <div className="w-full -mt-7 mb-10 skew-y-2">
-        <LogoLoop
-          logos={[
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-          ]}
-          speed={80}
-          direction="left"
-          logoHeight={20}
-          gap={40}
-          pauseOnHover={true}
-          className="font-gilroy-bold bg-blue-600 py-5  text-white"
-          ariaLabel="IEDC Summit 2025"
-        />
-      </div>
+       {/* Colored Blocks at Bottom */}
+       <div
+         ref={bottomRef}
+         className={`${
+           bottomVisible ? "fade-in-up-visible" : "fade-in-up-hidden"
+         }`}
+       >
+         <img 
+           src="/hero-blocks.png" 
+           alt="Decorative blocks" 
+           className="w-full h-20 sm:h-24 object-cover"
+         />
+      
+         {/* Scrolling Text Loop */}
+         <div className="w-full -mt-7 mb-10 skew-y-2">
+           <LogoLoop
+             logos={[
+               { text: 'IEDC SUMMIT 2025' },
+               { text: 'IEDC SUMMIT 2025' },
+               { text: 'IEDC SUMMIT 2025' },
+               { text: 'IEDC SUMMIT 2025' },
+               { text: 'IEDC SUMMIT 2025' },
+               { text: 'IEDC SUMMIT 2025' },
+               { text: 'IEDC SUMMIT 2025' },
+               { text: 'IEDC SUMMIT 2025' },
+             ]}
+             speed={80}
+             direction="left"
+             logoHeight={20}
+             gap={40}
+             pauseOnHover={true}
+             className="font-gilroy-bold bg-blue-600 py-5  text-white"
+             ariaLabel="IEDC Summit 2025"
+           />
+         </div>
+       </div>
     </>
   );
 };

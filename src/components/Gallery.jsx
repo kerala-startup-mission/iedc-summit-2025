@@ -48,7 +48,7 @@ const Gallery = () => {
         </div>
 
         {/* Large Video Display */}
-        <div className="w-full h-[200px] sm:h-[280px] md:h-[400px] lg:h-[500px] rounded-2xl overflow-hidden mb-12 shadow-lg">
+        <div className="w-full max-w-4xl h-[15vh] sm:h-[20vh] md:h-[30vh] lg:h-[40vh] rounded-2xl overflow-hidden mb-6 shadow-lg mx-auto flex justify-center">
           {currentSummit.type === 'instagram' ? (
             <iframe
               className="w-full h-full"
@@ -72,19 +72,19 @@ const Gallery = () => {
         </div>
 
         {/* Carousel Controller - Below Video */}
-        <div className="w-full lg:w-[860px] relative bottom-16 h-24 md:h-36 bg-white rounded-2xl border-3 border-blue-600 overflow-hidden flex items-center px-4 md:px-8 mx-auto mb-10">
+        <div className="w-full lg:w-[600px] relative bottom-10 h-16 md:h-24 bg-white rounded-2xl border-3 border-blue-600 overflow-hidden flex items-center px-2 md:px-4 mx-auto mb-12">
           {/* Left Arrow */}
           <button 
             onClick={goToPrevious}
-            className="w-8 md:w-10 h-20 md:h-28 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
+            className="w-5 md:w-7 h-12 md:h-20 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
           >
-            <MdKeyboardArrowLeft className="w-6 md:w-8 h-12 md:h-16 text-white" />
+            <MdKeyboardArrowLeft className="w-4 md:w-6 h-8 md:h-12 text-white" />
           </button>
           
 
           <div className="flex items-center justify-start h-full gap-2 md:gap-2.5 px-3 md:px-5 grow">
             {/* Video Thumbnail - Hidden on Mobile */}
-            <div className="hidden md:flex w-48 h-28 rounded-lg overflow-hidden shrink-0 bg-slate-900 items-center justify-center">
+            <div className="hidden md:flex w-32 h-20 rounded-lg overflow-hidden shrink-0 bg-slate-900 items-center justify-center">
               <img 
                 src={`https://img.youtube.com/vi/${currentSummit.videoId}/0.jpg`}
                 alt="Video thumbnail"
@@ -103,22 +103,19 @@ const Gallery = () => {
             </div>
 
             {/* Year Badge - Hidden on Mobile */}
-            <div className="hidden md:flex w-28 h-28 items-center justify-center bg-zinc-100 rounded-lg shrink-0">
-              <span className="text-slate-900 text-2xl font-light font-gilroy-light">
+            <div className="hidden md:flex w-20 h-20 items-center justify-center bg-zinc-100 rounded-lg shrink-0">
+              <span className="text-slate-900 text-lg font-light font-gilroy-light">
                 {currentSummit.year}
               </span>
             </div>
-
-            {/* Spacers - Hidden on Mobile */}
-            <div className="hidden md:block w-16 h-28 bg-zinc-300 rounded-lg shrink-0" />
           </div>
 
           {/* Right Arrow */}
           <button 
             onClick={goToNext}
-            className="w-8 md:w-10 h-20 md:h-28 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
+            className="w-5 md:w-7 h-12 md:h-20 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
           >
-            <MdNavigateNext className="w-6 md:w-8 h-12 md:h-16 text-white" />
+            <MdNavigateNext className="w-4 md:w-6 h-8 md:h-12 text-white" />
           </button>
         </div>  
       </div>
