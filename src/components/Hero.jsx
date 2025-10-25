@@ -48,15 +48,15 @@ const Hero = () => {
 
           {/* Pricing */}
           <div className="flex items-baseline gap-2 mb-2 animate-fade-in-up" style={{animationDelay: '0.4s'}}>
-            <div className="relative">
-              <div className="text-blue-400 text-2xl font-gilroy-bold opacity-75">999</div>
-              <div className="w-12 h-0.5 border-t-[3px] border-red-600 absolute top-1/2 left-0 -skew-x-12" />
+            <div className="relative inline-block">
+              <div className="text-blue-400 text-2xl font-gilroy-bold opacity-75">₹999</div>
+              <div className="w-16 h-0.5 border-t-[3px] border-red-600 absolute top-1/2 left-0 -translate-y-1/2 -skew-y-10" />
             </div>
-            <div className="text-blue-600 text-3xl font-gilroy-bold">749/-</div>
+            <div className="text-blue-600 text-3xl font-gilroy-bold">₹749/-</div>
           </div>
 
           {/* Early Bird */}
-          <div className="text-blue-400 text-sm font-normal font-gilroy-bold animate-fade-in-up" style={{animationDelay: '0.5s'}}>*early bird discounts available*</div>
+          <div className="text-blue-400 text-sm font-normal font-gilroy-bold animate-fade-in-up" style={{animationDelay: '0.5s'}}>*Be quick, connect more*</div>
         </div>
 
         {/* Spacer for better separation */}
@@ -152,14 +152,14 @@ const Hero = () => {
 
             {/* Amount */}
             <div className="flex items-baseline gap-2 mt-5 lg:mt-8">
-              <div className="text-blue-400 text-2xl lg:text-4xl font-black font-gilroy-bold opacity-75 relative">
-                <div className="w-12 lg:w-16 h-0.5 lg:h-1 border-t-4 border-red-600 absolute top-1/2 left-0 -skew-10" />
-                999
+              <div className="text-blue-400 text-2xl lg:text-4xl font-black font-gilroy-bold opacity-75 relative inline-block">
+                <div className="w-12 lg:w-22 h-0.5 lg:h-1 border-t-4 border-red-600 absolute top-1/2 left-0 -translate-y-1/2 -skew-9" />
+                ₹999
               </div>
-              <div className="text-blue-600 text-3xl lg:text-5xl font-black font-gilroy-bold">749/-</div>
+              <div className="text-blue-600 text-3xl lg:text-5xl font-black font-gilroy-bold">₹749/-</div>
             </div>
             {/* Paragraph */}
-            <div className="text-blue-400 text-base lg:text-xl font-black font-gilroy-bold mt-2">*early bird discounts available*</div>
+            <div className="text-blue-400 text-base lg:text-xl font-black font-gilroy-bold mt-2">*Be quick, connect more*</div>
           </div>
         </div>
 

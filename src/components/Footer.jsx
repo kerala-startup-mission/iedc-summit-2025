@@ -45,7 +45,7 @@ const Footer = () => {
         <hr className="hidden md:block border-gray-800 mb-8" />
 
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           
           {/* Left Column - Kerala Startup Mission */}
           <div className="space-y-6">
@@ -168,7 +168,7 @@ const Footer = () => {
 
             <div className="text-gray-300">
               <p className="font-bold text-white mb-2 font-clash-display">
-                Innovation and Entrepreneurship Development Centre<br />
+                IEDC LBSCEK
               </p>
               <p className="text-sm font-gilroy-light">L.B.S. College of Engineering,</p>
               <p className="text-sm font-gilroy-light">Povval, Muliyar P. O., Kasaragod, Kerala-671542</p>
@@ -238,6 +238,91 @@ const Footer = () => {
                 <li>
                   <a 
                     href="https://www.linkedin.com/company/iedc-lbscek/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-white/10 hover:bg-blue-600 rounded-full flex items-center justify-center transition-colors"
+                  >
+                    <FaLinkedin className="text-white" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Right Column - IEDC CUK */}
+          <div className="space-y-6">
+            <div className="text-gray-300">
+              <p className="font-bold text-white mb-2 font-clash-display">
+                IEDC CUK
+              </p>
+              <p className="text-sm font-gilroy-light">Central University of Kerala, Tejaswini Hills, Periye (PO),</p>
+              <p className="text-sm font-gilroy-light">Kasaragod, Kerala - 671316</p>
+            </div>
+
+            <div className="text-gray-300">
+              <p className="font-bold text-white mb-2 font-clash-display">For Queries</p>
+              <a 
+                href="mailto:iedcsummit@lbscek.ac.in" 
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light"
+              >
+                iedc@cukerala.ac.in
+              </a>
+            </div>
+
+            <div className="text-gray-300">
+              <p className="font-bold text-white mb-2 font-clash-display">IEDC CUK</p>
+              <a 
+                href="mailto:iedc@cukerala.ac.in" 
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors block font-gilroy-light"
+              >
+                iedc@cukerala.ac.in
+              </a>
+              <div className="text-sm font-gilroy-light">
+                <a 
+                  href="tel:+919497295949" 
+                  className="text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  +91 94972 95949
+                </a>
+              </div>
+            </div>
+
+            {/* Social Media - IEDC CUK */}
+            <div>
+              <ul className="flex gap-4">
+                <li>
+                  <a 
+                    href="https://www.facebook.com/mrocukerala/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-white/10 hover:bg-blue-500 rounded-full flex items-center justify-center transition-colors"
+                  >
+                    <FaFacebookF className="text-white" />
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://x.com/cukeralatweet" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-white/10 hover:bg-blue-400 rounded-full flex items-center justify-center transition-colors"
+                  >
+                    <FaTwitter className="text-white" />
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://www.instagram.com/cukerala_official/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-white/10 hover:bg-pink-500 rounded-full flex items-center justify-center transition-colors"
+                  >
+                    <FaInstagram className="text-white" />
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://www.linkedin.com/company/central-university-of-kerala-official/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-white/10 hover:bg-blue-600 rounded-full flex items-center justify-center transition-colors"
