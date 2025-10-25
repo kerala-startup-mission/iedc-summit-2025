@@ -46,8 +46,7 @@ const About = () => {
                     marks the 10th anniversary edition of this flagship event,
                     celebrating a decade of fostering innovation,
                     entrepreneurship, and technological excellence. This two-day
-                    summit invites students, aspiring entrepreneurs, innovators,
-                    and faculty to participate in a vibrant festival of ideas,
+                    summit invites students, aspiring entrepreneurs, innovators, faculty and staff to participate in a vibrant festival of ideas,
                     collaboration, and learning.
                   </p>
                 </div>

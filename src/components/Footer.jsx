@@ -70,7 +70,7 @@ const Footer = () => {
             <div className="text-gray-300">
               <p className="font-bold text-white mb-2 font-clash-display">Kerala Startup Mission | Government of Kerala</p>
               <p className="text-sm font-gilroy-light">G3B, Thejaswini, Technopark Campus</p>
-              <p className="text-sm font-gilroy-light">Kariyavattom, Trivandrum, Kerala 695581</p>
+              <p className="text-sm font-gilroy-light">Kariyavattom, Trivandrum, Kerala-695581</p>
             </div>
 
             <div className="text-gray-300">

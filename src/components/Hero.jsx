@@ -88,7 +88,7 @@ const Hero = () => {
             {/* Label */}
             <div className="flex flex-col items-start justify-center ml-0 gap-0">
               <span className="text-blue-600 text-4xl font-bold font-dimensions-semi-bold leading-none">DAYS</span>
-              <span className="text-blue-600 text-4xl font-dimensions-semi-bold leading-none -mt-2">TO GO</span>
+              <span className="text-blue-600 text-4xl font-dimensions-semi-bold leading-none -mt-2">TO Go</span>
             </div>
           </div>
         </div>
@@ -187,7 +187,7 @@ const Hero = () => {
             {/* Label */}
             <div className="flex flex-col items-start justify-center ml-0 lg:ml-0 gap-0">
               <span className="text-blue-600 text-sm md:text-xl lg:text-7xl font-bold font-dimensions-semi-bold leading-none">DAYS</span>
-              <span className="text-blue-600 text-xs md:text-lg lg:text-7xl font-dimensions-semi-bold leading-none -mt-3">TO GO</span>
+              <span className="text-blue-600 text-xs md:text-lg lg:text-7xl font-dimensions-semi-bold leading-none -mt-3">TO Go</span>
             </div>
           </div>
         </div>
