@@ -1,6 +1,5 @@
 import React from "react";
 import gridImage from "../assets/grid.svg";
-import elipseImage from "../assets/Ellipse3.svg";
 import ellipse_group from "../assets/ellipse_group.svg";
 import LogoLoop from "./LogoLoop";
 import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
@@ -25,23 +24,23 @@ const About = () => {
 
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Rest of the code remains the same */}
-          <div className=" mb-10 md:mb-5 relative">
+          <div className="mb-8 md:mb-5 relative">
             <div className="flex flex-col lg:flex-row lg:gap-12 justify-between text-wrap">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light font-clash-display text-blue-500 md:mb-12 relative z-20">
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-light font-clash-display text-blue-500 mb-4 md:mb-12 relative z-20">
                 About
               </h2>
               {/* Right Side - Description */}
-              <div className="lg:w-2/3 ">
-                <div className="w-full text-justify justify-center ">
-                  <div className="flex flex-col gap-0 mt-38 mb-10 md:hidden">
-                    <div className="w-full text-center justify-center text-black text-3xl font-normal font-clash-display ">
-                      A Decade of Innovation
+              <div className="lg:w-2/3">
+                <div className="w-full text-justify justify-center">
+                  <div className="flex flex-col gap-1 mb-4 md:hidden">
+                    <div className="w-full text-left text-black text-xl font-normal font-clash-display">
+                      Decade of Innovation
                     </div>
-                    <div className="w-full opacity-75 text-center justify-center text-black text-xl font-light font-gilroy-light leading-4 ">
-                      Asia's largest summit for aspiring entrepreneurs
+                    <div className="w-full opacity-75 text-left text-black text-sm font-light font-gilroy-light leading-5">
+                      Asia's largest summit for aspiring<br />entrepreneurs
                     </div>
                   </div>
-                  <span className="text-black text-2xl font-light font-gilroy-light leading-7 ">
+                  <p className="text-black text-sm md:text-2xl font-light font-gilroy-light leading-5 md:leading-7">
                     The IEDC Summit 2025, organised by Kerala Startup Mission
                     and hosted by L.B.S. College of Engineering, Kasaragod,
                     marks the 10th anniversary edition of this flagship event,
@@ -49,15 +48,15 @@ const About = () => {
                     entrepreneurship, and technological excellence. This two-day
                     summit invites students, aspiring entrepreneurs, innovators,
                     and faculty to participate in a vibrant festival of ideas,
-                    collaboration, and learning.{" "}
-                  </span>
+                    collaboration, and learning.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Grid Image */}
-          <div className="flex flex-row justify-between gap-10">
+          <div className="flex flex-row justify-between gap-10 mt-8 md:mt-0">
             <div className="lg:flex flex-col gap-10 mt-40 hidden">
               <div className="w-44 justify-start text-black text-3xl font-normal font-clash-display leading-7">
                 A Decade of Innovation
@@ -66,7 +65,7 @@ const About = () => {
                 Asia's largest summit for aspiring entrepreneurs
               </div>
             </div>
-            <div className="w-full flex justify-end z-10">
+            <div className="w-full flex justify-center md:justify-end z-10">
               <img
                 src={gridImage}
                 alt="IEDC Summit Statistics Grid"

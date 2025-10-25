@@ -41,14 +41,14 @@ const Gallery = () => {
 
       <div className="max-w-7xl mx-auto relative z-20">
         {/* Section Header */}
-        <div className="w-full flex flex-col items-start gap-4 text-left relative z-20">
-          <h2 className="text-blue-500 text-6xl md:text-7xl font-light font-clash-display leading-tight">
-            Previous Summits
+        <div className="w-full flex flex-col items-start gap-4 text-left relative z-20 mb-6">
+          <h2 className="text-blue-500 text-4xl md:text-6xl lg:text-7xl font-light font-clash-display leading-tight">
+            Previous<br className="md:hidden" /> Summits
           </h2>
         </div>
 
         {/* Large Video Display */}
-        <div className="w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden mb-12 shadow-lg">
+        <div className="w-full h-[250px] sm:h-[350px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden mb-12 shadow-lg">
           <iframe
             className="w-full h-full"
             src={`https://www.youtube.com/embed/${currentSummit.videoId}`}

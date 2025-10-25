@@ -29,7 +29,7 @@ const Hero = () => {
         
         {/* Main Content */}
         <div className="px-5 pt-24 pb-20 relative z-10">
-          <h1 className="text-blue-500 text-[42px] font-bold font-clash-display leading-[44px] mb-3">
+          <h1 className="text-blue-500 text-[42px] font-bold font-clash-display leading-11 mb-3">
             IEDC SUMMIT<br />2025
           </h1>
           {/* Location */}
@@ -42,7 +42,7 @@ const Hero = () => {
           </div>
 
           {/* Register Button */}
-          <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-[200px] h-[44px] bg-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-700 transition-colors mb-3 relative z-20">
+          <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-[200px] h-11 bg-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-700 transition-colors mb-3 relative z-20">
             <div className="text-neutral-100 text-lg font-semibold font-clash-display tracking-tight">REGISTER NOW</div>
           </a>
 
