@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-// import About from './components/About';
+import About from './components/About';
 import Highlights from './components/Highlights';
 import Gallery from './components/Gallery';
 import Directions from './components/Directions';
@@ -17,7 +17,7 @@ function App() {
     <div className="App">
           <Navbar />
           <Hero />
-          {/* <About /> */}
+          <About /> 
           <Gallery />
           <Highlights />
           <Directions />
