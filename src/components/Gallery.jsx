@@ -48,7 +48,7 @@ const Gallery = () => {
         </div>
 
         {/* Large Video Display */}
-        <div className="w-full max-w-4xl h-[15vh] sm:h-[20vh] md:h-[30vh] lg:h-[40vh] rounded-2xl overflow-hidden mb-6 shadow-lg mx-auto flex justify-center">
+        <div className="w-full lg:max-w-4xl h-[200px] sm:h-[280px] md:h-[40vh] lg:h-[50vh] rounded-2xl overflow-hidden mb-12 shadow-lg mx-auto">
           {currentSummit.type === 'instagram' ? (
             <iframe
               className="w-full h-full"
@@ -72,7 +72,7 @@ const Gallery = () => {
         </div>
 
         {/* Carousel Controller - Below Video */}
-        <div className="w-full lg:w-[600px] relative bottom-10 h-16 md:h-24 bg-white rounded-2xl border-3 border-blue-600 overflow-hidden flex items-center px-2 md:px-4 mx-auto mb-12">
+       <div className="w-full lg:w-[600px] relative bottom-10 h-16 md:h-24 bg-white rounded-2xl border-3 border-blue-600 overflow-hidden flex items-center px-2 md:px-4 mx-auto mb-20">
           {/* Left Arrow */}
           <button 
             onClick={goToPrevious}
