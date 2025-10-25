@@ -71,6 +71,14 @@ const Footer = () => {
               <p className="font-bold text-white mb-2 font-clash-display">Kerala Startup Mission | Government of Kerala</p>
               <p className="text-sm font-gilroy-light">G3B, Thejaswini, Technopark Campus</p>
               <p className="text-sm font-gilroy-light">Kariyavattom, Trivandrum, Kerala-695581</p>
+              <a 
+                href="https://www.startupmission.in" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light mt-2 inline-block"
+              >
+                www.startupmission.in
+              </a>
             </div>
 
             <div className="text-gray-300">
@@ -172,6 +180,14 @@ const Footer = () => {
               </p>
               <p className="text-sm font-gilroy-light">L.B.S. College of Engineering,</p>
               <p className="text-sm font-gilroy-light">Povval, Muliyar P. O., Kasaragod, Kerala-671542</p>
+              <a 
+                href="https://www.lbscek.ac.in" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light mt-2 inline-block"
+              >
+                www.lbscek.ac.in
+              </a>
             </div>
 
             <div className="text-gray-300">
@@ -257,6 +273,14 @@ const Footer = () => {
               </p>
               <p className="text-sm font-gilroy-light">Central University of Kerala, Tejaswini Hills, Periye (PO),</p>
               <p className="text-sm font-gilroy-light">Kasaragod, Kerala - 671316</p>
+              <a 
+                href="https://www.cukerala.ac.in" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light mt-2 inline-block"
+              >
+                www.cukerala.ac.in
+              </a>
             </div>
 
             <div className="text-gray-300">
