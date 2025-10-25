@@ -76,7 +76,7 @@ const Highlights = () => {
   };
 
   return (
-    <section className="w-full bg-white overflow-hidden relative">
+    <section id="highlights" className="w-full bg-white overflow-hidden relative">
       {/* Header Section */}
       <div className="px-12 pt-12 pb-16 flex items-start justify-between gap-12">
         {/* Left Content */}
