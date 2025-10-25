@@ -65,15 +65,15 @@ const Gallery = () => {
           {/* Left Arrow */}
           <button 
             onClick={goToPrevious}
-            className="w-9 md:w-11 h-24 md:h-32 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 flex-shrink-0"
+            className="w-9 md:w-11 h-24 md:h-32 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
           >
             <MdKeyboardArrowLeft className="w-8 md:w-10 h-16 md:h-20 text-white" />
           </button>
           
 
-          <div className="flex items-center justify-start h-full gap-2 md:gap-2.5 px-3 md:px-5 flex-grow">
+          <div className="flex items-center justify-start h-full gap-2 md:gap-2.5 px-3 md:px-5 grow">
             {/* Video Thumbnail - Hidden on Mobile */}
-            <div className="hidden md:flex w-60 h-32 rounded-lg overflow-hidden flex-shrink-0 bg-slate-900 items-center justify-center">
+            <div className="hidden md:flex w-60 h-32 rounded-lg overflow-hidden shrink-0 bg-slate-900 items-center justify-center">
               <img 
                 src={`https://img.youtube.com/vi/${currentSummit.videoId}/0.jpg`}
                 alt="Video thumbnail"
@@ -82,7 +82,7 @@ const Gallery = () => {
             </div>
 
             {/* Summit Info */}
-            <div className="flex-grow flex flex-col justify-center">
+            <div className="grow flex flex-col justify-center">
               <h3 className="text-slate-900 text-sm md:text-lg font-bold font-gilroy-bold leading-snug">
                 {currentSummit.title}
               </h3>
@@ -92,20 +92,20 @@ const Gallery = () => {
             </div>
 
             {/* Year Badge - Hidden on Mobile */}
-            <div className="hidden md:flex w-36 h-32 items-center justify-center bg-zinc-100 rounded-lg flex-shrink-0">
+            <div className="hidden md:flex w-36 h-32 items-center justify-center bg-zinc-100 rounded-lg shrink-0">
               <span className="text-slate-900 text-3xl font-light font-gilroy-light">
                 {currentSummit.year}
               </span>
             </div>
 
             {/* Spacers - Hidden on Mobile */}
-            <div className="hidden md:block w-20 h-32 bg-zinc-300 rounded-lg flex-shrink-0" />
+            <div className="hidden md:block w-20 h-32 bg-zinc-300 rounded-lg shrink-0" />
           </div>
 
           {/* Right Arrow */}
           <button 
             onClick={goToNext}
-            className="w-9 md:w-11 h-24 md:h-32 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 flex-shrink-0"
+            className="w-9 md:w-11 h-24 md:h-32 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shrink-0"
           >
             <MdNavigateNext className="w-8 md:w-10 h-16 md:h-20 text-white" />
           </button>

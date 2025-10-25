@@ -68,32 +68,32 @@ const Footer = () => {
             </div>
 
             <div className="text-gray-300">
-              <p className="font-bold text-white mb-2">Kerala Startup Mission | Government of Kerala</p>
-              <p className="text-sm">G3B, Thejaswini, Technopark Campus</p>
-              <p className="text-sm">Kariyavattom, Trivandrum, Kerala 695581</p>
+              <p className="font-bold text-white mb-2 font-clash-display">Kerala Startup Mission | Government of Kerala</p>
+              <p className="text-sm font-gilroy-light">G3B, Thejaswini, Technopark Campus</p>
+              <p className="text-sm font-gilroy-light">Kariyavattom, Trivandrum, Kerala 695581</p>
             </div>
 
             <div className="text-gray-300">
-              <p className="font-bold text-white mb-2">For Queries</p>
+              <p className="font-bold text-white mb-2 font-clash-display">For Queries</p>
               <a 
                 href="mailto:iedckerala@startupmission.in" 
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light"
               >
                 iedckerala@startupmission.in
               </a>
             </div>
 
             <div className="text-gray-300">
-              <p className="font-bold text-white mb-2">Adarsh V</p>
+              <p className="font-bold text-white mb-2 font-clash-display">Adarsh V</p>
               <a 
                 href="mailto:iedckerala@startupmission.in" 
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors block"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors block font-gilroy-light"
               >
                 iedckerala@startupmission.in
               </a>
               <a 
                 href="tel:+918921148007" 
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light"
               >
                 +91 89211 48007
               </a>
@@ -167,32 +167,32 @@ const Footer = () => {
             </div>
 
             <div className="text-gray-300">
-              <p className="font-bold text-white mb-2">
+              <p className="font-bold text-white mb-2 font-clash-display">
                 Innovation and Entrepreneurship Development Centre<br />
               </p>
-              <p className="text-sm">L.B.S. College of Engineering,</p>
-              <p className="text-sm">Povval, Muliyar P. O., Kasaragod, Kerala-671542</p>
+              <p className="text-sm font-gilroy-light">L.B.S. College of Engineering,</p>
+              <p className="text-sm font-gilroy-light">Povval, Muliyar P. O., Kasaragod, Kerala-671542</p>
             </div>
 
             <div className="text-gray-300">
-              <p className="font-bold text-white mb-2">For Queries</p>
+              <p className="font-bold text-white mb-2 font-clash-display">For Queries</p>
               <a 
                 href="mailto:iedcsummit@lbscek.ac.in" 
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light"
               >
                 iedcsummit@lbscek.ac.in
               </a>
             </div>
 
             <div className="text-gray-300">
-              <p className="font-bold text-white mb-2">IEDC LBSCEK</p>
+              <p className="font-bold text-white mb-2 font-clash-display">IEDC LBSCEK</p>
               <a 
                 href="mailto:iedc@lbscek.ac.in" 
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors block"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors block font-gilroy-light"
               >
                 iedc@lbscek.ac.in
               </a>
-              <div className="text-sm">
+              <div className="text-sm font-gilroy-light">
                 <a 
                   href="tel:+919946760222" 
                   className="text-blue-400 hover:text-blue-300 transition-colors"
@@ -252,7 +252,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-6 border-t border-gray-800">
-          <p className="text-center text-gray-500 text-sm">
+          <p className="text-center text-gray-500 text-sm font-gilroy-light">
             © 2025 Kerala Startup Mission. All Rights Reserved.
           </p>
         </div>

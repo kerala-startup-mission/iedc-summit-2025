@@ -9,46 +9,46 @@ const Hero = () => {
         {/* Decorative Circles for Mobile */}
         <div className="w-64 h-64 left-[-29px] top-[688px] absolute opacity-50 rounded-full border-[0.50px] border-blue-600" />
         <img src="/Ellipse3.svg" alt="Decorative" className="w-80 h-80 left-[102px] top-[428px] absolute opacity-50" />
-
-        {/* Logo */}
-        <img className="w-16 h-16 left-[15px] top-[18px] absolute" src="/iedc-summit-25-logo.png" alt="IEDC Badge" />
         
-        {/* Menu Button */}
-        <div className="left-[369px] top-[31px] absolute justify-center text-blue-600 text-xl font-normal font-gilroy-bold leading-8">Menu</div>
-        <div className="w-9 h-9 left-[376px] top-[30px] absolute rounded-full border-[0.38px] border-blue-600" />
-
         {/* Main Content */}
-        <div className="left-[59px] top-[153px] absolute justify-center text-blue-500 text-5xl font-normal font-clash-display leading-10">
-          IEDC SUMMIT <br/>2025<br/>
+        <div className="left-[59px] top-[153px] absolute justify-center text-blue-500 text-5xl font-bold font-clash-display leading-10">
+          IEDC SUMMIT <br />2025<br />
         </div>
 
         {/* Location */}
-        <div className="w-32 left-[59px] top-[253px] absolute justify-center text-blue-400 text-2xl font-normal font-clash-display leading-5">Kasaragod</div>
+        <div className="w-32 left-[59px] top-[275px] absolute justify-center text-blue-400 text-2xl font-normal font-clash-display leading-5">Kasaragod</div>
 
         {/* Date */}
-        <div className="w-44 h-10 left-[59px] top-[275px] absolute inline-flex justify-start items-center gap-6">
-          <div className="w-8 h-8 rounded-full border-[0.32px] border-blue-600" />
-          <div className="justify-center text-blue-500 text-2xl font-normal font-gilroy-bold leading-6">22 Dec 2025</div>
+        <div className="h-10 left-[59px] top-[300px] absolute inline-flex justify-start items-center gap-6">
+          <div className="justify-center text-blue-500 text-2xl font-normal font-gilroy-bold leading-6 relative z-10">22 Dec 2025</div>
+          <div className="w-8 h-8 rounded-full border-[0.32px] border-blue-600 absolute left-12 z-0" />
         </div>
 
-        {/* Pricing */}
-        <div className="left-[60px] top-[401px] absolute opacity-75 justify-center text-blue-400 text-3xl font-normal font-gilroy-black leading-10">999</div>
-        <div className="left-[120px] top-[392px] absolute justify-center text-blue-600 text-4xl font-normal font-gilroy-black leading-[55px]">749/-</div>
-        <div className="w-14 h-4 left-[59px] top-[414px] absolute opacity-75 outline-2 outline-offset-[-1px] outline-red-600" />
-
-        {/* Early Bird */}
-        <div className="left-[59px] top-[438px] absolute justify-center text-blue-400 text-lg font-normal font-gilroy-black leading-6">*early bird discounts available*</div>
-
         {/* Register Button */}
-        <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-56 h-12 left-[59px] top-[324px] absolute bg-blue-600 rounded-2xl flex items-center justify-center hover:bg-blue-700 transition-colors">
+        <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-56 h-12 left-[59px] top-[350px] absolute bg-blue-600 rounded-2xl flex items-center justify-center hover:bg-blue-700 transition-colors">
           <div className="text-neutral-100 text-2xl font-medium font-clash-display leading-8 tracking-tight">REGISTER NOW</div>
         </a>
+        {/* Pricing */}
+        <div className="left-[60px] top-[401px] absolute opacity-75 justify-center text-blue-400 text-3xl font-gilroy-bold leading-10">999</div>
+        <div className="left-[120px] top-[392px] absolute justify-center text-blue-600 text-4xl font-normal font-gilroy-bold leading-[55px]">749/-</div>
+        <div className="w-14 h-4 left-[59px] top-[420px] absolute -skew-10 border-t-4 border-red-600" />
+
+        {/* Early Bird */}
+        <div className="left-[59px] top-[438px] absolute justify-center text-blue-400 text-lg font-normal font-gilroy-bold leading-6">*early bird discounts available*</div>
+
 
         {/* Colored Blocks at Bottom */}
         <img 
           src="/hero-blocks.png" 
           alt="Decorative blocks" 
-          className="w-full h-16 left-0 top-[884px] absolute object-cover"
+          className="w-full h-16 left-0 bottom-0 absolute object-cover z-10"
+        />
+
+        {/* Hero Background Image - Mobile */}
+        <img
+          src="/hero-img.png" 
+          alt="Decorative image"
+          className="md:hidden w-full h-24 left-0 bottom-16 absolute object-cover z-0"
         />
       </div>
 

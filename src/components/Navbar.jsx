@@ -56,7 +56,7 @@ const Navbar = () => {
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="hidden md:flex fixed top-0 left-0 right-0 w-full h-24 items-center justify-center z-[1000]">
+      <nav className="hidden md:flex fixed top-0 left-0 right-0 w-full h-24 items-center justify-center z-1000">
         {/* Logo and Navigation Links Container */}
         <div className={`flex items-center gap-8 transition-all duration-300 ${isScrolled ? 'bg-white rounded-lg px-6 py-3' : 'bg-transparent'}`}>
           {/* Logo */}
@@ -101,7 +101,7 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Navigation */}
-      <div className="md:hidden fixed top-0 left-0 right-0 w-full z-[1000] p-4">
+      <div className="md:hidden fixed top-0 left-0 right-0 w-full z-1000 p-4">
         <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'bg-white rounded-lg px-4 py-2' : 'bg-transparent'}`}>
           <img 
             src={logo} 

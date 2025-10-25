@@ -94,7 +94,7 @@ const Highlights = () => {
         </div>
 
         {/* Right Cards Grid */}
-        <div className="grid grid-cols-2 gap-2 md:gap-3 lg:gap-4 w-full lg:w-150 lg:flex-shrink-0" style={{ gridAutoColumns: 'minmax(0, 1fr)' }}>
+        <div className="grid grid-cols-2 gap-2 md:gap-3 lg:gap-4 w-full lg:w-150 lg:shrink-0" style={{ gridAutoColumns: 'minmax(0, 1fr)' }}>
           <HighlightCard item={highlights[0]} position="engineering" />
           <HighlightCard item={highlights[1]} position="medical" />
           <HighlightCard item={highlights[2]} position="arts" />
