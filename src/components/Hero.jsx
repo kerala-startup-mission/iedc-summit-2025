@@ -79,7 +79,7 @@ const Hero = () => {
         />
 
         {/* Countdown Badge - Mobile */}
-        <div className="absolute bottom-30 left-8">
+        <div className="absolute bottom-30 left-8 animate-fade-in-up" style={{animationDelay: '0.9s'}}>
           <div className="flex items-center gap-0">
             {/* Days - First digit */}
             <span className="text-blue-600 text-8xl font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
