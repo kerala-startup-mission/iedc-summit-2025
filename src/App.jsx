@@ -4,7 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Highlights from './components/Highlights';
 import Gallery from './components/Gallery';
-import Directions from './components/Directions';
+// import Directions from './components/Directions';
 import Footer from './components/Footer';
 
 import "./fonts/ClashDisplay-Variable.ttf";
@@ -20,7 +20,7 @@ function App() {
           <About /> 
           <Gallery />
           <Highlights />
-          <Directions />
+          {/* <Directions /> */}
           <Footer />
     </div>
   );
