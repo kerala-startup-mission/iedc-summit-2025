@@ -57,6 +57,14 @@ const Hero = () => {
 
           {/* Early Bird */}
           <div className="text-blue-400 text-sm font-normal font-gilroy-bold animate-fade-in-up" style={{animationDelay: '0.5s'}}>*Be quick, connect more*</div>
+          
+          {/* Coupon Code */}
+          <div className="mt-2 animate-fade-in-up" style={{animationDelay: '0.6s'}}>
+            <div className="inline-block px-3 py-1 bg-blue-100 border-2 border-blue-500 rounded-lg">
+              <span className="text-blue-600 text-xs font-bold font-gilroy-bold">Code: </span>
+              <span className="text-blue-700 text-xs font-black font-gilroy-bold">EARLYBIRD</span>
+            </div>
+          </div>
         </div>
 
         {/* Spacer for better separation */}
@@ -167,6 +175,14 @@ const Hero = () => {
             </div>
             {/* Paragraph */}
             <div className="text-blue-400 text-[1.2vh] lg:text-xl font-black font-gilroy-bold leading-3">*Be quick, connect more*</div>
+            
+            {/* Coupon Code */}
+            <div className="mt-[1vh] lg:mt-[1.5vh] animate-fade-in-up" style={{animationDelay: '0.6s'}}>
+              <div className="inline-block px-3 lg:px-4 py-1 lg:py-2 bg-blue-100 border-2 border-blue-500 rounded-lg">
+                <span className="text-blue-600 text-[1vh] lg:text-base font-bold font-gilroy-bold">Code: </span>
+                <span className="text-blue-700 text-[1.1vh] lg:text-lg font-black font-gilroy-bold">EARLYBIRD</span>
+              </div>
+            </div>
           </div>
         </div>
 

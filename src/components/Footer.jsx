@@ -72,12 +72,12 @@ const Footer = () => {
               <p className="text-sm font-gilroy-light">G3B, Thejaswini, Technopark Campus</p>
               <p className="text-sm font-gilroy-light">Kariyavattom, Trivandrum, Kerala-695581</p>
               <a 
-                href="https://www.startupmission.in" 
+                href="https://www.startupmission.kerala.gov.in" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-sm text-blue-400 hover:text-blue-300 transition-colors font-gilroy-light mt-2 inline-block"
               >
-                www.startupmission.in
+                www.startupmission.kerala.gov.in
               </a>
             </div>
 
