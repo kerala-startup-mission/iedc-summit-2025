@@ -66,10 +66,10 @@ const Highlights = () => {
         
         {/* Content */}
         <div className="relative z-10">
-          <h3 className="text-base md:text-xl lg:text-2xl font-semibold font-clash-display text-white mb-1 md:mb-3 lg:mb-4 text-left">
+          <h3 className="text-base md:text-xl lg:text-2xl font-semibold font-clash-display text-white mb-1 md:mb-3 lg:mb-4 text-left drop-shadow-lg">
             {item.title}
           </h3>
-          <p className="text-[10px] md:text-sm text-white font-clash-display leading-snug text-left">
+          <p className="text-[10px] md:text-sm text-white font-clash-display leading-snug text-left drop-shadow-lg">
             {item.description}
           </p>
         </div>

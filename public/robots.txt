@@ -1,0 +1,22 @@
+# Robots.txt for IEDC Summit 2025
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Specific rules for Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Specific rules for Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Disallow specific paths if needed
+# Disallow: /admin/
+# Disallow: /private/
+
+# Sitemap location (update with your actual sitemap URL)
+Sitemap: https://iedcsummit.in/sitemap.xml
