@@ -42,8 +42,9 @@ const Hero = () => {
           </div>
 
           {/* Register Button */}
-          <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-[200px] h-11 bg-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-700 transition-colors mb-3 relative z-20 animate-scale-in" style={{animationDelay: '0.3s'}}>
-            <div className="text-neutral-100 text-lg font-semibold font-clash-display tracking-tight">REGISTER NOW</div>
+          <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-[200px] h-11 rounded-xl flex items-center justify-center relative overflow-hidden group hover:shadow-lg transition-shadow mb-3 z-20 animate-scale-in" style={{backgroundImage: 'url(/hero-blocks.png)', backgroundSize: 'cover', backgroundPosition: 'center'}} animationDelay="0.3s">
+            <div className="absolute inset-0 bg-blue-600 opacity-70 group-hover:opacity-60 transition-opacity duration-300"></div>
+            <div className="text-neutral-100 text-lg font-semibold font-clash-display tracking-tight relative z-10">REGISTER NOW</div>
           </a>
 
           {/* Pricing */}
@@ -150,9 +151,11 @@ const Hero = () => {
               href="https://tickets.startupmission.in/iedc-summit-2025" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="px-8 lg:px-12 py-3 lg:py-4 bg-blue-600 rounded-[29px] flex items-center justify-center mt-[2vh] lg:mt-[3vh] hover:bg-blue-700 transition-colors duration-300 inline-block"
+              className="px-8 lg:px-12 py-3 lg:py-4 rounded-[29px] flex items-center justify-center mt-[2vh] lg:mt-[3vh] transition-colors duration-300 relative overflow-hidden group inline-block"
+              style={{backgroundImage: 'url(/hero-blocks.png)', backgroundSize: 'cover', backgroundPosition: 'center'}}
             >
-              <div className="text-white text-[2.5vh] lg:text-[3.5vh] font-normal font-clash-display">
+              <div className="absolute inset-0 bg-blue-600 opacity-40 group-hover:opacity-20 transition-opacity duration-300"></div>
+              <div className="text-white text-[2.5vh] lg:text-[3.5vh] font-normal font-clash-display relative z-10">
                 REGISTER NOW
               </div>
             </a>
@@ -187,13 +190,13 @@ const Hero = () => {
         <div className="absolute bottom-[10vh] md:bottom-[10vh] lg:bottom-[23vh] right-[5%] lg:right-[40%] animate-fade-in-up" style={{animationDelay: '0.9s'}}>
           <div className="flex items-center gap-0 lg:gap-1">
             {/* Days - First digit */}
-            <span className="text-blue-600 text-[8vh] md:text-[12vh] lg:text-[20vh] font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
+            <span className="text-blue-600 text-[7vh] md:text-[10vh] lg:text-[12vh] font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
             {/* Days - Second digit */}
-            <span className="text-blue-600 text-[8vh] md:text-[12vh] lg:text-[20vh] font-bold font-dimensions-semi-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
+            <span className="text-blue-600 text-[8vh] md:text-[12vh] lg:text-[12vh] font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
             {/* Label */}
             <div className="flex flex-col items-start justify-center ml-0 lg:ml-0 gap-0">
-              <span className="text-blue-600 text-[1.5vh] md:text-[2vh] lg:text-[7vh] font-bold font-dimensions-semi-bold leading-none">DAYS</span>
-              <span className="text-blue-600 text-[1.2vh] md:text-[1.8vh] lg:text-[7vh] font-dimensions-semi-bold leading-none -mt-[0.5vh]">TO Go</span>
+              <span className="text-blue-600 text-[1.5vh] md:text-[2vh] lg:text-[5vh] font-bold font-gilroy-bold leading-none">DAYS</span>
+              <span className="text-blue-600 text-[1.2vh] md:text-[1.8vh] lg:text-[4vh] font-bold font-gilroy-bold leading-none -mt-[0.5vh]">TO Go</span>
             </div>
           </div>
         </div>

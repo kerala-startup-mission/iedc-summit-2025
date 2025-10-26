@@ -1,4 +1,5 @@
 ﻿import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import logo from '/iedc-summit-25-logo.png';
 import ellipse1 from '/Ellipse1.svg';
 
@@ -60,11 +61,16 @@ const Navbar = () => {
         {/* Logo and Navigation Links Container */}
         <div className={`flex items-center gap-8 transition-all duration-300 ${isScrolled ? 'bg-white rounded-lg px-6 py-3' : 'bg-transparent'}`}>
           {/* Logo */}
-          <img 
-            src={logo} 
-            alt="IEDC Logo" 
-            className="w-16 h-16 object-contain"
-          />
+          <button
+            onClick={() => handleNavClick('Home', '#home')}
+            className="cursor-pointer hover:opacity-80 transition-opacity bg-none border-none p-0"
+          >
+            <img 
+              src={logo} 
+              alt="IEDC Logo" 
+              className="w-16 h-16 object-contain"
+            />
+          </button>
 
           {/* Navigation Links */}
           <div className="inline-flex justify-start items-center gap-8">
@@ -89,6 +95,27 @@ const Navbar = () => {
               </div>
             ))}
 
+
+            {/* Be Our Sponsor Link */}
+            <div className="relative">
+              <Link 
+                to="/be-our-sponsor"
+                className="pb-px inline-flex flex-col justify-start items-start group cursor-pointer"
+              >
+                <div className={`justify-center text-blue-600 text-lg font-bold font-Gilroy leading-7 hover:opacity-100 transition-opacity ${activeSection === 'Be Our Sponsor' ? 'opacity-100' : 'opacity-50'}`}>
+                  Be Our Sponsor
+                </div>
+              </Link>
+              {/* Active Indicator */}
+              {activeSection === 'Be Our Sponsor' && (
+                <img 
+                  src={ellipse1} 
+                  alt="Active indicator" 
+                  className="w-8 h-8 absolute top-0 right-2"
+                />
+              )}
+            </div>
+
             {/* Register Button */}
             <a 
               href="https://tickets.startupmission.in/iedc-summit-2025"
@@ -103,11 +130,19 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       <div className="md:hidden fixed top-0 left-0 right-0 w-full z-1000 p-4 bg-white">
         <div className="flex items-center justify-between">
-          <img 
-            src={logo} 
-            alt="IEDC Logo" 
-            className="w-16 h-16 object-contain"
-          />
+          <button
+            onClick={() => {
+              handleNavClick('Home', '#home');
+              setIsMobileMenuOpen(false);
+            }}
+            className="cursor-pointer hover:opacity-80 transition-opacity bg-none border-none p-0"
+          >
+            <img 
+              src={logo} 
+              alt="IEDC Logo" 
+              className="w-16 h-16 object-contain"
+            />
+          </button>
           
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -147,6 +182,12 @@ const Navbar = () => {
             >
               REGISTER NOW
             </a>
+            <Link
+              to="/be-our-sponsor"
+              className="block w-full bg-blue-600 text-white text-lg font-bold py-2 text-center rounded-lg hover:bg-blue-700 transition-all duration-300 mt-2"
+            >
+              BE OUR SPONSOR
+            </Link>
           </div>
         )}
       </div>
