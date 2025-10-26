@@ -7,7 +7,7 @@ const Hero = () => {
 
   useEffect(() => {
     const calculateDaysLeft = () => {
-      const eventDate = new Date('2025-12-22').getTime();
+      const eventDate = new Date('2025-12-22T00:00:00').getTime();
       const today = new Date().getTime();
       const timeLeft = eventDate - today;
       const days = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
@@ -15,7 +15,7 @@ const Hero = () => {
     };
 
     calculateDaysLeft();
-    const timer = setInterval(calculateDaysLeft, 1000 * 60 * 60); // Update every hour
+    const timer = setInterval(calculateDaysLeft, 1000); // Update every sec
     return () => clearInterval(timer);
   }, []);
 
