@@ -11,10 +11,9 @@ export const useScrollFadeInUp = () => {
         const windowHeight = window.innerHeight;
 
         // Element is visible when it enters the viewport (bottom 80% of screen)
+        // Only set to true on scroll down, never set back to false
         if (rect.bottom > windowHeight * 0.2 && rect.top < windowHeight) {
           setIsVisible(true);
-        } else {
-          setIsVisible(false);
         }
       }
     };
