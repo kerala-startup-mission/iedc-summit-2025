@@ -43,7 +43,7 @@ const Hero = () => {
 
           {/* Register Button */}
           <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-[200px] h-11 rounded-xl flex items-center justify-center relative overflow-hidden group hover:shadow-lg transition-shadow mb-3 z-20 animate-scale-in" style={{backgroundImage: 'url(/hero-blocks.png)', backgroundSize: 'cover', backgroundPosition: 'center', animationDelay: '0.3s'}}>
-            <div className="absolute inset-0 bg-blue-600 opacity-70 group-hover:opacity-60 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 bg-violet-600 group-hover:bg-violet-800 transition-bg-color duration-300"></div>
             <div className="text-neutral-100 text-lg font-semibold font-clash-display tracking-tight relative z-10">REGISTER NOW</div>
           </a>
 
@@ -88,7 +88,7 @@ const Hero = () => {
         />
 
         {/* Countdown Badge - Mobile */}
-        <div className="absolute bottom-30 left-8 animate-fade-in-up" style={{animationDelay: '0.9s'}}>
+        <div className="absolute bottom-30 left-5 animate-fade-in-up" style={{animationDelay: '0.9s'}}>
           <div className="flex items-center gap-0">
             {/* Days - First digit */}
             <span className="text-blue-600 text-5xl font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
@@ -96,15 +96,15 @@ const Hero = () => {
             <span className="text-blue-600 text-5xl font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
             {/* Label */}
             <div className="flex flex-col items-start justify-center ml-0 gap-0">
-              <span className="text-blue-600 text-2xl font-bold font-gilroy-bold leading-none">DAYS</span>
-              <span className="text-blue-600 text-2xl font-gilroy-bold leading-none">TO GO</span>
+              <span className="text-blue-600 text-xl font-bold font-gilroy-bold leading-none">DAYS</span>
+              <span className="text-blue-600 text-xl font-gilroy-bold leading-none">TO GO</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Scrolling Text Loop - At Blocks Level */}
-      <div className="w-full -skew-y-2 absolute bottom-10 left-0 z-10 md:absolute md:bottom-12 md:left-0">
+      <div className="w-full -skew-y-2 absolute bottom-10 left-0 z-10 md:absolute md:bottom-[6vh] lg:bottom-[5vh] md:left-0">
         <LogoLoop
           logos={[
             { text: 'IEDC SUMMIT 2025' },
@@ -135,7 +135,7 @@ const Hero = () => {
         <img src="/Ellipse3.svg" alt="Decorative circle 4" className="w-1/3 absolute left-130 bottom-20 lg:bottom-30 opacity-25 animate-fade-in-up" style={{animationDelay: '0.4s'}} />
 
         {/* Main Content Container */}
-        <div className="w-1/2 absolute top-[6vh] lg:top-[13vh] xl:top-[25vh] left-[10%] flex flex-col gap-3 pb-40 animate-fade-in-down" style={{animationDelay: '0.5s'}}>
+        <div className="w-1/2 absolute top-[6vh] md:top-[25vh] lg:top-[13vh] xl:top-[25vh] left-[10%] flex flex-col gap-3 pb-40 animate-fade-in-down" style={{animationDelay: '0.5s'}}>
           {/* Title with Logo */}
           <div className="relative">
             <h1 className="text-blue-500 text-[5vh] lg:text-[6vh] xl:text-[7vh] font-semibold drop-shadow-[0px_2px_19px_rgba(37,99,235,0.10)] font-clash-display leading-15">
@@ -143,7 +143,7 @@ const Hero = () => {
             </h1>
 
             {/* Logo - Top Right of Title */}
-            <img className="w-[2vh] lg:w-[15vh] h-auto absolute -top-[3vh] lg:-top-[8vh] left-[8vh] lg:left-[20vh] animate-scale-in" style={{animationDelay: '0.6s'}} src="/iedc-summit-25-logo.png" alt="IEDC Badge" />
+            <img className="w-[2vh] md:w-[10vh] lg:w-[15vh] h-auto absolute -top-[3vh]  lg:-top-[8vh] left-[8vh] md:left-[12vh] lg:left-[20vh] animate-scale-in" style={{animationDelay: '0.6s'}} src="/iedc-summit-25-logo.png" alt="IEDC Badge" />
 
             {/* Location */}
             <div className="text-[#597fba] text-[2vh] lg:text-[3vh] font-semibold font-gilroy-medium">Kasaragod</div>
@@ -161,7 +161,7 @@ const Hero = () => {
               rel="noopener noreferrer" 
               className="px-8 lg:px-12 py-3 lg:py-4 rounded-[29px] flex items-center justify-center mt-[2vh]  transition-colors duration-300 relative overflow-hidden group inline-block"
             >
-              <div className="absolute inset-0 bg-violet-600 group-hover:bg-violet-950 transition-bg-color duration-300"></div>
+              <div className="absolute inset-0 bg-violet-600 group-hover:bg-violet-800 transition-bg-color duration-300"></div>
               <div className="text-white text-[2.5vh] lg:text-[3.5vh] font-normal font-clash-display relative z-10">
                 REGISTER NOW
               </div>
@@ -192,26 +192,26 @@ const Hero = () => {
         <img 
           src="/hero-blocks.png" 
           alt="Decorative blocks" 
-          className="w-full h-16 lg:h-24 absolute bottom-20 left-0 object-cover animate-fade-in-up" style={{animationDelay: '0.7s'}}
+          className="w-full h-16 lg:h-[10vh] absolute bottom-0 lg:bottom-[9vh] left-0 object-cover animate-fade-in-up" style={{animationDelay: '0.7s'}}
         />
 
         {/* Hero Background Image - Aligned Left and Scaled */}
        <img
             src="/hero-img.png" 
             alt="Decorative blocks"
-            className="h-[50vh] lg:h-[70vh] xl:h-[90vh] absolute bottom-[8%] right-[1%] object-contain animate-slide-in-right" style={{animationDelay: '0.8s'}}/>
+            className="h-[50vh] lg:h-[70vh] xl:h-[90vh] absolute bottom-[1vh] lg:bottom-[8%] right-[1%] object-contain animate-slide-in-right" style={{animationDelay: '0.8s'}}/>
 
         {/* Countdown Badge - Near Hero Image */}
-        <div className="absolute bottom-[10vh] md:bottom-[10vh] lg:bottom-[23vh] right-[5%] lg:right-[40%] animate-fade-in-up" style={{animationDelay: '0.9s'}}>
+        <div className="absolute bottom-[10vh] md:bottom-[15vh] lg:bottom-[23vh] right-[5%] md:right-[50%] lg:right-[40%] animate-fade-in-up" style={{animationDelay: '0.9s'}}>
           <div className="flex items-center gap-0 lg:gap-1">
             {/* Days - First digit */}
             <span className="text-blue-600 text-[7vh] md:text-[10vh] lg:text-[12vh] font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
             {/* Days - Second digit */}
-            <span className="text-blue-600 text-[8vh] md:text-[12vh] lg:text-[12vh] font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
+            <span className="text-blue-600 text-[7vh] md:text-[10vh] lg:text-[12vh] font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
             {/* Label */}
             <div className="flex flex-col items-start justify-center ml-0 lg:ml-0 gap-0">
-              <span className="text-blue-600 text-[1.5vh] md:text-[2vh] lg:text-[5vh] font-bold font-gilroy-bold leading-none">DAYS</span>
-              <span className="text-blue-600 text-[1.2vh] md:text-[1.8vh] lg:text-[4vh] font-bold font-gilroy-bold leading-none -mt-[0.5vh]">TO GO</span>
+              <span className="text-blue-600 text-[1.5vh] md:text-[4vh] lg:text-[5vh] font-bold font-gilroy-bold leading-none">DAYS</span>
+              <span className="text-blue-600 text-[1.2vh] md:text-[4vh] lg:text-[4vh] font-bold font-gilroy-bold leading-none -mt-[0.5vh]">TO GO</span>
             </div>
           </div>
         </div>
