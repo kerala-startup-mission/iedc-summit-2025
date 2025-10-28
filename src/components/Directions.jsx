@@ -21,7 +21,6 @@ const Directions = () => {
       airports: [
         { name: 'Mangaluru International Airport', distance: 'Approx 71km away' },
         { name: 'Kannur International Airport', distance: 'Approx 115km away' },
-        { name: 'Calicut International Airport', distance: 'Approx 210km away' },
       ],
       note: 'From the Airport choose train / bus / taxi'
     },
@@ -49,7 +48,6 @@ const Directions = () => {
       airports: [
         { name: 'Mangaluru International Airport', distance: 'Approx 83km away' },
         { name: 'Kannur International Airport', distance: 'Approx 99km away' },
-        { name: 'Calicut International Airport', distance: 'Approx 192km away' },
       ],
       note: 'From the Airport choose train / bus / taxi'
     },
@@ -57,7 +55,7 @@ const Directions = () => {
       title: 'For those arriving by train',
       stations: [
         { name: 'Kanhangad Railway Station', distance: 'Approx 11.4kms away', transport: 'By State/Line Bus' },
-        { name: 'Kasaragod Railway Station', distance: 'Approx 256kms away', transport: 'by city bus / direct auto taxi' },
+        { name: 'Kasaragod Railway Station', distance: 'Approx 30kms away', transport: 'by city bus / direct auto taxi' },
       ]
     },
     bus: {
@@ -115,14 +113,30 @@ const Directions = () => {
           {/* Left Column - Content */}
           <div>
             <div className="mb-6">
-              <h3 className="text-2xl md:text-3xl font-clash-display text-gray-800 mb-4">
-                How to Reach {activeCollege === 'lbs' ? 'LBS Kasaragod' : 'CUK'}
-              </h3>
+              <div className="mb-4">
+                <h3 className="text-2xl md:text-3xl font-clash-display text-gray-800 mb-2">
+                  How to Reach {activeCollege === 'lbs' ? 'LBS Kasaragod' : 'CUK'}
+                </h3>
+                <div className="text-sm text-gray-600 font-gilroy-light space-y-1">
+                  <p>
+                    <span className="font-gilroy-medium text-gray-700">Venue: </span>
+                    {activeCollege === 'lbs' 
+                      ? 'IEDC Summit 2025' 
+                      : "Nodal Officer's Meet/Founders Meet 34.0"}
+                  </p>
+                  <p>
+                    <span className="font-gilroy-medium text-gray-700">Date: </span>
+                    {activeCollege === 'lbs' 
+                      ? '22-Dec-2025' 
+                      : '21-Dec-2025'}
+                  </p>
+                </div>
+              </div>
               <a 
                 href={activeCollege === 'lbs' ? 'https://maps.app.goo.gl/25U116tE8YQsnNtn6' : 'https://maps.app.goo.gl/zhfTwny2aWRhLv9a7'} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-clash-display rounded-lg transition-colors mb-6 text-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-clash-display rounded-lg transition-colors text-sm"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
