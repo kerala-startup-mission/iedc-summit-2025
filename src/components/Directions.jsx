@@ -109,7 +109,7 @@ const Directions = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8">
           {/* Left Column - Content */}
           <div>
             <div className="mb-6">
@@ -214,25 +214,6 @@ const Directions = () => {
                   </>
                 );
               })()}
-            </div>
-          </div>
-
-          {/* Right Column - Map */}
-          <div>
-            <div className="rounded-2xl overflow-hidden shadow-[0px_4px_15px_0px_rgba(37,99,235,0.15)] border border-gray-200 h-full min-h-[400px] md:min-h-[550px]">
-              <iframe 
-                src={activeCollege === 'lbs' 
-                  ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3895.1816927493364!2d75.07822077573482!3d12.504113124953854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba4846bda0b9525%3A0x1a6965b115fbfb96!2sLBS%20College%20of%20Engineering!5e0!3m2!1sen!2sin!4v1760623210495!5m2!1sen!2sin"
-                  : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3896.851046072902!2d75.08909177554526!3d12.392902727300573!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba47b031dc7334f%3A0xffe04fb35cc41116!2sCentral%20University%20of%20Kerala%20(CUK)!5e0!3m2!1sen!2sin!4v1761670369086!5m2!1sen!2sin"
-                }
-                width="100%" 
-                height="100%"
-                style={{ border: 0, minHeight: '400px' }} 
-                allowFullScreen="" 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                title={activeCollege === 'lbs' ? "LBS College of Engineering, Kasaragod Location" : "Central University of Kerala Location"}
-              ></iframe>
             </div>
           </div>
         </div>
