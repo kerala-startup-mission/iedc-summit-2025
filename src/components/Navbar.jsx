@@ -182,12 +182,12 @@ const Navbar = () => {
             >
               REGISTER NOW
             </a>
-            <Link
+            {/* <Link
               to="/be-our-sponsor"
               className="block w-full bg-blue-600 text-white text-lg font-bold py-2 text-center rounded-lg hover:bg-blue-700 transition-all duration-300 mt-2"
             >
               BE OUR SPONSOR
-            </Link>
+            </Link> */}
           </div>
         )}
       </div>
