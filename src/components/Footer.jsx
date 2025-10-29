@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
-
+import { FaFacebookF, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
   return (
     <footer id="contact" className="bg-gray-900 py-12 md:py-16">
@@ -125,9 +125,9 @@ const Footer = () => {
                     href="https://x.com/startup_mission" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="w-10 h-10 bg-white/10 hover:bg-blue-400 rounded-full flex items-center justify-center transition-colors"
+                    className="w-10 h-10 bg-white/10 hover:bg-black rounded-full flex items-center justify-center transition-colors"
                   >
-                    <FaTwitter className="text-white" />
+                    <FaXTwitter className="text-white" />
                   </a>
                 </li>
                 <li>
@@ -236,9 +236,9 @@ const Footer = () => {
                     href="https://x.com/lbsiedc" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="w-10 h-10 bg-white/10 hover:bg-blue-400 rounded-full flex items-center justify-center transition-colors"
+                    className="w-10 h-10 bg-white/10 hover:bg-black rounded-full flex items-center justify-center transition-colors"
                   >
-                    <FaTwitter className="text-white" />
+                    <FaXTwitter className="text-white" />
                   </a>
                 </li>
                 <li>
@@ -329,9 +329,9 @@ const Footer = () => {
                     href="https://x.com/cukeralatweet" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="w-10 h-10 bg-white/10 hover:bg-blue-400 rounded-full flex items-center justify-center transition-colors"
+                    className="w-10 h-10 bg-white/10 hover:bg-black rounded-full flex items-center justify-center transition-colors"
                   >
-                    <FaTwitter className="text-white" />
+                    <FaXTwitter className="text-white" />
                   </a>
                 </li>
                 <li>
