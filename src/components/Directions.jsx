@@ -95,7 +95,7 @@ const Directions = () => {
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
             }`}
           >
-            LBS Kasaragod
+            LBSCE Kasaragod
           </button>
           <button
             onClick={() => setActiveCollege('cuk')}
@@ -115,7 +115,7 @@ const Directions = () => {
             <div className="mb-6">
               <div className="mb-4">
                 <h3 className="text-2xl md:text-3xl font-clash-display text-gray-800 mb-2">
-                  How to Reach {activeCollege === 'lbs' ? 'LBS Kasaragod' : 'CUK'}
+                  How to Reach {activeCollege === 'lbs' ? 'LBSCEK' : 'CUK'}
                 </h3>
                 <div className="text-sm text-gray-600 font-gilroy-light space-y-1">
                   <p>
@@ -141,7 +141,7 @@ const Directions = () => {
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
-                College Location
+                 Get Directions
               </a>
             </div>
 
