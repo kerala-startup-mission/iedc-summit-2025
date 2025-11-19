@@ -83,6 +83,10 @@ const Partners = () => {
       ],
     },
     {
+      title: "Media Partners",
+      partners: [{ src: "/manorama.png", alt: "manorama" }],
+    },
+    {
       title: "Ecosystem Partners",
       partners: [
         { src: "/tie-logo.png", alt: "TIE" },
@@ -100,10 +104,7 @@ const Partners = () => {
         { src: "/mulearn.png", alt: "Mulearn" }
       ],
     },
-    {
-      title: "Media Partners",
-      partners: [{ src: "/manorama.png", alt: "manorama" }],
-    },
+    
     {
       title: "Happiness Partners",
       partners: [{ src: "/radio-mango.png", alt: "Radio Mango" }],
