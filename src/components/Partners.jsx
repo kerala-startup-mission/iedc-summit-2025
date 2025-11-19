@@ -5,134 +5,150 @@ import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 const Partners = () => {
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
 
-  // Ecosystem Partners
-  const ecosystemPartners = [
-    {
-      node: (
+  // Helper component for the Partner Card
+  const PartnerCard = ({ src, alt, label, categoryTitle, href, className = "" }) => {
+    
+    // Common inner content
+    const CardContent = (
+      <>
+        {/* 1. Category Title (Absolute positioning to keep it at the top) */}
+        {categoryTitle && (
+          <div className="absolute top-3 left-0 w-full text-center px-1 z-10">
+            <h3 className="font-clash-display text-[10px] md:text-xs font-bold text-blue-600 uppercase tracking-wider leading-tight whitespace-nowrap">
+              {categoryTitle}
+            </h3>
+            {/* Small separator line */}
+            <div className="w-6 h-[1.5px] bg-blue-100 mx-auto mt-0.5"></div>
+          </div>
+        )}
+
+        {/* 2. The Icon/Logo */}
         <img
-          src="/tie-logo.png"
-          alt="TIE"
-          className="h-10 md:h-23 object-contain"
+          src={src}
+          alt={alt}
+          className={`w-full h-16 object-contain -mt-2 ${className}`}
         />
-      ),
-      ariaLabel: "TIE",
-    },
-    {
-      node: (
-        <img
-          src="/kasaracode-logo.png"
-          alt="Kasaracode"
-          className="h-6 md:h-11 object-contain"
-        />
-      ),
-      ariaLabel: "Kasaracode",
-    },
-    {
-      node: (
-        <img
-          src="/tinkerhub-logo.png"
-          alt="Tinkerhub"
-          className="h-6 md:h-11 object-contain"
-        />
-      ),
-      ariaLabel: "Tinkerhub",
-    },
-    {
-      node: (
-        <img
-          src="/cpcri-logo.png"
-          alt="CPCRI"
-          className="h-13 md:h-23 object-contain"
-        />
-      ),
-      ariaLabel: "CPCRI",
-    },
-    {
-      node: (
-        <img
-          src="/nammude-ksd-logo.png"
-          alt="Nammude KSD"
-          className="h-14 md:h-22 object-contain"
-        />
-      ),
-      ariaLabel: "Nammude KSD",
-    },
-    {
-      node: (
-        <img
-          src="/trest.png"
-          alt="TrEST"
-          className="h-10 md:h-22 object-contain"
-        />
-      ),
-      ariaLabel: "TrEST",
-    },
-    {
-      node: (
-        <img
-          src="/nasscom.png"
-          alt="Nasscom"
-          className="h-10 md:h-10 object-contain"
-        />
-      ),
-      ariaLabel: "Nasscom",
-    },
-    {
-      node: (
-        <img
-          src="/haris.png"
-          alt="Haris & Co"
-          className="h-10 md:h-14 object-contain"
-        />
-      ),
-      ariaLabel: "Haris & Co",
-    },
-    {
-      node: (
-        <img
-          src="/udhyam.png"
-          alt="Udhayam"
-          className="h-10 md:h-15 object-contain"
-        />
-      ),
-      ariaLabel: "Udhayam",
+
+        {/* 3. Sub-label */}
+        {label && (
+          <p className="md:text-[9px] text-[8px] font-semibold text-gray-400 text-center mt-2 uppercase tracking-wide absolute bottom-2 w-full px-1 leading-tight">
+            {label}
+          </p>
+        )}
+      </>
+    );
+
+    // Common container classes
+    // Using fixed widths (w-32 md:w-40) ensures they look like a grid even when using flex
+    const containerClasses =
+      "flex flex-col items-center justify-center px-2 py-3 hover:bg-gray-50 transition-all duration-300 rounded-lg h-full min-h-[140px] w-32 md:w-40 relative group border border-transparent hover:border-gray-100 bg-white";
+
+    if (href) {
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${containerClasses} cursor-pointer`}
+        >
+          {CardContent}
+        </a>
+      );
     }
 
+    return <div className={containerClasses}>{CardContent}</div>;
+  };
+
+  // Helper to flatten categories into grid items with title on the first item
+  const flattenData = (categories) => {
+    return categories.flatMap((category) => {
+      if (category.partners.length === 0) return [];
+      const firstPartner = {
+        ...category.partners[0],
+        categoryTitle: category.title,
+      };
+      const restPartners = category.partners.slice(1);
+      return [firstPartner, ...restPartners];
+    });
+  };
+
+  // 1. Main Partners Data
+  const mainCategories = [
+    {
+      title: "Startup Enablers",
+      partners: [
+        { src: "/tiib-logo.png", alt: "TIIB" },
+        { src: "/campusfund-logo.png", alt: "Campus Fund" },
+        { src: "/1trepreneur-logo.png", alt: "1trepreneur" },
+      ],
+    },
+    {
+      title: "Ecosystem Partners",
+      partners: [
+        { src: "/tie-logo.png", alt: "TIE" },
+        { src: "/kasaracode-logo.png", alt: "Kasaracode" },
+        { src: "/tinkerhub-logo.png", alt: "Tinkerhub" },
+        { src: "/cpcri-logo.png", alt: "CPCRI" },
+        { src: "/nammude-ksd-logo.png", alt: "Nammude KSD" },
+        { src: "/trest.png", alt: "TrEST" },
+        { src: "/nasscom.png", alt: "Nasscom" },
+        { src: "/haris.png", alt: "Haris & Co" },
+        { src: "/udhyam.png", alt: "Udhayam" },
+        { src: "/ghc-logo.png", alt: "Growth Lab" },
+        { src: "/ksd-flea.png", alt: "KSD Flea" },
+        { src: "/nest.png", alt: "nest" },
+      ],
+    },
+    {
+      title: "Media Partners",
+      partners: [{ src: "/manorama.png", alt: "manorama" }],
+    },
+    {
+      title: "Happiness Partners",
+      partners: [{ src: "/radio-mango.png", alt: "Radio Mango" }],
+    },
   ];
 
-  // Startup Enablers
-  const startupEnablers = [
+  // 2. Special Bottom Categories (Powered & Hosted)
+  const bottomCategories = [
     {
-      node: (
-        <img
-          src="/tiib-logo.png"
-          alt="TIIB"
-          className="h-10 md:h-17 object-contain"
-        />
-      ),
-      ariaLabel: "TIIB",
+      title: "Powered By",
+      partners: [
+        {
+          src: "/ksum-logo-black.png",
+          alt: "Kerala Startup Mission",
+          href: "https://www.startupmission.kerala.gov.in",
+          label: "Kerala Startup Mission",
+        },
+        {
+          src: "/iedc-logo-color.png",
+          alt: "IEDC Kerala",
+          href: "https://iedc.startupmission.in/",
+          label: "IEDC Kerala",
+        },
+      ],
     },
     {
-      node: (
-        <img
-          src="/campusfund-logo.png"
-          alt="Campus Fund"
-          className="h-10 md:h-17 object-contain"
-        />
-      ),
-      ariaLabel: "Campus Fund",
-    },
-    {
-      node: (
-        <img
-          src="/1trepreneur-logo.png"
-          alt="1trepreneur"
-          className="h-10 md:h-14 object-contain"
-        />
-      ),
-      ariaLabel: "1trepreneur",
+      title: "Hosted By",
+      partners: [
+        {
+          src: "/lbscek-logo-black.png",
+          alt: "LBS College of Engineering",
+          href: "https://www.lbscek.ac.in",
+          label: "LBS College of Engineering",
+        },
+        {
+          src: "/cuk-logo.svg",
+          alt: "Central University of Kerala",
+          href: "https://www.cukerala.ac.in",
+          label: "Central University of Kerala",
+        },
+      ],
     },
   ];
+
+  const mainGridItems = flattenData(mainCategories);
+  const bottomGridItems = flattenData(bottomCategories);
 
   return (
     <section
@@ -142,150 +158,47 @@ const Partners = () => {
       }`}
       ref={sectionRef}
     >
-      {/* Header Section */}
-      <div className="px-5 md:px-8 lg:px-12 pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8 ">
-        {/* Left Content */}
-        <div className="flex-1 w-full text-center flex flex-col items-center">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-light font-clash-display text-blue-500 mb-3 md:mb-6 lg:mb-8 leading-tight ">
+      {/* Main Content Container */}
+      <div className="container mx-auto px-5 pt-24 pb-16">
+        {/* Section Title */}
+        <div className="text-center mb-16">
+          <h2 className="font-bold text-3xl md:text-4xl lg:text-5xl text-blue-500 font-clash-display mb-4">
             Our Partners
           </h2>
-          <p className="text-xs md:text-base lg:text-lg text-black font-light font-gilroy-light w-full leading-relaxed">
+          <p className="text-xs md:text-base lg:text-lg text-black font-light font-gilroy-light max-w-2xl mx-auto">
             Grateful to our partners who make IEDC Summit 2025 possible through
-            their unwavering support and commitment to innovation.
+            their unwavering support.
           </p>
         </div>
-      </div>
 
-      {/* Startup Enablers Section */}
-      <div className="px-5 md:px-8 lg:px-12 pb-6 md:pb-8">
-        <h3 className="text-xl md:text-2xl lg:text-3xl font-light font-clash-display text-black mb-4 md:mb-6 text-center">
-          Startup Enablers
-        </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 md:gap-12 justify-items-center max-w-4xl mx-auto">
-          {startupEnablers.map((partner, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-center transition-transform duration-300 hover:scale-110"
-              aria-label={partner.ariaLabel}
-            >
-              {partner.node}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Ecosystem Partners Section */}
-      <div className="px-5 md:px-8 lg:px-12 pb-6 md:pb-8">
-        <h3 className="text-xl md:text-2xl lg:text-3xl font-light font-clash-display text-black mb-4 md:mb-6 text-center">
-          Ecosystem Partners
-        </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 md:gap-8 justify-items-center max-w-7xl mx-auto">
-          {ecosystemPartners.map((partner, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-center transition-transform duration-300 hover:scale-110"
-              aria-label={partner.ariaLabel}
-            >
-              {partner.node}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Powered By & Hosted By Section */}
-      <div className="px-5 md:px-8 lg:px-12 py-6 md:py-8 lg:py-10 mb-10 min-h-auto md:h-[25vh]">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 max-w-6xl mx-auto">
-          {/* Powered By */}
-          <div className="flex flex-col items-center">
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-light font-clash-display text-black mb-6 md:mb-8">
-              Powered by
-            </h3>
-            <div className="flex items-start gap-8 md:gap-12">
-              {/* KSUM */}
-              <a
-                href="https://www.startupmission.kerala.gov.in"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center group cursor-pointer"
-              >
-                <div className="transition-transform duration-300 hover:scale-110 mb-3">
-                  <img
-                    src="/ksum-logo-black.png"
-                    alt="KSUM"
-                    className="h-12 md:h-16 lg:h-20 object-contain"
-                  />
-                </div>
-                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300 text-center">
-                  Kerala Startup Mission
-                </p>
-              </a>
-
-              {/* IEDC */}
-              <a
-                href="https://iedc.startupmission.in/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center group cursor-pointer"
-              >
-                <div className="transition-transform duration-300 hover:scale-110 mb-3">
-                  <img
-                    src="/iedc-logo-color.png"
-                    alt="IEDC"
-                    className="h-12 md:h-16 lg:h-20 object-contain"
-                  />
-                </div>
-                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300 text-center">
-                  IEDC Kerala
-                </p>
-              </a>
-            </div>
+        {/* Main Grid (Using Flexbox to grow from center) */}
+        <div className="mb-16">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-8">
+            {mainGridItems.map((item, index) => (
+              <PartnerCard
+                key={`main-${index}`}
+                src={item.src}
+                alt={item.alt}
+                label={item.label}
+                href={item.href}
+                categoryTitle={item.categoryTitle}
+              />
+            ))}
           </div>
+        </div>
 
-          {/* Hosted By */}
-          <div className="flex flex-col items-center ">
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-light font-clash-display text-black mb-6 md:mb-8">
-              Hosted by
-            </h3>
-            <div className="flex items-start gap-8 md:gap-12">
-              {/* LBS Institute */}
-              <a
-                href="https://www.lbscek.ac.in"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center group cursor-pointer"
-              >
-                <div className="transition-transform duration-300 hover:scale-110 mb-3">
-                  <img
-                    src="/lbscek-logo-black.png"
-                    alt="LBS Institute"
-                    className="h-12 md:h-16 lg:h-20 object-contain"
-                  />
-                </div>
-                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300 text-center">
-                  LBS College of Engineering, Kasaragod
-                </p>
-              </a>
-
-              {/* CUK */}
-              <a
-                href="https://www.cukerala.ac.in"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center group cursor-pointer"
-              >
-                <div className="transition-transform duration-300 hover:scale-110 mb-3">
-                  <img
-                    src="/cuk-logo.svg"
-                    alt="CUK"
-                    className="h-12 md:h-16 lg:h-20 object-contain"
-                  />
-                </div>
-                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300 text-center">
-                  Central University of Kerala
-                </p>
-              </a>
-            </div>
-          </div>
+        {/* Bottom Section (Powered & Hosted - Centered) */}
+        <div className="py-10 border-t border-gray-100 mt-12 flex flex-wrap justify-center gap-12">
+          {bottomGridItems.map((item, index) => (
+            <PartnerCard
+              key={`bottom-${index}`}
+              src={item.src}
+              alt={item.alt}
+              label={item.label}
+              href={item.href}
+              categoryTitle={item.categoryTitle}
+            />
+          ))}
         </div>
       </div>
 

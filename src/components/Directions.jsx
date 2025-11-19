@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 import LogoLoop from "./LogoLoop";
-import { Train, Bus, Plane } from "lucide-react";
+import { Train, Bus, Plane, MapPin, ExternalLink } from "lucide-react";
 
 const Directions = () => {
   const [activeCollege, setActiveCollege] = useState("lbs");
@@ -9,6 +9,14 @@ const Directions = () => {
   const [hasAnimated, setHasAnimated] = useState(false);
   const headerRef = React.useRef(null);
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
+
+  // Images for each transport mode
+  // You can replace these URLs with your local assets like "/img/train.jpg"
+  const transportImages = {
+    train: "https://images.unsplash.com/photo-1589196728426-4613a4992c42?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    bus: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&q=80&w=1000",
+    flight: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=1000",
+  };
 
   // Only animate on first mount
   useEffect(() => {
@@ -19,31 +27,31 @@ const Directions = () => {
 
   const lbsDirections = {
     train: {
-      title: "For those arriving by train",
+      title: "Arriving by Train",
       stations: [
         {
           name: "Kasaragod Railway Station",
           distance: "Approx 13kms away",
-          transport: "by city bus / direct auto taxi (~300-400₹)",
+          transport: "City bus / Direct auto taxi (~₹300-400)",
         },
         {
           name: "Kanhangad Railway Station",
           distance: "Approx 30kms away",
-          transport: "By State/Line Bus",
+          transport: "State / Line Bus",
         },
       ],
     },
     bus: {
-      title: "For those arriving by Bus",
+      title: "Arriving by Bus",
       routes: [
-        "Kasaragod Rwy Bustop > Old bus stand > Takeoff Towards Bovikanam, Mulleria, Adoor, Adhur, Sullia get down at Povval LBS Stop",
-        "Kanhangad Town Stand > Bus Towards Kasaragod via Cherkala, Chattanchal, Poinachi, Vidyangara (NH66) get off at Cherkala, then Bus Towards Mulleria get down at Povval LBS Stop",
-        "From Kannur Bus Stand : Take a bus to Kasaragod via NH-LS & get down cherkala, then move to Povval Lbs Stop",
-        "Povval > LBS College Entrance Gate, Just 500m away | Auto taxi fare of 40₹",
+        "Kasaragod Rwy Bustop > Old bus stand > Takeoff Towards Bovikanam, Mulleria, Adoor, Adhur, Sullia > Get down at Povval LBS Stop",
+        "Kanhangad Town Stand > Bus Towards Kasaragod via Cherkala > Get off at Cherkala > Bus Towards Mulleria > Get down at Povval LBS Stop",
+        "From Kannur Bus Stand: Take bus to Kasaragod via NH-LS > Get down Cherkala > Move to Povval LBS Stop",
+        "Povval > LBS College Entrance Gate (500m) | Auto taxi fare ~₹40",
       ],
     },
     flight: {
-      title: "For those arriving by flight",
+      title: "Arriving by Flight",
       airports: [
         {
           name: "Mangaluru International Airport",
@@ -51,34 +59,34 @@ const Directions = () => {
         },
         { name: "Kannur International Airport", distance: "Approx 115km away" },
       ],
-      note: "From the Airport choose train / bus / taxi",
+      note: "From the Airport, you can take a train, bus, or taxi to reach Kasaragod.",
     },
   };
 
   const cukDirections = {
     train: {
-      title: "For those arriving by train",
+      title: "Arriving by Train",
       stations: [
         {
           name: "Kanhangad Railway Station",
           distance: "Approx 11.4kms away",
-          transport: "By State/Line Bus",
+          transport: "State / Line Bus",
         },
         {
           name: "Kasaragod Railway Station",
           distance: "Approx 30kms away",
-          transport: "by city bus / direct auto taxi",
+          transport: "City bus / Direct auto taxi",
         },
       ],
     },
     bus: {
-      title: "For those arriving by Bus",
+      title: "Arriving by Bus",
       routes: [
         "Bus information for CUK will be available soon. Please check back later or contact us for details.",
       ],
     },
     flight: {
-      title: "For those arriving by flight",
+      title: "Arriving by Flight",
       airports: [
         {
           name: "Mangaluru International Airport",
@@ -90,78 +98,55 @@ const Directions = () => {
     },
   };
 
+  const directions = activeCollege === "lbs" ? lbsDirections : cukDirections;
+  const currentData = directions[activeTransport];
+
   return (
     <section
       id="directions"
       ref={sectionRef}
-      className={`w-full py-8 md:py-16 bg-white ${
+      className={`w-full py-12 md:py-24 bg-white overflow-hidden ${
         hasAnimated ? "fade-in-up-visible" : "fade-in-up-hidden"
       }`}
     >
-      <div className="container mx-auto px-5 sm:px-6 md:px-16 lg:px-20">
-        <div ref={headerRef} className="text-center mb-6 md:mb-12">
-          <div className="inline-flex justify-center items-center mb-3">
+      <div className="container mx-auto px-5 sm:px-6 md:px-12 lg:px-20">
+        
+        {/* Header */}
+        <div ref={headerRef} className="text-center mb-12 md:mb-20">
+          <div className="inline-flex justify-center items-center mb-4">
             <img
               src="/iedc-summit-25-logo.png"
               alt="IEDC Logo"
-              className="w-14 h-14 md:w-20 md:h-20 object-contain"
+              className="w-16 h-16 md:w-24 md:h-24 object-contain"
             />
           </div>
-          <h2 className="text-2xl md:text-5xl font-normal font-clash-display text-gray-800 mb-3 px-4">
-            Get Directions to the <span className="text-blue-500">Event</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal font-clash-display text-gray-900 mb-4 leading-tight">
+            Get Directions to the <span className="text-blue-600">Event</span>
           </h2>
-          <div className="w-20 h-0.5 md:w-24 md:h-1 bg-blue-500 mx-auto"></div>
+          <div className="w-24 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
         </div>
 
-        {/* College Selection Tabs
-        <div className="flex justify-center gap-4 mb-8 flex-wrap">
-          <button
-            onClick={() => setActiveCollege("lbs")}
-            className={`px-6 py-2 rounded-lg font-clash-display transition-all ${
-              activeCollege === "lbs"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
-          >
-            LBSCE Kasaragod
-          </button>
-          <button
-            onClick={() => setActiveCollege("cuk")}
-            className={`px-6 py-2 rounded-lg font-clash-display transition-all ${
-              activeCollege === "cuk"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
-          >
-            Central University of Kerala
-          </button>
-        </div> */}
-
-        <div className="grid grid-cols-1 gap-8">
-          {/* Left Column - Content */}
-          <div>
-            <div className="mb-6">
-              <div className="mb-4">
-                <h3 className="text-2xl md:text-3xl font-clash-display text-gray-800 mb-2">
-                  How to Reach {activeCollege === "lbs" ? "LBSCEK" : "CUK"}
-                </h3>
-                <div className="text-sm text-gray-600 font-gilroy-light space-y-1">
-                  <p>
-                    <span className="font-gilroy-medium text-gray-700">
-                      Venue:{" "}
-                    </span>
-                    {activeCollege === "lbs"
-                      ? "IEDC Summit 2025"
-                      : "Nodal Officer's Meet/Founders Meet 34.0"}
-                  </p>
-                  <p>
-                    <span className="font-gilroy-medium text-gray-700">
-                      Date:{" "}
-                    </span>
-                    {activeCollege === "lbs" ? "22-Dec-2025" : "21-Dec-2025"}
-                  </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start">
+          
+          {/* Left Column: Controls & Text */}
+          <div className="flex flex-col h-full">
+            
+            {/* Venue Info & Map Button */}
+            <div className="mb-8 pb-8 border-b border-gray-100">
+              <h3 className="text-2xl md:text-3xl font-clash-display font-normal text-gray-900 mb-3">
+                How to Reach LBSCEK
+              </h3>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mb-6">
+                <div className="text-gray-600 font-gilroy-medium">
+                  <span className="text-gray-400 block text-xs uppercase tracking-wider mb-1">Venue</span>
+                  {activeCollege === "lbs" ? "IEDC Summit 2025" : "Nodal Officer's Meet"}
+                </div>
+                <div className="text-gray-600 font-gilroy-medium">
+                  <span className="text-gray-400 block text-xs uppercase tracking-wider mb-1">Date</span>
+                  {activeCollege === "lbs" ? "22 Dec 2025" : "21 Dec 2025"}
                 </div>
               </div>
+              
               <a
                 href={
                   activeCollege === "lbs"
@@ -170,131 +155,135 @@ const Directions = () => {
                 }
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-clash-display rounded-lg transition-colors text-sm"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-blue-600 text-white font-clash-display rounded-full transition-all duration-300 group w-fit"
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Get Directions
+                <MapPin className="w-5 h-5 group-hover:animate-bounce" />
+                Open in Google Maps
+                <ExternalLink className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity" />
               </a>
             </div>
 
-            {/* Transport Mode Tabs */}
-            <div className="flex gap-2 mb-6 flex-wrap">
-              {["train", "bus", "flight"].map((mode) => (
+            {/* Transport Tabs */}
+            <div className="flex p-1 bg-gray-100 rounded-xl gap-1 mb-8 w-fit">
+              {[
+                { id: "train", icon: Train, label: "Train" },
+                { id: "bus", icon: Bus, label: "Bus" },
+                { id: "flight", icon: Plane, label: "Flight" },
+              ].map((mode) => (
                 <button
-                  key={mode}
-                  onClick={() => setActiveTransport(mode)}
-                  className={`px-4 py-2 rounded-lg font-gilroy-medium text-sm transition-all flex items-center gap-2 ${
-                    activeTransport === mode
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  key={mode.id}
+                  onClick={() => setActiveTransport(mode.id)}
+                  className={`px-4 md:px-6 py-2.5 rounded-lg font-gilroy-bold text-sm md:text-base transition-all flex items-center gap-2 ${
+                    activeTransport === mode.id
+                      ? "bg-white text-blue-600 shadow-sm scale-105"
+                      : "text-gray-500 hover:text-gray-700 hover:bg-gray-200"
                   }`}
                 >
-                  {mode === "train" ? (
-                    <>
-                      <Train size={16} />
-                      Train
-                    </>
-                  ) : mode === "bus" ? (
-                    <>
-                      <Bus size={16} />
-                      Bus
-                    </>
-                  ) : (
-                    <>
-                      <Plane size={16} />
-                      Flight
-                    </>
-                  )}
+                  <mode.icon size={18} />
+                  {mode.label}
                 </button>
               ))}
             </div>
 
-            {/* Content Display */}
-            <div className="space-y-4 mb-[15vh] md:mb-[10vh]">
-              {(() => {
-                const directions =
-                  activeCollege === "lbs" ? lbsDirections : cukDirections;
-                const data = directions[activeTransport];
+            {/* Dynamic Text Content */}
+            <div className="flex-grow animate-fade-in-up">
+              <h4 className="text-xl font-clash-display text-gray-900 mb-6 flex items-center gap-2">
+                {currentData.title}
+              </h4>
 
-                return (
+              <div className="space-y-6">
+                {/* Train Stations */}
+                {activeTransport === "train" &&
+                  currentData.stations?.map((station, idx) => (
+                    <div key={idx} className="relative pl-6 border-l-2 border-blue-100">
+                      <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-blue-500 ring-4 ring-white"></div>
+                      <p className="text-lg text-gray-900 font-gilroy-bold mb-1">
+                        {station.name}
+                      </p>
+                      <p className="text-blue-500 font-gilroy-medium text-sm mb-1">
+                        {station.distance}
+                      </p>
+                      <p className="text-gray-500 font-gilroy-regular text-sm">
+                        Via: {station.transport}
+                      </p>
+                    </div>
+                  ))}
+
+                {/* Bus Routes */}
+                {activeTransport === "bus" &&
+                  currentData.routes?.map((route, idx) => (
+                    <div key={idx} className="flex gap-4">
+                      <div className="w-8 h-8 flex-shrink-0 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-sm">
+                        {idx + 1}
+                      </div>
+                      <p className="text-gray-700 font-gilroy-medium leading-relaxed pt-1">
+                        {route}
+                      </p>
+                    </div>
+                  ))}
+
+                {/* Airports */}
+                {activeTransport === "flight" && (
                   <>
-                    <h4 className="text-lg font-clash-display text-gray-800">
-                      {data.title}
-                    </h4>
-
-                    {activeTransport === "flight" && (
-                      <>
-                        <div className="space-y-3">
-                          {data.airports?.map((airport, idx) => (
-                            <div
-                              key={idx}
-                              className="pb-3 border-b border-gray-200 last:border-b-0"
-                            >
-                              <p className="text-gray-800 font-gilroy-medium">
-                                {airport.name}
-                              </p>
-                              <p className="text-gray-600 text-sm font-gilroy-light">
-                                {airport.distance}
-                              </p>
-                            </div>
-                          ))}
+                    {currentData.airports?.map((airport, idx) => (
+                      <div key={idx} className="flex items-start justify-between bg-gray-50 p-4 rounded-xl border border-gray-100 hover:border-blue-200 transition-colors">
+                        <div>
+                          <p className="text-gray-900 font-gilroy-bold">
+                            {airport.name}
+                          </p>
+                          <p className="text-gray-500 text-sm font-gilroy-medium mt-1">
+                            {airport.distance}
+                          </p>
                         </div>
-                        <p className="text-blue-600 font-gilroy-medium text-sm mt-4 p-3 bg-blue-50 rounded-lg">
-                          {data.note}
-                        </p>
-                      </>
-                    )}
-
-                    {activeTransport === "train" && (
-                      <div className="space-y-3">
-                        {data.stations?.map((station, idx) => (
-                          <div
-                            key={idx}
-                            className="pb-3 border-b border-gray-200 last:border-b-0"
-                          >
-                            <p className="text-gray-800 font-gilroy-medium">
-                              {station.name}
-                            </p>
-                            <p className="text-gray-600 text-sm font-gilroy-light">
-                              {station.distance}
-                            </p>
-                            <p className="text-gray-600 text-sm font-gilroy-light">
-                              {station.transport}
-                            </p>
-                          </div>
-                        ))}
+                        <Plane className="text-blue-300" size={20} />
                       </div>
-                    )}
-
-                    {activeTransport === "bus" && (
-                      <div className="space-y-3">
-                        {data.routes?.map((route, idx) => (
-                          <div
-                            key={idx}
-                            className="pb-3 border-b border-gray-200 last:border-b-0"
-                          >
-                            <p className="text-gray-700 font-gilroy-light text-sm leading-relaxed">
-                              {route}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                    ))}
+                    <div className="mt-4 p-4 bg-blue-50 text-blue-700 rounded-xl text-sm font-gilroy-medium flex gap-3 items-start">
+                      {currentData.note}
+                    </div>
                   </>
-                );
-              })()}
+                )}
+              </div>
             </div>
           </div>
+
+          {/* Right Column: Dynamic Image */}
+          <div className="hidden lg:block relative h-full min-h-[500px]">
+            <div className="sticky top-24 w-full h-[500px] rounded-[2rem] overflow-hidden shadow-2xl shadow-blue-900/10 group">
+               {/* Image Overlay Gradient */}
+               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+               
+               {/* Image switching animation logic can be handled by key change */}
+               {/* Use key={activeTransport} to force re-render and animate for simple transition */}
+               <img 
+                  key={activeTransport}
+                  src={transportImages[activeTransport]} 
+                  alt={activeTransport}
+                  className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105 animate-scale-in"
+               />
+
+               {/* Caption on Image */}
+               <div className="absolute bottom-0 left-0 w-full p-8 z-20 text-white">
+                 <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 bg-white/20 backdrop-blur-md rounded-lg">
+                      {activeTransport === 'train' && <Train size={24} />}
+                      {activeTransport === 'bus' && <Bus size={24} />}
+                      {activeTransport === 'flight' && <Plane size={24} />}
+                    </div>
+                    <span className="font-clash-display text-xl tracking-wide uppercase">
+                      {activeTransport} Travel
+                    </span>
+                 </div>
+                 <p className="text-white/80 font-gilroy-light text-sm max-w-xs">
+                    Enjoy the scenic route to Kasaragod. We can't wait to see you there!
+                 </p>
+               </div>
+            </div>
+            
+            {/* Decorative Element behind image */}
+            <div className="absolute -z-10 top-10 -right-10 w-full h-full border-2 border-blue-100 rounded-[2rem]"></div>
+          </div>
+
         </div>
       </div>
 
@@ -302,28 +291,19 @@ const Directions = () => {
       <img
         src="/hero-blocks.png"
         alt="Decorative blocks"
-        className="w-full h-20 sm:h-24 relative bottom-20 left-0 object-cover"
+        className="w-full h-16 md:h-24 object-cover mt-20"
       />
 
       {/* Scrolling Text Loop */}
-      <div className="w-full relative bottom-[13vh] left-0 skew-y-2">
+      <div className="w-full -mt-8 md:-mt-10 -skew-y-2 relative z-20">
         <LogoLoop
-          logos={[
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-          ]}
+          logos={Array(8).fill({ text: "IEDC SUMMIT 2025" })}
           speed={80}
           direction="right"
           logoHeight={20}
           gap={40}
           pauseOnHover={true}
-          className=" font-gilroy-bold bg-blue-600 py-5 text-white"
+          className="font-gilroy-bold bg-blue-600 py-4 md:py-6 text-white"
           ariaLabel="IEDC Summit 2025"
         />
       </div>
@@ -331,4 +311,4 @@ const Directions = () => {
   );
 };
 
-export default Directions;
+export default Directions;    
