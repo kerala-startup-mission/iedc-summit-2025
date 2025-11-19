@@ -16,7 +16,7 @@ const Faq = () => {
                 <input type="checkbox" id="rd1" className="hidden peer" />
                 <label
                   htmlFor="rd1"
-                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl bg-linear-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 peer-checked:from-blue-100 peer-checked:to-indigo-100 border-l-4 border-blue-500 transition-all duration-300"
+                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl border-l-4 border-blue-500 transition-all duration-300"
                 >
                   What is IEDC?
                 </label>
@@ -30,7 +30,7 @@ const Faq = () => {
                 <input type="checkbox" id="rd2" className="hidden peer" />
                 <label
                   htmlFor="rd2"
-                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl bg-linear-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 peer-checked:from-blue-100 peer-checked:to-indigo-100 border-l-4 border-blue-500 transition-all duration-300"
+                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl border-l-4 border-blue-500 transition-all duration-300"
                 >
                   What is the IEDC Summit?
                 </label>
@@ -44,7 +44,7 @@ const Faq = () => {
                 <input type="checkbox" id="rd3" className="hidden peer" />
                 <label
                   htmlFor="rd3"
-                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl bg-linear-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 peer-checked:from-blue-100 peer-checked:to-indigo-100 border-l-4 border-blue-500 transition-all duration-300"
+                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl border-l-4 border-blue-500 transition-all duration-300"
                 >
                   What includes in it?
                 </label>
@@ -58,7 +58,7 @@ const Faq = () => {
                 <input type="checkbox" id="rd4" className="hidden peer" />
                 <label
                   htmlFor="rd4"
-                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl bg-linear-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 peer-checked:from-blue-100 peer-checked:to-indigo-100 border-l-4 border-blue-500 transition-all duration-300"
+                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl  border-l-4 border-blue-500 transition-all duration-300"
                 >
                   Who can participate?
                 </label>
@@ -72,7 +72,7 @@ const Faq = () => {
                 <input type="checkbox" id="rd5" className="hidden peer" />
                 <label
                   htmlFor="rd5"
-                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl bg-linear-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 peer-checked:from-blue-100 peer-checked:to-indigo-100 border-l-4 border-blue-500 transition-all duration-300"
+                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl  border-l-4 border-blue-500 transition-all duration-300"
                 >
                   How to Register for the IEDC Summit 2025?
                 </label>
@@ -86,7 +86,7 @@ const Faq = () => {
                 <input type="checkbox" id="rd6" className="hidden peer" />
                 <label
                   htmlFor="rd6"
-                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl bg-linear-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 peer-checked:from-blue-100 peer-checked:to-indigo-100 border-l-4 border-blue-500 transition-all duration-300"
+                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl border-l-4 border-blue-500 transition-all duration-300"
                 >
                   Can I showcase my startup or project at the IEDC Summit?
                 </label>
@@ -100,7 +100,7 @@ const Faq = () => {
                 <input type="checkbox" id="rd107" className="hidden peer" />
                 <label
                   htmlFor="rd107"
-                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl bg-linear-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 peer-checked:from-blue-100 peer-checked:to-indigo-100 border-l-4 border-blue-500 transition-all duration-300"
+                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl border-l-4 border-blue-500 transition-all duration-300"
                 >
                   What is the benefit of attending?
                 </label>
@@ -118,7 +118,7 @@ const Faq = () => {
                 <input type="checkbox" id="rd7" className="hidden peer" />
                 <label
                   htmlFor="rd7"
-                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl bg-linear-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 peer-checked:from-blue-100 peer-checked:to-indigo-100 border-l-4 border-blue-500 transition-all duration-300"
+                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl border-l-4 border-blue-500 transition-all duration-300"
                 >
                   Are refreshments or meals provided at the IEDC Summit?
                 </label>
@@ -132,7 +132,7 @@ const Faq = () => {
                 <input type="checkbox" id="rd8" className="hidden peer" />
                 <label
                   htmlFor="rd8"
-                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl bg-linear-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 peer-checked:from-blue-100 peer-checked:to-indigo-100 border-l-4 border-blue-500 transition-all duration-300"
+                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl border-l-4 border-blue-500 transition-all duration-300"
                 >
                   Can we meet founders and entrepreneurs at the Summit?
                 </label>
@@ -146,7 +146,7 @@ const Faq = () => {
                 <input type="checkbox" id="rd9" className="hidden peer" />
                 <label
                   htmlFor="rd9"
-                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl bg-linear-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 peer-checked:from-blue-100 peer-checked:to-indigo-100 border-l-4 border-blue-500 transition-all duration-300"
+                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl border-l-4 border-blue-500 transition-all duration-300"
                 >
                   How to do bulk registration for the IEDC Summit 2025?
                 </label>
@@ -160,7 +160,7 @@ const Faq = () => {
                 <input type="checkbox" id="rd10" className="hidden peer" />
                 <label
                   htmlFor="rd10"
-                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl bg-linear-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 peer-checked:from-blue-100 peer-checked:to-indigo-100 border-l-4 border-blue-500 transition-all duration-300"
+                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl border-l-4 border-blue-500 transition-all duration-300"
                 >
                   Are the workshops at the IEDC Summit suitable for beginners, or do I need prior experience?
                 </label>
@@ -174,7 +174,7 @@ const Faq = () => {
                 <input type="checkbox" id="rd11" className="hidden peer" />
                 <label
                   htmlFor="rd11"
-                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl bg-linear-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 peer-checked:from-blue-100 peer-checked:to-indigo-100 border-l-4 border-blue-500 transition-all duration-300"
+                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl border-l-4 border-blue-500 transition-all duration-300"
                 >
                   How can I stay updated?
                 </label>
@@ -188,7 +188,7 @@ const Faq = () => {
                 <input type="checkbox" id="rd12" className="hidden peer" />
                 <label
                   htmlFor="rd12"
-                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl bg-linear-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 peer-checked:from-blue-100 peer-checked:to-indigo-100 border-l-4 border-blue-500 transition-all duration-300"
+                  className="tab__label block cursor-pointer p-4 font-semibold text-lg md:text-xl border-l-4 border-blue-500 transition-all duration-300"
                 >
                   Whom can I contact for more details about the IEDC Summit?
                 </label>

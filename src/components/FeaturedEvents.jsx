@@ -26,7 +26,6 @@ const LoadingAnimation = () => (
 
 // ---- Helpers ----
 
-// Now supports category as string or array
 const getEventType = (category) => {
   if (!category) return [];
 
@@ -57,22 +56,22 @@ const transformAgendaToEvents = (agenda) => {
               .split(',')
               .map((c) => c.trim());
 
-        // Skip events with Workshop or EOI categories
         if (categories.includes('Workshop') || categories.includes('EOI')) return;
 
         const eventType = getEventType(event.category);
 
-        if (eventType.includes('Featured')) {
-          events.push({
-            id: event.id || Math.random(),
-            title: event.name || '',
-            description: event.description || '',
-            registrationLink: event.link || '',
-            eventType,
-            startTime: event.start_time,
-            endTime: event.end_time,
-          });
-        }
+        events.push({
+          id: event.id || Math.random(),
+          title: event.name || '',
+          description: event.description || '',
+          registrationLink: event.link || '',
+          eventType,
+          isFeatured: eventType.includes('Featured'),
+          startTime: event.start_time,
+          endTime: event.end_time,
+          // FIX: Removed the unsafe JSON.parse here. 
+          // We will extract posterUrl in the safe processEventDescriptions function.
+        });
       });
     });
   });
@@ -80,6 +79,7 @@ const transformAgendaToEvents = (agenda) => {
   return events;
 };
 
+// Safely parses JSON descriptions and extracts Poster URLs
 const processEventDescriptions = (events) =>
   events.map((event) => {
     const rawDescription = event.description || '';
@@ -88,16 +88,18 @@ const processEventDescriptions = (events) =>
     if (!cleanDescription) return event;
 
     try {
+      // 1. Attempt to parse JSON
       const descData = JSON.parse(cleanDescription);
+      
+      // 2. Extract Description text
       const extractedDescription = descData.description || descData.Description;
-
-      if (!extractedDescription) return event;
 
       const processedEvent = {
         ...event,
-        description: extractedDescription,
+        description: extractedDescription || (typeof descData === 'string' ? descData : event.description),
       };
 
+      // 3. Extract Extra Data (Poster, etc.)
       if (descData.ExtraData) {
         const extra = descData.ExtraData;
         Object.assign(processedEvent, {
@@ -114,6 +116,8 @@ const processEventDescriptions = (events) =>
 
       return processedEvent;
     } catch (parseError) {
+      // 4. Fallback: If JSON parse fails, check if it's a string that LOOKS like JSON 
+      // (sometimes APIs return weirdly escaped strings)
       const descMatch = cleanDescription.match(
         /"description"\s*:\s*"([^"]*(?:\\.[^"]*)*)"/
       );
@@ -124,20 +128,29 @@ const processEventDescriptions = (events) =>
           description: descMatch[1].replace(/\\"/g, '"'),
         };
       }
-
-      console.warn(
-        'Failed to parse description JSON for event:',
-        event.title,
-        'Error:',
-        parseError.message
-      );
-
+      
+      // 5. Final Fallback: It's just a plain string description, return as is.
       return event;
     }
   });
 
+const isEventActive = (event) => {
+  const now = new Date();
+  
+  const regStart = event.registration_start ? new Date(event.registration_start) : null;
+  const regEnd = event.registration_end ? new Date(event.registration_end) : null;
+  const eventEnd = event.endTime ? new Date(event.endTime) : null;
+
+  if (regStart && now < regStart) return false; // Coming Soon
+  if (regEnd && now > regEnd) return false;     // Reg Closed
+  if (eventEnd && now > eventEnd) return false; // Event Ended
+
+  return true;
+};
+
 const FeaturedEvents = () => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([]); 
+  const [loopItems, setLoopItems] = useState([]); 
   const [isLoading, setIsLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -161,12 +174,74 @@ const FeaturedEvents = () => {
         );
         const data = await res.json();
 
-        const transformed = transformAgendaToEvents(data.agenda);
-        const processed = processEventDescriptions(transformed);
+        // 1. Get Raw Events (Strings are still raw here)
+        const allRawEvents = transformAgendaToEvents(data.agenda);
+        
+        // 2. SAFELY Process Descriptions (Extracts posters and dates)
+        const processedEvents = processEventDescriptions(allRawEvents);
 
-        setEvents(processed);
+        // 3. Filter for Logo Loop (Active + Summit Day)
+        const activeSummitEvents = processedEvents.filter(event => {
+          const isSummitEvent = event.eventType.includes('Summit Day');
+          const isActive = isEventActive(event);
+          return isSummitEvent && isActive;
+        });
+
+        // 4. Create Loop Items using the SAFELY processed data
+        const loopData = activeSummitEvents.map((event) => ({
+          node: (
+            <Link
+              to="/events"
+              className="flex items-center gap-4 p-3 w-[320px] bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 group mx-3 h-[88px]"
+            >
+               {/* Poster Image or Initial Placeholder */}
+               <div className="flex items-center justify-center w-14 h-full bg-blue-50 rounded-lg shrink-0 overflow-hidden border border-blue-100 group-hover:bg-blue-100 transition-colors">
+                  {event.posterUrl ? (
+                    <img
+                      src={event.posterUrl}
+                      alt={event.title}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'block';
+                      }}
+                    />
+                  ) : null}
+                  <span 
+                    className="text-xl font-bold text-gray-700 leading-none absolute"
+                    style={{ display: event.posterUrl ? 'none' : 'block' }}
+                  >
+                    {event.title.charAt(0).toUpperCase()}
+                  </span>
+               </div>
+               
+               {/* Content */}
+               <div className="flex-1 min-w-0 flex flex-col justify-center h-full py-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                    <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider truncate">
+                      {event.eventType[0] || 'Event'}
+                    </span>
+                  </div>
+                  <h4 className="font-clash-display text-sm font-semibold text-gray-900 leading-tight line-clamp-2 group-hover:text-blue-600 transition-colors">
+                    {event.title}
+                  </h4>
+               </div>
+               
+               <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-white group-hover:text-blue-600 group-hover:shadow-sm transition-all shrink-0">
+                 <ChevronRight size={16} />
+               </div>
+            </Link>
+          )
+        }));
+        setLoopItems(loopData);
+
+        // 5. Filter Featured Events for Main Carousel
+        const featuredEvents = processedEvents.filter(e => e.isFeatured);
+        setEvents(featuredEvents);
+
       } catch (error) {
-        console.error('Error fetching featured events:', error);
+        console.error('Error fetching events:', error);
       } finally {
         setIsLoading(false);
       }
@@ -197,9 +272,8 @@ const FeaturedEvents = () => {
           <LoadingAnimation />
         ) : events.length > 0 ? (
           <div className="relative">
-            {/* Cards Grid with Stacked Effect */}
-            <div className="relative h-[450px] sm:h-[600px] md:h-[750px] lg:h-[900px] flex items-center justify-center mt-[28vh] mb-[25vh] md:mt-0 md:-mb-[10vh]">
-            {/* Previous Button - Large screens only, left side */}
+            {/* Cards Grid */}
+            <div className="relative h-[450px] sm:h-[600px] md:h-[750px] lg:h-[900px] flex items-center justify-center mt-[28vh] mb-[5vh] md:mt-0 md:-mb-[10vh]">
               {events.length > 1 && (
                 <button
                   onClick={handlePrev}
@@ -211,7 +285,6 @@ const FeaturedEvents = () => {
               )}
 
               <AnimatePresence mode="popLayout">
-                {/* Display 3 cards in a stacked fashion */}
                 {[0, 1, 2].map((offset) => {
                   const cardIndex = (currentIndex + offset) % events.length;
                   const event = events[cardIndex];
@@ -243,7 +316,6 @@ const FeaturedEvents = () => {
                 })}
               </AnimatePresence>
 
-              {/* Next Button - Large screens only, right side */}
               {events.length > 1 && (
                 <button
                   onClick={handleNext}
@@ -255,58 +327,49 @@ const FeaturedEvents = () => {
               )}
             </div>
 
-            {/* Navigation Controls and View All - Mobile and Tablet only */}
+            {/* Mobile Navigation Buttons */}
             {events.length > 1 && (
-              <div className="lg:hidden flex items-center justify-between gap-4 mb-[15vh]">
-                {/* Previous Button */}
+              <div className="lg:hidden flex items-center justify-center gap-8 mb-12">
                 <button
                   onClick={handlePrev}
-                  className="w-14 h-14 md:w-16 md:h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg shrink-0"
+                  className="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg"
                   aria-label="Previous event"
                 >
-                  <ChevronLeft size={32} />
+                  <ChevronLeft size={28} />
                 </button>
-
-                {/* View All Link - Center on mobile */}
-                <Link
-                  to="/events"
-                  className="flex-1 text-center text-blue-600 text-base md:text-lg font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity"
-                >
-                  View all events...
-                </Link>
-
-                {/* Next Button */}
                 <button
                   onClick={handleNext}
-                  className="w-14 h-14 md:w-16 md:h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg shrink-0"
+                  className="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg"
                   aria-label="Next event"
                 >
-                  <ChevronRight size={32} />
+                  <ChevronRight size={28} />
                 </button>
               </div>
             )}
 
-            {/* View All Link - Mobile only when single event */}
-            {events.length <= 1 && (
-              <div className="lg:hidden text-center py-8">
-                <Link
-                  to="/events"
-                  className="text-blue-600 text-base md:text-lg font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity"
-                >
-                  View all events...
-                </Link>
-              </div>
-            )}
-
-            {/* View All Link - Desktop only */}
-            <div className="hidden lg:block text-center pb-12">
-              <Link
-                to="/events"
-                className="text-blue-600 text-lg md:text-xl font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity"
-              >
-                View all events...
-              </Link>
+            {/* Scrollable Event Cards Loop */}
+            <div className="w-full py-12 relative mt-8">
+              <div className="absolute inset-y-0 left-0 w-12 md:w-32 bg-gradient-to-r from-white via-white/90 to-transparent z-10 pointer-events-none" />
+              <div className="absolute inset-y-0 right-0 w-12 md:w-32 bg-gradient-to-l from-white via-white/90 to-transparent z-10 pointer-events-none" />
+              
+              {loopItems.length > 0 ? (
+                 <LogoLoop
+                   logos={loopItems}
+                   speed={40} 
+                   direction="left"
+                   logoHeight={90}
+                   gap={20}
+                   pauseOnHover={true}
+                   className="py-2"
+                   ariaLabel="All Events List"
+                 />
+              ) : (
+                <div className="text-center text-gray-400 font-gilroy-light text-sm">
+                   More events coming soon...
+                </div>
+              )}
             </div>
+
           </div>
         ) : (
           <div className="w-full text-center py-20">
@@ -324,19 +387,10 @@ const FeaturedEvents = () => {
         className="w-full h-20 sm:h-24 relative bottom-20 left-0 object-cover"
       />
 
-      {/* Scrolling Text Loop */}
+      {/* Bottom Scrolling Text Loop */}
       <div className="w-full relative bottom-[13vh] left-0 skew-y-2">
         <LogoLoop
-          logos={[
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-          ]}
+          logos={Array(8).fill({ text: "IEDC SUMMIT 2025" })}
           speed={80}
           direction="right"
           logoHeight={20}
