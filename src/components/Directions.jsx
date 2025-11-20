@@ -11,11 +11,10 @@ const Directions = () => {
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
 
   // Images for each transport mode
-  // You can replace these URLs with your local assets like "/img/train.jpg"
   const transportImages = {
-    train: "https://images.unsplash.com/photo-1589196728426-4613a4992c42?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    bus: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&q=80&w=1000",
-    flight: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=1000",
+    train: "/train.png",
+    bus: "/bus.png",
+    flight: "/flight.png",
   };
 
   // Only animate on first mount
@@ -253,8 +252,7 @@ const Directions = () => {
                {/* Image Overlay Gradient */}
                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
                
-               {/* Image switching animation logic can be handled by key change */}
-               {/* Use key={activeTransport} to force re-render and animate for simple transition */}
+               {/* Image switching animation */}
                <img 
                   key={activeTransport}
                   src={transportImages[activeTransport]} 
@@ -311,4 +309,4 @@ const Directions = () => {
   );
 };
 
-export default Directions;    
+export default Directions;

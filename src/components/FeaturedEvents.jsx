@@ -273,7 +273,7 @@ const FeaturedEvents = () => {
         ) : events.length > 0 ? (
           <div className="relative">
             {/* Cards Grid */}
-            <div className="relative h-[450px] sm:h-[600px] md:h-[750px] lg:h-[900px] flex items-center justify-center mt-[28vh] mb-[5vh] md:mt-0 md:-mb-[10vh]">
+            <div className="relative h-[450px] sm:h-[65000px] md:h-[750px] lg:h-[900px] flex items-center justify-center mt-[28vh] mb-[12vh] md:-mt-[20vh] md:-mb-[20vh]">
               {events.length > 1 && (
                 <button
                   onClick={handlePrev}
@@ -332,14 +332,14 @@ const FeaturedEvents = () => {
               <div className="lg:hidden flex items-center justify-center gap-8 mb-12">
                 <button
                   onClick={handlePrev}
-                  className="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg"
+                  className="w-14 h-14 absolute z-20 bottom-100 left-0 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg"
                   aria-label="Previous event"
                 >
                   <ChevronLeft size={28} />
                 </button>
                 <button
                   onClick={handleNext}
-                  className="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg"
+                  className="w-14 h-14 absolute z-20 bottom-100 right-0 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg"
                   aria-label="Next event"
                 >
                   <ChevronRight size={28} />
@@ -348,7 +348,7 @@ const FeaturedEvents = () => {
             )}
 
             {/* Scrollable Event Cards Loop */}
-            <div className="w-full py-12 relative mt-8">
+            <div className="w-full py-12 relative sm:mt-25 md:mt-0">
               <div className="absolute inset-y-0 left-0 w-12 md:w-32 bg-gradient-to-r from-white via-white/90 to-transparent z-10 pointer-events-none" />
               <div className="absolute inset-y-0 right-0 w-12 md:w-32 bg-gradient-to-l from-white via-white/90 to-transparent z-10 pointer-events-none" />
               

@@ -218,6 +218,7 @@ export const LogoLoop = memo(
     const renderLogoItem = useCallback(
       (item, key) => {
         const isNodeItem = 'node' in item;
+        const isImageItem = 'src' in item;
 
         const content = isNodeItem ? (
           <span
@@ -231,6 +232,19 @@ export const LogoLoop = memo(
           >
             {item.node}
           </span>
+        ) : isImageItem ? (
+          <img
+            src={item.src}
+            alt={item.alt || ''}
+            className={cx(
+              'h-(--logoloop-logoHeight) w-auto object-contain',
+              '[-webkit-user-drag:none] pointer-events-none',
+              '[image-rendering:-webkit-optimize-contrast]',
+              'motion-reduce:transition-none',
+              scaleOnHover &&
+                'transition-transform duration-300 ease-in-out group-hover/item:scale-120'
+            )}
+          />
         ) : (
           <div
             className={cx(

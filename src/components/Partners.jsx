@@ -83,11 +83,11 @@ const Partners = () => {
       ],
     },
     {
-      title: "Media Partners",
+      title: "Media Partner",
       partners: [{ src: "/manorama.png", alt: "manorama" }],
     }, 
     {
-      title: "Happiness Partners",
+      title: "Happiness Partner",
       partners: [{ src: "/radio-mango.png", alt: "Radio Mango" }],
     },
     {

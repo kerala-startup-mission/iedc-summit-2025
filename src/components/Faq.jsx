@@ -4,13 +4,13 @@ import LogoLoop from "./LogoLoop";
 const Faq = () => {
   return (
     <>
-      <section className="py-12 px-5 bg-white">
+      <section className="py-2 px-5 bg-white">
         <div className="container mx-auto">
           <div className=" text-3xl md:text-5xl lg:text-5xl font-gilroy text-center mb-10 lg:mb-20 text-blue-600">
             FAQ
           </div>
           <div className="grid md:grid-cols-2 gap-5 lg:gap-10 mb-20">
-          <div>
+          <div className="font-clash-display">
             <div className="accordion accordion--radio flex flex-col gap-3">
               <div className="tab border-2 rounded-xl bg-white overflow-hidden">
                 <input type="checkbox" id="rd1" className="hidden peer" />
@@ -112,7 +112,7 @@ const Faq = () => {
               </div>
             </div>
           </div>
-          <div>
+          <div className="font-clash-display">
             <div className="accordion accordion--radio flex flex-col gap-3">
               <div className="tab border-2 rounded-xl bg-white overflow-hidden">
                 <input type="checkbox" id="rd7" className="hidden peer" />
@@ -180,7 +180,7 @@ const Faq = () => {
                 </label>
                 <div className="tab__content max-h-0 overflow-hidden transition-all duration-300 peer-checked:max-h-[1000px]">
                   <div className="p-3 border-t-2">
-                    Follow us on Instagram, LinkedIn and regularly check www.innovationfestival.in for updates
+                    Follow us on <a href="http://instagram.com/iedcsummit" target="_blank" rel="noopener noreferrer">Instagram</a>, <a href="http://linkedin.com/company/iedcsummit" target="_blank" rel="noopener noreferrer">LinkedIn</a> and regularly check <a href="http://iedcsummit.in" target="_blank" rel="noopener noreferrer">www.iedcsummit.in</a> for updates
                   </div>
                 </div>
               </div>
