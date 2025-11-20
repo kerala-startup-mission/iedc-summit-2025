@@ -43,7 +43,6 @@ export default function FeaturedSpeakers() {
           "https://events.startupmission.in/api/event/iedc-summit-2025/speakers"
         );
         const data = await response.json();
-        // Get featured speakers and sort by order
         const featuredSpeakers = data.Featured || [];
 
         if (featuredSpeakers.length === 0) {
@@ -77,7 +76,6 @@ export default function FeaturedSpeakers() {
       </h2>
 
       <div className="w-full md:mb-30">
-        {/* Responsive Grid */}
         {isLoading ? (
           <LoadingAnimation />
         ) : error ? (
@@ -87,47 +85,66 @@ export default function FeaturedSpeakers() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-6 gap-6 max-w-7xl mx-auto justify-center mb-[15vh]  lg:mb-[2vh]">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-6 gap-4 md:gap-6 max-w-7xl mx-auto justify-center mb-[15vh] lg:mb-[2vh]">
             {speakers.map((speaker, index) => (
               <div
                 key={speaker.id}
-                className="relative w-full max-w-xs aspect-3/4 overflow-hidden group"
+                className="relative group overflow-hidden bg-cover bg-no-repeat bg-center shadow-xl transition-all duration-700 bg-[url('/bekal.png')] aspect-[3/4] rounded-lg"
               >
-                {/* Speaker Image */}
+                <div className="bg-white/20 h-full relative duration-700">
+                  <img
+                    src={speaker.photo}
+                    alt={speaker.name}
+                    className="w-full h-full object-cover object-top"
+                  />
+
+                  {/* Star decoration */}
+                  <div
+                    className="absolute -bottom-8 left-2 md:-bottom-22 md:left-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-clash-display font-semibold pointer-events-none leading-none scale-350 md:scale-250 z-10"
+                    style={{
+                      color: starColors[index % starColors.length],
+                    }}
+                  >
+                    *
+                  </div>
+
+                  {/* Info Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent flex flex-col justify-end p-3 md:p-4 z-20">
+                    
+                    {/* Name - Always Visible & Aligned at bottom initially */}
+                    <p className="text-[14px] md:text-[14px] font-medium font-clash-display leading-tight text-white relative z-20">
+                      {speaker.name}
+                    </p>
+
+                    {/* Designation - Collapsed by default on Desktop, expands on hover */}
+                    {/* This ensures Name sits at the bottom when not hovered */}
+                    <div className="overflow-hidden transition-all duration-500 ease-in-out 
+                                    max-h-[3rem] opacity-100                /* Mobile: Visible */
+                                    md:max-h-0 md:opacity-0                 /* Desktop: Hidden (Collapsed) */
+                                    md:group-hover:max-h-[3rem] md:group-hover:opacity-100 /* Desktop Hover: Expanded */
+                    ">
+                      <p className="text-[10px] sm:text-xs md:text-[12px] font-light font-gilroy-light text-gray-200 mt-1 line-clamp-2">
+                        {speaker.designation}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
                 <img
-                  src={speaker.photo}
-                  alt={speaker.name}
-                  className="w-full h-full object-cover"
+                  src="/hero-blocks.png"
+                  alt="lighthouse"
+                  className="absolute -bottom-2 -right-1 w-8 md:w-auto opacity-80"
                 />
 
                 {speaker.linkedin && speaker.linkedin.length > 0 && (
                   <IoLogoLinkedin
-                    className="z-50 absolute top-2 right-2 text-white text-2xl md:text-3xl cursor-pointer hover:scale-110 transition-all duration-500 drop-shadow-2xl md:opacity-0 md:group-hover:opacity-100 md:-translate-y-4 md:group-hover:translate-y-0"
+                    className="z-50 absolute top-3 right-3 text-white text-2xl md:text-3xl cursor-pointer hover:scale-110 transition-all duration-500 drop-shadow-md md:opacity-0 md:group-hover:opacity-100 md:-translate-y-4 md:group-hover:translate-y-0"
                     style={{
                       color: starColors[index % starColors.length],
                     }}
                     onClick={() => window.open(speaker.linkedin, "_blank")}
                   />
                 )}
-
-                {/* Star decoration - asterisk with color */}
-                <div
-                  className="absolute -bottom-8 left-2 md:-bottom-22 md:left-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-clash-display font-semibold pointer-events-none leading-none scale-350 md:scale-250"
-                  style={{
-                    color: starColors[index % starColors.length],
-                  }}
-                >
-                  *
-                </div>
-                {/* Info - Always Visible */}
-                <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/5 to-black/50 flex flex-col justify-end p-4">
-                  <p className="text-[12px] md:text-[14px] font-medium font-clash-display leading-tight text-white">
-                    {speaker.name}
-                  </p>
-                  <p className="text-[10px] sm:text-xs md:text-[12px] font-light font-gilroy-light text-white mt-1">
-                    {speaker.designation}
-                  </p>
-                </div>
               </div>
             ))}
           </div>
@@ -145,6 +162,7 @@ export default function FeaturedSpeakers() {
       <div className="w-full absolute bottom-8 left-0 -skew-y-2">
         <LogoLoop
           logos={[
+            { text: "IEDC SUMMIT 2025" },
             { text: "IEDC SUMMIT 2025" },
             { text: "IEDC SUMMIT 2025" },
             { text: "IEDC SUMMIT 2025" },
