@@ -91,7 +91,7 @@ export default function FeaturedSpeakers() {
                 key={speaker.id}
                 className="relative group overflow-hidden bg-cover bg-no-repeat bg-center shadow-xl transition-all duration-700 bg-[url('/bekal.png')] aspect-[3/4] rounded-lg"
               >
-                <div className="bg-white/20 h-full relative duration-700">
+                <div className="h-full relative duration-700">
                   <img
                     src={speaker.photo}
                     alt={speaker.name}
@@ -100,7 +100,7 @@ export default function FeaturedSpeakers() {
 
                   {/* Star decoration */}
                   <div
-                    className="absolute -bottom-8 left-2 md:-bottom-22 md:left-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-clash-display font-semibold pointer-events-none leading-none scale-350 md:scale-250 z-10"
+                    className="absolute -bottom-8 left-2 md:-bottom-22 md:left-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-clash-display font-semibold pointer-events-none leading-none scale-350 md:scale-200 z-10"
                     style={{
                       color: starColors[index % starColors.length],
                     }}
