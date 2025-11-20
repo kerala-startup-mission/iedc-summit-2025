@@ -79,7 +79,11 @@ const EOICard = ({ card }) => {
         {/* Action Button */}
         <div className="mt-auto w-full flex gap-2">
           <button
-            onClick={card.buttonAction}
+            onClick={() => {
+              if (!card.disabled && card.registrationLink) {
+                window.open(card.registrationLink, '_blank', 'noopener,noreferrer');
+              }
+            }}
             disabled={card.disabled}
             className={`flex-1 h-9 md:h-10 rounded-lg flex items-center justify-center transition ${
               card.disabled

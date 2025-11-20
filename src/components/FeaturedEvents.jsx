@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { ChevronRight, ChevronLeft, Play } from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import side_image from "../assets/side_image.png";
 import { Link } from "react-router-dom";
+import EventCard from "./EventCard";
 import LogoLoop from "./LogoLoop";
 
 const LoadingAnimation = () => (
@@ -24,81 +24,236 @@ const LoadingAnimation = () => (
   </div>
 );
 
-const FeaturedEvents = () => {
-  const [events, setEvents] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+// ---- Helpers ----
 
-  // Test data with sponsor logos
-  const testEvents = [
-    {
-      id: 1,
-      title: "1Tank for Students",
-      description:
-        "🚀 Seize Your Opportunity to Go Global! 🔥\n\n1Pitch, Infinite Opportunities\n\nPitch your startup idea on the IEDC Summit 2025 stage and stand a chance to:\n\n🏆 Secure Funding\n🎓 Win a Fully Funded* 1-Year Entrepreneurship Training in the UAE\n\nApplication Deadline: November 15, 2025",
-      registrationLink: "https://www.iedcsummit.in/1tank",
-      sponsors: ["/tiib-logo.png", "/1trepreneur-logo.png", "/campusfund-logo.png", "/tie-logo.png"]
+const getEventType = (category) => {
+  if (!category) return [];
+
+  const categories = Array.isArray(category)
+    ? category
+    : String(category)
+        .split(',')
+        .map((c) => c.trim());
+
+  const types = [];
+  if (categories.includes('Featured')) types.push('Featured');
+  if (categories.includes('Event')) types.push('Summit Day');
+  if (categories.includes('Pre-Event')) types.push('Pre-Event');
+  return types;
+};
+
+const transformAgendaToEvents = (agenda) => {
+  if (!agenda) return [];
+
+  const events = [];
+
+  Object.values(agenda).forEach((dateGroup) => {
+    Object.values(dateGroup).forEach((venueEvents) => {
+      venueEvents.forEach((event) => {
+        const categories = Array.isArray(event.category)
+          ? event.category
+          : String(event.category)
+              .split(',')
+              .map((c) => c.trim());
+
+        if (categories.includes('Workshop') || categories.includes('EOI')) return;
+
+        const eventType = getEventType(event.category);
+
+        events.push({
+          id: event.id || Math.random(),
+          title: event.name || '',
+          description: event.description || '',
+          registrationLink: event.link || '',
+          eventType,
+          isFeatured: eventType.includes('Featured'),
+          startTime: event.start_time,
+          endTime: event.end_time,
+          // FIX: Removed the unsafe JSON.parse here. 
+          // We will extract posterUrl in the safe processEventDescriptions function.
+        });
+      });
+    });
+  });
+
+  return events;
+};
+
+// Safely parses JSON descriptions and extracts Poster URLs
+const processEventDescriptions = (events) =>
+  events.map((event) => {
+    const rawDescription = event.description || '';
+    const cleanDescription = rawDescription.trim();
+
+    if (!cleanDescription) return event;
+
+    try {
+      // 1. Attempt to parse JSON
+      const descData = JSON.parse(cleanDescription);
+      
+      // 2. Extract Description text
+      const extractedDescription = descData.description || descData.Description;
+
+      const processedEvent = {
+        ...event,
+        description: extractedDescription || (typeof descData === 'string' ? descData : event.description),
+      };
+
+      // 3. Extract Extra Data (Poster, etc.)
+      if (descData.ExtraData) {
+        const extra = descData.ExtraData;
+        Object.assign(processedEvent, {
+          ...(extra.posterUrl && { posterUrl: extra.posterUrl }),
+          ...(extra.logos && { logos: extra.logos }),
+          ...(extra.slots && { slots: extra.slots }),
+          ...(extra.registration_start && { registration_start: extra.registration_start }),
+          ...(extra.registration_end && { registration_end: extra.registration_end }),
+          ...(extra.vidLink && { vidLink: extra.vidLink }),
+          ...(extra.poc && { poc: extra.poc }),
+          ...(extra.capacity && { capacity: extra.capacity }),
+        });
+      }
+
+      return processedEvent;
+    } catch (parseError) {
+      // 4. Fallback: If JSON parse fails, check if it's a string that LOOKS like JSON 
+      // (sometimes APIs return weirdly escaped strings)
+      const descMatch = cleanDescription.match(
+        /"description"\s*:\s*"([^"]*(?:\\.[^"]*)*)"/
+      );
+
+      if (descMatch) {
+        return {
+          ...event,
+          description: descMatch[1].replace(/\\"/g, '"'),
+        };
+      }
+      
+      // 5. Final Fallback: It's just a plain string description, return as is.
+      return event;
     }
-  ];
+  });
 
-  useEffect(() => {
-    // Comment out API fetching for testing
-    // const fetchEvents = async () => {
-    //   try {
-    //     const fetchedEvents = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue");
-    //     const eventsData = await fetchedEvents.json();
-    //
-    //     // Transform and filter for Featured events only
-    //     const transformedEvents = [];
-    //
-    //     if (eventsData.agenda) {
-    //       Object.values(eventsData.agenda).forEach(dateGroup => {
-    //         Object.values(dateGroup).forEach(venueEvents => {
-    //           venueEvents.forEach(event => {
-    //             // Check if the event has "Featured" in its category
-    //             if (event.category && event.category.includes("Featured")) {
-    //               transformedEvents.push({
-    //                 id: event.id || Math.random(),
-    //                 title: event.name,
-    //                 description: event.description,
-    //                 registrationLink: event.link || "",
-    //               });
-    //             }
-    //           });
-    //         });
-    //       });
-    //     }
-    //
-    //     setEvents(transformedEvents);
-    //   } catch (error) {
-    //     console.error("Error fetching events:", error);
-    //   } finally {
-    //     setIsLoading(false);
-    //   }
-    // };
+const isEventActive = (event) => {
+  const now = new Date();
+  
+  const regStart = event.registration_start ? new Date(event.registration_start) : null;
+  const regEnd = event.registration_end ? new Date(event.registration_end) : null;
+  const eventEnd = event.endTime ? new Date(event.endTime) : null;
 
-    // fetchEvents();
+  if (regStart && now < regStart) return false; // Coming Soon
+  if (regEnd && now > regEnd) return false;     // Reg Closed
+  if (eventEnd && now > eventEnd) return false; // Event Ended
 
-    // Use test data instead
-    setEvents(testEvents);
-    setIsLoading(false);
-  }, []);
+  return true;
+};
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % Math.max(events.length, 1));
-  };
+const FeaturedEvents = () => {
+  const [events, setEvents] = useState([]); 
+  const [loopItems, setLoopItems] = useState([]); 
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrev = () => {
-    setCurrentIndex(
-      (prev) =>
-        (prev - 1 + Math.max(events.length, 1)) % Math.max(events.length, 1)
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? events.length - 1 : prevIndex - 1
     );
   };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === events.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch(
+          'https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue'
+        );
+        const data = await res.json();
+
+        // 1. Get Raw Events (Strings are still raw here)
+        const allRawEvents = transformAgendaToEvents(data.agenda);
+        
+        // 2. SAFELY Process Descriptions (Extracts posters and dates)
+        const processedEvents = processEventDescriptions(allRawEvents);
+
+        // 3. Filter for Logo Loop (Active + Summit Day)
+        const activeSummitEvents = processedEvents.filter(event => {
+          const isSummitEvent = event.eventType.includes('Summit Day');
+          const isActive = isEventActive(event);
+          return isSummitEvent && isActive;
+        });
+
+        // 4. Create Loop Items using the SAFELY processed data
+        const loopData = activeSummitEvents.map((event) => ({
+          node: (
+            <Link
+              to="/events"
+              className="flex items-center gap-4 p-3 w-[320px] bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 group mx-3 h-[88px]"
+            >
+               {/* Poster Image or Initial Placeholder */}
+               <div className="flex items-center justify-center w-14 h-full bg-blue-50 rounded-lg shrink-0 overflow-hidden border border-blue-100 group-hover:bg-blue-100 transition-colors">
+                  {event.posterUrl ? (
+                    <img
+                      src={event.posterUrl}
+                      alt={event.title}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'block';
+                      }}
+                    />
+                  ) : null}
+                  <span 
+                    className="text-xl font-bold text-gray-700 leading-none absolute"
+                    style={{ display: event.posterUrl ? 'none' : 'block' }}
+                  >
+                    {event.title.charAt(0).toUpperCase()}
+                  </span>
+               </div>
+               
+               {/* Content */}
+               <div className="flex-1 min-w-0 flex flex-col justify-center h-full py-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                    <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider truncate">
+                      {event.eventType[0] || 'Event'}
+                    </span>
+                  </div>
+                  <h4 className="font-clash-display text-sm font-semibold text-gray-900 leading-tight line-clamp-2 group-hover:text-blue-600 transition-colors">
+                    {event.title}
+                  </h4>
+               </div>
+               
+               <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-white group-hover:text-blue-600 group-hover:shadow-sm transition-all shrink-0">
+                 <ChevronRight size={16} />
+               </div>
+            </Link>
+          )
+        }));
+        setLoopItems(loopData);
+
+        // 5. Filter Featured Events for Main Carousel
+        const featuredEvents = processedEvents.filter(e => e.isFeatured);
+        setEvents(featuredEvents);
+
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   return (
     <section
       id="featured-events"
-      className="w-full py-16 md:py-24 bg-white relative overflow-hidden"
+      className="w-full py-5 md:py-24 bg-white relative overflow-hidden"
     >
       {/* Decorative circles */}
       <div className="w-96 h-96 left-32 top-1/3 absolute opacity-50 rounded-full border border-blue-600"></div>
@@ -117,9 +272,8 @@ const FeaturedEvents = () => {
           <LoadingAnimation />
         ) : events.length > 0 ? (
           <div className="relative">
-            {/* Cards Grid with Stacked Effect */}
-            <div className="relative h-80 sm:h-96 md:h-[550px] lg:h-[700px] flex items-center justify-center mt-[12vh] mb-[5vh] md:mt-[3vh]">
-              {/* Previous Button - Large screens only, left side */}
+            {/* Cards Grid */}
+            <div className="relative h-[450px] sm:h-[65000px] md:h-[750px] lg:h-[900px] flex items-center justify-center mt-[28vh] mb-[12vh] md:-mt-[20vh] md:-mb-[20vh]">
               {events.length > 1 && (
                 <button
                   onClick={handlePrev}
@@ -131,7 +285,6 @@ const FeaturedEvents = () => {
               )}
 
               <AnimatePresence mode="popLayout">
-                {/* Display 3 cards in a stacked fashion */}
                 {[0, 1, 2].map((offset) => {
                   const cardIndex = (currentIndex + offset) % events.length;
                   const event = events[cardIndex];
@@ -153,86 +306,16 @@ const FeaturedEvents = () => {
                         stiffness: 260,
                         damping: 20,
                       }}
-                      className="absolute w-full max-w-xs md:max-w-md"
+                      className="absolute w-full max-w-sm md:max-w-3xl "
                     >
-                      <div className="w-full max-w-[80vw] md:max-w-[46vw] lg:max-w-4xl mx-auto aspect-4/5 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl">
-                        <div className="w-[85%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 lg:p-8 flex flex-col gap-3 md:gap-4">
-                          <h3 className="text-xl md:text-3xl lg:text-4xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
-                            {event.title}
-                          </h3>
-
-                          <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black leading-relaxed [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
-                            {event.description}
-                          </p>
-
-                          {/* Sponsor Logos */}
-                          {event.sponsors && event.sponsors.length > 0 && (
-                            <div className="flex items-center gap-2 md:gap-3 flex-wrap mt-auto pt-4">
-                              {event.sponsors.map((sponsor, idx) => (
-                                <img
-                                  key={idx}
-                                  src={sponsor} 
-                                  alt="sponsor" 
-                                  className="h-6 md:h-8 lg:h-9 object-contain"
-                                />
-                              ))}
-                            </div>
-                          )}
-
-                          {/* Buttons Container */}
-                          <div className="flex gap-2 mt-auto pt-4">
-                            {event.registrationLink ? (
-                              <a
-                                href={event.registrationLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex-1 h-9 md:h-10 lg:h-11 bg-black rounded-lg flex items-center justify-center hover:opacity-80 opacity-90 transition"
-                              >
-                                <span className="text-white text-xs md:text-sm lg:text-base font-medium font-clash-display tracking-tight">
-                                  REGISTER NOW
-                                </span>
-                              </a>
-                            ) : (
-                              <div className="flex-1 h-9 md:h-10 lg:h-11 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
-                                <span className="text-white text-xs md:text-sm lg:text-base font-medium font-clash-display tracking-tight">
-                                  COMING SOON
-                                </span>
-                              </div>
-                            )}
-
-                            {/* Promo Video Button */}
-                            <button
-                              onClick={() => {
-                                window.open(
-                                  "https://www.linkedin.com/posts/iedcsummit_iedcsummit2025-daretodisrupt-keralastartupmission-activity-7392572580018311168-3nxw",
-                                  "_blank",
-                                  "noopener,noreferrer"
-                                );
-                              }}
-                              className="h-9 md:h-10 lg:h-11 px-3 md:px-4 lg:px-5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0"
-                              aria-label="Watch promo video"
-                            >
-                              <Play size={16} fill="currentColor" />
-                              <span className="text-white text-xs md:text-sm font-medium font-clash-display tracking-tight hidden sm:inline">
-                                PROMO
-                              </span>
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* Colored Decorative Blocks */}
-                        <img
-                          src={side_image}
-                          alt="side decorations"
-                          className="absolute right-0 top-0 w-12 md:w-20 h-auto"
-                        />
+                      <div className="transform-gpu">
+                        <EventCard event={event} />
                       </div>
                     </motion.div>
                   );
                 })}
               </AnimatePresence>
 
-              {/* Next Button - Large screens only, right side */}
               {events.length > 1 && (
                 <button
                   onClick={handleNext}
@@ -244,63 +327,54 @@ const FeaturedEvents = () => {
               )}
             </div>
 
-            {/* Navigation Controls and View All - Mobile and Tablet only */}
+            {/* Mobile Navigation Buttons */}
             {events.length > 1 && (
-              <div className="lg:hidden flex items-center justify-between gap-4 mb-[10vh]">
-                {/* Previous Button */}
+              <div className="lg:hidden flex items-center justify-center gap-8 mb-12">
                 <button
                   onClick={handlePrev}
-                  className="w-14 h-14 md:w-16 md:h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg shrink-0"
+                  className="w-14 h-14 absolute z-20 bottom-100 left-0 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg"
                   aria-label="Previous event"
                 >
-                  <ChevronLeft size={32} />
+                  <ChevronLeft size={28} />
                 </button>
-
-                {/* View All Link - Center on mobile */}
-                <Link
-                  to="/events"
-                  className="flex-1 text-center text-blue-600 text-base md:text-lg font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity"
-                >
-                  View all events...
-                </Link>
-
-                {/* Next Button */}
                 <button
                   onClick={handleNext}
-                  className="w-14 h-14 md:w-16 md:h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg shrink-0"
+                  className="w-14 h-14 absolute z-20 bottom-100 right-0 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg"
                   aria-label="Next event"
                 >
-                  <ChevronRight size={32} />
+                  <ChevronRight size={28} />
                 </button>
               </div>
             )}
 
-            {/* View All Link - Mobile only when single event */}
-            {events.length <= 1 && (
-              <div className="lg:hidden text-center py-8">
-                <Link
-                  to="/events"
-                  className="text-blue-600 text-base md:text-lg font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity"
-                >
-                  View all events...
-                </Link>
-              </div>
-            )}
-
-            {/* View All Link - Desktop only */}
-            <div className="hidden lg:block text-center pb-12">
-              <Link
-                to="/events"
-                className="text-blue-600 text-lg md:text-xl font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity"
-              >
-                View all events...
-              </Link>
+            {/* Scrollable Event Cards Loop */}
+            <div className="w-full py-12 relative sm:mt-25 md:mt-0">
+              <div className="absolute inset-y-0 left-0 w-12 md:w-32 bg-gradient-to-r from-white via-white/90 to-transparent z-10 pointer-events-none" />
+              <div className="absolute inset-y-0 right-0 w-12 md:w-32 bg-gradient-to-l from-white via-white/90 to-transparent z-10 pointer-events-none" />
+              
+              {loopItems.length > 0 ? (
+                 <LogoLoop
+                   logos={loopItems}
+                   speed={40} 
+                   direction="left"
+                   logoHeight={90}
+                   gap={20}
+                   pauseOnHover={true}
+                   className="py-2"
+                   ariaLabel="All Events List"
+                 />
+              ) : (
+                <div className="text-center text-gray-400 font-gilroy-light text-sm">
+                   More events coming soon...
+                </div>
+              )}
             </div>
+
           </div>
         ) : (
           <div className="w-full text-center py-20">
             <p className="text-2xl font-gilroy-light text-gray-500">
-              Loading featured events...
+              No featured events available
             </p>
           </div>
         )}
@@ -310,22 +384,13 @@ const FeaturedEvents = () => {
       <img
         src="/hero-blocks.png"
         alt="Decorative blocks"
-        className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
+        className="w-full h-20 sm:h-24 relative bottom-20 left-0 object-cover"
       />
 
-      {/* Scrolling Text Loop */}
-      <div className="w-full absolute bottom-12 left-0 skew-y-2">
+      {/* Bottom Scrolling Text Loop */}
+      <div className="w-full relative bottom-[13vh] left-0 skew-y-2">
         <LogoLoop
-          logos={[
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-            { text: "IEDC SUMMIT 2025" },
-          ]}
+          logos={Array(8).fill({ text: "IEDC SUMMIT 2025" })}
           speed={80}
           direction="right"
           logoHeight={20}

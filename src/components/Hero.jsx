@@ -99,18 +99,20 @@ const Hero = () => {
             </div>
           </a>
 
-          {/* Pricing */}
+          {/* Pricing - Mobile (Reduced Size) */}
           <div
             className="flex items-baseline gap-2 mb-2 animate-fade-in-up"
             style={{ animationDelay: "0.4s" }}
           >
             <div className="relative inline-block">
-              <div className="text-blue-400 text-2xl font-gilroy-bold opacity-75">
+              {/* Reduced from text-2xl to text-xl */}
+              <div className="text-blue-400 text-xl font-gilroy-bold opacity-75">
                 ₹999
               </div>
-              <div className="w-16 h-0.5 border-t-[3px] border-red-600 absolute top-1/2 left-0 -translate-y-1/2 -skew-y-10" />
+              <div className="w-12 h-0.5 border-t-[2px] border-red-600 absolute top-1/2 left-0 -translate-y-1/2 -skew-y-10" />
             </div>
-            <div className="text-blue-600 text-3xl font-gilroy-bold">
+            {/* Reduced from text-3xl to text-2xl */}
+            <div className="text-blue-600 text-2xl font-gilroy-bold">
               ₹749/-
             </div>
           </div>
@@ -135,6 +137,17 @@ const Hero = () => {
               <span className="text-blue-700 text-xs font-black font-gilroy-bold">
                 EARLYBIRD
               </span>
+            </div>
+          </div>
+
+          {/* Closing Date - Mobile */}
+          <div
+            className="mt-2 animate-fade-in-up"
+            style={{ animationDelay: "0.7s" }}
+          >
+            <div className="text-red-500 text-xs font-semibold font-gilroy-medium flex items-center gap-1">
+              <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
+              Offer ends on 30 Nov 2025
             </div>
           </div>
         </div>
@@ -312,13 +325,15 @@ const Hero = () => {
               </div>
             </a>
 
-            {/* Amount */}
+            {/* Amount - Desktop (Reduced Size) */}
             <div className="flex items-baseline gap-2 mt-[2vh]">
-              <div className="text-blue-400 text-[2.5vh] lg:text-[4vh] font-black font-gilroy-bold opacity-75 relative inline-block">
-                <div className="w-full lg:w-full h-[0.5vh] lg:h-[0.7vh] border-t-4 border-red-600 absolute top-1/2 left-0 -translate-y-1/2 -skew-6" />
+              {/* Reduced from 2.5vh/4vh to 2vh/3vh */}
+              <div className="text-blue-400 text-[2vh] lg:text-[3vh] font-black font-gilroy-bold opacity-75 relative inline-block">
+                <div className="w-full lg:w-full h-[0.4vh] lg:h-[0.5vh] border-t-4 border-red-600 absolute top-1/2 left-0 -translate-y-1/2 -skew-6" />
                 ₹999
               </div>
-              <div className="text-blue-600 text-[3vh] lg:text-[5vh] font-black font-gilroy-bold">
+              {/* Reduced from 3vh/5vh to 2.5vh/4vh */}
+              <div className="text-blue-600 text-[2.5vh] lg:text-[4vh] font-black font-gilroy-bold">
                 ₹749/-
               </div>
             </div>
@@ -339,6 +354,17 @@ const Hero = () => {
                 <span className="text-blue-700 text-[1.1vh] lg:text-lg font-black font-gilroy-bold">
                   EARLYBIRD
                 </span>
+              </div>
+            </div>
+
+            {/* Closing Date - Desktop */}
+            <div
+              className="mt-[1vh] animate-fade-in-up"
+              style={{ animationDelay: "0.7s" }}
+            >
+              <div className="text-red-500 text-[1.5vh] lg:text-lg font-semibold font-gilroy-medium flex items-center gap-2">
+                <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                Offer ends on 30 Nov 2025
               </div>
             </div>
           </div>
