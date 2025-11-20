@@ -85,13 +85,17 @@ export default function FeaturedSpeakers() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-6 gap-4 md:gap-6 max-w-7xl mx-auto justify-center mb-[15vh] lg:mb-[2vh]">
+          // CHANGED: Replaced grid with flex + wrap + justify-center
+          // This forces items to center-align and grow outwards from the middle
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 max-w-7xl mx-auto mb-[15vh] lg:mb-[2vh]">
             {speakers.map((speaker, index) => (
               <div
                 key={speaker.id}
-                className="relative group overflow-hidden bg-cover bg-no-repeat bg-center shadow-xl transition-all duration-700 bg-[url('/bekal.png')] aspect-[3/4] rounded-lg"
+                // Set explicit widths to mimic grid columns (w-1/2 on mobile, ~w-1/5 on desktop)
+                // Using slightly less than full fraction (e.g. w-[48%]) to account for gaps
+                className="relative group overflow-hidden bg-cover bg-no-repeat bg-center shadow-xl transition-all duration-700 bg-[url('/bekal.png')] aspect-[3/4] rounded-xl w-[47%] sm:w-[48%] md:w-[18%] lg:w-[15%]"
               >
-                <div className="h-full relative duration-700">
+                <div className="bg-white/20 h-full relative duration-700">
                   <img
                     src={speaker.photo}
                     alt={speaker.name}
@@ -100,7 +104,7 @@ export default function FeaturedSpeakers() {
 
                   {/* Star decoration */}
                   <div
-                    className="absolute -bottom-8 left-2 md:-bottom-22 md:left-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-clash-display font-semibold pointer-events-none leading-none scale-350 md:scale-200 z-10"
+                    className="absolute -bottom-8 left-2 md:-bottom-22 md:left-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-clash-display font-semibold pointer-events-none leading-none scale-350 md:scale-250 z-10"
                     style={{
                       color: starColors[index % starColors.length],
                     }}
@@ -109,7 +113,7 @@ export default function FeaturedSpeakers() {
                   </div>
 
                   {/* Info Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent flex flex-col justify-end p-3 md:p-4 z-20">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-3 md:p-4 z-20">
                     
                     {/* Name - Always Visible & Aligned at bottom initially */}
                     <p className="text-[14px] md:text-[14px] font-medium font-clash-display leading-tight text-white relative z-20">
@@ -117,7 +121,6 @@ export default function FeaturedSpeakers() {
                     </p>
 
                     {/* Designation - Collapsed by default on Desktop, expands on hover */}
-                    {/* This ensures Name sits at the bottom when not hovered */}
                     <div className="overflow-hidden transition-all duration-500 ease-in-out 
                                     max-h-[3rem] opacity-100                /* Mobile: Visible */
                                     md:max-h-0 md:opacity-0                 /* Desktop: Hidden (Collapsed) */

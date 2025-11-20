@@ -105,7 +105,8 @@ const Partners = () => {
         { src: "/ghc-logo.png", alt: "Growth Lab" },
         { src: "/ksd-flea.png", alt: "KSD Flea" },
         { src: "/nest.png", alt: "nest" },
-        { src: "/mulearn.png", alt: "Mulearn" }
+        { src: "/mulearn.png", alt: "Mulearn" },
+        { src: "/ksdupdates.png", alt: "KSD Updates" },
       ],
     },
   ];
