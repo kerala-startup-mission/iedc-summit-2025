@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LogoLoop from "./LogoLoop";
 import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
+import { IoLogoLinkedin } from "react-icons/io5";
 
 const LoadingAnimation = () => (
   <div className="flex items-center justify-center py-20">
@@ -42,7 +43,6 @@ export default function FeaturedSpeakers() {
           "https://events.startupmission.in/api/event/iedc-summit-2025/speakers"
         );
         const data = await response.json();
-
         // Get featured speakers and sort by order
         const featuredSpeakers = data.Featured || [];
 
@@ -91,7 +91,7 @@ export default function FeaturedSpeakers() {
             {speakers.map((speaker, index) => (
               <div
                 key={speaker.id}
-                className="relative w-full max-w-xs aspect-3/4 overflow-hidden"
+                className="relative w-full max-w-xs aspect-3/4 overflow-hidden group"
               >
                 {/* Speaker Image */}
                 <img
@@ -99,6 +99,16 @@ export default function FeaturedSpeakers() {
                   alt={speaker.name}
                   className="w-full h-full object-cover"
                 />
+
+                {speaker.linkedin && speaker.linkedin.length > 0 && (
+                  <IoLogoLinkedin
+                    className="z-50 absolute top-2 right-2 text-white text-2xl md:text-3xl cursor-pointer hover:scale-110 transition-all duration-500 drop-shadow-2xl md:opacity-0 md:group-hover:opacity-100 md:-translate-y-4 md:group-hover:translate-y-0"
+                    style={{
+                      color: starColors[index % starColors.length],
+                    }}
+                    onClick={() => window.open(speaker.linkedin, "_blank")}
+                  />
+                )}
 
                 {/* Star decoration - asterisk with color */}
                 <div
