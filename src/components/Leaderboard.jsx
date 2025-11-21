@@ -4,6 +4,7 @@ const Leaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [lastUpdated, setLastUpdated] = useState('')
 
   // Google Sheet CSV export URL - make sure the sheet is set to "Anyone with the link can view"
   const SHEET_URL = 'https://docs.google.com/spreadsheets/d/14Y9ea72JNHZx3XDpY95jSnkzk_uYWdlZrSp_lPnDhwg/export?format=csv&gid=1396061035'
@@ -26,11 +27,17 @@ const Leaderboard = () => {
           return {
             siNo: parseInt(values[0]),
             district: values[1],
-            ticketCount: parseInt(values[2])
+            ticketCount: parseInt(values[2]),
+            lastUpdated: values[4] // Column E (5th column, index 4)
           }
         }).filter(item => !isNaN(item.ticketCount))
         
         const sortedData = parsedData.sort((a, b) => b.ticketCount - a.ticketCount)
+        
+        // Set last updated from the first item
+        if (sortedData.length > 0) {
+          setLastUpdated(sortedData[0].lastUpdated || '')
+        }
         const formattedData = sortedData.map((item, index) => {
           const rank = index + 1
           return {
@@ -122,9 +129,14 @@ const Leaderboard = () => {
           <h1 className="text-4xl md:text-6xl font-bold text-blue-500 font-clash-display">
             LeaderBoard
           </h1>
-          <p className="text-lg text-gray-600 mb-4 font-normal">
+          <p className="text-lg text-gray-600 mb-4 font-normal font-clash-display">
             These are the top districts that have most registrations
           </p>
+          {lastUpdated && (
+            <p className="text-sm text-gray-500 mb-4 font-clash-display">
+              Last updated: {lastUpdated}
+            </p>
+          )}
           {error && (
             <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-2 rounded mb-4 inline-block">
               {error}
