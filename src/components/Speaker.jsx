@@ -40,12 +40,9 @@ export default function SpeakersPage() {
         );
         if (!res.ok) throw new Error("Fetch failed");
         const data = await res.json();
-        // Get all speakers except "startup talks"
-        const allSpeakers = Object.values(data).flat();
-        const filteredSpeakers = allSpeakers.filter(
-          speaker => speaker.category !== "startup talks"
-        );
-        setSpeakers(filteredSpeakers);
+        // Get only "Featured" speakers
+        const featuredSpeakers = data.Featured || [];
+        setSpeakers(featuredSpeakers);
       } catch (err) {
         console.error(err);
         setSpeakers([]);
@@ -112,11 +109,17 @@ export default function SpeakersPage() {
                     ? c % 2 === 0
                     : c % 2 !== 0;
 
+                  const isLeft = c % 2 === 0;
+
                   items.push(
                     <div
                       key={`${r}-${c}-${speaker.id || speakerIndex}`}
-                      className={`w-full h-0 pb-[100%] relative ${
-                        !isPhotoBlock ? `${color}` : ""
+                      style={{
+                        backgroundSize: "200% 100%",
+                        backgroundPosition: isLeft ? "0% 0%" : "100% 0%",
+                      }}
+                      className={`w-full h-0 pb-[100%] relative bg-[url('/bekal.png')] bg-no-repeat ${
+                        !isPhotoBlock ? `${color} bg-blend-multiply` : ""
                       }`}
                     >
                       {isPhotoBlock ? (
