@@ -14,6 +14,12 @@ const LoadingAnimation = () => (
 
 // ---- Helpers ----
 
+// Fixes date string format for Safari/JS compatibility
+const parseDate = (dateStr) => {
+  if (!dateStr) return null;
+  return new Date(dateStr.replace(' ', 'T'));
+};
+
 const getEventType = (category) => {
   if (!category) return [];
   const categories = Array.isArray(category)
@@ -92,58 +98,70 @@ const processEventDescriptions = (events) =>
     return processedEvent;
   });
 
-// ---- Sorting Logic ----
+// ---- NEW STRICT RANKING SYSTEM ----
 
-const getEventStatusRank = (event) => {
+const getEventRank = (event) => {
   const now = new Date();
   
-  // Determine Start Date (Registration Start -> Event Start -> Default Now)
-  const start = event.registration_start 
-    ? new Date(event.registration_start) 
-    : (event.startTime ? new Date(event.startTime) : new Date());
+  // 1. Parse Dates Safely
+  const start = parseDate(event.registration_start) || parseDate(event.startTime) || new Date();
+  const end = parseDate(event.registration_end) || parseDate(event.endTime) || new Date();
 
-  // Determine End Date (Registration End -> Event End -> Default Now)
-  const end = event.registration_end 
-    ? new Date(event.registration_end) 
-    : (event.endTime ? new Date(event.endTime) : new Date());
+  // 2. Determine Status
+  const isClosed = now > end;
+  const isUpcoming = now < start;
+  // isActive is implicit if not closed and not upcoming
 
-  // Rank 3: Closed (Lowest Priority)
-  if (now > end) return 3;
+  // 3. Determine Base Score based on STATUS (Major Grouping)
+  // Active = 0
+  // Upcoming = 100 (Pushes them below ALL active events)
+  // Closed = 200 (Pushes them to the very bottom)
+  let statusScore = 0;
+  if (isClosed) statusScore = 200;
+  else if (isUpcoming) statusScore = 100;
+  else statusScore = 0;
 
-  // Rank 2: Upcoming / Not Started Yet
-  if (now < start) return 2;
-
-  // Rank 1: Active / Open (Highest Priority)
-  return 1;
-};
-
-const getTypePriority = (event) => {
+  // 4. Determine Type Score (Sub-sorting within status)
+  // Featured = 1
+  // Pre-Event = 2
+  // Summit Day = 3
   const types = event.eventType || [];
-  // 1. Featured
-  if (types.includes('Featured')) return 1;
-  // 2. Pre-Events
-  if (types.includes('Pre-Event')) return 2;
-  // 3. Summit Day Events
-  if (types.includes('Summit Day')) return 3;
+  let typeScore = 10; // Fallback
 
-  return 4;
+  if (types.includes('Featured')) typeScore = 1;
+  else if (types.includes('Pre-Event')) typeScore = 2;
+  else if (types.includes('Summit Day')) typeScore = 3;
+
+  // Final Score = Status + Type
+  // Example: Active Featured = 0 + 1 = 1
+  // Example: Active Summit = 0 + 3 = 3
+  // Example: Upcoming Featured = 100 + 1 = 101
+  return statusScore + typeScore;
 };
 
 const sortEvents = (events) => {
   return [...events].sort((a, b) => {
-    // 1. Primary Sort: Status (Active < Upcoming < Closed)
-    const statusA = getEventStatusRank(a);
-    const statusB = getEventStatusRank(b);
+    const rankA = getEventRank(a);
+    const rankB = getEventRank(b);
 
-    if (statusA !== statusB) {
-      return statusA - statusB; // Ascending rank (1 comes before 2)
+    // 1. Primary Sort: By Calculated Rank (Status Group + Type Priority)
+    if (rankA !== rankB) {
+      return rankA - rankB;
     }
 
-    // 2. Secondary Sort: Within the same status, sort by Type (Featured < Pre < Summit)
-    const typeA = getTypePriority(a);
-    const typeB = getTypePriority(b);
+    // 2. Secondary Sort (Tie-breaker within same group & type)
+    
+    // If Closed, show MOST RECENTLY closed first
+    if (rankA >= 200) {
+      const endA = parseDate(a.registration_end) || parseDate(a.endTime);
+      const endB = parseDate(b.registration_end) || parseDate(b.endTime);
+      return endB - endA; 
+    }
 
-    return typeA - typeB;
+    // Otherwise (Active or Upcoming), show SOONEST start date first
+    const startA = parseDate(a.registration_start) || parseDate(a.startTime);
+    const startB = parseDate(b.registration_start) || parseDate(b.startTime);
+    return startA - startB;
   });
 };
 

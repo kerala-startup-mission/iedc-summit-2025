@@ -82,7 +82,7 @@ const Hero = () => {
 
           {/* Register Button */}
           <a
-            href="https://tickets.startupmission.in/iedc-summit-2025?code=earlybird"
+            href="https://tickets.startupmission.in/iedc-summit-2025"
             target="_blank"
             rel="noopener noreferrer"
             className="w-[200px] h-11 rounded-xl flex items-center justify-center relative overflow-hidden group hover:shadow-lg transition-shadow mb-3 z-20 animate-scale-in"
@@ -314,7 +314,7 @@ const Hero = () => {
 
             {/* Register Button */}
             <a
-              href="https://tickets.startupmission.in/iedc-summit-2025?code=earlybird"
+              href="https://tickets.startupmission.in/iedc-summit-2025"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 lg:px-12 py-3 lg:py-4 rounded-[29px] flex items-center justify-center mt-[2vh]  transition-colors duration-300 relative overflow-hidden group inline-block"

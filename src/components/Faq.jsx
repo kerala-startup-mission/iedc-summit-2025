@@ -194,7 +194,7 @@ const Faq = () => {
                 </label>
                 <div className="tab__content max-h-0 overflow-hidden transition-all duration-300 peer-checked:max-h-[1000px]">
                   <div className="p-3 border-t-2">
-                    For any queries regarding the summit, you can contact the organizing team via the details in the website footer: Email: iedcsummit@lbscek.ac.in, Phone: +91 99467 60222.
+                    For any queries regarding the summit, you can contact the organizing team via the details in the website footer: <br />Email: iedcsummit@lbscek.ac.in<br />Phone: +91 9 467 60222.  
                   </div>
                 </div>
               </div>
