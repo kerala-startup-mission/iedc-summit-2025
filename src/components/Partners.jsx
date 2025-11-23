@@ -1,9 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LogoLoop from "./LogoLoop";
 import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 
 const Partners = () => {
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
+  const [mainCategories, setMainCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchPartners = async () => {
+      try {
+        const response = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/speakers");
+        const data = await response.json();
+        
+        if (data.Partners) {
+          // Group partners by designation
+          const groupedPartners = data.Partners.reduce((acc, partner) => {
+            const category = partner.designation || "Other Partners";
+            if (!acc[category]) {
+              acc[category] = [];
+            }
+            acc[category].push({
+              src: partner.photo,
+              alt: partner.name,
+              // You can map other fields if needed, e.g. href if available in API
+            });
+            return acc;
+          }, {});
+
+          // Convert to array format expected by the component
+          const categoriesArray = Object.keys(groupedPartners).map(title => ({
+            title,
+            partners: groupedPartners[title]
+          }));
+
+          setMainCategories(categoriesArray);
+        }
+      } catch (error) {
+        console.error("Error fetching partners:", error);
+      }
+    };
+
+    fetchPartners();
+  }, []);
 
   // Helper component for the Partner Card
   const PartnerCard = ({ src, alt, label, categoryTitle, href, className = "" }) => {
@@ -13,7 +51,7 @@ const Partners = () => {
       <>
         {/* 1. Category Title (Absolute positioning to keep it at the top) */}
         {categoryTitle && (
-          <div className="absolute top-3 left-0 w-full text-center px-1 z-10">
+          <div className="absolute -top-1 left-0 w-full text-center px-1 z-10">
             <h3 className="font-clash-display text-[10px] md:text-xs font-bold text-blue-600 uppercase tracking-wider leading-tight whitespace-nowrap">
               {categoryTitle}
             </h3>
@@ -26,12 +64,12 @@ const Partners = () => {
         <img
           src={src}
           alt={alt}
-          className={`w-full h-16 object-contain -mt-2 ${className}`}
+          className={`w-full h-28 object-contain -mt-2 ${className}`}
         />
 
         {/* 3. Sub-label */}
         {label && (
-          <p className="md:text-[9px] text-[8px] font-semibold text-gray-400 text-center mt-2 uppercase tracking-wide absolute bottom-2 w-full px-1 leading-tight">
+          <p className="md:text-[9px] text-[8px] font-semibold text-gray-400 text-center mt-1 uppercase tracking-wide absolute bottom-2 w-full px-1 leading-tight">
             {label}
           </p>
         )}
@@ -72,45 +110,6 @@ const Partners = () => {
     });
   };
 
-  // 1. Main Partners Data
-  const mainCategories = [
-    {
-      title: "Startup Enablers",
-      partners: [
-        { src: "/tiib-logo.png", alt: "TIIB" },
-        { src: "/campusfund-logo.png", alt: "Campus Fund" },
-        { src: "/1trepreneur-logo.png", alt: "1trepreneur" },
-      ],
-    },
-    {
-      title: "Media Partner",
-      partners: [{ src: "/manorama.png", alt: "manorama" }],
-    }, 
-    {
-      title: "Happiness Partner",
-      partners: [{ src: "/radio-mango.png", alt: "Radio Mango" }],
-    },
-    {
-      title: "Ecosystem Partners",
-      partners: [
-        { src: "/tie-logo.png", alt: "TIE" },
-        { src: "/kasaracode-logo.png", alt: "Kasaracode" },
-        { src: "/tinkerhub-logo.png", alt: "Tinkerhub" },
-        { src: "/cpcri-logo.png", alt: "CPCRI" },
-        { src: "/nammude-ksd-logo.png", alt: "Nammude KSD" },
-        { src: "/trest.png", alt: "TrEST" },
-        { src: "/nasscom.png", alt: "Nasscom" },
-        { src: "/udhyam.png", alt: "Udhayam" },
-        { src: "/haris.png", alt: "Haris & Co" },
-        { src: "/ghc-logo.png", alt: "Growth Lab" },
-        { src: "/ksd-flea.png", alt: "KSD Flea" },
-        { src: "/nest.png", alt: "nest" },
-        { src: "/mulearn.png", alt: "Mulearn" },
-        { src: "/ksdupdates.png", alt: "KSD Updates" },
-      ],
-    },
-  ];
-
   // 2. Special Bottom Categories (Powered & Hosted)
   const bottomCategories = [
     {
@@ -140,7 +139,7 @@ const Partners = () => {
           label: "LBS College of Engineering",
         },
         {
-          src: "/cuk-logo.svg",
+          src: "/cuk-logo.png",
           alt: "Central University of Kerala",
           href: "https://www.cukerala.ac.in",
           label: "Central University of Kerala",
