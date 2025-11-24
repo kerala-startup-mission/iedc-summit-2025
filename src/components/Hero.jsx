@@ -183,7 +183,7 @@ const Hero = () => {
           <div className="bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2.5 shadow-lg border-2 border-blue-200">
             <div className="grid grid-cols-4 gap-1.5">
               {/* Days */}
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center w-[30px] sm:w-[40px]">
                 <div className="text-blue-600 text-xl sm:text-2xl font-bold font-gilroy-bold leading-none">
                   {String(timeLeft.days).padStart(2, "0")}
                 </div>
@@ -192,7 +192,7 @@ const Hero = () => {
                 </div>
               </div>
               {/* Hours */}
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center w-[30px] sm:w-[40px]">
                 <div className="text-blue-600 text-xl sm:text-2xl font-bold font-gilroy-bold leading-none">
                   {String(timeLeft.hours).padStart(2, "0")}
                 </div>
@@ -201,7 +201,7 @@ const Hero = () => {
                 </div>
               </div>
               {/* Minutes */}
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center w-[30px] sm:w-[40px]">
                 <div className="text-blue-600 text-xl sm:text-2xl font-bold font-gilroy-bold leading-none">
                   {String(timeLeft.minutes).padStart(2, "0")}
                 </div>
@@ -210,7 +210,7 @@ const Hero = () => {
                 </div>
               </div>
               {/* Seconds */}
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center w-[30px] sm:w-[40px]">
                 <div className="text-blue-600 text-xl sm:text-2xl font-bold font-gilroy-bold leading-none">
                   {String(timeLeft.seconds).padStart(2, "0")}
                 </div>
@@ -394,7 +394,7 @@ const Hero = () => {
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-4 md:px-6 lg:px-8 py-3 md:py-4 lg:py-5 shadow-xl border-2 border-blue-200">
             <div className="grid grid-cols-4 gap-2 md:gap-4 lg:gap-6">
               {/* Days */}
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center w-[5vh] md:w-[8vh] lg:w-[10vh]">
                 <div className="text-blue-600 text-[4vh] md:text-[6vh] lg:text-[8vh] font-bold font-gilroy-bold leading-none">
                   {String(timeLeft.days).padStart(2, "0")}
                 </div>
@@ -403,7 +403,7 @@ const Hero = () => {
                 </div>
               </div>
               {/* Hours */}
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center w-[5vh] md:w-[8vh] lg:w-[10vh]">
                 <div className="text-blue-600 text-[4vh] md:text-[6vh] lg:text-[8vh] font-bold font-gilroy-bold leading-none">
                   {String(timeLeft.hours).padStart(2, "0")}
                 </div>
@@ -412,7 +412,7 @@ const Hero = () => {
                 </div>
               </div>
               {/* Minutes */}
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center w-[5vh] md:w-[8vh] lg:w-[10vh]">
                 <div className="text-blue-600 text-[4vh] md:text-[6vh] lg:text-[8vh] font-bold font-gilroy-bold leading-none">
                   {String(timeLeft.minutes).padStart(2, "0")}
                 </div>
@@ -421,7 +421,7 @@ const Hero = () => {
                 </div>
               </div>
               {/* Seconds */}
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center w-[5vh] md:w-[8vh] lg:w-[10vh]">
                 <div className="text-blue-600 text-[4vh] md:text-[6vh] lg:text-[8vh] font-bold font-gilroy-bold leading-none">
                   {String(timeLeft.seconds).padStart(2, "0")}
                 </div>
