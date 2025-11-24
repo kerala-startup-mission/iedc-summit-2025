@@ -14,6 +14,7 @@ import Navbar from "./components/Navbar.jsx";
 import Speaker from "./components/Speaker.jsx";
 import EOIs from "./components/EOIs.jsx";
 import Leaderboard from "./components/Leaderboard.jsx";
+import WebinarCertificates from "./components/WebinarCertificates.jsx";
 import { SponsorForm } from "./components/SponsorForm";
 import { ScrollToTop } from "./components/ScrollToTop";
 
@@ -108,6 +109,16 @@ createRoot(document.getElementById("root")).render(
               <>
                 <Navbar />
                 <Leaderboard />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/webinars/certificates"
+            element={
+              <>
+                <Navbar />
+                <WebinarCertificates />
                 <Footer />
               </>
             }
