@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaLinkedin, FaDownload } from 'react-icons/fa';
 
@@ -37,11 +38,45 @@ const WebinarCertificates = () => {
              throw new Error("The URL returned HTML instead of CSV. Make sure you published the sheet to the web as CSV (File > Share > Publish to web > CSV).");
         }
 
-        // Simple CSV parser
-        const rows = csvText.split('\n').map(row => row.split(','));
+        // Robust CSV parser
+        const parseCSV = (text) => {
+            const result = [];
+            let cell = '';
+            let row = [];
+            let inQuotes = false;
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                if (char === '"') {
+                    if (inQuotes && text[i + 1] === '"') {
+                        cell += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    row.push(cell);
+                    cell = '';
+                } else if ((char === '\r' || char === '\n') && !inQuotes) {
+                    if (char === '\r' && text[i + 1] === '\n') i++;
+                    row.push(cell);
+                    result.push(row);
+                    row = [];
+                    cell = '';
+                } else {
+                    cell += char;
+                }
+            }
+            if (cell || row.length > 0) {
+                row.push(cell);
+                result.push(row);
+            }
+            return result;
+        };
+
+        const rows = parseCSV(csvText);
         if (rows.length < 2) throw new Error("Sheet is empty or invalid.");
 
-        const header = rows[0].map(c => c.trim().toLowerCase().replace(/"/g, ''));
+        const header = rows[0].map(c => c.trim().toLowerCase());
         console.log("Detected headers:", header);
 
         const emailIndex = header.findIndex(h => h.includes('email'));
@@ -65,23 +100,23 @@ const WebinarCertificates = () => {
             const row = rows[i];
             if (row.length <= emailIndex) continue;
 
-            const rowEmail = row[emailIndex]?.trim().replace(/"/g, '').toLowerCase();
+            const rowEmail = row[emailIndex]?.trim().toLowerCase();
             
             if (rowEmail === email.trim().toLowerCase()) {
-                const link = row[linkIndex]?.trim().replace(/"/g, '');
+                const link = row[linkIndex]?.trim();
                 // Only add if we have a valid link
                 if (link && link.startsWith('http')) {
                     foundCertificates.push({
-                        webinarNo: webinarNoIndex !== -1 ? row[webinarNoIndex]?.trim().replace(/"/g, '') : '',
-                        topic: topicIndex !== -1 ? row[topicIndex]?.trim().replace(/"/g, '') : '',
-                        speaker: speakerIndex !== -1 ? row[speakerIndex]?.trim().replace(/"/g, '') : '',
-                        designation: designationIndex !== -1 ? row[designationIndex]?.trim().replace(/"/g, '') : '',
+                        webinarNo: webinarNoIndex !== -1 ? row[webinarNoIndex]?.trim() : '',
+                        topic: topicIndex !== -1 ? row[topicIndex]?.trim() : '',
+                        speaker: speakerIndex !== -1 ? row[speakerIndex]?.trim() : '',
+                        designation: designationIndex !== -1 ? row[designationIndex]?.trim() : '',
                         link: link
                     });
                     
                     // Capture name from the first match
                     if (!foundName && nameIndex !== -1) {
-                        foundName = row[nameIndex]?.trim().replace(/"/g, '');
+                        foundName = row[nameIndex]?.trim();
                     }
                 }
             }
@@ -114,6 +149,11 @@ const WebinarCertificates = () => {
           <p className="mt-2 text-sm text-gray-600 font-gilroy-regular">
             Enter your registered email address to download your webinar certificate.
           </p>
+          <div className="mt-4">
+            <Link to="/webinars/verify" className="text-sm text-blue-600 hover:text-blue-800 font-gilroy-medium underline">
+                Verify a Certificate
+            </Link>
+          </div>
         </div>
         
         <form className="mt-8 space-y-6" onSubmit={handleSearch}>
@@ -175,12 +215,12 @@ const WebinarCertificates = () => {
                     Hello <strong>{userName}</strong>, your certificate{certificates.length > 1 ? 's are' : ' is'} ready!
                 </p>
                 
-                <div className="space-y-4">
+                <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
                     {certificates.map((cert, index) => (
                         <div key={index} className="bg-gray-50 p-4 rounded-lg border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
                             <div className="text-left">
                                 <p className="font-clash-display font-semibold text-blue-600">
-                                    {cert.webinarNo ? `Webinar #${cert.webinarNo}` : 'Webinar Certificate'}
+                                    {cert.webinarNo ? `Webinar #${cert.webinarNo}` : (certificates.length > 1 ? `Certificate #${index + 1}` : 'Webinar Certificate')}
                                 </p>
                                 {cert.topic && (
                                     <p className="text-sm text-gray-600 font-gilroy-regular mt-1">

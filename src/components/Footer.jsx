@@ -144,11 +144,20 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="text-gray-500 text-center">
-          Copyright © 2025 Kerala Startup Mission. All Rights Reserved.
+        <div className="pt-6 border-t border-gray-800">
+          <div className="flex flex-wrap items-center justify-center gap-5 text-sm mb-6">
+            <a href="/leaderboard" className="text-gray-500 hover:text-blue-400 transition-colors font-gilroy-light font-semibold">Leaderboard</a>
+            <a href="/accomodation" className="text-gray-500 hover:text-blue-400 transition-colors font-gilroy-light font-semibold">Accommodation</a>
+            <a href="/Tender_IEDC_Summit_2025.pdf" download="Tender_IEDC_Summit_2025.pdf" className="text-gray-500 hover:text-blue-400 transition-colors font-gilroy-light font-semibold">Tender Form</a>
+            <a target="_blank" href="https://policy.ksum.in/privacy_policy.html" className="text-gray-500 hover:text-blue-400 transition-colors font-gilroy-light">Privacy Policy</a>
+            <a target="_blank" href="https://policy.ksum.in/terms.html" className="text-gray-500 hover:text-blue-400 transition-colors font-gilroy-light">Terms &amp; Conditions</a>
+            <a target="_blank" href="https://policy.ksum.in/refund_policy.html" className="text-gray-500 hover:text-blue-400 transition-colors font-gilroy-light">Refund Policy</a>
+          </div>
+          {/* Copyright */}
+          <div className="text-gray-500 text-center">
+            Copyright © 2025 Kerala Startup Mission. All Rights Reserved.
+          </div>
         </div>
-
       </section>
     </footer>
   );
