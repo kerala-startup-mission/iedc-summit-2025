@@ -15,6 +15,17 @@ export default function EventCard({ event, isWebinar = false }) {
 
   const slots = hasSlots ? event.slots : [];
 
+  const isSeatsFull = useMemo(() => {
+    if (!event.capacity) return false;
+    const capacityStr = String(event.capacity);
+    if (capacityStr.includes('/')) {
+      const [available] = capacityStr.split('/').map(Number);
+      return !isNaN(available) && available <= 0;
+    }
+    const num = parseInt(capacityStr);
+    return !isNaN(num) && num <= 0;
+  }, [event.capacity]);
+
   // Compute webinar links from registrationLink (comma separated)
   const webinarLinks = useMemo(() => {
     if (!isWebinar || !event.registrationLink || typeof event.registrationLink !== 'string') {
@@ -195,9 +206,31 @@ export default function EventCard({ event, isWebinar = false }) {
   const renderCapacity = () => {
     if (!event.capacity) return null;
 
+    let isLow = false;
+    let displayCapacity = event.capacity;
+    const capacityStr = String(event.capacity);
+
+    // Check for "available/total" format (e.g. "23/50")
+    if (capacityStr.includes('/')) {
+      const [available, total] = capacityStr.split('/').map(Number);
+      
+      if (!isNaN(available)) {
+        displayCapacity = available;
+      }
+
+      if (!isNaN(available) && !isNaN(total) && total > 0) {
+        // Turn red if less than 20% seats are left
+        if (available / total <= 0.2) isLow = true;
+      }
+    } else {
+      // Fallback for plain numbers
+      const num = parseInt(capacityStr);
+      if (!isNaN(num) && num <= 10) isLow = true;
+    }
+
     return (
-      <div className="text-xs font-gilroy-bold text-blue-600">
-        Seats Available: {event.capacity}
+      <div className={`text-xs font-gilroy-bold ${isLow ? 'text-red-600' : 'text-blue-600'}`}>
+        Seats Available: {displayCapacity}
       </div>
     );
   };
@@ -213,14 +246,14 @@ export default function EventCard({ event, isWebinar = false }) {
               window.open(registration || event.registrationLink, '_blank', 'noopener,noreferrer')
             }
             className={`flex-1 h-8 md:h-9 rounded-lg flex items-center justify-center text-center transition ${
-              canRegister && !isEventEnded
+              canRegister && !isEventEnded && !isSeatsFull
                 ? 'bg-black hover:opacity-100 opacity-90 cursor-pointer'
                 : 'bg-gray-400 cursor-not-allowed'
             }`}
-            disabled={!canRegister || isEventEnded}
+            disabled={!canRegister || isEventEnded || isSeatsFull}
           >
             <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-              {isEventEnded ? 'CLOSED' : canRegister ? 'REGISTER' : 'CLOSED'}
+              {isEventEnded ? 'CLOSED' : isSeatsFull ? 'SEATS FULL' : canRegister ? 'REGISTER' : 'CLOSED'}
             </span>
           </button>
         ) : (
@@ -262,7 +295,7 @@ export default function EventCard({ event, isWebinar = false }) {
       );
     }
 
-    const isClosed = isEventEnded || registrationEnded || !canRegister;
+    const isClosed = isEventEnded || registrationEnded || !canRegister || isSeatsFull;
 
     return (
       <div className="mt-auto w-full flex gap-2">
@@ -278,6 +311,8 @@ export default function EventCard({ event, isWebinar = false }) {
           <span className="text-white text-xs font-medium font-clash-display tracking-tight">
             {isEventEnded || registrationEnded
               ? 'REGISTRATION CLOSED'
+              : isSeatsFull
+              ? 'SEATS FULL'
               : canRegister
               ? 'REGISTER NOW'
               : 'COMING SOON'}
