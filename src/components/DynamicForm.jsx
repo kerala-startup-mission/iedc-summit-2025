@@ -387,8 +387,6 @@ const DynamicForm = ({
         alt="Decorative blocks" 
         className="w-full h-24 object-cover"
       />
-
-      <Footer />
     </div>
   );
 };

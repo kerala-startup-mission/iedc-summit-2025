@@ -293,7 +293,7 @@ const Directions = () => {
       />
 
       {/* Scrolling Text Loop */}
-      <div className="w-full -mt-8 md:-mt-10 -skew-y-2 relative z-20">
+      <div className="w-full -mt-8 md:-mt-10 skew-y-2 relative z-20">
         <LogoLoop
           logos={Array(8).fill({ text: "IEDC SUMMIT 2025" })}
           speed={80}

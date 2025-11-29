@@ -1,24 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LogoLoop from "./LogoLoop";
 import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 
 const Partners = () => {
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
+  const [mainCategories, setMainCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchPartners = async () => {
+      try {
+        const response = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/speakers");
+        const data = await response.json();
+        
+        if (data.Partners) {
+          // Group partners by designation
+          const groupedPartners = data.Partners.reduce((acc, partner) => {
+            const category = partner.designation || "Other Partners";
+            if (!acc[category]) {
+              acc[category] = [];
+            }
+            acc[category].push({
+              src: partner.photo,
+              alt: partner.name,
+              // You can map other fields if needed, e.g. href if available in API
+            });
+            return acc;
+          }, {});
+
+          // Convert to array format expected by the component
+          const categoriesArray = Object.keys(groupedPartners).map(title => ({
+            title,
+            partners: groupedPartners[title]
+          }));
+
+          setMainCategories(categoriesArray);
+        }
+      } catch (error) {
+        console.error("Error fetching partners:", error);
+      }
+    };
+
+    fetchPartners();
+  }, []);
 
   // Helper component for the Partner Card
-  const PartnerCard = ({ src, alt, label, categoryTitle, href, className = "" }) => {
+  const PartnerCard = ({ src, alt, label, categoryTitle, href, className = "", wrapperClass = "" }) => {
     
     // Common inner content
     const CardContent = (
       <>
         {/* 1. Category Title (Absolute positioning to keep it at the top) */}
         {categoryTitle && (
-          <div className="absolute top-3 left-0 w-full text-center px-1 z-10">
+          <div className="absolute -top-5 left-0 w-full text-center px-1 z-10">
             <h3 className="font-clash-display text-[10px] md:text-xs font-bold text-blue-600 uppercase tracking-wider leading-tight whitespace-nowrap">
               {categoryTitle}
             </h3>
-            {/* Small separator line */}
-            <div className="w-6 h-[1.5px] bg-blue-100 mx-auto mt-0.5"></div>
           </div>
         )}
 
@@ -26,12 +62,12 @@ const Partners = () => {
         <img
           src={src}
           alt={alt}
-          className={`w-full h-16 object-contain -mt-2 ${className}`}
+          className={`w-full h-28 object-contain -mt-2 ${className}`}
         />
 
         {/* 3. Sub-label */}
         {label && (
-          <p className="md:text-[9px] text-[8px] font-semibold text-gray-400 text-center mt-2 uppercase tracking-wide absolute bottom-2 w-full px-1 leading-tight">
+          <p className="md:text-[9px] text-[8px] font-semibold text-gray-400 text-center mt-1 uppercase tracking-wide absolute bottom-2 w-full px-1 leading-tight">
             {label}
           </p>
         )}
@@ -41,7 +77,7 @@ const Partners = () => {
     // Common container classes
     // Using fixed widths (w-32 md:w-40) ensures they look like a grid even when using flex
     const containerClasses =
-      "flex flex-col items-center justify-center px-2 py-3 hover:bg-gray-50 transition-all duration-300 rounded-lg h-full min-h-[140px] w-32 md:w-40 relative group border border-transparent hover:border-gray-100 bg-white";
+      `flex flex-col items-center justify-center px-2 py-3 hover:bg-gray-50 transition-all duration-300 rounded-lg h-full min-h-[140px] w-32 md:w-40 relative group bg-white ${wrapperClass}`;
 
     if (href) {
       return (
@@ -58,57 +94,6 @@ const Partners = () => {
 
     return <div className={containerClasses}>{CardContent}</div>;
   };
-
-  // Helper to flatten categories into grid items with title on the first item
-  const flattenData = (categories) => {
-    return categories.flatMap((category) => {
-      if (category.partners.length === 0) return [];
-      const firstPartner = {
-        ...category.partners[0],
-        categoryTitle: category.title,
-      };
-      const restPartners = category.partners.slice(1);
-      return [firstPartner, ...restPartners];
-    });
-  };
-
-  // 1. Main Partners Data
-  const mainCategories = [
-    {
-      title: "Startup Enablers",
-      partners: [
-        { src: "/tiib-logo.png", alt: "TIIB" },
-        { src: "/campusfund-logo.png", alt: "Campus Fund" },
-        { src: "/1trepreneur-logo.png", alt: "1trepreneur" },
-      ],
-    },
-    {
-      title: "Media Partner",
-      partners: [{ src: "/manorama.png", alt: "manorama" }],
-    }, 
-    {
-      title: "Happiness Partner",
-      partners: [{ src: "/radio-mango.png", alt: "Radio Mango" }],
-    },
-    {
-      title: "Ecosystem Partners",
-      partners: [
-        { src: "/tie-logo.png", alt: "TIE" },
-        { src: "/kasaracode-logo.png", alt: "Kasaracode" },
-        { src: "/tinkerhub-logo.png", alt: "Tinkerhub" },
-        { src: "/cpcri-logo.png", alt: "CPCRI" },
-        { src: "/nammude-ksd-logo.png", alt: "Nammude KSD" },
-        { src: "/trest.png", alt: "TrEST" },
-        { src: "/nasscom.png", alt: "Nasscom" },
-        { src: "/haris.png", alt: "Haris & Co" },
-        { src: "/udhyam.png", alt: "Udhayam" },
-        { src: "/ghc-logo.png", alt: "Growth Lab" },
-        { src: "/ksd-flea.png", alt: "KSD Flea" },
-        { src: "/nest.png", alt: "nest" },
-        { src: "/mulearn.png", alt: "Mulearn" }
-      ],
-    },
-  ];
 
   // 2. Special Bottom Categories (Powered & Hosted)
   const bottomCategories = [
@@ -139,7 +124,7 @@ const Partners = () => {
           label: "LBS College of Engineering",
         },
         {
-          src: "/cuk-logo.svg",
+          src: "/cuk-logo.png",
           alt: "Central University of Kerala",
           href: "https://www.cukerala.ac.in",
           label: "Central University of Kerala",
@@ -147,9 +132,6 @@ const Partners = () => {
       ],
     },
   ];
-
-  const mainGridItems = flattenData(mainCategories);
-  const bottomGridItems = flattenData(bottomCategories);
 
   return (
     <section
@@ -173,32 +155,53 @@ const Partners = () => {
         </div>
 
         {/* Main Grid (Using Flexbox to grow from center) */}
-        <div className="mb-16">
-          <div className="flex flex-wrap justify-center gap-x-4 gap-y-8">
-            {mainGridItems.map((item, index) => (
-              <PartnerCard
-                key={`main-${index}`}
-                src={item.src}
-                alt={item.alt}
-                label={item.label}
-                href={item.href}
-                categoryTitle={item.categoryTitle}
-              />
-            ))}
-          </div>
+        <div className="mb-16 flex flex-wrap justify-center gap-8 md:gap-12 items-start">
+          {mainCategories.map((category, index) => (
+            <div 
+              key={index} 
+              className="relative border border-gray-200 rounded-2xl p-4 pt-8 md:p-8 md:pt-10 flex flex-wrap justify-center gap-4 md:gap-6 w-full md:w-auto max-w-6xl"
+            >
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-4">
+                <h3 className="font-clash-display text-sm md:text-base font-bold text-blue-600 uppercase tracking-wider whitespace-nowrap">
+                  {category.title}
+                </h3>
+              </div>
+              
+              {category.partners.map((partner, pIndex) => (
+                <PartnerCard
+                  key={pIndex}
+                  src={partner.src}
+                  alt={partner.alt}
+                  label={partner.label}
+                  href={partner.href}
+                />
+              ))}
+            </div>
+          ))}
         </div>
 
         {/* Bottom Section (Powered & Hosted - Centered) */}
-        <div className="py-10 border-t border-gray-100 mt-12 flex flex-wrap justify-center gap-12">
-          {bottomGridItems.map((item, index) => (
-            <PartnerCard
-              key={`bottom-${index}`}
-              src={item.src}
-              alt={item.alt}
-              label={item.label}
-              href={item.href}
-              categoryTitle={item.categoryTitle}
-            />
+        <div className="py-10 border-t border-gray-100 mt-12 flex flex-wrap justify-center gap-8 md:gap-10">
+          {bottomCategories.map((category, index) => (
+            <div 
+              key={`bottom-cat-${index}`} 
+              className="relative border border-gray-200 rounded-2xl p-4 pt-8 md:p-8 md:pt-10 flex flex-wrap justify-center gap-4 md:gap-6 w-full md:w-auto md:min-w-[300px]"
+            >
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-4">
+                <h3 className="font-clash-display text-sm md:text-base font-bold text-blue-600 uppercase tracking-wider whitespace-nowrap">
+                  {category.title}
+                </h3>
+              </div>
+              {category.partners.map((partner, pIndex) => (
+                <PartnerCard
+                  key={pIndex}
+                  src={partner.src}
+                  alt={partner.alt}
+                  label={partner.label}
+                  href={partner.href}
+                />
+              ))}
+            </div>
           ))}
         </div>
       </div>

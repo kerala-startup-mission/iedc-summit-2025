@@ -151,6 +151,7 @@ const isEventActive = (event) => {
 const FeaturedEvents = () => {
   const [events, setEvents] = useState([]); 
   const [loopItems, setLoopItems] = useState([]); 
+  const [trackData, setTrackData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -169,10 +170,15 @@ const FeaturedEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch(
-          'https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue'
-        );
-        const data = await res.json();
+        const [eventsRes, tracksRes] = await Promise.all([
+          fetch('https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue'),
+          fetch('https://tickets.startupmission.in/api/report/tracks/iedc-summit-2025')
+        ]);
+
+        const data = await eventsRes.json();
+        const tracksData = await tracksRes.json();
+
+        setTrackData(tracksData);
 
         // 1. Get Raw Events (Strings are still raw here)
         const allRawEvents = transformAgendaToEvents(data.agenda);
@@ -309,7 +315,7 @@ const FeaturedEvents = () => {
                       className="absolute w-full max-w-sm md:max-w-3xl "
                     >
                       <div className="transform-gpu">
-                        <EventCard event={event} />
+                        <EventCard event={event} trackData={trackData} />
                       </div>
                     </motion.div>
                   );

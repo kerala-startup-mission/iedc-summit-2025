@@ -5,33 +5,26 @@ import EventCard from './EventCard';
 const LoadingAnimation = () => (
   <div className="flex items-center justify-center py-20">
     <div className="flex gap-2">
-      <div
-        className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"
-        style={{ animationDelay: '0s' }}
-      />
-      <div
-        className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"
-        style={{ animationDelay: '0.15s' }}
-      />
-      <div
-        className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"
-        style={{ animationDelay: '0.3s' }}
-      />
+      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
+      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }} />
+      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }} />
     </div>
   </div>
 );
 
 // ---- Helpers ----
 
-// Now supports category as string or array
+// Fixes date string format for Safari/JS compatibility
+const parseDate = (dateStr) => {
+  if (!dateStr) return null;
+  return new Date(dateStr.replace(' ', 'T'));
+};
+
 const getEventType = (category) => {
   if (!category) return [];
-
   const categories = Array.isArray(category)
     ? category
-    : String(category)
-        .split(',')
-        .map((c) => c.trim());
+    : String(category).split(',').map((c) => c.trim());
 
   const types = [];
   if (categories.includes('Featured')) types.push('Featured');
@@ -42,7 +35,6 @@ const getEventType = (category) => {
 
 const transformAgendaToEvents = (agenda) => {
   if (!agenda) return [];
-
   const events = [];
 
   Object.values(agenda).forEach((dateGroup) => {
@@ -50,30 +42,25 @@ const transformAgendaToEvents = (agenda) => {
       venueEvents.forEach((event) => {
         const categories = Array.isArray(event.category)
           ? event.category
-          : String(event.category)
-              .split(',')
-              .map((c) => c.trim());
+          : String(event.category).split(',').map((c) => c.trim());
 
-        // Skip events with Workshop or EOI categories
         if (categories.includes('Workshop') || categories.includes('EOI') || categories.includes('Webinar')) return;
 
         const eventType = getEventType(event.category);
-
-        if (!eventType) return;
+        if (!eventType || eventType.length === 0) return;
 
         events.push({
           id: event.id || Math.random(),
           title: event.name || '',
           description: event.description || '',
           registrationLink: event.link || '',
-          eventType,
+          eventType, 
           startTime: event.start_time,
           endTime: event.end_time,
         });
       });
     });
   });
-
   return events;
 };
 
@@ -81,101 +68,100 @@ const processEventDescriptions = (events) =>
   events.map((event) => {
     const rawDescription = event.description || '';
     const cleanDescription = rawDescription.trim();
+    
+    let processedEvent = { ...event };
 
-    if (!cleanDescription) return event;
+    if (cleanDescription) {
+        try {
+          const descData = JSON.parse(cleanDescription);
+          const extractedDescription = descData.description || descData.Description;
 
-    try {
-      const descData = JSON.parse(cleanDescription);
-      const extractedDescription = descData.description || descData.Description;
+          processedEvent.description = extractedDescription || event.description;
 
-      if (!extractedDescription) return event;
-
-      const processedEvent = {
-        ...event,
-        description: extractedDescription,
-      };
-
-      if (descData.ExtraData) {
-        const extra = descData.ExtraData;
-        Object.assign(processedEvent, {
-          ...(extra.posterUrl && { posterUrl: extra.posterUrl }),
-          ...(extra.logos && { logos: extra.logos }),
-          ...(extra.slots && { slots: extra.slots }),
-          ...(extra.registration_start && { registration_start: extra.registration_start }),
-          ...(extra.registration_end && { registration_end: extra.registration_end }),
-          ...(extra.vidLink && { vidLink: extra.vidLink }),
-          ...(extra.poc && { poc: extra.poc }),
-          ...(extra.capacity && { capacity: extra.capacity }),
-        });
-      }
-
-      return processedEvent;
-    } catch (parseError) {
-      const descMatch = cleanDescription.match(
-        /"description"\s*:\s*"([^"]*(?:\\.[^"]*)*)"/
-      );
-
-      if (descMatch) {
-        return {
-          ...event,
-          description: descMatch[1].replace(/\\"/g, '"'),
-        };
-      }
-
-      console.warn(
-        'Failed to parse description JSON for event:',
-        event.title,
-        'Error:',
-        parseError.message
-      );
-
-      return event;
+          if (descData.ExtraData) {
+            const extra = descData.ExtraData;
+            Object.assign(processedEvent, {
+              posterUrl: extra.posterUrl,
+              logos: extra.logos,
+              slots: extra.slots,
+              registration_start: extra.registration_start,
+              registration_end: extra.registration_end,
+              vidLink: extra.vidLink,
+              poc: extra.poc,
+              capacity: extra.capacity,
+            });
+          }
+        } catch (parseError) {
+          // Description is just string, keep as is
+        }
     }
+    return processedEvent;
   });
 
-const getRegistrationStatusOrder = (startTime, endTime, now) => {
-  const start = new Date(startTime);
-  const end = new Date(endTime);
+// ---- NEW STRICT RANKING SYSTEM ----
 
-  const isActive = now >= start && now <= end;
-  const notStartedYet = now < start;
-  const ended = now > end;
+const getEventRank = (event) => {
+  const now = new Date();
+  
+  // 1. Parse Dates Safely
+  const start = parseDate(event.registration_start) || parseDate(event.startTime) || new Date();
+  const end = parseDate(event.registration_end) || parseDate(event.endTime) || new Date();
 
-  if (isActive) return 0; // Active registrations
-  if (notStartedYet) return 1; // Upcoming registrations
-  if (ended) return 2; // Past registrations
+  // 2. Determine Status
+  const isClosed = now > end;
+  const isUpcoming = now < start;
+  // isActive is implicit if not closed and not upcoming
 
-  return 3;
+  // 3. Determine Base Score based on STATUS (Major Grouping)
+  // Active = 0
+  // Upcoming = 100 (Pushes them below ALL active events)
+  // Closed = 200 (Pushes them to the very bottom)
+  let statusScore = 0;
+  if (isClosed) statusScore = 200;
+  else if (isUpcoming) statusScore = 100;
+  else statusScore = 0;
+
+  // 4. Determine Type Score (Sub-sorting within status)
+  // Featured = 1
+  // Pre-Event = 2
+  // Summit Day = 3
+  const types = event.eventType || [];
+  let typeScore = 10; // Fallback
+
+  if (types.includes('Featured')) typeScore = 1;
+  else if (types.includes('Pre-Event')) typeScore = 2;
+  else if (types.includes('Summit Day')) typeScore = 3;
+
+  // Final Score = Status + Type
+  // Example: Active Featured = 0 + 1 = 1
+  // Example: Active Summit = 0 + 3 = 3
+  // Example: Upcoming Featured = 100 + 1 = 101
+  return statusScore + typeScore;
 };
 
 const sortEvents = (events) => {
-  const now = new Date();
-
   return [...events].sort((a, b) => {
-    // First priority: Featured events with open registration
-    const aIsFeaturedOpen = a.eventType.includes('Featured') && getRegistrationStatusOrder(a.startTime, a.endTime, now) !== 2;
-    const bIsFeaturedOpen = b.eventType.includes('Featured') && getRegistrationStatusOrder(b.startTime, b.endTime, now) !== 2;
+    const rankA = getEventRank(a);
+    const rankB = getEventRank(b);
 
-    if (aIsFeaturedOpen && !bIsFeaturedOpen) return -1;
-    if (!aIsFeaturedOpen && bIsFeaturedOpen) return 1;
-
-    // If both are featured with open registration or both are not, use existing logic
-    const statusA = getRegistrationStatusOrder(a.startTime, a.endTime, now);
-    const statusB = getRegistrationStatusOrder(b.startTime, b.endTime, now);
-
-    if (statusA !== statusB) return statusA - statusB;
-
-    const startA = new Date(a.startTime);
-    const startB = new Date(b.startTime);
-
-    if (startA.getTime() !== startB.getTime()) {
-      return startA - startB;
+    // 1. Primary Sort: By Calculated Rank (Status Group + Type Priority)
+    if (rankA !== rankB) {
+      return rankA - rankB;
     }
 
-    const idA = typeof a.id === 'string' ? parseInt(a.id, 10) : a.id;
-    const idB = typeof b.id === 'string' ? parseInt(b.id, 10) : b.id;
+    // 2. Secondary Sort (Tie-breaker within same group & type)
+    
+    // If Closed, show MOST RECENTLY closed first
+    if (rankA >= 200) {
+      const endA = parseDate(a.registration_end) || parseDate(a.endTime);
+      const endB = parseDate(b.registration_end) || parseDate(b.endTime);
+      return endB - endA; 
+    }
 
-    return (idA || 0) - (idB || 0);
+    // Otherwise (Active or Upcoming), show SOONEST start date first
+    const startA = parseDate(a.registration_start) || parseDate(a.startTime);
+    const startB = parseDate(b.registration_start) || parseDate(b.startTime);
+    return startA - startB;
   });
 };
 
@@ -183,19 +169,28 @@ const sortEvents = (events) => {
 
 export default function EventsPage() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [events, setEvents] = useState([]);
+  const [trackData, setTrackData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch(
-          'https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue'
-        );
-        const data = await res.json();
+        const [eventsRes, tracksRes] = await Promise.all([
+          fetch('https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue'),
+          fetch('https://tickets.startupmission.in/api/report/tracks/iedc-summit-2025')
+        ]);
 
-        const transformed = transformAgendaToEvents(data.agenda);
+        const eventsData = await eventsRes.json();
+        const tracksData = await tracksRes.json();
+
+        setTrackData(tracksData);
+
+        const transformed = transformAgendaToEvents(eventsData.agenda);
         const processed = processEventDescriptions(transformed);
+        
+        // Apply Sorting
         const sorted = sortEvents(processed);
 
         setEvents(sorted);
@@ -210,19 +205,27 @@ export default function EventsPage() {
   }, []);
 
   const filteredEvents = useMemo(() => {
-    const query = searchQuery.toLowerCase();
-    if (!query) return events;
+    let filtered = events;
 
-    return events.filter((event) => {
-      const title = event.title?.toLowerCase() || '';
-      const description = event.description?.toLowerCase() || '';
-      return title.includes(query) || description.includes(query);
-    });
-  }, [events, searchQuery]);
+    // Filter by Category
+    if (selectedCategory !== 'All') {
+      filtered = filtered.filter(event => event.eventType && event.eventType.includes(selectedCategory));
+    }
+
+    const query = searchQuery.toLowerCase();
+    if (query) {
+      filtered = filtered.filter((event) => {
+        const title = event.title?.toLowerCase() || '';
+        const description = event.description?.toLowerCase() || '';
+        return title.includes(query) || description.includes(query);
+      });
+    }
+    
+    return filtered;
+  }, [events, searchQuery, selectedCategory]);
 
   return (
     <section className="w-full min-h-screen bg-white relative overflow-hidden">
-      {/* Main content */}
       <div className="relative py-[10vh] px-5 md:px-8 mt-7">
         {/* Header */}
         <div className="mb-[8vh] md:mb-[12vh] md:flex md:flex-col md:items-center">
@@ -243,20 +246,34 @@ export default function EventsPage() {
             />
             <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-blue-600" />
           </div>
+
+          {/* Category Filter */}
+          <div className="flex flex-wrap justify-center gap-3 mt-6 w-full max-w-md">
+            {['All', 'Featured', 'Summit Day', 'Pre-Event'].map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 rounded-full text-sm font-gilroy-bold transition-all duration-300 ${
+                  selectedCategory === category
+                    ? 'bg-blue-600 text-white shadow-lg scale-105'
+                    : 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </div>
-      {/* <div className="w-full bg-yellow-400 text-black py-4 px-5 text-center font-gilroy-medium text-lg top-10">
-        🚧 Events page is currently under maintenance. We'll be back soon! 🚧
-      </div> */}
 
         {/* Event cards grid */}
-        <div className="w-full max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 md:auto-rows-fr gap-4 md:gap-6 mb-[10vh]">
+        <div className="w-full max-w-screen-2xl -mt-10 md:-mt-15 mx-auto grid grid-cols-1 md:grid-cols-4 md:auto-rows-fr gap-4 md:gap-6 mb-[10vh]">
           {isLoading ? (
             <div className="col-span-full">
               <LoadingAnimation />
             </div>
           ) : filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
+              <EventCard key={event.id} event={event} trackData={trackData} />
             ))
           ) : (
             <div className="col-span-full text-center py-12">
@@ -268,7 +285,6 @@ export default function EventsPage() {
         </div>
       </div>
 
-      {/* Decorative Bottom Image */}
       <img
         src="/hero-blocks.png"
         alt="Decorative blocks"

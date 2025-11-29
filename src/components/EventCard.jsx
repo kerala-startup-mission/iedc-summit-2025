@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import side_image from '../assets/side_image.png';
 import { Play } from 'lucide-react';
 
-export default function EventCard({ event, isWebinar = false }) {
+export default function EventCard({ event, isWebinar = false, trackData = [] }) {
   const [isEventLive, setIsEventLive] = useState(false);
   const [canRegister, setCanRegister] = useState(true);
   const [isEventEnded, setIsEventEnded] = useState(false);
@@ -14,6 +14,40 @@ export default function EventCard({ event, isWebinar = false }) {
   const hasSlots = Array.isArray(event.slots) && event.slots.length > 0;
 
   const slots = hasSlots ? event.slots : [];
+
+  const isSeatsFull = useMemo(() => {
+    if (!event.capacity) return false;
+
+    if (Array.isArray(event.capacity)) {
+      // New logic for array of track names
+      let totalCapacity = 0;
+      let totalAttendees = 0;
+      let foundTrack = false;
+
+      event.capacity.forEach(trackName => {
+        const track = trackData.find(t => t.name === trackName);
+        if (track) {
+          foundTrack = true;
+          totalCapacity += track.capacity || 0;
+          totalAttendees += track.attendees_count || 0;
+        }
+      });
+
+      if (foundTrack) {
+        const available = totalCapacity - totalAttendees;
+        return available <= 0;
+      }
+      return false; // If no track found, assume not full or handle differently
+    }
+
+    const capacityStr = String(event.capacity);
+    if (capacityStr.includes('/')) {
+      const [available] = capacityStr.split('/').map(Number);
+      return !isNaN(available) && available <= 0;
+    }
+    const num = parseInt(capacityStr);
+    return !isNaN(num) && num <= 0;
+  }, [event.capacity, trackData]);
 
   // Compute webinar links from registrationLink (comma separated)
   const webinarLinks = useMemo(() => {
@@ -195,9 +229,57 @@ export default function EventCard({ event, isWebinar = false }) {
   const renderCapacity = () => {
     if (!event.capacity) return null;
 
+    let isLow = false;
+    let displayCapacity = event.capacity;
+
+    if (Array.isArray(event.capacity)) {
+      let totalCapacity = 0;
+      let totalAttendees = 0;
+      let foundTrack = false;
+
+      event.capacity.forEach(trackName => {
+        const track = trackData.find(t => t.name === trackName);
+        if (track) {
+          foundTrack = true;
+          totalCapacity += track.capacity || 0;
+          totalAttendees += track.attendees_count || 0;
+        }
+      });
+
+      if (foundTrack) {
+        const available = totalCapacity - totalAttendees;
+        displayCapacity = available;
+        if (totalCapacity > 0 && available / totalCapacity <= 0.2) {
+          isLow = true;
+        }
+      } else {
+        return null; // Or show nothing if track not found
+      }
+    } else {
+      const capacityStr = String(event.capacity);
+
+      // Check for "available/total" format (e.g. "23/50")
+      if (capacityStr.includes('/')) {
+        const [available, total] = capacityStr.split('/').map(Number);
+        
+        if (!isNaN(available)) {
+          displayCapacity = available;
+        }
+
+        if (!isNaN(available) && !isNaN(total) && total > 0) {
+          // Turn red if less than 20% seats are left
+          if (available / total <= 0.2) isLow = true;
+        }
+      } else {
+        // Fallback for plain numbers
+        const num = parseInt(capacityStr);
+        if (!isNaN(num) && num <= 10) isLow = true;
+      }
+    }
+
     return (
-      <div className="text-xs font-gilroy-bold text-blue-600">
-        Seats Available: {event.capacity}
+      <div className={`text-xs font-gilroy-bold ${isLow ? 'text-red-600' : 'text-blue-600'}`}>
+        Seats Available: {displayCapacity}
       </div>
     );
   };
@@ -213,14 +295,14 @@ export default function EventCard({ event, isWebinar = false }) {
               window.open(registration || event.registrationLink, '_blank', 'noopener,noreferrer')
             }
             className={`flex-1 h-8 md:h-9 rounded-lg flex items-center justify-center text-center transition ${
-              canRegister && !isEventEnded
+              canRegister && !isEventEnded && !isSeatsFull
                 ? 'bg-black hover:opacity-100 opacity-90 cursor-pointer'
                 : 'bg-gray-400 cursor-not-allowed'
             }`}
-            disabled={!canRegister || isEventEnded}
+            disabled={!canRegister || isEventEnded || isSeatsFull}
           >
             <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-              {isEventEnded ? 'CLOSED' : canRegister ? 'REGISTER' : 'CLOSED'}
+              {isEventEnded ? 'CLOSED' : isSeatsFull ? 'SEATS FULL' : canRegister ? 'REGISTER' : 'CLOSED'}
             </span>
           </button>
         ) : (
@@ -262,7 +344,7 @@ export default function EventCard({ event, isWebinar = false }) {
       );
     }
 
-    const isClosed = isEventEnded || registrationEnded || !canRegister;
+    const isClosed = isEventEnded || registrationEnded || !canRegister || isSeatsFull;
 
     return (
       <div className="mt-auto w-full flex gap-2">
@@ -278,6 +360,8 @@ export default function EventCard({ event, isWebinar = false }) {
           <span className="text-white text-xs font-medium font-clash-display tracking-tight">
             {isEventEnded || registrationEnded
               ? 'REGISTRATION CLOSED'
+              : isSeatsFull
+              ? 'SEATS FULL'
               : canRegister
               ? 'REGISTER NOW'
               : 'COMING SOON'}
@@ -381,12 +465,12 @@ export default function EventCard({ event, isWebinar = false }) {
         {hasPoster && (
           <div
             className={`w-full md:w-1/2 h-auto md:h-auto shrink-0 ${
-              isEventEnded || registrationEnded || !canRegister
+              isEventEnded || registrationEnded || !canRegister || isSeatsFull
                 ? ''
                 : 'cursor-pointer'
             }`}
             onClick={() => {
-              const isClosed = isEventEnded || registrationEnded || !canRegister;
+              const isClosed = isEventEnded || registrationEnded || !canRegister || isSeatsFull;
               if (!isClosed) {
                 handleRegisterClick();
               }
@@ -396,7 +480,7 @@ export default function EventCard({ event, isWebinar = false }) {
               src={event.posterUrl}
               alt={`${event.title} poster`}
               className={`w-full h-auto object-contain rounded-t-xl md:rounded-l-xl md:rounded-tr-none ${
-                isEventEnded || registrationEnded || !canRegister
+                isEventEnded || registrationEnded || !canRegister || isSeatsFull
                   ? ''
                   : 'hover:opacity-90 transition-opacity'
               }`}
