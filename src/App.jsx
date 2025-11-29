@@ -10,6 +10,7 @@ import Faq from "./components/Faq";
 import Gallery from "./components/Gallery";
 import Footer from "./components/Footer";
 import FeaturedSpeaker from "./components/FeaturedSpeakers";
+import DpFramer from "./components/DpFramer";
 // import RegisterCTA from "./components/RegisterCTA";
 
 import "./fonts/ClashDisplay-Variable.ttf";
@@ -32,6 +33,7 @@ function App() {
       <Faq />
       <Gallery />
       <Footer />
+      <DpFramer />
     </div>
   );
 }
