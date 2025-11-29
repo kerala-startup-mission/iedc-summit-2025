@@ -169,18 +169,25 @@ const sortEvents = (events) => {
 
 export default function EventsPage() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [events, setEvents] = useState([]);
+  const [trackData, setTrackData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch(
-          'https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue'
-        );
-        const data = await res.json();
+        const [eventsRes, tracksRes] = await Promise.all([
+          fetch('https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue'),
+          fetch('https://tickets.startupmission.in/api/report/tracks/iedc-summit-2025')
+        ]);
 
-        const transformed = transformAgendaToEvents(data.agenda);
+        const eventsData = await eventsRes.json();
+        const tracksData = await tracksRes.json();
+
+        setTrackData(tracksData);
+
+        const transformed = transformAgendaToEvents(eventsData.agenda);
         const processed = processEventDescriptions(transformed);
         
         // Apply Sorting
@@ -198,15 +205,24 @@ export default function EventsPage() {
   }, []);
 
   const filteredEvents = useMemo(() => {
-    const query = searchQuery.toLowerCase();
-    if (!query) return events;
+    let filtered = events;
 
-    return events.filter((event) => {
-      const title = event.title?.toLowerCase() || '';
-      const description = event.description?.toLowerCase() || '';
-      return title.includes(query) || description.includes(query);
-    });
-  }, [events, searchQuery]);
+    // Filter by Category
+    if (selectedCategory !== 'All') {
+      filtered = filtered.filter(event => event.eventType && event.eventType.includes(selectedCategory));
+    }
+
+    const query = searchQuery.toLowerCase();
+    if (query) {
+      filtered = filtered.filter((event) => {
+        const title = event.title?.toLowerCase() || '';
+        const description = event.description?.toLowerCase() || '';
+        return title.includes(query) || description.includes(query);
+      });
+    }
+    
+    return filtered;
+  }, [events, searchQuery, selectedCategory]);
 
   return (
     <section className="w-full min-h-screen bg-white relative overflow-hidden">
@@ -230,17 +246,34 @@ export default function EventsPage() {
             />
             <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-blue-600" />
           </div>
+
+          {/* Category Filter */}
+          <div className="flex flex-wrap justify-center gap-3 mt-6 w-full max-w-md">
+            {['All', 'Featured', 'Summit Day', 'Pre-Event'].map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 rounded-full text-sm font-gilroy-bold transition-all duration-300 ${
+                  selectedCategory === category
+                    ? 'bg-blue-600 text-white shadow-lg scale-105'
+                    : 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Event cards grid */}
-        <div className="w-full max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 md:auto-rows-fr gap-4 md:gap-6 mb-[10vh]">
+        <div className="w-full max-w-screen-2xl -mt-10 md:-mt-15 mx-auto grid grid-cols-1 md:grid-cols-4 md:auto-rows-fr gap-4 md:gap-6 mb-[10vh]">
           {isLoading ? (
             <div className="col-span-full">
               <LoadingAnimation />
             </div>
           ) : filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
+              <EventCard key={event.id} event={event} trackData={trackData} />
             ))
           ) : (
             <div className="col-span-full text-center py-12">
