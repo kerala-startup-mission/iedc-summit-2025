@@ -69,43 +69,63 @@ const Timer = ({ timeLeft, size = "md" }) => {
 };
 
 // Keeping the "Better" Coupon you liked (or let me know if you want the old one)
-const FloatingCoupon = ({ currentCode }) => (
-  <a
-    href="https://tickets.startupmission.in/iedc-summit-2025"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="fixed bottom-5 right-5 md:right-10 z-50 min-w-[180px] md:min-w-[200px] cursor-pointer group"
-  >
-    <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl p-3 md:p-4 shadow-2xl shadow-blue-500/40 transform transition-all duration-300 group-hover:scale-105 border border-white/20">
-      {/* Shine effect */}
-      <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12" />
-      
-      <div className="flex items-center gap-2 md:gap-3 relative z-10">
-        <div className="bg-white/20 p-1.5 md:p-2 rounded-lg backdrop-blur-sm">
-          <TicketPercent className="w-5 h-5 md:w-6 md:h-6 text-white" />
-        </div>
-        <div className="flex flex-col">
-          <span className="text-blue-100 text-[9px] md:text-xs font-bold font-gilroy-bold uppercase tracking-wider">
-            Get 25% OFF <span className="text-white/40 mx-1">|</span>{" "}
-            <span className="text-yellow-300 animate-pulse">Ends 30th Nov</span>
-          </span>
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={currentCode}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="text-white text-base md:text-xl font-black font-gilroy-bold tracking-wide"
-            >
-              {currentCode}
-            </motion.span>
-          </AnimatePresence>
+const FloatingCoupon = ({ currentCode, offerTimeLeft }) => {
+  const isExpired = offerTimeLeft.days <= 0 && offerTimeLeft.hours <= 0 && offerTimeLeft.minutes <= 0 && offerTimeLeft.seconds <= 0;
+
+  if (isExpired) {
+    return (
+      <div className="fixed bottom-5 right-5 md:right-10 z-50 min-w-[180px] md:min-w-[200px]">
+        <div className="relative overflow-hidden bg-gradient-to-r from-gray-500 to-gray-600 rounded-2xl p-3 md:p-4 shadow-2xl border border-white/20">
+          <div className="flex items-center justify-center relative z-10">
+            <span className="text-white text-sm md:text-base font-bold font-gilroy-bold uppercase tracking-wider">
+              Early Bird Closed
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  </a>
-);
+    );
+  }
+
+  return (
+    <a
+      href="https://tickets.startupmission.in/iedc-summit-2025"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-5 right-5 md:right-10 z-50 min-w-[180px] md:min-w-[200px] cursor-pointer group"
+    >
+      <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl p-3 md:p-4 shadow-2xl shadow-blue-500/40 transform transition-all duration-300 group-hover:scale-105 border border-white/20">
+        {/* Shine effect */}
+        <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12" />
+        
+        <div className="flex items-center gap-2 md:gap-3 relative z-10">
+          <div className="bg-white/20 p-1.5 md:p-2 rounded-lg backdrop-blur-sm">
+            <TicketPercent className="w-5 h-5 md:w-6 md:h-6 text-white" />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-blue-100 text-[9px] md:text-xs font-bold font-gilroy-bold uppercase tracking-wider">
+              Get 25% OFF <span className="text-white/40 mx-1">|</span>{" "}
+              <span className="text-yellow-300 animate-pulse">
+                Ends in {offerTimeLeft.days}d {offerTimeLeft.hours}h {offerTimeLeft.minutes}m
+              </span>
+            </span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={currentCode}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="text-white text-base md:text-xl font-black font-gilroy-bold tracking-wide"
+              >
+                {currentCode}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+    </a>
+  );
+};
 
 // --- Layout Components ---
 
@@ -152,6 +172,10 @@ const MobileLayout = ({ timeLeft }) => (
           REGISTER NOW
         </div>
       </a>
+
+      <div className="text-red-600 text-xs font-bold font-gilroy-bold mb-3 w-[200px] text-center animate-pulse" style={{ animationDelay: "0.4s" }}>
+        Early Bird Ends on 30th Nov
+      </div>
 
       <div className="text-blue-400 text-sm font-normal font-gilroy-bold animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
         *Be quick, connect more*
@@ -216,13 +240,16 @@ const DesktopLayout = ({ timeLeft }) => (
           href="https://tickets.startupmission.in/iedc-summit-2025"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-8 lg:px-12 py-3 lg:py-4 rounded-[29px] flex items-center justify-center mt-[4vh] transition-colors duration-300 relative overflow-hidden group inline-block w-fit"
+          className="px-8 lg:px-12 py-3 lg:py-4 rounded-[29px] flex items-center justify-center mt-[4vh] transition-colors duration-300 relative overflow-hidden group w-fit"
         >
           <div className="absolute inset-0 bg-violet-600 group-hover:bg-violet-800 transition-bg-color duration-300"></div>
           <div className="text-white text-[2.5vh] lg:text-[3.5vh] font-normal font-clash-display relative z-10">
             REGISTER NOW
           </div>
         </a>
+        <div className="text-red-600 text-sm font-bold font-gilroy-bold mt-2 ml-4 animate-pulse">
+            Early Bird Ends on 30th Nov
+        </div>
       </div>
     </div>
 
@@ -247,6 +274,7 @@ const DesktopLayout = ({ timeLeft }) => (
 
 const Hero = () => {
   const timeLeft = useCountdown(EVENT_DATE);
+  const offerTimeLeft = useCountdown("2025-11-30T23:59:59");
   const currentCode = useRotatingValue(COUPON_CODES, 3000);
   const logoList = useMemo(() => Array(9).fill({ text: "IEDC SUMMIT 2025" }), []);
 
@@ -270,7 +298,7 @@ const Hero = () => {
         />
       </div>
 
-      <FloatingCoupon currentCode={currentCode} />
+      <FloatingCoupon currentCode={currentCode} offerTimeLeft={offerTimeLeft} />
     </div>
   );
 };
