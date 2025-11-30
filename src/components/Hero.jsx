@@ -177,9 +177,9 @@ const MobileLayout = ({ timeLeft }) => (
         Early Bird Ends on 30th Nov
       </div>
 
-      <div className="text-blue-400 text-sm font-normal font-gilroy-bold animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
+      {/* <div className="text-blue-400 text-sm font-normal font-gilroy-bold animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
         *Be quick, connect more*
-      </div>
+      </div> */}
     </div>
 
     <div className="h-32" />

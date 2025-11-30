@@ -139,6 +139,32 @@ const WebinarCertificates = () => {
     }
   };
 
+  const handleShare = async (cert) => {
+    const shareText = `I’m happy to share that I attended the session on “${cert.topic || 'Webinar'}” held as part of the 45-Day Webinar Series – IEDC Summit 2025.
+
+The session was led by ${cert.speaker ? (cert.designation ? `${cert.speaker}, ${cert.designation}` : cert.speaker) : 'industry experts'}, and it was a great learning opportunity.
+
+Thank you to IEDC LBS College of Engineering Kasaragod for organizing this.
+
+#IEDCSummit2025 #WebinarSeries #DareToDisrupt #StartupShowcase #KeralaStartupMission #Entrepreneurship #Innovation #LBSCEK #CUK #Kasaragod`;
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile && navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Webinar Certificate',
+          text: shareText,
+        });
+      } catch (error) {
+        console.error('Error sharing:', error);
+      }
+    } else {
+      const linkedinUrl = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(shareText)}`;
+      window.open(linkedinUrl, '_blank');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white pt-24 pb-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
       <div className="max-w-md w-full space-y-8">
@@ -229,17 +255,13 @@ const WebinarCertificates = () => {
                                 )}
                             </div>
                             <div className="flex gap-3">
-                                <a
-                                    href={`https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(
-                                        `I’m happy to share that I attended the session on “${cert.topic || '<Session Topic>'}” held as part of the 45-Day Webinar Series – IEDC Summit 2025.\n\nThe session was led by ${cert.speaker ? (cert.designation ? `${cert.speaker}, ${cert.designation}` : cert.speaker) : '<Speaker Name & Designation>'}, and it helped me understand more about:\n• <Point 1>\n• <Point 2>\n\nThank you to IEDC LBS College of Engineering Kasaragod for organizing this learning opportunity. Looking forward to the upcoming sessions.\n\n#IEDCSummit2025 #WebinarSeries #DareToDisrupt #StartupShowcase #KeralaStartupMission #Entrepreneurship #Innovation #LBSCEK #CUK #Kasaragod\n\nCertificate attached: ${cert.link}`
-                                    )}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                <button
+                                    onClick={() => handleShare(cert)}
                                     className="inline-flex items-center justify-center p-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#0077b5] hover:bg-[#006396] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0077b5] transition-colors duration-200"
                                     title="Share on LinkedIn"
                                 >
                                     <FaLinkedin size={20} />
-                                </a>
+                                </button>
                                 <a
                                     href={cert.link}
                                     target="_blank"
