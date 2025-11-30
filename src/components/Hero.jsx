@@ -87,7 +87,7 @@ const FloatingCoupon = ({ currentCode }) => (
         <div className="flex flex-col">
           <span className="text-blue-100 text-[9px] md:text-xs font-bold font-gilroy-bold uppercase tracking-wider">
             Get 25% OFF <span className="text-white/40 mx-1">|</span>{" "}
-            <span className="text-yellow-300 animate-pulse">Limited Time Only</span>
+            <span className="text-yellow-300 animate-pulse">Ends 30th Nov</span>
           </span>
           <AnimatePresence mode="wait">
             <motion.span
