@@ -138,6 +138,7 @@ createRoot(document.getElementById("root")).render(
             path="/accomodation"
             element={<AccommodationRedirect />}
           />
+          <Route path="/dp" element={<App />} />
           {/* Session redirect route - /r/sessionId */}
           <Route path="/r/:sessionId" element={<SessionRedirect />} />
           {/* Catch-all route for external form redirects - MUST be last */}

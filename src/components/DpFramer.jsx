@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Camera, Aperture, Upload, Download, RefreshCw, X, Image as ImageIcon, Move, Plus, Minus } from 'lucide-react';
 const DpFramer = () => {
+  const location = useLocation();
   // --- Configuration ---
   const CANVAS_SIZE = 1080;
   const WINDOW = {
@@ -46,6 +48,13 @@ const DpFramer = () => {
       setGeneratedImage(null);
     }
   }, [isOpen]);
+
+  // 3. Auto-open on /dp route
+  useEffect(() => {
+    if (location.pathname === '/dp') {
+      setIsOpen(true);
+    }
+  }, [location]);
 
   // --- Core Graphics Logic ---
 
