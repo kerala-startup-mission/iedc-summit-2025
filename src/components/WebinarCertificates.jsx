@@ -78,7 +78,7 @@ const WebinarCertificates = () => {
 
         const header = rows[0].map(c => c.trim().toLowerCase());
         console.log("Detected headers:", header);
-
+  
         const emailIndex = header.findIndex(h => h.includes('email'));
         const webinarNoIndex = header.findIndex(h => h.includes('webinarno'));
         const topicIndex = header.findIndex(h => h.includes('topic'));

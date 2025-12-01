@@ -103,7 +103,7 @@ const FloatingCoupon = ({ currentCode, offerTimeLeft }) => {
           </div>
           <div className="flex flex-col">
             <span className="text-blue-100 text-[9px] md:text-xs font-bold font-gilroy-bold uppercase tracking-wider">
-              Get 25% OFF <span className="text-white/40 mx-1">|</span>{" "}
+              Early Bird Extended <span className="text-white/40 mx-1">|</span>{" "}
               <span className="text-yellow-300 animate-pulse">
                 Ends in {offerTimeLeft.days}d {offerTimeLeft.hours}h {offerTimeLeft.minutes}m
               </span>
@@ -174,7 +174,7 @@ const MobileLayout = ({ timeLeft }) => (
       </a>
 
       <div className="text-red-600 text-xs font-bold font-gilroy-bold mb-3 w-[200px] text-center animate-pulse" style={{ animationDelay: "0.4s" }}>
-        Early Bird Ends on 30th Nov
+        Early Bird Extended for 48hr!
       </div>
 
       {/* <div className="text-blue-400 text-sm font-normal font-gilroy-bold animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
@@ -248,7 +248,7 @@ const DesktopLayout = ({ timeLeft }) => (
           </div>
         </a>
         <div className="text-red-600 text-sm font-bold font-gilroy-bold mt-2 ml-4 animate-pulse">
-            Early Bird Ends on 30th Nov
+            Early Bird Extended for 48hr!
         </div>
       </div>
     </div>
@@ -274,7 +274,7 @@ const DesktopLayout = ({ timeLeft }) => (
 
 const Hero = () => {
   const timeLeft = useCountdown(EVENT_DATE);
-  const offerTimeLeft = useCountdown("2025-11-30T23:59:59");
+  const offerTimeLeft = useCountdown("2025-12-03T12:00:00");
   const currentCode = useRotatingValue(COUPON_CODES, 3000);
   const logoList = useMemo(() => Array(9).fill({ text: "IEDC SUMMIT 2025" }), []);
 
