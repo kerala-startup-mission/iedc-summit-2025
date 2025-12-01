@@ -5,7 +5,7 @@ import LogoLoop from "./LogoLoop";
 
 // --- Constants ---
 const EVENT_DATE = "2025-12-22T09:00:00";
-const COUPON_CODES = ["MANORAMA25", "HAPPY25", "EARLYBIRD"];
+const COUPON_CODES = ["EARLYBIRD"];
 
 // --- Custom Hooks ---
 const useCountdown = (targetDate) => {
