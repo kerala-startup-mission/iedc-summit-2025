@@ -174,7 +174,7 @@ const MobileLayout = ({ timeLeft }) => (
       </a>
 
       <div className="text-red-600 text-xs font-bold font-gilroy-bold mb-3 w-[200px] text-center animate-pulse" style={{ animationDelay: "0.4s" }}>
-        Early Bird Extended for 48hr!
+        We heard your voice! <br/> Early Bird Extended for 48hr!
       </div>
 
       {/* <div className="text-blue-400 text-sm font-normal font-gilroy-bold animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
@@ -248,7 +248,7 @@ const DesktopLayout = ({ timeLeft }) => (
           </div>
         </a>
         <div className="text-red-600 text-sm font-bold font-gilroy-bold mt-2 ml-4 animate-pulse">
-            Early Bird Extended for 48hr!
+            We heard your voice! Early Bird Extended for 48hr!
         </div>
       </div>
     </div>
@@ -274,7 +274,7 @@ const DesktopLayout = ({ timeLeft }) => (
 
 const Hero = () => {
   const timeLeft = useCountdown(EVENT_DATE);
-  const offerTimeLeft = useCountdown("2025-12-03T12:00:00");
+  const offerTimeLeft = useCountdown("2025-12-03T13:00:00");
   const currentCode = useRotatingValue(COUPON_CODES, 3000);
   const logoList = useMemo(() => Array(9).fill({ text: "IEDC SUMMIT 2025" }), []);
 
