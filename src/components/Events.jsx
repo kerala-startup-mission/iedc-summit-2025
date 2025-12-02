@@ -30,6 +30,7 @@ const getEventType = (category) => {
   if (categories.includes('Featured')) types.push('Featured');
   if (categories.includes('Event')) types.push('Summit Day');
   if (categories.includes('Pre-Event')) types.push('Pre-Event');
+  if (categories.includes('Club')) types.push('Club');
   return types;
 };
 
@@ -49,12 +50,20 @@ const transformAgendaToEvents = (agenda) => {
         const eventType = getEventType(event.category);
         if (!eventType || eventType.length === 0) return;
 
+        let clubName = null;
+        if (eventType.includes('Club')) {
+             const knownKeywords = ['Featured', 'Event', 'Pre-Event', 'Club', 'Workshop', 'EOI', 'Webinar'];
+             const otherCats = categories.filter(c => !knownKeywords.includes(c));
+             if (otherCats.length > 0) clubName = otherCats[0];
+        }
+
         events.push({
           id: event.id || Math.random(),
           title: event.name || '',
           description: event.description || '',
           registrationLink: event.link || '',
           eventType, 
+          clubName,
           startTime: event.start_time,
           endTime: event.end_time,
         });
@@ -110,15 +119,21 @@ const getEventRank = (event) => {
   // 2. Determine Status
   const isClosed = now > end;
   const isUpcoming = now < start;
-  // isActive is implicit if not closed and not upcoming
+  
+  // Check fullness
+  const slots = parseInt(event.slots || 0);
+  const capacity = parseInt(event.capacity || 0);
+  const isFull = capacity > 0 && slots >= capacity;
 
   // 3. Determine Base Score based on STATUS (Major Grouping)
   // Active = 0
-  // Upcoming = 100 (Pushes them below ALL active events)
-  // Closed = 200 (Pushes them to the very bottom)
+  // Active Full = 50
+  // Upcoming = 100
+  // Closed = 200
   let statusScore = 0;
   if (isClosed) statusScore = 200;
   else if (isUpcoming) statusScore = 100;
+  else if (isFull) statusScore = 50; // Deprioritize full events
   else statusScore = 0;
 
   // 4. Determine Type Score (Sub-sorting within status)
@@ -131,11 +146,9 @@ const getEventRank = (event) => {
   if (types.includes('Featured')) typeScore = 1;
   else if (types.includes('Pre-Event')) typeScore = 2;
   else if (types.includes('Summit Day')) typeScore = 3;
+  else if (types.includes('Club')) typeScore = 4;
 
   // Final Score = Status + Type
-  // Example: Active Featured = 0 + 1 = 1
-  // Example: Active Summit = 0 + 3 = 3
-  // Example: Upcoming Featured = 100 + 1 = 101
   return statusScore + typeScore;
 };
 
@@ -249,7 +262,7 @@ export default function EventsPage() {
 
           {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-3 mt-6 w-full max-w-md">
-            {['All', 'Featured', 'Summit Day', 'Pre-Event'].map((category) => (
+            {['All', 'Featured', 'Summit Day', 'Pre-Event', 'Club'].map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}

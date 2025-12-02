@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import side_image from '../assets/side_image.png';
 import { Play } from 'lucide-react';
 
-export default function EventCard({ event, isWebinar = false, trackData = [] }) {
+export default function EventCard({ event, isWebinar = false, trackData = [], truncateDescription = false }) {
   const [isEventLive, setIsEventLive] = useState(false);
   const [canRegister, setCanRegister] = useState(true);
   const [isEventEnded, setIsEventEnded] = useState(false);
@@ -455,7 +455,7 @@ export default function EventCard({ event, isWebinar = false, trackData = [] }) 
           <div className="absolute top-1 right-1 z-10 flex gap-2">
             {event.eventType.map((type, index) => (
               <div key={index} className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                {type}
+                {type === 'Club' && event.clubName ? event.clubName : type}
               </div>
             ))}
           </div>
@@ -479,6 +479,7 @@ export default function EventCard({ event, isWebinar = false, trackData = [] }) 
             <img
               src={event.posterUrl}
               alt={`${event.title} poster`}
+              loading="lazy"
               className={`w-full h-auto object-contain rounded-t-xl md:rounded-l-xl md:rounded-tr-none ${
                 isEventEnded || registrationEnded || !canRegister || isSeatsFull
                   ? ''
@@ -501,7 +502,7 @@ export default function EventCard({ event, isWebinar = false, trackData = [] }) 
           {renderSpeakers()}
           {renderWebinarTime()}
 
-          <p className="text-xs md:text-sm font-gilroy-light text-black leading-relaxed [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
+          <p className={`text-xs md:text-sm font-gilroy-light text-black leading-relaxed [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)] ${truncateDescription ? 'md:line-clamp-3' : ''}`}>
             {event.description}
           </p>
 
