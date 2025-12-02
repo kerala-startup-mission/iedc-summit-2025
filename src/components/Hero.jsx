@@ -291,7 +291,7 @@ const Hero = () => {
         />
       </div>
 
-      <FloatingCoupon currentCode={currentCode} offerTimeLeft={offerTimeLeft} />
+      {/* <FloatingCoupon currentCode={currentCode} offerTimeLeft={offerTimeLeft} /> */}
     </div>
   );
 };
