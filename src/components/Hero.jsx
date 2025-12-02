@@ -274,7 +274,7 @@ const DesktopLayout = ({ timeLeft }) => (
 
 const Hero = () => {
   const timeLeft = useCountdown(EVENT_DATE);
-  const offerTimeLeft = useCountdown("2025-12-03T13:00:00");
+  const offerTimeLeft = useCountdown("2025-12-03T00:00:00");
   const currentCode = useRotatingValue(COUPON_CODES, 3000);
   const logoList = useMemo(() => Array(9).fill({ text: "IEDC SUMMIT 2025" }), []);
 
