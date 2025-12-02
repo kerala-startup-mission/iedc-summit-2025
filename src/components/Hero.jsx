@@ -173,10 +173,6 @@ const MobileLayout = ({ timeLeft }) => (
         </div>
       </a>
 
-      <div className="text-red-600 text-xs font-bold font-gilroy-bold mb-3 w-[200px] text-center animate-pulse" style={{ animationDelay: "0.4s" }}>
-        We heard your voice! <br/> Early Bird Extended for 48hr!
-      </div>
-
       {/* <div className="text-blue-400 text-sm font-normal font-gilroy-bold animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
         *Be quick, connect more*
       </div> */}
@@ -247,9 +243,6 @@ const DesktopLayout = ({ timeLeft }) => (
             REGISTER NOW
           </div>
         </a>
-        <div className="text-red-600 text-sm font-bold font-gilroy-bold mt-2 ml-4 animate-pulse">
-            We heard your voice! Early Bird Extended for 48hr!
-        </div>
       </div>
     </div>
 
