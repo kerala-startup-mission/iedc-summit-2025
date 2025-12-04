@@ -180,9 +180,8 @@ const sortEvents = (events) => {
 
 // ---- Component ----
 
-export default function EventsPage() {
+export default function PreEventsPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
   const [events, setEvents] = useState([]);
   const [trackData, setTrackData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -203,11 +202,11 @@ export default function EventsPage() {
         const transformed = transformAgendaToEvents(eventsData.agenda);
         const processed = processEventDescriptions(transformed);
         
-        // Filter OUT Pre-Events (they have their own page now)
-        const mainEvents = processed.filter(event => !event.eventType.includes('Pre-Event'));
+        // Filter ONLY Pre-Events
+        const preEvents = processed.filter(event => event.eventType && event.eventType.includes('Pre-Event'));
 
         // Apply Sorting
-        const sorted = sortEvents(mainEvents);
+        const sorted = sortEvents(preEvents);
 
         setEvents(sorted);
       } catch (error) {
@@ -223,11 +222,6 @@ export default function EventsPage() {
   const filteredEvents = useMemo(() => {
     let filtered = events;
 
-    // Filter by Category
-    if (selectedCategory !== 'All') {
-      filtered = filtered.filter(event => event.eventType && event.eventType.includes(selectedCategory));
-    }
-
     const query = searchQuery.toLowerCase();
     if (query) {
       filtered = filtered.filter((event) => {
@@ -238,7 +232,7 @@ export default function EventsPage() {
     }
     
     return filtered;
-  }, [events, searchQuery, selectedCategory]);
+  }, [events, searchQuery]);
 
   return (
     <section className="w-full min-h-screen bg-white relative overflow-hidden">
@@ -247,7 +241,7 @@ export default function EventsPage() {
         <div className="mb-[8vh] md:mb-[12vh] md:flex md:flex-col md:items-center">
           <div className="w-full md:text-center">
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-clash-display md:font-black text-blue-500 relative z-20">
-              Events
+              Pre-Events
             </h2>
           </div>
 
@@ -255,29 +249,12 @@ export default function EventsPage() {
           <div className="relative w-full max-w-md mx-auto md:mx-0 mt-[3vh]">
             <input
               type="text"
-              placeholder="Search events"
+              placeholder="Search pre-events"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full h-[5vh] px-5 bg-indigo-100 rounded-[19px] text-sm text-blue-600 placeholder-blue-600 font-gilroy-light focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-blue-600" />
-          </div>
-
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-3 mt-6 w-full max-w-md">
-            {['All', 'Featured', 'Summit Day', 'Club'].map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-gilroy-bold transition-all duration-300 ${
-                  selectedCategory === category
-                    ? 'bg-blue-600 text-white shadow-lg scale-105'
-                    : 'bg-blue-50 text-blue-600 hover:bg-blue-100'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
           </div>
         </div>
 
@@ -294,7 +271,7 @@ export default function EventsPage() {
           ) : (
             <div className="col-span-full text-center py-12">
               <p className="text-xl font-gilroy-light text-gray-500">
-                No events found
+                No pre-events found
               </p>
             </div>
           )}

@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   { label: 'Home', href: '/' },
   { label: 'Speakers', href: '/speakers' },
   { label: 'Events', href: '/events' },
+  { label: 'Pre-Events', href: '/preevents' },
   { label: 'Webinars', href: '/webinars' },
   { label: 'EOIs', href: '/eois' },
   { label: 'Be Our Sponsor', href: '/be-our-sponsor' },

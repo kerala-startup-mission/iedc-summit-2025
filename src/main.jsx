@@ -8,6 +8,7 @@ import ExternalFormRedirect from "./components/ExternalFormRedirect";
 import SessionRedirect from "./components/SessionRedirect";
 import Schedule from "./components/Schedule.jsx";
 import Events from "./components/Events.jsx";
+import PreEventsPage from "./components/PreEvents.jsx";
 import Webinars from "./components/Webinars.jsx";
 import Footer from "./components/Footer.jsx";
 import Navbar from "./components/Navbar.jsx";
@@ -60,6 +61,16 @@ createRoot(document.getElementById("root")).render(
               <>
                 <Navbar />
                 <Events />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/preevents"
+            element={
+              <>
+                <Navbar />
+                <PreEventsPage />
                 <Footer />
               </>
             }
