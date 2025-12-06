@@ -334,6 +334,32 @@ export default function EventCard({ event, isWebinar = false, trackData = [], tr
   };
 
   const renderRegularButtons = () => {
+    if (event.link_text) {
+      const targetLink = event.link || event.registrationLink;
+      const hasLink = targetLink && targetLink.length > 0;
+
+      return (
+        <div className="mt-auto w-full flex gap-2">
+          <button
+            onClick={() => {
+              if (hasLink) {
+                window.open(targetLink, '_blank', 'noopener,noreferrer');
+              }
+            }}
+            className={`flex-1 h-8 md:h-9 rounded-lg flex items-center justify-center transition ${
+              hasLink 
+                ? 'bg-black hover:opacity-100 opacity-90 cursor-pointer' 
+                : 'bg-gray-500 cursor-default'
+            }`}
+          >
+            <span className="text-white text-xs font-medium font-clash-display tracking-tight">
+              {event.link_text}
+            </span>
+          </button>
+        </div>
+      );
+    }
+
     if (!event.registrationLink && !hasSlots) {
       return (
         <div className="mt-auto w-full h-8 md:h-9 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">

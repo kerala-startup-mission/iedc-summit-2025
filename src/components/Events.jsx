@@ -62,6 +62,7 @@ const transformAgendaToEvents = (agenda) => {
           title: event.name || '',
           description: event.description || '',
           registrationLink: event.link || '',
+          link_text: event.link_text || '',
           eventType, 
           clubName,
           startTime: event.start_time,
