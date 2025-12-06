@@ -117,7 +117,7 @@ const FloatingCoupon = ({ currentCode, offerTimeLeft }) => {
                 transition={{ duration: 0.3 }}
                 className="text-white text-base md:text-xl font-black font-gilroy-bold tracking-wide"
               >
-                {currentCode}
+                <span className="text-[10px] md:text-xs font-medium mr-1 opacity-80">USE CODE:</span>{currentCode}
               </motion.span>
             </AnimatePresence>
           </div>
