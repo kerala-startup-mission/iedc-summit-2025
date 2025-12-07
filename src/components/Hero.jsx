@@ -5,7 +5,7 @@ import LogoLoop from "./LogoLoop";
 
 // --- Constants ---
 const EVENT_DATE = "2025-12-22T09:00:00";
-const COUPON_CODES = ["FLASH20"];
+const COUPON_CODES = ["SUMMIT15"];
 
 // --- Custom Hooks ---
 const useCountdown = (targetDate) => {
@@ -78,7 +78,7 @@ const FloatingCoupon = ({ currentCode, offerTimeLeft }) => {
         <div className="relative overflow-hidden bg-gradient-to-r from-gray-500 to-gray-600 rounded-2xl p-3 md:p-4 shadow-2xl border border-white/20">
           <div className="flex items-center justify-center relative z-10">
             <span className="text-white text-sm md:text-base font-bold font-gilroy-bold uppercase tracking-wider">
-              Flash Sale Closed
+              Sale Closed
             </span>
           </div>
         </div>
@@ -88,7 +88,7 @@ const FloatingCoupon = ({ currentCode, offerTimeLeft }) => {
 
   return (
     <a
-      href="https://tickets.startupmission.in/iedc-summit-2025?code=FLASH20"
+      href="https://tickets.startupmission.in/iedc-summit-2025?code=SUMMIT15"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-5 right-5 md:right-10 z-50 min-w-[180px] md:min-w-[200px] cursor-pointer group"
@@ -103,10 +103,8 @@ const FloatingCoupon = ({ currentCode, offerTimeLeft }) => {
           </div>
           <div className="flex flex-col">
             <span className="text-blue-100 text-[9px] md:text-xs font-bold font-gilroy-bold uppercase tracking-wider">
-              20% OFF <span className="text-white/40 mx-1">|</span>{" "}
-              <span className="text-yellow-300 animate-pulse">
-                Ends in {offerTimeLeft.days}d {offerTimeLeft.hours}h {offerTimeLeft.minutes}m
-              </span>
+              15% OFF
+
             </span>
             <AnimatePresence mode="wait">
               <motion.span
@@ -233,7 +231,7 @@ const DesktopLayout = ({ timeLeft }) => (
 
         {/* ORIGINAL CTA BUTTON (Restored) */}
         <a
-          href="https://tickets.startupmission.in/iedc-summit-2025?code=FLASH20"
+          href="https://tickets.startupmission.in/iedc-summit-2025?code=SUMMIT15"
           target="_blank"
           rel="noopener noreferrer"
           className="px-8 lg:px-12 py-3 lg:py-4 rounded-[29px] flex items-center justify-center mt-[4vh] transition-colors duration-300 relative overflow-hidden group w-fit"
@@ -267,7 +265,7 @@ const DesktopLayout = ({ timeLeft }) => (
 
 const Hero = () => {
   const timeLeft = useCountdown(EVENT_DATE);
-  const offerTimeLeft = useCountdown("2025-12-06T20:00:00");
+  const offerTimeLeft = useCountdown("2025-12-22T00:00:00");
   const currentCode = useRotatingValue(COUPON_CODES, 3000);
   const logoList = useMemo(() => Array(9).fill({ text: "IEDC SUMMIT 2025" }), []);
 
@@ -291,7 +289,7 @@ const Hero = () => {
         />
       </div>
 
-     {/* <FloatingCoupon currentCode={currentCode} offerTimeLeft={offerTimeLeft} /> */}
+     <FloatingCoupon currentCode={currentCode} offerTimeLeft={offerTimeLeft} /> 
     </div>
   );
 };
