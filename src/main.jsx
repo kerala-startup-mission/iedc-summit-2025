@@ -66,6 +66,16 @@ createRoot(document.getElementById("root")).render(
             }
           />
           <Route
+            path="/events/club"
+            element={
+              <>
+                <Navbar />
+                <Events />
+                <Footer />
+              </>
+            }
+          />
+          <Route
             path="/preevents"
             element={
               <>

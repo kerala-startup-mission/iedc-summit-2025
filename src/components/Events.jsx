@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import EventCard from './EventCard';
 
@@ -182,11 +183,35 @@ const sortEvents = (events) => {
 // ---- Component ----
 
 export default function EventsPage() {
+  const location = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [events, setEvents] = useState([]);
   const [trackData, setTrackData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Check for URL path (e.g. /events/club)
+    if (location.pathname === '/events/club') {
+      setSelectedCategory('Club');
+      return;
+    }
+
+    // Check for query params (e.g. /events?category=Club)
+    const params = new URLSearchParams(location.search);
+    const categoryParam = params.get('category');
+    
+    if (categoryParam) {
+      // Handle different casing or URL-friendly formats
+      if (categoryParam.toLowerCase() === 'club') {
+        setSelectedCategory('Club');
+      } else if (categoryParam.toLowerCase() === 'featured') {
+        setSelectedCategory('Featured');
+      } else if (categoryParam.toLowerCase() === 'summit-day' || categoryParam.toLowerCase() === 'summit day') {
+        setSelectedCategory('Summit Day');
+      }
+    }
+  }, [location.search, location.pathname]);
 
   useEffect(() => {
     const fetchEvents = async () => {

@@ -2,6 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { TicketPercent, MapPin, Calendar } from "lucide-react";
 import LogoLoop from "./LogoLoop";
+import FeaturedEventsPopup from "./FeaturedEventsPopup";
 
 // --- Constants ---
 const EVENT_DATE = "2025-12-22T09:00:00";
@@ -289,7 +290,8 @@ const Hero = () => {
         />
       </div>
 
-     <FloatingCoupon currentCode={currentCode} offerTimeLeft={offerTimeLeft} /> 
+      <FloatingCoupon currentCode={currentCode} offerTimeLeft={offerTimeLeft} /> 
+      {/* <FeaturedEventsPopup /> */}
     </div>
   );
 };
