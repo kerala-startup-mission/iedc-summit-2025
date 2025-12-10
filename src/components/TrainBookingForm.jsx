@@ -28,7 +28,7 @@ export const TrainBookingForm = () => {
 
         <div className="max-w-4xl mx-auto relative z-10 mt-10">
             <h1 className="text-4xl md:text-6xl font-clash-display font-black text-blue-600 mb-4 text-center">
-                Book a Train
+                Book Train Ticket
             </h1>
             <p className="text-center text-gray-600 mb-12 font-gilroy-medium text-lg">
                 Reserve your seat for the IEDC Summit 2025 journey

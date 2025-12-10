@@ -106,7 +106,7 @@ createRoot(document.getElementById("root")).render(
             }
           />
           <Route
-            path="/book-train"
+            path="/book-train-ticket"
             element={
               <>
                 <Navbar />
