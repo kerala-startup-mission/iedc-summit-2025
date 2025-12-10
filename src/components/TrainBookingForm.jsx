@@ -298,7 +298,7 @@ export const TrainBookingForm = () => {
                                         </div>
                                     )}
                                     <span className="block font-clash-display font-bold mb-1">From Kasaragod</span>
-                                    <span className="text-xs">Dec 23</span>
+                                    <span className="text-xs">Dec 22</span>
                                     {isFromFull && <span className="block text-xs text-red-500 font-bold mt-1">Booking Closed</span>}
                                 </button>
                             </div>
