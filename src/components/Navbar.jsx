@@ -10,7 +10,7 @@ const NAV_ITEMS = [
   { label: 'Pre-Events', href: '/preevents' },
   { label: 'Webinars', href: '/webinars' },
   { label: 'EOIs', href: '/eois' },
-  { label: 'Be Our Sponsor', href: '/be-our-sponsor' },
+  { label: 'Book a Train', href: '/book-train' },
 ];
 
 const Navbar = () => {

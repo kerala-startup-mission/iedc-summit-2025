@@ -25,6 +25,7 @@ const FeaturedEventsPopup = () => {
         
         // Extract and filter featured events
         const allEvents = [];
+        const seenIds = new Set();
         const now = new Date();
 
         if (data.agenda) {
@@ -50,9 +51,12 @@ const FeaturedEventsPopup = () => {
                     // Ignore JSON parse errors
                   }
 
-                  // Only add if event is not closed
+                  // Only add if event is not closed and not duplicate
                   if (endTime && now <= endTime) {
-                    allEvents.push(event);
+                    if (!seenIds.has(event.id)) {
+                      seenIds.add(event.id);
+                      allEvents.push(event);
+                    }
                   }
                 }
               });
@@ -80,91 +84,114 @@ const FeaturedEventsPopup = () => {
     return () => clearInterval(interval);
   }, [events.length]);
 
-  if (!isVisible || isLoading || events.length === 0) return null;
+  if (!isVisible) return null;
+  if (!isLoading && events.length === 0) return null;
 
-  const currentEvent = events[currentIndex];
-
-  // Helper to get poster URL from description JSON
-  const getPosterUrl = (description) => {
+  // Helper to get details from description JSON
+  const getEventDetails = (description) => {
     try {
       const descData = JSON.parse(description);
-      return descData?.ExtraData?.posterUrl || null;
+      return {
+        posterUrl: descData?.ExtraData?.posterUrl || null,
+        descriptionText: descData?.description || descData?.Description || description
+      };
     } catch (error) {
-      return null;
+      return {
+        posterUrl: null,
+        descriptionText: description
+      };
     }
   };
 
-  const posterUrl = getPosterUrl(currentEvent.description);
+  const currentEvent = !isLoading && events.length > 0 ? events[currentIndex] : null;
+  const { posterUrl, descriptionText } = currentEvent ? getEventDetails(currentEvent.description) : { posterUrl: null, descriptionText: '' };
 
   return (
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 w-[90vw] max-w-[500px]">
-      <div className="relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden">
+    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[95vw] max-w-[750px]">
+      <div className="relative bg-white rounded-xl shadow-2xl outline-2 outline-blue-600/75 overflow-hidden min-h-[300px]">
         {/* Close Button */}
         <button
-          onClick={() => setIsVisible(false)}
-          className="absolute top-2 right-2 z-20 p-1.5 bg-black/10 hover:bg-black/20 rounded-full transition-colors"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsVisible(false);
+          }}
+          className="absolute top-2 right-2 z-50 p-1.5 bg-black/10 hover:bg-black/20 rounded-full transition-colors cursor-pointer"
         >
           <X size={20} className="text-gray-800" />
         </button>
 
-        <Link to="/events" className="block group">
-          <div className="flex flex-col md:flex-row">
-            {/* Image */}
-            {posterUrl ? (
-              <div className="w-full md:w-1/2 h-48 md:h-auto shrink-0 bg-gray-100">
-                <img
-                  src={posterUrl}
-                  alt={currentEvent.name}
-                  className="w-full h-full object-contain md:object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            ) : (
-              <div className="w-full md:w-1/2 h-48 md:h-auto shrink-0 bg-blue-50 flex items-center justify-center">
-                <span className="text-blue-600 font-bold text-xl text-center px-4">
-                  IEDC Summit 2025
-                </span>
-              </div>
-            )}
-
-            {/* Content */}
-            <div className="flex flex-col justify-center p-5 md:p-6 min-w-0 flex-1">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="px-3 py-1 bg-blue-600 text-white text-xs font-medium rounded-full uppercase tracking-wider">
-                  Featured Event
-                </span>
-              </div>
-              
-              <AnimatePresence mode="wait">
-                <motion.h3
-                  key={currentEvent.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="text-xl md:text-2xl font-clash-display text-black leading-tight mb-3"
-                >
-                  {currentEvent.name}
-                </motion.h3>
-              </AnimatePresence>
-
-              <div className="mt-auto flex items-center text-blue-600 text-sm font-bold font-gilroy-bold group-hover:translate-x-1 transition-transform">
-                VIEW DETAILS <ChevronRight size={16} className="ml-1" />
-              </div>
+        {isLoading ? (
+          <div className="flex items-center justify-center h-[300px] w-full">
+            <div className="flex gap-2">
+              <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: "0s" }}></div>
+              <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: "0.15s" }}></div>
+              <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: "0.3s" }}></div>
             </div>
           </div>
-          
-          {/* Progress Bar */}
-          {events.length > 1 && (
-            <div className="absolute bottom-0 left-0 h-1.5 bg-blue-100 w-full">
-              <motion.div
-                key={currentIndex}
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 5, ease: "linear" }}
-                className="h-full bg-blue-600"
-              />
+        ) : (
+          <Link to="/events" className="block group">
+            <div className="flex flex-col md:flex-row">
+              {/* Image */}
+              {posterUrl ? (
+                <div className="w-full md:w-1/2 h-48 md:h-auto shrink-0 bg-gray-100">
+                  <img
+                    src={posterUrl}
+                    alt={currentEvent.name}
+                    className="w-full h-full object-contain md:object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              ) : (
+                <div className="w-full md:w-1/2 h-48 md:h-auto shrink-0 bg-blue-50 flex items-center justify-center">
+                  <span className="text-blue-600 font-bold text-xl text-center px-4">
+                    IEDC Summit 2025
+                  </span>
+                </div>
+              )}
+
+              {/* Content */}
+              <div className="flex flex-col justify-center p-5 md:p-6 min-w-0 flex-1">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="px-3 py-1 bg-blue-600 text-white text-xs font-medium rounded-full uppercase tracking-wider">
+                    Featured Event
+                  </span>
+                </div>
+                
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentEvent.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                  >
+                    <h3 className="text-xl md:text-2xl font-clash-display text-black leading-tight mb-2">
+                      {currentEvent.name}
+                    </h3>
+                    <p className="text-sm text-gray-600 font-gilroy-medium line-clamp-3 mb-4 leading-relaxed">
+                      {descriptionText}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+
+                <div className="mt-auto flex items-center text-blue-600 text-sm font-bold font-gilroy-bold group-hover:translate-x-1 transition-transform">
+                  VIEW DETAILS <ChevronRight size={16} className="ml-1" />
+                </div>
+              </div>
             </div>
-          )}
-        </Link>
+            
+            {/* Progress Bar */}
+            {events.length > 1 && (
+              <div className="absolute bottom-0 left-0 h-1.5 bg-blue-100 w-full">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ width: "0%" }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 5, ease: "linear" }}
+                  className="h-full bg-blue-600"
+                />
+              </div>
+            )}
+          </Link>
+        )}
       </div>
     </div>
   );

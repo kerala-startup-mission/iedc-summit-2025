@@ -17,7 +17,7 @@ import EOIs from "./components/EOIs.jsx";
 import Leaderboard from "./components/Leaderboard.jsx";
 import WebinarCertificates from "./components/WebinarCertificates.jsx";
 import CertificateVerification from "./components/CertificateVerification.jsx";
-import { SponsorForm } from "./components/SponsorForm";
+import { TrainBookingForm } from "./components/TrainBookingForm";
 import { ScrollToTop } from "./components/ScrollToTop";
 
 const AccommodationRedirect = () => {
@@ -106,11 +106,11 @@ createRoot(document.getElementById("root")).render(
             }
           />
           <Route
-            path="/be-our-sponsor"
+            path="/book-train"
             element={
               <>
                 <Navbar />
-                <SponsorForm />
+                <TrainBookingForm />
                 <Footer />
               </>
             }
