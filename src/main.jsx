@@ -39,6 +39,25 @@ const AccommodationRedirect = () => {
   );
 };
 
+const RegisterRedirect = () => {
+  useEffect(() => {
+    window.location.href = "https://tickets.startupmission.in/iedc-summit-2025?code=SUMMIT15";
+  }, []);
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-white">
+      <div className="text-center">
+        <p className="text-blue-600 font-clash-display text-lg mb-2">
+          Redirecting to registration page...
+        </p>
+        <p className="text-blue-400 font-gilroy-medium">
+          If you are not redirected, click <a href="https://tickets.startupmission.in/iedc-summit-2025?code=SUMMIT15" className="text-blue-600 underline">here</a>
+        </p>
+      </div>
+    </div>
+  );
+};
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
@@ -158,6 +177,10 @@ createRoot(document.getElementById("root")).render(
           <Route
             path="/accomodation"
             element={<AccommodationRedirect />}
+          />
+          <Route
+            path="/register"
+            element={<RegisterRedirect />}
           />
           <Route path="/dp" element={<App />} />
           {/* Session redirect route - /r/sessionId */}
