@@ -39,16 +39,16 @@ export const TrainBookingForm = () => {
   const scheduleData = {
     to_kasaragod: [
       { station: 'Trivandrum', date: '21/12/25', time: '14:00', fare: '₹ 365' },
-      { station: 'Kottayam', date: '21/12/25', time: '16:30 - 16:40', fare: '₹ 295' },
-      { station: 'Ernakulam North', date: '21/12/25', time: '18:05 - 18:10', fare: '₹ 265' },
+      { station: 'Kottayam', date: '21/12/25', time: '16:30 - 16:32', fare: '₹ 295' },
+      { station: 'Ernakulam North', date: '21/12/25', time: '17:55 - 18:10', fare: '₹ 265' },
       { station: 'Shoranur', date: '21/12/25', time: '21:05 - 21:20', fare: '₹ 220' },
       { station: 'Kasaragod', date: '22/12/25', time: '04:00', isDestination: true }
     ],
     from_kasaragod: [
       { station: 'Kasaragod', date: '22/12/25', time: '23:30', isOrigin: true },
-      { station: 'Shoranur', date: '23/12/25', time: '04:50 - 05:00', fare: '₹ 220' },
-      { station: 'Ernakulam North', date: '23/12/25', time: '08:05 - 08:10', fare: '₹ 265' },
-      { station: 'Kottayam', date: '23/12/25', time: '10:10 - 10:20', fare: '₹ 295' },
+      { station: 'Shoranur', date: '23/12/25', time: '04:45 - 05:00', fare: '₹ 220' },
+      { station: 'Ernakulam North', date: '23/12/25', time: '07:55 - 08:10', fare: '₹ 265' },
+      { station: 'Kottayam', date: '23/12/25', time: '10:10 - 10:12', fare: '₹ 295' },
       { station: 'Trivandrum', date: '23/12/25', time: '14:30', fare: '₹ 365' }
     ]
   };
