@@ -107,6 +107,10 @@ export const TrainBookingForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    await submitBooking('book');
+  };
+
+  const submitBooking = async (action) => {
     setLoading(true);
     setError('');
 
@@ -122,6 +126,7 @@ export const TrainBookingForm = () => {
       params.append('name', formData.name);
       params.append('ticketNumber', formData.ticketNumber);
       params.append('station', formData.station);
+      params.append('action', action);
 
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
@@ -130,20 +135,30 @@ export const TrainBookingForm = () => {
       
       const result = await response.json();
 
+      if (result.result === 'duplicate') {
+        if (window.confirm(result.message)) {
+            await submitBooking('update');
+            return;
+        } else {
+            setLoading(false);
+            return;
+        }
+      }
+
       if (result.result === 'error') {
-        // If Duplicate or Full
         setError(result.message);
         setLoading(false);
+        return;
+      }
+
+      // SUCCESS: REDIRECT TO PAYMENT
+      const link = paymentLinks[formData.route]?.[formData.station];
+      
+      if (link) {
+          window.location.href = link;
       } else {
-        // SUCCESS: REDIRECT TO PAYMENT
-        const link = paymentLinks[formData.route]?.[formData.station];
-        
-        if (link) {
-            window.location.href = link;
-        } else {
-            setError('Payment link not configured for this station.');
-            setLoading(false);
-        }
+          setError('Payment link not configured for this station.');
+          setLoading(false);
       }
 
     } catch (err) {
