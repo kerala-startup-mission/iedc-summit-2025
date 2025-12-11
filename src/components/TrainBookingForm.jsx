@@ -40,14 +40,14 @@ export const TrainBookingForm = () => {
     to_kasaragod: [
       { station: 'Trivandrum', date: '21/12/25', time: '14:00', fare: '₹ 365' },
       { station: 'Kottayam', date: '21/12/25', time: '16:30 - 16:40', fare: '₹ 295' },
-      { station: 'Ernakulam', date: '21/12/25', time: '18:05 - 18:10', fare: '₹ 265' },
+      { station: 'Ernakulam North', date: '21/12/25', time: '18:05 - 18:10', fare: '₹ 265' },
       { station: 'Shoranur', date: '21/12/25', time: '21:05 - 21:20', fare: '₹ 220' },
       { station: 'Kasaragod', date: '22/12/25', time: '04:00', isDestination: true }
     ],
     from_kasaragod: [
       { station: 'Kasaragod', date: '22/12/25', time: '23:30', isOrigin: true },
       { station: 'Shoranur', date: '23/12/25', time: '04:50 - 05:00', fare: '₹ 220' },
-      { station: 'Ernakulam', date: '23/12/25', time: '08:05 - 08:10', fare: '₹ 265' },
+      { station: 'Ernakulam North', date: '23/12/25', time: '08:05 - 08:10', fare: '₹ 265' },
       { station: 'Kottayam', date: '23/12/25', time: '10:10 - 10:20', fare: '₹ 295' },
       { station: 'Trivandrum', date: '23/12/25', time: '14:30', fare: '₹ 365' }
     ]
@@ -58,12 +58,12 @@ export const TrainBookingForm = () => {
     to_kasaragod: {
       'Trivandrum': 'https://tickets.startupmission.in/iedcsummit25-stt-tvm-kgq',
       'Kottayam': 'https://tickets.startupmission.in/iedcsummit25-stt-ktym-kgq',
-      'Ernakulam': 'https://tickets.startupmission.in/iedcsummit25-stt-ern-kgq',
+      'Ernakulam North': 'https://tickets.startupmission.in/iedcsummit25-stt-ern-kgq',
       'Shoranur': 'https://tickets.startupmission.in/iedcsummit25-stt-srr-kgq'
     },
     from_kasaragod: {
       'Shoranur': 'https://tickets.startupmission.in/iedcsummit25-stt-kgq-srr',
-      'Ernakulam': 'https://tickets.startupmission.in/iedcsummit25-stt-kgq-ern',
+      'Ernakulam North': 'https://tickets.startupmission.in/iedcsummit25-stt-kgq-ern',
       'Kottayam': 'https://tickets.startupmission.in/iedcsummit25-stt-kgq-ktym',
       'Trivandrum': 'https://tickets.startupmission.in/iedcsummit25-stt-kgq-tvm'
     }
