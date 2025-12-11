@@ -58,12 +58,12 @@ export const TrainBookingForm = () => {
     to_kasaragod: {
       'Trivandrum': 'https://tickets.startupmission.in/iedcsummit25-stt-tvm-kgq',
       'Kottayam': 'https://tickets.startupmission.in/iedcsummit25-stt-ktym-kgq',
-      'Ernakulam': 'https://tickets.startupmission.in/iedcsummit25-stt-ers-kgq',
+      'Ernakulam': 'https://tickets.startupmission.in/iedcsummit25-stt-ern-kgq',
       'Shoranur': 'https://tickets.startupmission.in/iedcsummit25-stt-srr-kgq'
     },
     from_kasaragod: {
       'Shoranur': 'https://tickets.startupmission.in/iedcsummit25-stt-kgq-srr',
-      'Ernakulam': 'https://tickets.startupmission.in/iedcsummit25-stt-kgq-ers',
+      'Ernakulam': 'https://tickets.startupmission.in/iedcsummit25-stt-kgq-ern',
       'Kottayam': 'https://tickets.startupmission.in/iedcsummit25-stt-kgq-ktym',
       'Trivandrum': 'https://tickets.startupmission.in/iedcsummit25-stt-kgq-tvm'
     }
