@@ -226,7 +226,7 @@ export const TrainBookingForm = () => {
                                 required
                                 value={formData.ticketNumber}
                                 onChange={handleInputChange}
-                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all font-gilroy-medium text-center text-lg tracking-wider uppercase"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all font-gilroy-medium text-center text-lg tracking-wider"
                                 placeholder="IE-XXXX-XXXX"
                             />
                         </div>
