@@ -294,7 +294,7 @@ export const TrainBookingForm = () => {
                                     {isToFull && <span className="block text-xs text-red-500 font-bold mt-1">Booking Closed</span>}
                                 </button>
 
-                                {/* FROM KASARAGOD BUTTON */}
+                                {/* FROM KASARAGOD BUTTOn  */}
                                 <button
                                     type="button"
                                     disabled={isFromFull}
