@@ -89,6 +89,10 @@ const processEventDescriptions = (events) =>
 
           processedEvent.description = extractedDescription || event.description;
 
+          if (descData.id) {
+            processedEvent.customOrder = Number(descData.id);
+          }
+
           if (descData.ExtraData) {
             const extra = descData.ExtraData;
             Object.assign(processedEvent, {
@@ -156,6 +160,10 @@ const getEventRank = (event) => {
 
 const sortEvents = (events) => {
   return [...events].sort((a, b) => {
+    if (a.customOrder !== undefined && b.customOrder !== undefined) return a.customOrder - b.customOrder;
+    if (a.customOrder !== undefined) return -1;
+    if (b.customOrder !== undefined) return 1;
+
     const rankA = getEventRank(a);
     const rankB = getEventRank(b);
 
@@ -229,8 +237,14 @@ export default function EventsPage() {
         const transformed = transformAgendaToEvents(eventsData.agenda);
         const processed = processEventDescriptions(transformed);
         
-        // Filter OUT Pre-Events (they have their own page now)
-        const mainEvents = processed.filter(event => !event.eventType.includes('Pre-Event'));
+        // Filter logic:
+        // 1. Pre-Events: Hide if it's the only category
+        // 2. Club: Hide if it doesn't also have 'Summit Day' (Event) category
+        const mainEvents = processed.filter(event => {
+          if (event.eventType.includes('Pre-Event') && event.eventType.length === 1) return false;
+          if (event.eventType.includes('Club') && !event.eventType.includes('Summit Day')) return false;
+          return true;
+        });
 
         // Apply Sorting
         const sorted = sortEvents(mainEvents);
