@@ -6,7 +6,7 @@ import FeaturedEventsPopup from "./FeaturedEventsPopup";
 
 // --- Constants ---
 const EVENT_DATE = "2025-12-22T09:00:00";
-const COUPON_CODES = ["SUMMIT15"];
+const COUPON_CODES = ["SUMMIT15", "BEKAL15"];
 
 // --- Custom Hooks ---
 const useCountdown = (targetDate) => {
