@@ -89,7 +89,7 @@ const FloatingCoupon = ({ currentCode, offerTimeLeft }) => {
 
   return (
     <a
-      href="https://tickets.startupmission.in/iedc-summit-2025?code=SUMMIT15"
+      href={`https://tickets.startupmission.in/iedc-summit-2025?code=${currentCode}`}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-5 right-5 md:right-10 z-50 min-w-[180px] md:min-w-[200px] cursor-pointer group"
