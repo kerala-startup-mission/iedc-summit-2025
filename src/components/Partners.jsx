@@ -44,7 +44,7 @@ const Partners = () => {
   }, []);
 
   // Helper component for the Partner Card
-  const PartnerCard = ({ src, alt, label, categoryTitle, href, className = "", wrapperClass = "" }) => {
+  const PartnerCard = ({ src, alt, label, categoryTitle, href, className = "", wrapperClass = "", isTitleSponsor = false }) => {
     
     // Common inner content
     const CardContent = (
@@ -62,7 +62,7 @@ const Partners = () => {
         <img
           src={src}
           alt={alt}
-          className={`w-full h-28 object-contain -mt-2 ${className}`}
+          className={`w-full ${isTitleSponsor ? "h-48 md:h-56" : "h-28"} object-contain -mt-2 ${className}`}
         />
 
         {/* 3. Sub-label */}
@@ -77,7 +77,7 @@ const Partners = () => {
     // Common container classes
     // Using fixed widths (w-32 md:w-40) ensures they look like a grid even when using flex
     const containerClasses =
-      `flex flex-col items-center justify-center px-2 py-3 hover:bg-gray-50 transition-all duration-300 rounded-lg h-full min-h-[140px] w-32 md:w-40 relative group bg-white ${wrapperClass}`;
+      `flex flex-col items-center justify-center px-2 py-3 hover:bg-gray-50 transition-all duration-300 rounded-lg h-full ${isTitleSponsor ? "min-h-[220px] w-56 md:w-72" : "min-h-[140px] w-32 md:w-40"} relative group bg-white ${wrapperClass}`;
 
     if (href) {
       return (
@@ -156,13 +156,16 @@ const Partners = () => {
 
         {/* Main Grid (Using Flexbox to grow from center) */}
         <div className="mb-16 flex flex-wrap justify-center gap-8 md:gap-12 items-start">
-          {mainCategories.map((category, index) => (
+          {mainCategories.map((category, index) => {
+            const isTitleSponsor = category.title.toLowerCase().includes("title sponsor");
+            
+            return (
             <div 
               key={index} 
-              className="relative border border-gray-200 rounded-2xl p-4 pt-8 md:p-8 md:pt-10 flex flex-wrap justify-center gap-4 md:gap-6 w-full md:w-auto max-w-6xl"
+              className={`relative border ${isTitleSponsor ? "border-blue-300 shadow-xl bg-blue-50/20 scale-105 z-10" : "border-gray-200"} rounded-2xl p-4 pt-8 md:p-8 md:pt-10 flex flex-wrap justify-center gap-4 md:gap-6 w-full md:w-auto max-w-6xl`}
             >
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-4">
-                <h3 className="font-clash-display text-sm md:text-base font-bold text-blue-600 uppercase tracking-wider whitespace-nowrap">
+              <div className={`absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-4 ${isTitleSponsor ? "px-6 py-1 rounded-full border border-blue-100 shadow-sm" : ""}`}>
+                <h3 className={`font-clash-display font-bold text-blue-600 uppercase tracking-wider whitespace-nowrap ${isTitleSponsor ? "text-lg md:text-xl" : "text-sm md:text-base"}`}>
                   {category.title}
                 </h3>
               </div>
@@ -174,10 +177,11 @@ const Partners = () => {
                   alt={partner.alt}
                   label={partner.label}
                   href={partner.href}
+                  isTitleSponsor={isTitleSponsor}
                 />
               ))}
             </div>
-          ))}
+          )})}
         </div>
 
         {/* Bottom Section (Powered & Hosted - Centered) */}
