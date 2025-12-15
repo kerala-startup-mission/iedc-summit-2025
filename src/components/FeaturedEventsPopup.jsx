@@ -148,7 +148,6 @@ const FeaturedEventsPopup = () => {
                 </div>
               )}
 
-              {/* Content */}
               <div className="flex flex-col justify-center p-5 md:p-6 min-w-0 flex-1">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="px-3 py-1 bg-blue-600 text-white text-xs font-medium rounded-full uppercase tracking-wider">
