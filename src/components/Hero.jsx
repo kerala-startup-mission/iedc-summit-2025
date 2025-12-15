@@ -89,7 +89,7 @@ const FloatingCoupon = ({ currentCode, offerTimeLeft }) => {
 
   return (
     <a
-      href={`https://tickets.startupmission.in/iedc-summit-2025?code=${currentCode}`}
+      href="https://tickets.startupmission.in/iedc-summit-2025"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-5 right-5 md:right-10 z-50 min-w-[180px] md:min-w-[200px] cursor-pointer group"
@@ -232,7 +232,7 @@ const DesktopLayout = ({ timeLeft }) => (
 
         {/* ORIGINAL CTA BUTTON (Restored) */}
         <a
-          href="https://tickets.startupmission.in/iedc-summit-2025?code=SUMMIT15"
+          href="https://tickets.startupmission.in/iedc-summit-2025"
           target="_blank"
           rel="noopener noreferrer"
           className="px-8 lg:px-12 py-3 lg:py-4 rounded-[29px] flex items-center justify-center mt-[4vh] transition-colors duration-300 relative overflow-hidden group w-fit"
