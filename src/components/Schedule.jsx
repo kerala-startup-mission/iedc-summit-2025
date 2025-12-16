@@ -31,7 +31,7 @@ const Schedule = () => {
         });
         
         // Filter venues list to only show those with events
-        const excludedVenues = ["Website", "Webinars ", "EOIs"];
+        const excludedVenues = ["Website", "Webinars ", "EOIs", "LBS College of Engineering Kasaragod", "Webinars - 1", "Webinars - 2"];
         const filteredVenues = allVenues.filter(v => activeVenues.has(v) && !excludedVenues.includes(v));
         const finalVenues = filteredVenues.length > 0 ? filteredVenues : Array.from(activeVenues).filter(v => !excludedVenues.includes(v));
 
@@ -160,9 +160,21 @@ const Schedule = () => {
   };
 
   const getSpeakers = (item) => {
+    if (!item.speakers) return [];
     if (Array.isArray(item.speakers)) return item.speakers;
-    if (item.speakers && item.speakers.speaker && Array.isArray(item.speakers.speaker)) {
-        return item.speakers.speaker;
+    
+    if (typeof item.speakers === 'object') {
+        let allSpeakers = [];
+        Object.entries(item.speakers).forEach(([key, value]) => {
+            if (Array.isArray(value)) {
+                const speakersWithRole = value.map(s => ({
+                    ...s,
+                    role: key // e.g., 'speaker', 'panelist', 'moderator'
+                }));
+                allSpeakers = [...allSpeakers, ...speakersWithRole];
+            }
+        });
+        return allSpeakers;
     }
     return [];
   };
@@ -260,25 +272,30 @@ const Schedule = () => {
                     {expandedItems.includes(index) && (
                         <div className="mt-4 text-sm text-center">
                         {speakers.length > 0 ? (
-                            <div className="md:flex md:flex-row md:items-center font-gilroy-light md:gap-2 md:mt-10">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 md:gap-y-8 md:gap-x-4 font-gilroy-light md:mt-10">
                             {speakers.map((speaker, speakerIndex) => (
                                 <div
                                 key={speakerIndex}
-                                className="mb-2 flex flex-row md:w-1/2 justify-center gap-4"
+                                className="flex flex-row justify-start gap-4 px-2 w-full"
                                 >
-                                <div className="flex flex-row gap-3">
+                                <div className="flex flex-row gap-3 items-start w-full">
                                     <img
                                     src={speaker.image || speaker.photo || "https://i.pravatar.cc/150?img=5"}
                                     alt=""
-                                    className="rounded-full w-20 h-20 object-cover"
+                                    className="rounded-full w-16 h-16 md:w-20 md:h-20 object-cover shrink-0"
                                     />
-                                    <div className="flex flex-col md:items-start text-left">
-                                    <p className="font-medium mt-4 md:text-xl">
+                                    <div className="flex flex-col items-start text-left">
+                                    <p className="font-medium md:text-xl leading-tight">
                                         {speaker.name}
                                     </p>
-                                    <p className="text-[10px] md:text-base">
+                                    <p className="text-xs md:text-sm text-gray-700 mt-1">
                                         {speaker.title || speaker.designation}
                                     </p>
+                                    {speaker.role && (
+                                        <span className="text-[10px] md:text-xs bg-black/10 px-2 py-0.5 rounded-full mt-1 capitalize">
+                                            {speaker.role}
+                                        </span>
+                                    )}
                                     </div>
                                 </div>
                                 </div>

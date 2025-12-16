@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Search } from 'lucide-react';
 import EventCard from './EventCard';
+import { winnersData } from '../data/winners';
 
 const LoadingAnimation = () => (
   <div className="flex items-center justify-center py-20">
@@ -203,8 +204,28 @@ export default function PreEventsPage() {
         const transformed = transformAgendaToEvents(eventsData.agenda);
         const processed = processEventDescriptions(transformed);
         
+        // Attach winners data to events
+        const eventsWithWinners = processed.map(event => {
+          // Normalize title for matching
+          const normalizedTitle = event.title.toLowerCase().replace(/\s+/g, '');
+          
+          // Check against winnersData keys
+          let eventWinners = [];
+          Object.keys(winnersData).forEach(key => {
+             const normalizedKey = key.toLowerCase().replace(/\s+/g, '');
+             if (normalizedTitle.includes(normalizedKey)) {
+               eventWinners = winnersData[key].winners;
+             }
+          });
+
+          return {
+            ...event,
+            winners: eventWinners
+          };
+        });
+
         // Filter ONLY Pre-Events
-        const preEvents = processed.filter(event => event.eventType && event.eventType.includes('Pre-Event'));
+        const preEvents = eventsWithWinners.filter(event => event.eventType && event.eventType.includes('Pre-Event'));
 
         // Apply Sorting
         const sorted = sortEvents(preEvents);

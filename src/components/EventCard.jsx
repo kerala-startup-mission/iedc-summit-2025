@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import side_image from '../assets/side_image.png';
-import { Play } from 'lucide-react';
+import { Play, Trophy } from 'lucide-react';
+import EventWinnersModal from './EventWinnersModal';
 
 export default function EventCard({ event, isWebinar = false, trackData = [], truncateDescription = false }) {
   const [isEventLive, setIsEventLive] = useState(false);
@@ -8,10 +9,14 @@ export default function EventCard({ event, isWebinar = false, trackData = [], tr
   const [isEventEnded, setIsEventEnded] = useState(false);
   const [registrationEnded, setRegistrationEnded] = useState(false);
   const [showSlotModal, setShowSlotModal] = useState(false);
+  const [showWinnersModal, setShowWinnersModal] = useState(false);
 
   const hasPoster = !!event.posterUrl;
   const hasLogos = Array.isArray(event.logos) && event.logos.length > 0;
   const hasSlots = Array.isArray(event.slots) && event.slots.length > 0;
+
+  const is1Tank = event.title?.toLowerCase().includes('1tank') || event.title?.toLowerCase().includes('1 tank');
+  const hasWinners = (event.winners && event.winners.length > 0) || is1Tank;
 
   const slots = hasSlots ? event.slots : [];
 
@@ -394,6 +399,19 @@ export default function EventCard({ event, isWebinar = false, trackData = [], tr
           </span>
         </button>
 
+        {hasWinners && (
+          <button
+            onClick={() => setShowWinnersModal(true)}
+            className="h-8 md:h-9 px-3 md:px-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0 cursor-pointer"
+            aria-label="View Winners"
+          >
+            <Trophy size={14} fill="currentColor" />
+            <span className="text-white text-xs font-medium font-clash-display tracking-tight hidden sm:inline">
+              WINNERS
+            </span>
+          </button>
+        )}
+
         {event.vidLink && (
           <button
             onClick={() => {
@@ -553,6 +571,13 @@ export default function EventCard({ event, isWebinar = false, trackData = [], tr
       </div>
 
       {renderSlotModal()}
+
+      <EventWinnersModal 
+        isOpen={showWinnersModal} 
+        onClose={() => setShowWinnersModal(false)} 
+        eventTitle={event.title}
+        winners={event.winners}
+      />
     </>
   );
 }

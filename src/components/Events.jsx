@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import EventCard from './EventCard';
+import { winnersData } from '../data/winners';
 
 const LoadingAnimation = () => (
   <div className="flex items-center justify-center py-20">
@@ -236,12 +237,34 @@ export default function EventsPage() {
 
         const transformed = transformAgendaToEvents(eventsData.agenda);
         const processed = processEventDescriptions(transformed);
+
+        // Attach winners data to events BEFORE filtering
+        const eventsWithWinners = processed.map(event => {
+          // Normalize title for matching
+          const normalizedTitle = event.title.toLowerCase().replace(/\s+/g, '');
+          
+          // Check against winnersData keys
+          let eventWinners = [];
+          Object.keys(winnersData).forEach(key => {
+             const normalizedKey = key.toLowerCase().replace(/\s+/g, '');
+             if (normalizedTitle.includes(normalizedKey)) {
+               eventWinners = winnersData[key].winners;
+             }
+          });
+
+          return {
+            ...event,
+            winners: eventWinners
+          };
+        });
         
         // Filter logic:
-        // 1. Pre-Events: Hide if it's the only category
+        // 1. Pre-Events: Hide if it's the only category (UNLESS it has winners)
         // 2. Club: Hide if it doesn't also have 'Summit Day' (Event) category
-        const mainEvents = processed.filter(event => {
-          if (event.eventType.includes('Pre-Event') && event.eventType.length === 1) return false;
+        const mainEvents = eventsWithWinners.filter(event => {
+          const hasWinners = event.winners && event.winners.length > 0;
+          
+          if (event.eventType.includes('Pre-Event') && event.eventType.length === 1 && !hasWinners) return false;
           if (event.eventType.includes('Club') && !event.eventType.includes('Summit Day')) return false;
           return true;
         });
@@ -265,7 +288,11 @@ export default function EventsPage() {
 
     // Filter by Category
     if (selectedCategory !== 'All') {
-      filtered = filtered.filter(event => event.eventType && event.eventType.includes(selectedCategory));
+      if (selectedCategory === 'Winners') {
+        filtered = filtered.filter(event => event.winners && event.winners.length > 0);
+      } else {
+        filtered = filtered.filter(event => event.eventType && event.eventType.includes(selectedCategory));
+      }
     }
 
     const query = searchQuery.toLowerCase();
@@ -305,7 +332,7 @@ export default function EventsPage() {
 
           {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-3 mt-6 w-full max-w-md">
-            {['All', 'Featured', 'Summit Day', 'Club'].map((category) => (
+            {['All', 'Featured', 'Summit Day', 'Club', 'Winners'].map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}

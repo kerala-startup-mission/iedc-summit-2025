@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Highlights from "./components/Highlights";
+import Winners from "./components/Winners";
 import Partners from "./components/Partners";
 import FeaturedEvents from "./components/FeaturedEvents";
 import Directions from "./components/Directions";
@@ -26,6 +27,7 @@ function App() {
       <FeaturedSpeaker />
       <FeaturedEvents />
       <Highlights />
+      <Winners />
       {/* <RegisterCTA /> */}
       <About />
       <Partners />
