@@ -149,7 +149,7 @@ export default function SpeakersPage() {
         if (!res.ok) throw new Error("Fetch failed");
         const data = await res.json();
         
-        setFeaturedSpeakers(data.Featured || []);
+        setFeaturedSpeakers(data.Speakers || []);
         setWebinarSpeakers(data.Webinar || []);
       } catch (err) {
         console.error(err);
