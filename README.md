@@ -1,108 +1,132 @@
 # IEDC Summit 2025 🚀
 
-Official website for the **10th Anniversary Edition** of IEDC Summit, Kerala's premier entrepreneurship and innovation event hosted by L.B.S. College of Engineering, Kasaragod.
+[![React](https://img.shields.io/badge/React-19.1.1-blue?logo=react)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-7.1.14-646CFF?logo=vite)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## 🌟 About
-
-The IEDC Summit 2025 celebrates a decade of fostering innovation, entrepreneurship, and technological excellence. This flagship event brings together students, entrepreneurs, innovators, and industry leaders for workshops, keynotes, networking, and collaborative learning.
+Official website for the **10th Anniversary Edition** of **IEDC Summit**, Kerala's premier entrepreneurship and innovation event hosted by **L.B.S. College of Engineering, Kasaragod**.
 
 **Theme:** *Dare to Disrupt*
 
-## ✨ Features
+---
 
-- **Smooth Scroll Animations** - GSAP-powered fade-in effects for all sections
-- **Interactive Components** - 3D tilted cards with Framer Motion
-- **Responsive Design** - Mobile-first approach with Tailwind CSS v4
-- **Modal Popups** - Detailed content for Summit, LBSCEK, and IEDC Kerala
-- **Video Gallery** - Embedded YouTube videos from previous summits (2016-2024)
-- **Custom Scrollbar** - Blue accent theme with smooth scrolling
-- **SEO Optimized** - Comprehensive meta tags and structured data
+## 🌟 Overview
+
+The **IEDC Summit 2025** marks a decade of fostering innovation, entrepreneurship, and technological excellence in Kerala. This flagship event brings together students, entrepreneurs, innovators, and industry leaders for a transformative experience featuring workshops, keynotes, networking opportunities, and collaborative learning.
+
+This repository contains the source code for the official summit website, built with modern web technologies to ensure a seamless and engaging user experience.
+
+## ✨ Key Features
+
+-   **Immersive UI/UX**:
+    -   **Smooth Scroll Animations**: Powered by GSAP and custom hooks for a fluid browsing experience.
+    -   **Interactive Components**: 3D tilted cards (Framer Motion), dynamic logo loops, and animated statistics.
+    -   **Responsive Design**: Mobile-first approach using Tailwind CSS v4 for optimal viewing on all devices.
+
+-   **Comprehensive Event Management**:
+    -   **Dynamic Schedule**: Real-time schedule updates with filtering capabilities.
+    -   **Event & Speaker Showcases**: Detailed sections for featured events, speakers, and webinars.
+    -   **Registration & EOIs**: Integrated forms for event registration and Expressions of Interest.
+
+-   **Utility & Integration**:
+    -   **Certificate Verification**: System for verifying participation and achievement certificates.
+    -   **Supabase Integration**: Backend services for data management.
+    -   **Dynamic Forms**: Reusable form components for various data collection needs.
+    -   **Video Gallery**: Curated collection of past summit highlights.
 
 ## 🛠️ Tech Stack
+### Frontend
+-   **Framework**: [React 19](https://react.dev/)
+-   **Build Tool**: [Vite](https://vitejs.dev/)
+-   **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+-   **Routing**: [React Router DOM](https://reactrouter.com/)
 
-- **React 19.1.1** - UI framework
-- **Vite 7.1.14** - Build tool and dev server
-- **Tailwind CSS v4** - Utility-first styling
-- **GSAP 3.13.0** - Scroll animations with ScrollTrigger
-- **Framer Motion** - 3D card interactions
-- **React Router DOM 7.9.4** - Navigation
-- **React Icons 5.5.0** - Icon library
+### Animation & UI
+-   **GSAP**: Advanced scroll animations.
+-   **Framer Motion**: Complex layout transitions and 3D effects.
+-   **Lucide React**: Modern, consistent icon set.
 
-## 📦 Installation
+### Backend & Utilities
+-   **Supabase**: Database and backend services.
+-   **Custom Hooks**: Optimized hooks for scrolling, counting up, and intersection observing.
+
+## 📦 Installation & Setup
+
+Follow these steps to set up the project locally:
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/UmarAlMukhtar/iedcsummit25.git
+    cd iedc-summit-2025
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    # or
+    pnpm install
+    ```
+
+3.  **Start the development server**
+    ```bash
+    npm run dev
+    # or
+    pnpm dev
+    ```
+    The application will be available at `http://localhost:5173`.
+
+## 🚀 Build & Deployment
+
+To create a production build:
 
 ```bash
-# Clone the repository
-git clone https://github.com/UmarAlMukhtar/iedcsummit25.git
-
-# Navigate to project directory
-cd iedc-summit-2025
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
+npm run build
 ```
 
-## 🚀 Development
+To preview the production build locally:
 
 ```bash
-# Run development server (http://localhost:5173)
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
 npm run preview
-
-# Lint code
-npm run lint
 ```
 
 ## 📁 Project Structure
 
 ```text
 src/
-├── components/        # React components
-│   ├── About.jsx     # Summit, LBSCEK, IEDC info with modals
-│   ├── Contact.jsx   # Contact form and information
-│   ├── Footer.jsx    # Footer with navigation links
-│   ├── Gallery.jsx   # Video gallery from past summits
-│   ├── Hero.jsx      # Landing section with logo
-│   ├── Highlights.jsx # Summit highlights with 3D cards
-│   ├── Navbar.jsx    # Navigation bar with smooth scroll
-│   ├── Stats.jsx     # IEDC network statistics
-│   ├── TextType.jsx  # Animated typing effect
-│   └── TiltedCard.jsx # 3D tilt card component
-├── hooks/
-│   └── useScrollAnimation.jsx # GSAP scroll animation hook
-├── assets/           # Images and static files
-├── App.jsx           # Main app component
-├── main.jsx          # Entry point
-└── index.css         # Global styles and scrollbar
+├── assets/             # Static assets (images, icons)
+├── components/         # Reusable UI components
+│   ├── About.jsx       # About section with modals
+│   ├── Events.jsx      # Event listings
+│   ├── Hero.jsx        # Landing section
+│   ├── Navbar.jsx      # Responsive navigation
+│   ├── Schedule.jsx    # Event schedule display
+│   └── ...             # (See source for full list)
+├── data/               # Static data files
+├── hooks/              # Custom React hooks
+│   ├── useScrollAnimation.jsx
+│   └── ...
+├── pages/              # Route components
+├── utils/              # Utility functions (Supabase, etc.)
+├── App.jsx             # Main application layout
+└── main.jsx            # Application entry point
 ```
-
-## 🎨 Key Sections
-
-1. **Hero** - Eye-catching landing with IEDC Summit logo and tagline
-2. **About** - Detailed information about the Summit, LBSCEK, and IEDC Kerala
-3. **Stats** - Network statistics (100+ IEDCs, 50+ Startups, 5000+ Attendees)
-4. **Highlights** - Key features (Workshops, Keynotes, Networking, Startup Hub)
-5. **Gallery** - Video showcase from previous summits (2016-2024)
-6. **Contact** - Registration and contact information
 
 
 ## 📧 Contact
 
-### IEDC LBSCEK
+For queries regarding the summit or the website:
 
-- Email: <iedcsummit@lbscek.ac.in>
+**IEDC LBSCEK**
+-   Email: [iedcsummit@lbscek.ac.in](mailto:iedcsummit@lbscek.ac.in)
+-   Website: [iedcsummit.in](https://iedcsummit.in)
 
 ## 📄 License
 
-© 2025 IEDC LBSCEK. All rights reserved.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-### Built with ❤️ by IEDC LBSCEK Team
+<div align="center">
+  Built with ❤️ by the <strong>IEDC LBSCEK Team</strong>
+</div>
