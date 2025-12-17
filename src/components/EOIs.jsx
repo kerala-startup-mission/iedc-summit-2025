@@ -20,7 +20,7 @@ const EOIs = () => {
     const fetchEOIs = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue");
+        const response = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025-website/agenda/venue");
         const eoiData = await response.json();
 
         const transformedEOIs = [];

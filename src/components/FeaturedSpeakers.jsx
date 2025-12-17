@@ -43,7 +43,7 @@ export default function FeaturedSpeakers() {
           "https://events.startupmission.in/api/event/iedc-summit-2025/speakers"
         );
         const data = await response.json();
-        const featuredSpeakers = data.Featured || [];
+        const featuredSpeakers = data.Speakers || [];
 
         if (featuredSpeakers.length === 0) {
           setError("No featured speakers available");

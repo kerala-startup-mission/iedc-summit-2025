@@ -227,7 +227,7 @@ const FeaturedEvents = () => {
     const fetchEvents = async () => {
       try {
         const [eventsRes, tracksRes] = await Promise.all([
-          fetch('https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue'),
+          fetch('https://events.startupmission.in/api/event/iedc-summit-2025-website/agenda/venue'),
           fetch('https://tickets.startupmission.in/api/report/tracks/iedc-summit-2025')
         ]);
 

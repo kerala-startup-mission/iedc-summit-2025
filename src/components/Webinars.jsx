@@ -19,7 +19,7 @@ export default function WebinarsPage() {
   useEffect(() => {
       const fetchEvents = async () => {
         try {
-          const fetchedEvents = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue");
+          const fetchedEvents = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025-website/agenda/venue");
           const eventsData = await fetchedEvents.json();
           
           // Transform and filter for Webinar events only

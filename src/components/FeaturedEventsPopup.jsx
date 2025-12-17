@@ -19,7 +19,7 @@ const FeaturedEventsPopup = () => {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          "https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue"
+          "https://events.startupmission.in/api/event/iedc-summit-2025-website/agenda/venue"
         );
         const data = await response.json();
         
