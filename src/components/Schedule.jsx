@@ -65,9 +65,9 @@ const Schedule = () => {
   }, [venues, selectedLocation, scheduleData]);
 
   useEffect(() => {
-    setExpandedItems([]);
+    setExpandedItems(currentEvents.map((_, index) => index));
     setCardHeights({});
-  }, [selectedLocation]);
+  }, [currentEvents]);
 
   const toggleExpand = (index) => {
     setExpandedItems((prev) => (prev.includes(index) ? [] : [index]));
@@ -82,7 +82,7 @@ const Schedule = () => {
     const baseSpacing = window.innerWidth >= 768 ? 105 : 80;
     for (let i = 0; i < index; i++) {
       if (expandedItems.includes(i) && cardHeights[i]) {
-        top += cardHeights[i] + 20;
+        top += cardHeights[i] - 20;
       } else {
         top += baseSpacing;
       }
@@ -100,7 +100,7 @@ const Schedule = () => {
     
     currentEvents.forEach((_, index) => {
       if (expandedItems.includes(index) && cardHeights[index]) {
-        calculatedHeight += cardHeights[index] + 20;
+        calculatedHeight += cardHeights[index] - 20;
       } else {
         calculatedHeight += baseSpacing;
       }
@@ -194,7 +194,7 @@ const Schedule = () => {
         style={{ minHeight: sectionHeight }}
       >
         <div className="w-full md:text-center">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-clash-display md:font-black text-blue-500 relative z-20">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-clash-display md:font-bold text-blue-500 relative z-20">
             Schedule
           </h2>
           <div className="w-full px-6">
@@ -241,31 +241,24 @@ const Schedule = () => {
                         }
                         }
                     }}
-                    onClick={() => toggleExpand(index)}
-                    className="absolute w-full mx-auto rounded-4xl z-9 px-5 py-4 md:px-10 md:py-5 transition-all duration-300 shadow-xl cursor-pointer hover:shadow-2xl"
+                    className="absolute w-full mx-auto rounded-4xl z-9 px-5 py-4 md:px-10 md:py-5 transition-all duration-300 shadow-xl hover:shadow-2xl"
                     style={{
                         top: `${calculateTopPosition(index)}px`,
                         height: expandedItems.includes(index) || index === currentEvents.length - 1 ? "auto" : "100%",
                         backgroundColor: getEventColor(index),
                     }}
                     >
-                    <div className="w-full h-auto flex flex-row justify-between">
-                        <div className="font-medium font-clash-display text-lg md:text-3xl flex flex-row items-center gap-2">
-                        <ArrowDown
-                            size={window.innerWidth >= 700 ? 32 : 20}
-                            className={`transition-transform duration-300 ${
-                            expandedItems.includes(index) ? "rotate-360" : "rotate-315"
-                            }`}
-                        />
+                    <div className="w-full h-auto flex flex-row justify-between items-center">
+                        <div className="font-normal font-clash-display text-lg md:text-2xl flex flex-row items-center gap-2">
                         <div className="flex flex-col md:flex-row md:items-center md:gap-2">
                             <span>{formatDate(item.start_time)}</span>
-                            <span className="text-xs md:text-xl hidden md:inline">|</span>
-                            <span className="text-xs md:text-2xl">
+                            <span className="text-xs md:text-lg hidden md:inline opacity-50">|</span>
+                            <span className="text-xs md:text-xl">
                               {formatTimeOnly(item.start_time)}
                             </span>
                         </div>
                         </div>
-                        <div className="font-medium font-clash-display text-lg md:text-3xl text-right pl-4">
+                        <div className="font-medium font-clash-display text-lg md:text-2xl text-right pl-4 leading-snug">
                         {item.name}
                         </div>
                     </div>
@@ -285,14 +278,14 @@ const Schedule = () => {
                                     className="rounded-full w-16 h-16 md:w-20 md:h-20 object-cover shrink-0"
                                     />
                                     <div className="flex flex-col items-start text-left">
-                                    <p className="font-medium md:text-xl leading-tight">
+                                    <p className="font-medium md:text-lg leading-tight text-gray-900">
                                         {speaker.name}
                                     </p>
-                                    <p className="text-xs md:text-sm text-gray-700 mt-1">
+                                    <p className="text-xs md:text-sm text-gray-600 mt-1 font-medium">
                                         {speaker.title || speaker.designation}
                                     </p>
                                     {speaker.role && (
-                                        <span className="text-[10px] md:text-xs bg-black/10 px-2 py-0.5 rounded-full mt-1 capitalize">
+                                        <span className="text-[10px] md:text-xs bg-black/5 text-gray-600 px-2 py-0.5 rounded-full mt-1 capitalize border border-black/5">
                                             {speaker.role}
                                         </span>
                                     )}
