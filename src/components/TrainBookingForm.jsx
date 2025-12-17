@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 export const TrainBookingForm = () => {
+  const isBookingOpen = new Date() < new Date('2025-12-17T23:59:59+05:30');
   const [formData, setFormData] = useState({
     name: '',
     ticketNumber: '',
@@ -187,12 +188,14 @@ export const TrainBookingForm = () => {
 
         <div className="max-w-4xl mx-auto relative z-10 mt-10">
             <h1 className="text-4xl md:text-6xl font-clash-display font-black text-blue-600 mb-4 text-center">
-                Book Train Ticket
+                {isBookingOpen ? 'Book Train Ticket' : 'Train Schedule'}
             </h1>
             <p className="text-center text-gray-600 mb-12 font-gilroy-medium text-lg">
-                Reserve your seat for the IEDC Summit 2025 journey
+                {isBookingOpen ? 'Reserve your seat for the IEDC Summit 2025 journey' : 'Check the train timings for IEDC Summit 2025'}
             </p>
 
+            {isBookingOpen && (
+            <>
             <div className="bg-blue-50/50 rounded-3xl border border-blue-100 p-8 mb-12 flex flex-col md:flex-row items-center gap-8 max-w-3xl mx-auto backdrop-blur-sm">
                 <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center shrink-0 text-blue-600">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -360,6 +363,8 @@ export const TrainBookingForm = () => {
                     </form>
                 )}
             </div>
+            </>
+            )}
 
             {/* TRAIN SCHEDULE DISPLAY */}
             <div className="grid md:grid-cols-2 gap-8 mb-15">

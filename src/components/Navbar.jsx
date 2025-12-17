@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '/iedc-summit-25-logo.png';
 import ellipse1 from '/Ellipse1.svg';
 
+const isBookingOpen = new Date() < new Date('2025-12-17T23:59:59+05:30');
+
 const NAV_ITEMS = [
   { label: 'Home', href: '/' },
   { label: 'Speakers', href: '/speakers' },
@@ -10,7 +12,7 @@ const NAV_ITEMS = [
   { label: 'Pre-Events', href: '/preevents' },
   { label: 'Webinars', href: '/webinars' },
   { label: 'EOIs', href: '/eois' },
-  // { label: 'Train Ticket', href: '/book-train-ticket' },
+  { label: isBookingOpen ? 'Train Ticket' : 'Train', href: '/train' },
 ];
 
 const Navbar = () => {
