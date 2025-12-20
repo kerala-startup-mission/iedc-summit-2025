@@ -3,7 +3,7 @@ import side_image from '../assets/side_image.png';
 import { Play, Trophy } from 'lucide-react';
 import EventWinnersModal from './EventWinnersModal';
 
-export default function EventCard({ event, isWebinar = false, trackData = [], truncateDescription = false }) {
+export default function EventCard({ event, isWebinar = false, trackData = [], truncateDescription = false, hideRegistration = false }) {
   const [isEventLive, setIsEventLive] = useState(false);
   const [canRegister, setCanRegister] = useState(true);
   const [isEventEnded, setIsEventEnded] = useState(false);
@@ -69,27 +69,31 @@ export default function EventCard({ event, isWebinar = false, trackData = [], tr
 
   // Time-based state: live/ended/registration
   useEffect(() => {
-    if (!event.startTime || !event.endTime) return;
-
     const checkEventLive = () => {
       const now = new Date();
-      const eventStart = new Date(event.startTime);
-      const eventEnd = new Date(event.endTime);
+      
+      if (event.startTime && event.endTime) {
+        const eventStart = new Date(event.startTime);
+        const eventEnd = new Date(event.endTime);
 
-      setIsEventLive(now >= eventStart && now <= eventEnd);
-      setIsEventEnded(now > eventEnd);
+        setIsEventLive(now >= eventStart && now <= eventEnd);
+        setIsEventEnded(now > eventEnd);
+      }
 
-      if (!isWebinar && event.registration_start && event.registration_end) {
-        // Parse as UTC to avoid timezone issues
-        const regStart = new Date(`${event.registration_start}Z`);
-        const regEnd = new Date(`${event.registration_end}Z`);
+      if (!isWebinar && (event.registration_start || event.registration_end)) {
+        // Handle "YYYY-MM-DD HH:mm:ss" format
+        const formatTime = (t) => t ? t.replace(' ', 'T') : null;
+        
+        const regStart = event.registration_start ? new Date(formatTime(event.registration_start)) : null;
+        const regEnd = event.registration_end ? new Date(formatTime(event.registration_end)) : null;
 
-        const regHasStarted = now >= regStart;
-        const regHasEnded = now > regEnd;
+        const regHasStarted = regStart ? now >= regStart : true;
+        const regHasEnded = regEnd ? now > regEnd : false;
 
         setCanRegister(regHasStarted && !regHasEnded);
         setRegistrationEnded(regHasEnded);
-      } else if (isWebinar) {
+      } else if (isWebinar && event.startTime) {
+        const eventStart = new Date(event.startTime);
         // Webinars: registration allowed until 30 minutes before start
         const thirtyMinutesBefore = new Date(eventStart.getTime() - 30 * 60000);
         const canReg = now < thirtyMinutesBefore;
@@ -339,6 +343,8 @@ export default function EventCard({ event, isWebinar = false, trackData = [], tr
   };
 
   const renderRegularButtons = () => {
+    if (hideRegistration) return null;
+
     if (event.link_text) {
       const targetLink = event.link || event.registrationLink;
       const hasLink = targetLink && targetLink.length > 0;
@@ -509,11 +515,12 @@ export default function EventCard({ event, isWebinar = false, trackData = [], tr
         {hasPoster && (
           <div
             className={`w-full md:w-1/2 h-auto md:h-auto shrink-0 ${
-              isEventEnded || registrationEnded || !canRegister || isSeatsFull
+              isEventEnded || registrationEnded || !canRegister || isSeatsFull || hideRegistration
                 ? ''
                 : 'cursor-pointer'
             }`}
             onClick={() => {
+              if (hideRegistration) return;
               const isClosed = isEventEnded || registrationEnded || !canRegister || isSeatsFull;
               if (!isClosed) {
                 handleRegisterClick();
@@ -525,7 +532,7 @@ export default function EventCard({ event, isWebinar = false, trackData = [], tr
               alt={`${event.title} poster`}
               loading="lazy"
               className={`w-full h-auto object-contain rounded-t-xl md:rounded-l-xl md:rounded-tr-none ${
-                isEventEnded || registrationEnded || !canRegister || isSeatsFull
+                isEventEnded || registrationEnded || !canRegister || isSeatsFull || hideRegistration
                   ? ''
                   : 'hover:opacity-90 transition-opacity'
               }`}

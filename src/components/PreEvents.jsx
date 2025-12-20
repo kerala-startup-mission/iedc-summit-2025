@@ -288,7 +288,7 @@ export default function PreEventsPage() {
             </div>
           ) : filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
-              <EventCard key={event.id} event={event} trackData={trackData} />
+              <EventCard key={event.id} event={event} trackData={trackData} hideRegistration={true} />
             ))
           ) : (
             <div className="col-span-full text-center py-12">
