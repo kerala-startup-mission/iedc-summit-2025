@@ -58,6 +58,25 @@ const RegisterRedirect = () => {
   );
 };
 
+const EntryPassRedirect = () => {
+  useEffect(() => {
+    window.location.href = "https://forms.gle/cB5YaSoSzZbsEe2z5";
+  }, []);
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-white">
+      <div className="text-center">
+        <p className="text-blue-600 font-clash-display text-lg mb-2">
+          Redirecting to entry pass form...
+        </p>
+        <p className="text-blue-400 font-gilroy-medium">
+          If you are not redirected, click <a href="https://forms.gle/cB5YaSoSzZbsEe2z5" className="text-blue-600 underline">here</a>
+        </p>
+      </div>
+    </div>
+  );
+};
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
@@ -181,6 +200,10 @@ createRoot(document.getElementById("root")).render(
           <Route
             path="/register"
             element={<RegisterRedirect />}
+          />
+          <Route
+            path="/entry-pass"
+            element={<EntryPassRedirect />}
           />
           <Route path="/dp" element={<App />} />
           {/* Session redirect route - /r/sessionId */}
