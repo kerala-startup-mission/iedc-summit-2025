@@ -25,7 +25,10 @@ const Schedule = () => {
         Object.values(agenda).forEach(dateObj => {
             Object.keys(dateObj).forEach(venueName => {
                 if (dateObj[venueName] && dateObj[venueName].length > 0) {
-                    activeVenues.add(venueName);
+                    // Only include venue if it has events with a category
+                    if (dateObj[venueName].some(event => event.category)) {
+                        activeVenues.add(venueName);
+                    }
                 }
             });
         });
@@ -57,6 +60,9 @@ const Schedule = () => {
             events = [...events, ...dateEvents[venueName]];
         }
     });
+
+    // Filter out events without category
+    events = events.filter(event => event.category);
 
     // Sort by start_time
     events.sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
@@ -264,7 +270,7 @@ const Schedule = () => {
                     </div>
                     {expandedItems.includes(index) && (
                         <div className="mt-4 text-sm text-center">
-                        {speakers.length > 0 ? (
+                        {speakers.length > 0 && (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 md:gap-y-8 md:gap-x-4 font-gilroy-light md:mt-10">
                             {speakers.map((speaker, speakerIndex) => (
                                 <div
@@ -294,8 +300,6 @@ const Schedule = () => {
                                 </div>
                             ))}
                             </div>
-                        ) : (
-                            <p className="italic mt-4 mb-2">No speakers scheduled</p>
                         )}
                         <p className="mb-3 font-gilroy-light md:text-lg md:mt-8 whitespace-pre-wrap">
                             {parseDescription(item.description)}

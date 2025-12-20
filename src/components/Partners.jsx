@@ -22,7 +22,8 @@ const Partners = () => {
             acc[category].push({
               src: partner.photo,
               alt: partner.name,
-              // You can map other fields if needed, e.g. href if available in API
+              // Map external_id to href, ensuring it has a protocol
+              href: partner.external_id ? (partner.external_id.startsWith('http') ? partner.external_id : `https://${partner.external_id}`) : null
             });
             return acc;
           }, {});
