@@ -6,6 +6,7 @@ const Schedule = () => {
   const [selectedLocation, setSelectedLocation] = useState(0);
   const [cardHeights, setCardHeights] = useState({});
   const [sectionHeight, setSectionHeight] = useState("140vh");
+  const venueListRef = React.useRef(null);
   
   const [venues, setVenues] = useState([]);
   const [scheduleData, setScheduleData] = useState({});
@@ -112,8 +113,11 @@ const Schedule = () => {
       }
     });
     
-    // Add header height and bottom padding
-    const headerHeight = isMobile ? 250 : 300;
+    // Dynamic header height calculation
+    const venueHeight = venueListRef.current ? venueListRef.current.offsetHeight : (isMobile ? 80 : 100);
+    const titleHeight = isMobile ? 150 : 200; // Approximate height for title and spacing
+    const headerHeight = venueHeight + titleHeight;
+
     let bottomPadding;
     
     if (isMobile) {
@@ -216,7 +220,10 @@ const Schedule = () => {
              </div>
         ) : (
             <>
-                <div className="w-full md:w-[60%] max-h-[10vh] md:max-h-[20vh] flex gap-4 flex-nowrap overflow-x-auto overflow-y-hidden md:flex-wrap md:justify-center px-5 py-6 scrollbar-hide">
+                <div 
+                    ref={venueListRef}
+                    className="w-full md:w-[90%] flex gap-4 flex-nowrap overflow-x-auto md:flex-wrap md:justify-center px-5 py-6 scrollbar-hide"
+                >
                 {venues.map((loc, index) => (
                     <div
                     key={index}
