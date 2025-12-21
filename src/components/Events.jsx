@@ -346,6 +346,15 @@ export default function EventsPage() {
               </button>
             ))}
           </div>
+
+          {/* Priority Policy Message */}
+          <div className="mt-8 w-full max-w-3xl mx-auto px-4">
+            <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-center shadow-sm">
+              <p className="text-yellow-800 text-sm md:text-base font-gilroy-medium">
+                <span className="font-bold">Priority Policy:</span> Among those who have registered for Workshops, the person reporting first at the venue will have priority for seating and participation.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Event cards grid */}
