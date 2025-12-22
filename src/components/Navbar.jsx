@@ -132,7 +132,7 @@ const getItemClasses = (isActive) => `
 
 const RegisterButton = ({ className = "" }) => (
   <a 
-    href="https://tickets.startupmission.in/iedc-summit-2025?code=earlybird" 
+    href="https://events.snapshare.ai/in/iedcsummit" 
     target='_blank' 
     rel="noreferrer"
     className={`
@@ -141,7 +141,7 @@ const RegisterButton = ({ className = "" }) => (
       ${className}
     `}
   >
-    REGISTER NOW
+    VIEW PHOTOS
   </a>
 );
 

@@ -298,29 +298,7 @@ export default function EventCard({ event, isWebinar = false, trackData = [], tr
 
     return (
       <div className="mt-auto flex items-center gap-2 pt-4">
-        {event.registrationLink ? (
-          <button
-            onClick={() =>
-              window.open(registration || event.registrationLink, '_blank', 'noopener,noreferrer')
-            }
-            className={`flex-1 h-8 md:h-9 rounded-lg flex items-center justify-center text-center transition ${
-              canRegister && !isEventEnded && !isSeatsFull
-                ? 'bg-black hover:opacity-100 opacity-90 cursor-pointer'
-                : 'bg-gray-400 cursor-not-allowed'
-            }`}
-            disabled={!canRegister || isEventEnded || isSeatsFull}
-          >
-            <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-              {isEventEnded ? 'CLOSED' : isSeatsFull ? 'SEATS FULL' : canRegister ? 'REGISTER' : 'CLOSED'}
-            </span>
-          </button>
-        ) : (
-          <div className="flex-1 h-8 md:h-9 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
-            <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-              {isEventEnded ? 'CLOSED' : 'COMING SOON'}
-            </span>
-          </div>
-        )}
+        {/* Registration Button Removed */}
 
         {meet && (canRegister || isEventLive) && !isEventEnded && (
           <button
@@ -371,44 +349,18 @@ export default function EventCard({ event, isWebinar = false, trackData = [], tr
       );
     }
 
-    if (!event.registrationLink && !hasSlots) {
-      return (
-        <div className="mt-auto w-full h-8 md:h-9 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
-          <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-            {isEventEnded ? 'REGISTRATION CLOSED' : 'COMING SOON'}
-          </span>
-        </div>
-      );
-    }
+    // Removed "COMING SOON" / "REGISTRATION CLOSED" placeholder button as per request
 
     const isClosed = isEventEnded || registrationEnded || !canRegister || isSeatsFull;
 
     return (
       <div className="mt-auto w-full flex gap-2">
-        <button
-          onClick={handleRegisterClick}
-          className={`flex-1 h-8 md:h-9 rounded-lg flex items-center justify-center transition ${
-            !isClosed
-              ? 'bg-black hover:opacity-100 opacity-90 cursor-pointer'
-              : 'bg-gray-400 cursor-not-allowed'
-          }`}
-          disabled={isClosed}
-        >
-          <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-            {isEventEnded || registrationEnded
-              ? 'REGISTRATION CLOSED'
-              : isSeatsFull
-              ? 'SEATS FULL'
-              : canRegister
-              ? 'REGISTER NOW'
-              : 'COMING SOON'}
-          </span>
-        </button>
+        {/* Registration Button Removed as per request */}
 
         {hasWinners && (
           <button
             onClick={() => setShowWinnersModal(true)}
-            className="h-8 md:h-9 px-3 md:px-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0 cursor-pointer"
+            className="h-8 md:h-9 px-3 md:px-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0 cursor-pointer flex-1"
             aria-label="View Winners"
           >
             <Trophy size={14} fill="currentColor" />
@@ -423,7 +375,7 @@ export default function EventCard({ event, isWebinar = false, trackData = [], tr
             onClick={() => {
               window.open(event.vidLink, '_blank', 'noopener,noreferrer');
             }}
-            className="h-8 md:h-9 px-3 md:px-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0 cursor-pointer"
+            className="h-8 md:h-9 px-3 md:px-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0 cursor-pointer flex-1"
             aria-label="Watch promo video"
           >
             <Play size={14} fill="currentColor" />

@@ -153,9 +153,14 @@ const MobileLayout = ({ timeLeft }) => (
          <div className="w-6 h-6 rounded-full border-[0.32px] border-blue-600 absolute left-[140px]" />
       </div>
 
+      {/* THANK YOU MESSAGE */}
+      <div className="text-blue-600 text-lg font-bold font-gilroy-bold mb-4 animate-fade-in-up" style={{ animationDelay: "0.25s" }}>
+        Thank you for making IEDC Summit 2025 a grand success!
+      </div>
+
       {/* ORIGINAL CTA STYLE */}
       <a
-        href="https://tickets.startupmission.in/iedc-summit-2025"
+        href="https://events.snapshare.ai/in/iedcsummit"
         target="_blank"
         rel="noopener noreferrer"
         className="w-[200px] h-11 rounded-xl flex items-center justify-center relative overflow-hidden group hover:shadow-lg transition-shadow mb-3 z-20 animate-scale-in"
@@ -168,7 +173,7 @@ const MobileLayout = ({ timeLeft }) => (
       >
         <div className="absolute inset-0 bg-violet-600 group-hover:bg-violet-800 transition-bg-color duration-300"></div>
         <div className="text-neutral-100 text-lg font-semibold font-clash-display tracking-tight relative z-10">
-          REGISTER NOW
+          VIEW PHOTOS
         </div>
       </a>
 
@@ -186,11 +191,7 @@ const MobileLayout = ({ timeLeft }) => (
     
     <img src="/hero-blocks.png" alt="" className="w-full h-14 object-cover absolute bottom-0 left-0 z-5 animate-fade-in-up" style={{ animationDelay: "0.9s" }} />
 
-    <div className="absolute bottom-16 left-4 max-w-[320px] animate-fade-in-up" style={{ animationDelay: "0.9s" }}>
-      <div className="bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2.5 shadow-lg border-2 border-blue-200">
-        <Timer timeLeft={timeLeft} size="sm" />
-      </div>
-    </div>
+    {/* Timer Removed */}
   </div>
 );
 
@@ -230,16 +231,21 @@ const DesktopLayout = ({ timeLeft }) => (
             </div>
         </div>
 
+        {/* THANK YOU MESSAGE */}
+        <div className="mt-4 text-blue-600 text-[2vh] lg:text-[2.5vh] font-bold font-gilroy-bold animate-fade-in-up delay-700">
+          Thank you for making IEDC Summit 2025 a grand success!
+        </div>
+
         {/* ORIGINAL CTA BUTTON (Restored) */}
         <a
-          href="https://tickets.startupmission.in/iedc-summit-2025"
+          href="https://events.snapshare.ai/in/iedcsummit"
           target="_blank"
           rel="noopener noreferrer"
           className="px-8 lg:px-12 py-3 lg:py-4 rounded-[29px] flex items-center justify-center mt-[4vh] transition-colors duration-300 relative overflow-hidden group w-fit"
         >
           <div className="absolute inset-0 bg-violet-600 group-hover:bg-violet-800 transition-bg-color duration-300"></div>
           <div className="text-white text-[2.5vh] lg:text-[3.5vh] font-normal font-clash-display relative z-10">
-            REGISTER NOW
+            VIEW PHOTOS
           </div>
         </a>
       </div>
@@ -254,11 +260,7 @@ const DesktopLayout = ({ timeLeft }) => (
       className="h-[50vh] lg:h-[70vh] xl:h-[90vh] absolute bottom-[1vh] lg:bottom-[8%] right-[1%] object-contain animate-slide-in-right delay-800" 
     />
 
-    <div className="absolute bottom-[10vh] md:bottom-[15vh] lg:bottom-[23vh] right-[2%] md:right-[45%] lg:right-[35%] animate-fade-in-up delay-900">
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-3 md:px-5 lg:px-6 py-2 md:py-3 lg:py-4 shadow-xl border-2 border-blue-200">
-        <Timer timeLeft={timeLeft} size="lg" />
-      </div>
-    </div>
+    {/* Timer Removed */}
   </div>
 );
 
