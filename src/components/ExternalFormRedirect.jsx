@@ -4,11 +4,17 @@ import { useParams } from 'react-router-dom';
 const ExternalFormRedirect = () => {
   const { formName } = useParams();
 
+  const overrides = {
+    "LBS-Participants":
+      "https://docs.google.com/spreadsheets/d/1bGirCbs-ZU7TK6-dPJb_BEGLzCoz0tqoGGFQGX2dxOw/edit?gid=0#gid=0",
+  };
+
+  const externalUrl = overrides[formName] ?? `https://tickets.startupmission.in/iedcsummit25-${formName}`;
+
   useEffect(() => {
     // Redirect to the external form URL
-    const externalUrl = `https://tickets.startupmission.in/iedcsummit25-${formName}`;
     window.location.href = externalUrl;
-  }, [formName]);
+  }, [externalUrl]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
@@ -17,7 +23,7 @@ const ExternalFormRedirect = () => {
           Redirecting to form...
         </p>
         <p className="text-blue-400 font-gilroy-medium">
-          If you are not redirected, click <a href={`https://tickets.startupmission.in/iedcsummit25-${formName}`} className="text-blue-600 underline">here</a>
+          If you are not redirected, click <a href={externalUrl} className="text-blue-600 underline">here</a>
         </p>
       </div>
     </div>
