@@ -139,7 +139,7 @@ const Faq = () => {
                 question="Whom can I contact for more details about the IEDC Summit?"
                 answer={
                   <>
-                    For any queries regarding the summit, you can contact the organizing team via the details in the website footer: <br />Email: <a href="mailto:iedcsummit@lbscek.ac.in" className="text-blue-500">iedcsummit@lbscek.ac.in</a><br />Phone: <a href="https://wa.me/918891549779" target="_blank" rel="noopener noreferrer" className="text-blue-500">+91 88915 49779</a>
+                    For any queries regarding the summit, you can contact the organizing team via the details in the website footer: <br />Email: <a href="mailto:iedcsummit@lbscek.ac.in" className="text-blue-500">iedcsummit@lbscek.ac.in</a><br />
                   </>
                 }
                 isOpen={openId === "rd12"}

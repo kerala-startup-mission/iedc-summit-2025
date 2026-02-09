@@ -228,7 +228,6 @@ export default function EventCard({ event, isWebinar = false, trackData = [], tr
         </h4>
         <div className="text-sm font-gilroy-light text-blue-700 space-y-1">
           {event.poc.name && <p><strong>Name:</strong> {event.poc.name}</p>}
-          {event.poc.phone && <p><strong>Phone:</strong> {event.poc.phone}</p>}
           {event.poc.email && <p><strong>Email:</strong> {event.poc.email}</p>}
         </div>
       </div>

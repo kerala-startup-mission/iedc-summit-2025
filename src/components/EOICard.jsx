@@ -69,12 +69,6 @@ const EOICard = ({ card }) => {
           </div>
         )}
 
-        {/* Point of Contact */}
-        {card.poc && (
-          <p className="text-md font-gilroy-medium text-gray-700">
-            Any Queries? {card.poc.phone}
-          </p>
-        )}
 
         {/* Action Button */}
         <div className="mt-auto w-full flex gap-2">
